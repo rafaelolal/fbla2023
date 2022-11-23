@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./db.db"
+}
+
+model Admin {
+  email    String @id
+  password String
+}
+
+model Award {
+  id          Int       @id @default(autoincrement())
+  name        String
+  requirement String
+  recipients  Student[]
+}
+
+model Event {
+  id           Int                @id @default(autoincrement())
+  datetime     DateTime
+  description  String
+  image        String
+  location     String
+  name         String
+  points       Int
+  type         String
+  participants StudentsOnEvents[]
+}
+
+model Student {
+  email      String             @id
+  password   String
+  firstName  String
+  middleName String
+  lastName   String
+  grade      Int
+  rank       Int
+  awards     Award[]
+  events     StudentsOnEvents[]
+}
+
+model StudentsOnEvents {
+  event        Event   @relation(fields: [eventId], references: [id])
+  eventId      Int
+  student      Student @relation(fields: [studentEmail], references: [email])
+  studentEmail String
+
+  status String
+
+  @@id([eventId, studentEmail])
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  name        String
+  datetime    DateTime
+  description String
+}
