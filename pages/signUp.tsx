@@ -1,9 +1,11 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRef } from "react";
-
-import { auth } from "../firebase";
+import { useRouter } from "next/router";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
 export default function SignUpPage() {
+  const router = useRouter();
+
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -14,18 +16,17 @@ export default function SignUpPage() {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-        console.table({ user });
-        const currentUser = auth.currentUser
-        console.table({currentUser});
-        // ...
+        const currentUser = auth.currentUser;
+        console.table({ user, currentUser });
+        emailRef.current!.value = "";
+        passwordRef.current!.value = "";
+        router.push("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.table({ errorCode, errorMessage });
-        // ..
       });
   }
 
