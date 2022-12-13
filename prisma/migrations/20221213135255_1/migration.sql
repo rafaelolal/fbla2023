@@ -1,7 +1,6 @@
 -- CreateTable
 CREATE TABLE "Admin" (
-    "email" TEXT NOT NULL PRIMARY KEY,
-    "password" TEXT NOT NULL
+    "id" TEXT NOT NULL PRIMARY KEY
 );
 
 -- CreateTable
@@ -25,24 +24,13 @@ CREATE TABLE "Event" (
 
 -- CreateTable
 CREATE TABLE "Student" (
-    "email" TEXT NOT NULL PRIMARY KEY,
-    "password" TEXT NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "firstName" TEXT NOT NULL,
     "middleName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "grade" INTEGER NOT NULL,
+    "points" INTEGER NOT NULL,
     "rank" INTEGER NOT NULL
-);
-
--- CreateTable
-CREATE TABLE "StudentsOnEvents" (
-    "eventId" INTEGER NOT NULL,
-    "studentEmail" TEXT NOT NULL,
-    "status" TEXT NOT NULL,
-
-    PRIMARY KEY ("eventId", "studentEmail"),
-    CONSTRAINT "StudentsOnEvents_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "StudentsOnEvents_studentEmail_fkey" FOREIGN KEY ("studentEmail") REFERENCES "Student" ("email") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -58,7 +46,15 @@ CREATE TABLE "_AwardToStudent" (
     "A" INTEGER NOT NULL,
     "B" TEXT NOT NULL,
     CONSTRAINT "_AwardToStudent_A_fkey" FOREIGN KEY ("A") REFERENCES "Award" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "_AwardToStudent_B_fkey" FOREIGN KEY ("B") REFERENCES "Student" ("email") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "_AwardToStudent_B_fkey" FOREIGN KEY ("B") REFERENCES "Student" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "_EventToStudent" (
+    "A" INTEGER NOT NULL,
+    "B" TEXT NOT NULL,
+    CONSTRAINT "_EventToStudent_A_fkey" FOREIGN KEY ("A") REFERENCES "Event" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "_EventToStudent_B_fkey" FOREIGN KEY ("B") REFERENCES "Student" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateIndex
@@ -66,3 +62,9 @@ CREATE UNIQUE INDEX "_AwardToStudent_AB_unique" ON "_AwardToStudent"("A", "B");
 
 -- CreateIndex
 CREATE INDEX "_AwardToStudent_B_index" ON "_AwardToStudent"("B");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_EventToStudent_AB_unique" ON "_EventToStudent"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_EventToStudent_B_index" ON "_EventToStudent"("B");

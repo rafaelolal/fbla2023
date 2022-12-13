@@ -11,8 +11,7 @@ datasource db {
 }
 
 model Admin {
-  email    String @id
-  password String
+  id String @id
 }
 
 model Award {
@@ -31,30 +30,19 @@ model Event {
   name         String
   points       Int
   type         String
-  participants StudentsOnEvents[]
+  participants Student[]
 }
 
 model Student {
-  email      String             @id
-  password   String
+  id         String             @id
   firstName  String
   middleName String
   lastName   String
   grade      Int
+  points     Int
   rank       Int
   awards     Award[]
-  events     StudentsOnEvents[]
-}
-
-model StudentsOnEvents {
-  event        Event   @relation(fields: [eventId], references: [id])
-  eventId      Int
-  student      Student @relation(fields: [studentEmail], references: [email])
-  studentEmail String
-
-  status String
-
-  @@id([eventId, studentEmail])
+  events     Event[]
 }
 
 model News {

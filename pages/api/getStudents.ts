@@ -6,14 +6,6 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const data = await prisma.award.findMany({
-    where: {
-      recipients: {
-        some: {
-          email: "test@gmail.com",
-        },
-      },
-    },
-  });
+  const data = await prisma.student.findMany();
   res.json(data);
 }

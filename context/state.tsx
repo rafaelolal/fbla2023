@@ -1,54 +1,49 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { Context, createContext, useContext, useEffect, useState } from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import ToastType from "../components/toast";
+import { MyToastType } from "../components/toasts/types";
+import ToastList from "../components/toasts/toast-list";
 
-type contextType = {
-  loggedIn: boolean;
+type ToastListType = MyToastType[];
+type ContextType = {
+  user: User | null;
+  addToast: (toast: MyToastType) => void;
 };
 
-type ToastType = { status: number | null; message: string | null };
-
-const AppContext = createContext<contextType>({ loggedIn: false });
+let AppContext: Context<ContextType>;
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [toast, setToast] = useState<ToastType>({
-    message: null,
-    status: null,
-  });
+  const [user, setUser] = useState<User | null>(null);
+  const [toasts, setToasts] = useState<ToastListType>([]);
 
-  let sharedState = {
-    loggedIn,
-    setToast,
+  const sharedState = {
+    user,
+    addToast,
   };
 
+  AppContext = createContext(sharedState);
+
   useEffect(() => {
-    if (toast.status) {
-      const timer = setTimeout(() => {
-        setToast({ message: null, status: null });
-      }, 5000);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [toast]);
+  function addToast(toast: MyToastType) {
+    setToasts(toasts.concat([toast]));
+  }
 
-  onAuthStateChanged(auth, (user) => {
-    console.log("onAuthStateChanged executed")
-    if (user) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  });
+  function removeToast() {
+    setToasts(toasts.slice(1, toasts.length));
+  }
 
   return (
     <>
-      {toast.message && (
-        <ToastType status={toast.status!} message={toast.message} />
-      )}
+      {toasts && <ToastList toasts={toasts} removeToast={removeToast} />}
       <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>
     </>
   );

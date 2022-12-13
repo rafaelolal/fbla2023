@@ -1,14 +1,18 @@
 import type { AppProps } from "next/app";
 import Script from "next/script";
-
-import { AppWrapper } from "../context/state";
+import { AppWrapper, useAppContext } from "../context/state";
+import Navbar from "../components/layout/navbar";
 import "../styles/globals.scss";
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <AppWrapper>
       <Script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" />
-      <Component {...pageProps} />
+      <Navbar />
+      <div className="container">
+        <Component {...pageProps} />
+      </div>
     </AppWrapper>
   );
 }

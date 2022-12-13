@@ -1,20 +1,18 @@
-import { useAppContext } from "../context/state";
-
-import { auth } from "../firebaseConfig";
+import { useState } from "react";
+import DashboardNavbar from "../components/dashboard/navbar";
+import DashboardHome from "../components/dashboard/home";
+import DashboardStudents from "../components/dashboard/students";
+import DashboardEvents from "../components/dashboard/events";
 
 export default function DashboardPage() {
-  const { loggedIn } = useAppContext();
-  console.table({loggedIn})
-
-  if (!loggedIn) {
-    
-  }
+  const [currentPage, setCurrentPage] = useState("Home");
 
   return (
     <>
-      <p>Logged in: {loggedIn.toString()}</p>
-      {loggedIn && <p>{auth.currentUser!.email}</p>}
-      <button className="btn btn-primary" onClick={() => {auth.signOut()}}>Sign Out</button>
+      <DashboardNavbar setCurrentPage={setCurrentPage} />
+      {currentPage == "Home" ? <DashboardHome /> : null}
+      {currentPage == "Events" ? <DashboardEvents /> : null}
+      {currentPage == "Students" ? <DashboardStudents /> : null}
     </>
   );
 }

@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { useRouter } from "next/router";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+import { app, auth } from "../firebaseConfig";
+import { getAnalytics, setUserProperties } from "firebase/analytics";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -31,8 +32,8 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="container d-flex vh-100">
-      <form className="mx-auto my-auto" onSubmit={submitHandler}>
+    <div className="container d-flex">
+      <form className="mx-auto" onSubmit={submitHandler}>
         <div className="mb-3">
           <label htmlFor="emailInput" className="form-label">
             Email address
