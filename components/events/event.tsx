@@ -1,9 +1,13 @@
 import axios from "axios";
+import { MutableRefObject, useRef, useState } from "react";
 import { useAppContext } from "../../context/state";
-import { EventPropType } from "./types";
+import { EventPropsType } from "./types";
 
-export default function Event(props: EventPropType) {
+export default function Event(props: EventPropsType) {
   const { user, addToast } = useAppContext();
+  const [canceling, setCanceling] = useState(false);
+  const cancelingRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
+
   const now = new Date();
 
   async function joinHandler() {
@@ -36,7 +40,43 @@ export default function Event(props: EventPropType) {
         });
       });
 
-    console.log({ studentEvent: result });
+    console.log({ studentEventResult: result });
+  }
+
+  function deleteHandler(id: string) {
+    axios
+      .post("/api/deleteEvent", {
+        id: parseInt(id),
+      })
+      .then(function (response) {
+        console.log({ deleteEventResponse: response });
+
+        if (response.status == 200) {
+          props.mutate();
+        }
+      })
+      .catch(function (error) {
+        console.log({ deleteEventError: error });
+      });
+  }
+
+  function cancelHandler(id: string, reason: string) {
+    axios
+      .post("/api/cancelEvent", {
+        id: parseInt(id),
+        reason: reason,
+      })
+      .then(function (response) {
+        console.log({ cancelEventResponse: response });
+
+        if (response.status == 200) {
+          props.mutate();
+          setCanceling(false);
+        }
+      })
+      .catch(function (error) {
+        console.log({ cancelEventError: error });
+      });
   }
 
   return (
@@ -45,7 +85,8 @@ export default function Event(props: EventPropType) {
         <img src={props.image} className="card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">
-            {props.name} ({props.type}) - {props.points}
+            {props.isCanceled && "CANCELED"} {props.name} ({props.type}) -{" "}
+            {props.points}
           </h5>
           <h6 className="card-subtitle mb-2 text-muted">
             {new Date(props.datetime).toLocaleString(undefined, {
@@ -59,24 +100,56 @@ export default function Event(props: EventPropType) {
           </h6>
           <p className="card-text">{props.description}</p>
 
-          {props.page == "dashboard" && (
+          {!props.isCanceled && props.page == "dashboard" && (
             <>
-              <a
-                href="#"
-                className={`btn btn-primary me-2 ${
-                  new Date(props.datetime) < now ? "disabled" : ""
-                }`}
-              >
-                Cancel
-              </a>
-              <a
-                href="#"
+              <button
                 className={`btn btn-primary me-2 ${
                   new Date(props.datetime) > now ? "disabled" : ""
                 }`}
               >
                 Mark Attendance
-              </a>
+              </button>
+
+              <button
+                className={`btn btn-primary me-2 ${
+                  new Date(props.datetime) < now ? "disabled" : ""
+                }`}
+                onClick={() => deleteHandler(props.id)}
+              >
+                Delete
+              </button>
+
+              <button
+                className={`btn btn-primary me-2 ${
+                  new Date(props.datetime) < now ? "disabled" : ""
+                }`}
+                onClick={() => setCanceling(!canceling)}
+              >
+                Cancel
+              </button>
+
+              {canceling && (
+                <>
+                  <div className="form-floating">
+                    <textarea
+                      className="form-control"
+                      placeholder="Reason for cancelation"
+                      id="floatingTextarea"
+                      ref={cancelingRef}
+                    ></textarea>
+                    <label htmlFor="floatingTextarea">Reason</label>
+                  </div>
+
+                  <button
+                    className="btn btn-danger"
+                    onClick={() =>
+                      cancelHandler(props.id, cancelingRef.current.value)
+                    }
+                  >
+                    Cancel
+                  </button>
+                </>
+              )}
             </>
           )}
 

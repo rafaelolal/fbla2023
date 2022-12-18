@@ -22,19 +22,22 @@ model Award {
 }
 
 model Event {
-  id           Int                @id @default(autoincrement())
-  datetime     DateTime
-  description  String
-  image        String
-  location     String
-  name         String
-  points       Int
-  type         String
+  id          Int      @id @default(autoincrement())
+  datetime    DateTime
+  description String
+  image       String
+  location    String
+  name        String
+  points      Int
+  type        String
+  isCanceled  Boolean  @default(false)
+  reason      String?
+
   participants Student[]
 }
 
 model Student {
-  id         String             @id
+  id         String  @id
   firstName  String
   middleName String
   lastName   String

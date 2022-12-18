@@ -1,3 +1,5 @@
+import { KeyedMutator } from "swr";
+
 export type EventType = {
   id: string;
   image: string;
@@ -7,9 +9,14 @@ export type EventType = {
   location: string;
   description: string;
   datetime: string;
+  isCanceled: boolean;
+  reason: string | null;
 };
 
-export type EventPropType = EventType & { page: string };
+export type EventPropsType = EventType & {
+  page: string;
+  mutate: KeyedMutator<any>;
+};
 
 export type QueryType = {
   type: string | null;

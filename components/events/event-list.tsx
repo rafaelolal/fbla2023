@@ -1,7 +1,9 @@
+import { KeyedMutator } from "swr";
 import Event from "./event";
 import { EventType } from "./types";
 
 export default function EventList(props: {
+  mutate: KeyedMutator<any>;
   events: EventType[];
   page: string;
 }) {
@@ -19,6 +21,9 @@ export default function EventList(props: {
           description={event.description}
           datetime={event.datetime}
           page={props.page}
+          isCanceled={event.isCanceled}
+          reason={event.reason}
+          mutate={props.mutate}
         />
       ))}
       ;
