@@ -9,9 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <AppWrapper>
       <Script src="/js/bootstrap.bundle.min.js" />
       <Navbar />
-      <div className="container">
-        <Component {...pageProps} />
-      </div>
+      <Component {...pageProps} />
     </AppWrapper>
   );
 }

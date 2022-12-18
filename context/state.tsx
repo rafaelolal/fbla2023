@@ -1,4 +1,4 @@
-import { Context, createContext, useContext, useEffect, useState } from "react";
+import { Context, createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { MyToastType } from "../components/toasts/types";
@@ -8,6 +8,8 @@ type ToastListType = MyToastType[];
 type ContextType = {
   user: User | null;
   addToast: (toast: MyToastType) => void;
+  rallyTime: Date;
+  setRallyTime: Dispatch<SetStateAction<Date>>;
 };
 
 let AppContext: Context<ContextType>;
@@ -15,10 +17,13 @@ let AppContext: Context<ContextType>;
 export function AppWrapper({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [toasts, setToasts] = useState<ToastListType>([]);
+  const [rallyTime, setRallyTime] = useState(new Date());
 
   const sharedState = {
     user,
     addToast,
+    rallyTime,
+    setRallyTime,
   };
 
   AppContext = createContext(sharedState);
