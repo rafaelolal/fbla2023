@@ -17,7 +17,7 @@ export default async function handle(
       data: {
         events: {
           connect: {
-            eventId_studentId: { eventId: eventId, studentId: studentId },
+            id: eventId,
           },
         },
       },

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <AppWrapper>
-      <Script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" />
+      <Script src="/js/bootstrap.bundle.min.js" />
       <Navbar />
       <div className="container">
         <Component {...pageProps} />
