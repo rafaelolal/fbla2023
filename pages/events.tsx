@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useSWR from "swr";
 import EventList from "../components/events/event-list";
 import Search from "../components/events/search";

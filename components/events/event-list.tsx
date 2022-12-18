@@ -8,7 +8,7 @@ export default function EventList(props: {
   page: string;
 }) {
   return (
-    <div className="row">
+    <div className="row row-cols-1 justify-content-center">
       {props.events.map((event, i) => (
         <Event
           key={i}
