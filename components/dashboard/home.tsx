@@ -10,7 +10,7 @@ export default function DashboardHome() {
       <p>Signed in: {Boolean(user).toString()}</p>
       {user && (
         <>
-          <p>Signed in as: {user.email}</p> <p>Admin:</p>
+          <p>Signed in as: {user.email}</p>
           <button
             className="btn btn-primary"
             onClick={() => {

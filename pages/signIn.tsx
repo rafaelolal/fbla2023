@@ -3,8 +3,10 @@ import { useRouter } from "next/router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { app, auth } from "../firebaseConfig";
 import { getAnalytics, setUserProperties } from "firebase/analytics";
+import { useAppContext } from "../context/state";
 
 export default function SignInPage() {
+  const { addToast } = useAppContext();
   const router = useRouter();
 
   const emailRef = useRef<HTMLInputElement>(null);
@@ -17,17 +19,21 @@ export default function SignInPage() {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        const currentUser = auth.currentUser;
-        console.table({ user, currentUser });
         emailRef.current!.value = "";
         passwordRef.current!.value = "";
         router.push("/");
+        addToast({
+          status: 200,
+          title: "Signed In",
+          body: `Successfully signed in as ${userCredential.user.email}`,
+        });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.table({ errorCode, errorMessage });
+        addToast({
+          status: 500,
+          title: `Error: ${error.code}`,
+          body: error.message,
+        });
       });
   }
 
