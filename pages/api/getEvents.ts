@@ -13,8 +13,6 @@ export default async function handle(
   datetime && (where.datetime = { gte: new Date(datetime) });
   location && (where.location = location);
 
-  console.log({ where });
-
   const data = await prisma.event.findMany({
     where: where,
     orderBy: { datetime: "asc" },

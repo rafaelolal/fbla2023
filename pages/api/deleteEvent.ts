@@ -7,27 +7,16 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { eventId, studentId } = req.body;
+  const { id } = req.body;
 
   try {
-    const result = await prisma.student.update({
-      where: {
-        id: studentId,
-      },
-      data: {
-        events: {
-          connect: {
-            id: eventId,
-          },
-        },
-      },
-    });
+    const result = await prisma.event.delete({ where: { id } });
 
-    console.log({ studentAddEventResult: result });
+    console.log({ eventDeleteResult: result });
 
     res
       .status(200)
-      .json({ status: 200, message: "Student added successfully" });
+      .json({ status: 200, message: "Event deleted successfully" });
   } catch (error) {
     let message = "Unknown Error";
     if (error instanceof Error) message = error.message;

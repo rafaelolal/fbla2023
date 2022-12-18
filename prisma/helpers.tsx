@@ -1,7 +1,7 @@
 import axios from "axios";
 import useSWR from "swr";
 
-export function isAdmin(id: string) {
+export async function isAdmin(id: string) {
   const { data, error } = useSWR("/api/isAdmin", async (url) => {
     return await axios
       .get(url, { params: { id } })

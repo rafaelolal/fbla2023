@@ -3,7 +3,7 @@ import useSWR from "swr";
 import EventList from "../events/event-list";
 
 export default function DashboardEvents() {
-  const { data, error } = useSWR("/api/getEvents", async (url) => {
+  const { data, error, mutate } = useSWR("/api/getEvents", async (url) => {
     return await axios
       .get(url)
       .then((response) => {
@@ -17,5 +17,5 @@ export default function DashboardEvents() {
   if (error) return <div>An error occurred.</div>;
   if (!data) return <div>Loading ...</div>;
 
-  return <EventList events={data} />;
+  return <EventList mutate={mutate} page="dashboard" events={data} />;
 }

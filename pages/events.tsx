@@ -19,7 +19,7 @@ export default function EventsPage() {
         return response.data;
       })
       .catch((error) => {
-        console.log({ getEvents: error });
+        console.log({ getEventsError: error });
       });
   });
 
