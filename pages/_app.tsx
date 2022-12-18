@@ -3,7 +3,6 @@ import Script from "next/script";
 import { AppWrapper, useAppContext } from "../context/state";
 import Navbar from "../components/layout/navbar";
 import "../styles/globals.scss";
-import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
