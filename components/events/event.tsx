@@ -81,7 +81,7 @@ export default function Event(props: EventPropsType) {
 
   return (
     <div className="col-8" style={{padding: "1rem"}}>
-      <div className="row" style={{height: "13rem", backgroundColor: "orange", boxShadow: "5px 5px 0px #000"}} >
+      <div className="row" style={{height: "13rem", backgroundColor: "#999999", boxShadow: "5px 5px 0px #000"}} >
         <div className="col-4" style={{height: "13rem", padding: "0"}}>
           <img src={props.image} style={{objectFit: "cover", width: "100%", height: "100%"}} alt="..." />
         </div>
@@ -92,7 +92,7 @@ export default function Event(props: EventPropsType) {
             {props.points}
           </h5>
           
-          <p className="card-text">{props.description}</p>
+          <p className="card-text">{props.isCanceled ? `Cancelation reason: ${props.reason}` : props.description}</p>
 
           {!props.isCanceled && props.page == "dashboard" && (
             <>

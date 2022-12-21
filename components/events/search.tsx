@@ -69,6 +69,18 @@ export default function Search(props: {
         >
           Search
         </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            props.setQuery({
+              type: "",
+              datetime: "",
+              location: "",
+            });
+          }}
+        >
+          Reset
+        </button>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import Event from "../components/events/event";
 import { useAppContext } from "../context/state";
@@ -104,7 +105,7 @@ export default function IndexPage(props) {
       <div className="container my-5">
         <div className="d-flex justify-content-between">
           <h1>UPCOMING EVENTS</h1>
-          <small>See more</small>
+          <Link href="/events"><small>See more</small></Link>
         </div>
         <div className="row">
           {props.events.map((event, i) => (
