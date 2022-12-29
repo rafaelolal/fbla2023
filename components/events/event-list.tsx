@@ -8,27 +8,27 @@ export default function EventList(props: {
   page: string;
 }) {
   return (
-    < div className="container">
-    <div className="row row-cols-1 justify-content-center">
-      {props.events.map((event, i) => (
-        <Event
-          key={i}
-          id={event.id}
-          image={event.image}
-          name={event.name}
-          type={event.type}
-          points={event.points}
-          location={event.location}
-          description={event.description}
-          datetime={event.datetime}
-          page={props.page}
-          isCanceled={event.isCanceled}
-          reason={event.reason}
-          mutate={props.mutate}
-        />
-      ))}
-      ;
-    </div>
+    <div className="container">
+      <div className="row row-cols-1 justify-content-center">
+        {props.events.map((event, i) => (
+          <Event
+            key={i}
+            id={event.id}
+            image={event.image}
+            name={event.name}
+            type={event.type}
+            points={event.points}
+            location={event.location}
+            description={event.description}
+            datetime={event.datetime}
+            page={props.page}
+            isCanceled={event.isCanceled}
+            reason={event.reason}
+            mutate={props.mutate}
+          />
+        ))}
+        ;
+      </div>
     </div>
   );
 }
