@@ -80,19 +80,34 @@ export default function Event(props: EventPropsType) {
   }
 
   return (
-    <div className="col-8" style={{padding: "1rem"}}>
-      <div className="row" style={{height: "13rem", backgroundColor: "#999999", boxShadow: "5px 5px 0px #000"}} >
-        <div className="col-4" style={{height: "13rem", padding: "0"}}>
-          <img src={props.image} style={{objectFit: "cover", width: "100%", height: "100%"}} alt="..." />
+    <div className="col-8 p-3">
+      <div
+        className="row"
+        style={{
+          height: "13rem",
+          backgroundColor: "#999999",
+          boxShadow: "5px 5px 0px #000",
+        }}
+      >
+        <div className="col-3" style={{ height: "13rem", padding: "0" }}>
+          <img
+            src={props.image}
+            style={{ objectFit: "cover", width: "100%", height: "100%" }}
+            alt="..."
+          />
         </div>
 
-        <div className="col-6 card-body-right" style={{padding: "1rem"}}>
+        <div className="col-6 card-body-right" style={{ padding: "1rem" }}>
           <h5 className="card-title">
             {props.isCanceled && "CANCELED"} {props.name} ({props.type}) -{" "}
             {props.points}
           </h5>
-          
-          <p className="card-text">{props.isCanceled ? `Cancelation reason: ${props.reason}` : props.description}</p>
+
+          <p className="card-text">
+            {props.isCanceled
+              ? `Cancelation reason: ${props.reason}`
+              : props.description}
+          </p>
 
           {!props.isCanceled && props.page == "dashboard" && (
             <>
@@ -153,15 +168,23 @@ export default function Event(props: EventPropsType) {
             </a>
           )}
         </div>
-        <div className = "col-2 d-flex" >
-        <h6 className = "my-auto" style={{ textAlign: "center", height: "fit-content", fontSize: "1rem"}}>
+        <div className="col-3 d-flex">
+          <h6
+            className="my-auto"
+            style={{
+              textAlign: "center",
+              height: "fit-content",
+              fontSize: "1rem",
+            }}
+          >
             {new Date(props.datetime).toLocaleString(undefined, {
               timeZone: "UTC",
               year: "numeric",
               month: "long",
               day: "2-digit",
               weekday: "long",
-            })}{""}
+            })}
+            {""}
             at {props.location}
           </h6>
         </div>
