@@ -15,11 +15,12 @@ export default function DashboardPage() {
     return <p>Loading...</p>;
   }
 
-  isAdmin(user.uid).then(function(data) {
+  isAdmin(user.uid).then(function (data) {
     if (!data) {
-      return <ForbiddenPage />
+      alert(user.uid);
+      return <ForbiddenPage />;
     }
-  })
+  });
 
   return (
     <>
