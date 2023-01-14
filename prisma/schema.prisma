@@ -33,11 +33,11 @@ model Event {
   isCanceled  Boolean  @default(false)
   reason      String?
 
-  participants Student[]
+  participants StudentsOnEvents[]
 }
 
 model Student {
-  id         String  @id
+  id         String             @id
   firstName  String
   middleName String
   lastName   String
@@ -45,7 +45,17 @@ model Student {
   points     Int
   rank       Int
   awards     Award[]
-  events     Event[]
+  events     StudentsOnEvents[]
+}
+
+model StudentsOnEvents {
+  event     Event   @relation(fields: [eventId], references: [id])
+  eventId   Int
+  student   Student @relation(fields: [studentId], references: [id])
+  studentId String
+  attended  Boolean
+
+  @@id([eventId, studentId])
 }
 
 model News {
