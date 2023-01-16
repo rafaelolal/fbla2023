@@ -1,12 +1,7 @@
-import { KeyedMutator } from "swr";
 import Event from "./event";
-import { EventType } from "./types";
+import { EventType } from "../../types/events";
 
-export default function EventList(props: {
-  mutate: KeyedMutator<any>;
-  events: EventType[];
-  page: string;
-}) {
+export default function EventList(props: { events: EventType[] }) {
   return (
     <div className="row row-cols-1 justify-content-center">
       {props.events.map((event, i) => (
@@ -20,10 +15,8 @@ export default function EventList(props: {
           location={event.location}
           description={event.description}
           datetime={event.datetime}
-          page={props.page}
           isCanceled={event.isCanceled}
           reason={event.reason}
-          mutate={props.mutate}
         />
       ))}
       ;

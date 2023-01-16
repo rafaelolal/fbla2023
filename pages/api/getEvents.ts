@@ -8,14 +8,20 @@ export default async function handle(
 ) {
   const { type, datetime, location } = req.query;
 
-  let where = {};
+  let where: any = {};
   type && (where.type = type);
-  datetime && (where.datetime = { gte: new Date(datetime) });
+  datetime && (where.datetime = { gte: new Date(<string>datetime) });
   location && (where.location = location);
 
   const data = await prisma.event.findMany({
     where: where,
     orderBy: { datetime: "asc" },
+    include: {
+      participants: true,
+    },
   });
+
+  console.log({ apiData: data });
+
   res.json(data);
 }

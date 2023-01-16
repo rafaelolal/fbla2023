@@ -2,7 +2,7 @@ import axios from "axios";
 import { useAppContext } from "../../context/state";
 import { EventType } from "../../types/events";
 
-export default function Event(props: EventType) {
+export default function HomeEvent(props: EventType) {
   const { user, addToast } = useAppContext();
 
   async function joinHandler() {
