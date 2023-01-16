@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { useRouter } from "next/router";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+import { app, auth } from "../firebaseConfig";
+import { getAnalytics, setUserProperties } from "firebase/analytics";
 import { useAppContext } from "../context/state";
 
 export default function SignInPage() {

@@ -9,9 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <AppWrapper>
       <Script src="/js/bootstrap.bundle.min.js" />
       <Navbar />
-      <div style={{backgroundColor: "#cae6ef"}}>
       <Component {...pageProps} />
-      </div>
     </AppWrapper>
   );
 }
