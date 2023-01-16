@@ -1,5 +1,5 @@
 import Toast from "react-bootstrap/Toast";
-import { MyToastPropsType } from "./types";
+import { MyToastPropsType } from "../../types/toasts";
 
 const statusColors: { [key: number]: string } = {
   400: "warning",

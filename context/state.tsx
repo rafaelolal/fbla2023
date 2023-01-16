@@ -1,12 +1,22 @@
-import { Context, createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import {
+  Context,
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { MyToastType } from "../components/toasts/types";
+import { MyToastType } from "../types/toasts";
 import ToastList from "../components/toasts/toast-list";
+import { isAdmin } from "../prisma/helpers";
 
 type ToastListType = MyToastType[];
 type ContextType = {
   user: User | null;
+  isA: boolean;
   addToast: (toast: MyToastType) => void;
   rallyTime: Date;
   setRallyTime: Dispatch<SetStateAction<Date>>;
@@ -18,10 +28,12 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [toasts, setToasts] = useState<ToastListType>([]);
   const [rallyTime, setRallyTime] = useState(new Date());
+  const [isA, setIsA] = useState(false);
 
   const sharedState = {
     user,
     addToast,
+    isA,
     rallyTime,
     setRallyTime,
   };
@@ -32,6 +44,10 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        isAdmin(user.uid).then(function (result) {
+          console.log(result);
+          setIsA(result);
+        });
       } else {
         setUser(null);
       }
