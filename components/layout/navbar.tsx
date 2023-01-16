@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { useAppContext } from "../../context/state";
 import { auth } from "../../firebaseConfig";
-import { isAdmin } from "../../prisma/helpers";
 
 export default function Navbar() {
-  const { user } = useAppContext();
+  const { user, isA } = useAppContext();
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -28,14 +27,14 @@ export default function Navbar() {
                 Home
               </Link>
             </li>
-            
+
             <li className="nav-item">
               <Link className="nav-link" href="/events">
                 Events
               </Link>
             </li>
 
-            {(user && isAdmin(user.uid)) && (
+            {user && isA && (
               <li className="nav-item">
                 <Link className="nav-link" href="/dashboard">
                   Dashboard
