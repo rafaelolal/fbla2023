@@ -10,18 +10,26 @@ export default async function handle(
   const { eventId, studentId } = req.body;
 
   try {
-    const result = await prisma.student.update({
-      where: {
-        id: studentId,
-      },
+    const result = await prisma.studentsOnEvents.create({
       data: {
-        events: {
-          connect: {
-            id: eventId,
-          },
-        },
+        studentId: studentId,
+        eventId: eventId,
+        attended: false,
       },
     });
+
+    // const result = await prisma.student.update({
+    //   where: {
+    //     id: studentId,
+    //   },
+    //   data: {
+    //     events: {
+    //       connect: {
+    //         id: eventId,
+    //       },
+    //     },
+    //   },
+    // });
 
     console.log({ studentAddEventResult: result });
 
