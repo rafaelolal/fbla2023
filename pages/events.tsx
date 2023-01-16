@@ -3,13 +3,13 @@ import { useState } from "react";
 import useSWR from "swr";
 import EventList from "../components/events/event-list";
 import Search from "../components/events/search";
-import { QueryType } from "../components/events/types";
+import { QueryType } from "../types/events";
 
 export default function EventsPage() {
   const [query, setQuery] = useState<QueryType>({
-    type: null,
+    type: "",
     datetime: new Date().toLocaleDateString("en-CA"),
-    location: null,
+    location: "",
   });
 
   const { data, error } = useSWR(["/api/getEvents", query], async (url) => {
@@ -36,7 +36,7 @@ export default function EventsPage() {
   return (
     <>
       <Search types={types} locations={locations} setQuery={setQuery} />
-      <EventList events={data} page="events" />
+      <EventList events={data} />
     </>
   );
 }

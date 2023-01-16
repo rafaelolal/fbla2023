@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
 import { useRef } from "react";
-import { useAppContext } from "../../context/state";
-import { tempAuth } from "../../firebaseConfig";
+import { useAppContext } from "../../../context/state";
+import { tempAuth } from "../../../firebaseConfig";
 
 export default function StudentSignUp() {
   const { addToast } = useAppContext();
@@ -73,9 +73,9 @@ export default function StudentSignUp() {
               "emailInput"
             ) as HTMLInputElement;
 
-            (document.getElementById(
-              "passwordInput"
-            ) as HTMLInputElement).value =
+            (
+              document.getElementById("passwordInput") as HTMLInputElement
+            ).value =
               eI.value.split("@")[0] +
               "0".repeat(Math.max(0, 6 - eI.value.split("@")[0].length));
           }}

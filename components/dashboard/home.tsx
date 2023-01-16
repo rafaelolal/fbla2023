@@ -1,8 +1,9 @@
 import { MutableRefObject, useRef } from "react";
 import { useAppContext } from "../../context/state";
 import { auth } from "../../firebaseConfig";
-import AddEventForm from "../events/add-event-form";
-import StudentSignUp from "./student-sign-up";
+import AddNewsForm from "./add-news-form";
+import AddEventForm from "./events/add-event-form";
+import StudentSignUp from "./students/student-sign-up";
 
 export default function DashboardHome() {
   const { user, setRallyTime } = useAppContext();
@@ -53,6 +54,10 @@ export default function DashboardHome() {
 
       <div className="my-3 p-3" style={{ border: "solid 1px" }}>
         <AddEventForm />
+      </div>
+
+      <div className="my-3 p-3" style={{ border: "solid 1px" }}>
+        <AddNewsForm />
       </div>
     </>
   );
