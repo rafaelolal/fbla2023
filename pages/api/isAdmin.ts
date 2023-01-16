@@ -12,7 +12,7 @@ export default async function handle(
   const data = Boolean(
     await prisma.admin.findFirst({
       where: {
-        id: <string>id,
+        id: id,
       },
     })
   );

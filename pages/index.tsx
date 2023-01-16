@@ -1,18 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import HomeEvent from "../components/events/home-event";
-import NewsList from "../components/news/news-list";
+import Event from "../components/events/event";
 import { useAppContext } from "../context/state";
-import { EventType } from "../types/events";
-import { NewsType } from "../types/news";
 
 const prisma = new PrismaClient();
 
-export default function IndexPage(props: {
-  events: EventType[];
-  news: NewsType[];
-}) {
+export default function IndexPage(props) {
   const { rallyTime } = useAppContext();
   const [partyTime, setPartyTime] = useState(false);
   const [days, setDays] = useState(0);
@@ -111,49 +105,35 @@ export default function IndexPage(props: {
       <div className="container my-5">
         <div className="d-flex justify-content-between">
           <h1>UPCOMING EVENTS</h1>
-          <Link href="/events">
-            <small>See more</small>
-          </Link>
+          <Link href="/events"><small>See more</small></Link>
         </div>
         <div className="row">
-          {props.events.map((event: EventType, i: number) => (
-            <HomeEvent
+          {props.events.map((event, i) => (
+            <Event
               key={i}
               id={event.id}
               image={event.image}
               name={event.name}
-              type={event.type}
-              points={event.points}
-              description={event.description}
               location={event.location}
               datetime={event.datetime}
+              page={props.page}
               isCanceled={event.isCanceled}
               reason={event.reason}
+              mutate={props.mutate}
             />
           ))}
         </div>
-
-        <div className="d-flex justify-content-between">
-          <h1>NEWS</h1>
-          <Link href="/events">
-            <small>See more</small>
-          </Link>
-        </div>
-
-        <NewsList news={props.news} />
       </div>
     </>
   );
 }
 
-export async function getServerSideProps() {
-  const eventsResult = (await prisma.event.findMany()).slice(0, 3);
-  const newsResult = (await prisma.news.findMany()).slice(0, 3);
+export async function getServerSideProps(context) {
+  const result = (await prisma.event.findMany()).slice(0, 3);
 
   return {
     props: {
-      events: JSON.parse(JSON.stringify(eventsResult)),
-      news: JSON.parse(JSON.stringify(newsResult)),
+      events: JSON.parse(JSON.stringify(result)),
     },
   };
 }
