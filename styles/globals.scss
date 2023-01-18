@@ -1,14 +1,52 @@
 @import "./node_modules/bootstrap/scss/bootstrap.scss";
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
 
-.card-image-cstm{
-    height: 100px;
-    
-
-
+* {
+  font-family: "Dosis", sans-serif;
 }
 
-
-.card-body-right{
-    background-color: gray;
+.fc-1 {
+  color: #56becd;
 }
 
+.fc-2 {
+  color: #000000;
+}
+
+.card-image-cstm {
+  height: 100px;
+}
+
+.card-body-right {
+  background-color: gray;
+}
+.homePageButton {
+  width: 300px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.homePageButton:hover {
+  transition: 0.3s ease-in-out;
+  transform: scale(1.03);
+}
+
+.neoBorder {
+  box-shadow: 2px 2px 0px #000000;
+  border-radius: 7px;
+  border: solid 3px #000000;
+}
+
+.signBtn {
+  padding: 0.25rem 1.4rem;
+  text-decoration: none;
+  color: #000000;
+}
+
+.eventBtn {
+  background-color: #56becd;
+  color: black;
+  text-decoration: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 7px;
+}

@@ -58,19 +58,33 @@ export default function IndexPage(props: {
       >
         <img
           className=""
-          src="/images/school18.jpg"
+          src="/images/homepage pic.svg"
+          alt=""
           style={{
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            filter: "brightness(50%)",
             zIndex: -1,
+            borderBottom: "solid 4px #000000",
           }}
         />
 
+        <div className="position-absolute" style={{ top: "45%", left: "13%" }}>
+          <Link href="/events">
+            <img
+              className="homePageButton"
+              src="/images/homepage button.svg"
+              alt="View Events Button"
+            />
+          </Link>
+        </div>
+
         <div
-          className="text-white text-center position-absolute bottom-0 end-0 m-3"
-          style={{ border: "solid 3px #aaaaaa" }}
+          className="text-center position-absolute bottom-0 end-0 m-5 neoBorder "
+          style={{
+            border: "solid 4px #000000",
+            backgroundColor: "#e6f9ff",
+          }}
         >
           {partyTime ? (
             <h2 className="p-3">RALLY STARTED</h2>
@@ -80,25 +94,25 @@ export default function IndexPage(props: {
               <div className="row m-0">
                 <div
                   className="col p-2 m-3"
-                  style={{ border: "solid 3px #aaaaaa" }}
+                  style={{ border: "solid 3px #000000" }}
                 >
                   <h2>{days}</h2>
                 </div>
                 <div
                   className="col p-2 m-3"
-                  style={{ border: "solid 3px #aaaaaa" }}
+                  style={{ border: "solid 3px #000000" }}
                 >
                   <h2>{hours}</h2>
                 </div>
                 <div
                   className="col p-2 m-3"
-                  style={{ border: "solid 3px #aaaaaa" }}
+                  style={{ border: "solid 3px #000000" }}
                 >
                   <h2>{minutes}</h2>
                 </div>
                 <div
                   className="col p-2 m-3"
-                  style={{ border: "solid 3px #aaaaaa" }}
+                  style={{ border: "solid 3px #000000" }}
                 >
                   <h2>{seconds}</h2>
                 </div>
@@ -110,12 +124,29 @@ export default function IndexPage(props: {
 
       <div className="container my-5">
         <div className="d-flex justify-content-between">
-          <h1>UPCOMING EVENTS</h1>
-          <Link href="/events">
-            <small>See more</small>
+          <h1>Top Events of the Week</h1>
+          <Link
+            className="signBtn fs-6 mx-3 "
+            style={{ height: "fit-content" }}
+            href="/events"
+          >
+            See More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              className="bi bi-arrow-right"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+              />
+            </svg>
           </Link>
         </div>
-        <div className="row">
+        <div className="">
           {props.events.map((event: EventType, i: number) => (
             <HomeEvent
               key={i}
