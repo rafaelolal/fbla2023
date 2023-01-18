@@ -1,7 +1,7 @@
 import axios from "axios";
 import useSWR from "swr";
 import DashboardStudent from "./student";
-import { StudentType } from "./types";
+import { DashboardStudentType } from "../../../types/students";
 
 export default function DashboardStudentList() {
   const { data, error, mutate } = useSWR("/api/getStudents", async (url) => {
@@ -22,7 +22,7 @@ export default function DashboardStudentList() {
     <>
       <div className="row gy-4">
         {data &&
-          data.map((student: StudentType, i: number) => (
+          data.map((student: DashboardStudentType, i: number) => (
             <DashboardStudent
               key={i}
               id={student.id}

@@ -23,13 +23,14 @@ model Award {
 
 model Event {
   id          Int      @id @default(autoincrement())
-  datetime    DateTime
+  title       String
   description String
-  image       String
-  location    String
-  name        String
-  points      Int
   type        String
+  location    String
+  start       DateTime
+  end         DateTime
+  image       String
+  points      Int
   isCanceled  Boolean  @default(false)
   reason      String?
 
@@ -37,23 +38,28 @@ model Event {
 }
 
 model Student {
-  id         String             @id
+  id         String @id
   firstName  String
   middleName String
   lastName   String
-  grade      Int
-  points     Int
-  rank       Int
-  awards     Award[]
-  events     StudentsOnEvents[]
+  grade      Int    @default(-1)
+  bio        String @default("")
+  image      String @default("default.jpg")
+  points     Int    @default(0)
+  rank       Int?
+
+  awards Award[]
+  events StudentsOnEvents[]
 }
 
 model StudentsOnEvents {
-  event     Event   @relation(fields: [eventId], references: [id])
+  event     Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId   Int
-  student   Student @relation(fields: [studentId], references: [id])
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
   studentId String
-  attended  Boolean
+
+  attended    Boolean @default(false)
+  studentName String
 
   @@id([eventId, studentId])
 }

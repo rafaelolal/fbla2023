@@ -1,8 +1,8 @@
+import { useRef } from "react";
 import axios from "axios";
 import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
-import { useRef } from "react";
-import { useAppContext } from "../../../context/state";
 import { tempAuth } from "../../../firebaseConfig";
+import { useAppContext } from "../../../context/state";
 
 export default function StudentSignUp() {
   const { addToast } = useAppContext();
@@ -24,8 +24,6 @@ export default function StudentSignUp() {
             firstName: user.email,
             middleName: "",
             lastName: "",
-            grade: -1,
-            rank: -1,
           })
           .then(function (response) {
             addToast({

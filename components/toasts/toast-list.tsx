@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-bootstrap";
-import { MyToastType } from "../../types/toasts";
 import MyToast from "./toast";
+import { MyToastType } from "../../types/toasts";
 
 export default function ToastList(props: {
   toasts: MyToastType[];

@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -7,8 +7,7 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id, firstName, middleName, lastName, grade, rank } = req.body;
-  const points = 0;
+  const { id, firstName, middleName, lastName } = req.body;
 
   try {
     const result = await prisma.student.create({
@@ -17,9 +16,6 @@ export default async function handle(
         firstName,
         middleName,
         lastName,
-        grade,
-        points,
-        rank,
       },
     });
 

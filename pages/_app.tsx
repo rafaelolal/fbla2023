@@ -1,8 +1,8 @@
+import "../styles/globals.scss";
 import type { AppProps } from "next/app";
 import Script from "next/script";
-import { AppWrapper, useAppContext } from "../context/state";
 import Navbar from "../components/layout/navbar";
-import "../styles/globals.scss";
+import { AppWrapper } from "../context/state";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

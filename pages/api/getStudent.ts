@@ -7,6 +7,11 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const data = await prisma.news.findMany();
+  const { id } = req.query;
+
+  const data = await prisma.student.findFirst({
+    where: { id: <string>id },
+  });
+
   res.json(data);
 }

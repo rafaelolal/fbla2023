@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useAppContext } from "../../../context/state";
 import Modal from "react-bootstrap/Modal";
+import { useAppContext } from "../../../context/state";
 import { ParticipantsType } from "../../../types/events";
 
 export default function AttendanceModal(props: {
@@ -9,25 +9,21 @@ export default function AttendanceModal(props: {
   toggleModal: () => void;
   participants: ParticipantsType;
 }) {
-  const { user, addToast } = useAppContext();
+  const { addToast } = useAppContext();
 
   async function markAttendanceHandler() {
     const checks = document.querySelectorAll(
-      'input[type="checkbox"]:checked'
+      'input[type="checkbox"]'
     ) as NodeListOf<HTMLInputElement>;
 
-    console.log({ checks });
-
-    var studentIds = [];
+    var attendance = [];
     for (let check of checks) {
-      studentIds.push(check.value);
+      attendance.push({ id: check.value, attended: check.checked });
     }
-
-    console.log({ studentIds });
 
     const result = await axios
       .post("/api/markAttendance", {
-        studentIds: studentIds,
+        attendance,
         eventId: props.id,
       })
       .then(function (response) {
@@ -45,11 +41,8 @@ export default function AttendanceModal(props: {
         });
       });
 
-    console.log({ studentEventResult: result });
     props.toggleModal();
   }
-
-  console.log({ part: props.participants });
 
   return (
     <Modal show={props.show} onHide={props.toggleModal}>
@@ -61,19 +54,20 @@ export default function AttendanceModal(props: {
         {props.participants.length == 0 ? (
           <p>No participants</p>
         ) : (
-          props.participants.map((comb) => (
-            <div className="form-check">
+          props.participants.map((comb, i) => (
+            <div key={i} className="form-check">
               <input
                 className="form-check-input"
                 type="checkbox"
                 value={comb.studentId}
                 id={`check-${props.id}-${comb.studentId}`}
+                defaultChecked={comb.attended}
               />
               <label
                 className="form-check-label"
                 htmlFor={`check-${comb.studentId}`}
               >
-                {comb.studentId}
+                {comb.studentName}
               </label>
             </div>
           ))

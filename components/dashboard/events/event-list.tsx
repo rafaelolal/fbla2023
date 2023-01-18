@@ -1,10 +1,10 @@
 import { KeyedMutator } from "swr";
 import DashboardEvent from "./event";
-import { DashBoardEventPropsType } from "../../../types/events";
+import { DashboardEventType } from "../../../types/events";
 
 export default function DashboardEventList(props: {
   mutate: KeyedMutator<any>;
-  events: DashBoardEventPropsType[];
+  events: DashboardEventType[];
 }) {
   return (
     <div className="row">
@@ -12,8 +12,8 @@ export default function DashboardEventList(props: {
         <DashboardEvent
           key={i}
           id={event.id}
-          name={event.name}
-          datetime={event.datetime}
+          title={event.title}
+          start={event.start}
           participants={event.participants}
           isCanceled={event.isCanceled}
           reason={event.reason}

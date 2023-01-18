@@ -13,11 +13,12 @@ CREATE TABLE "Award" (
 -- CreateTable
 CREATE TABLE "Event" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "datetime" DATETIME NOT NULL,
+    "start" DATETIME NOT NULL,
+    "end" DATETIME NOT NULL,
     "description" TEXT NOT NULL,
     "image" TEXT NOT NULL,
     "location" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
     "points" INTEGER NOT NULL,
     "type" TEXT NOT NULL,
     "isCanceled" BOOLEAN NOT NULL DEFAULT false,
@@ -30,16 +31,19 @@ CREATE TABLE "Student" (
     "firstName" TEXT NOT NULL,
     "middleName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
-    "grade" INTEGER NOT NULL,
-    "points" INTEGER NOT NULL,
-    "rank" INTEGER NOT NULL
+    "grade" INTEGER NOT NULL DEFAULT -1,
+    "points" INTEGER NOT NULL DEFAULT 0,
+    "rank" INTEGER NOT NULL DEFAULT -1,
+    "image" TEXT NOT NULL DEFAULT 'default.jpg',
+    "bio" TEXT NOT NULL DEFAULT ''
 );
 
 -- CreateTable
 CREATE TABLE "StudentsOnEvents" (
     "eventId" INTEGER NOT NULL,
     "studentId" TEXT NOT NULL,
-    "attended" BOOLEAN NOT NULL,
+    "attended" BOOLEAN NOT NULL DEFAULT false,
+    "studentName" TEXT NOT NULL,
 
     PRIMARY KEY ("eventId", "studentId"),
     CONSTRAINT "StudentsOnEvents_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,

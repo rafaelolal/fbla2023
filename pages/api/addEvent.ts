@@ -7,7 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { datetime, description, image, location, name, points, type } =
+  const { start, end, description, image, location, title, points, type } =
     req.body;
 
   console.log({ addEventReqBody: req.body });
@@ -15,11 +15,12 @@ export default async function handler(
   try {
     const result = await prisma.event.create({
       data: {
-        datetime,
+        start,
+        end,
         description,
         image,
         location,
-        name,
+        title,
         points,
         type,
       },

@@ -1,6 +1,6 @@
+import path from "path";
 import { NextApiRequest, NextApiResponse } from "next";
 import formidable from "formidable";
-import path from "path";
 
 export const config = {
   api: {
@@ -12,7 +12,7 @@ function readFile(
   req: NextApiRequest
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> {
   const options: formidable.Options = {};
-  options.uploadDir = path.join(process.cwd(), "/public/images");
+  options.uploadDir = path.join(process.cwd(), `/public/images`);
   options.filename = (name, ext, path, form) => {
     return `${path.originalFilename}`;
   };
@@ -36,9 +36,11 @@ export default async function handler(
 ) {
   try {
     const result = await readFile(req);
-    res
-      .status(200)
-      .json({ status: 200, image: result.files.myImage.newFilename });
+
+    res.status(200).json({
+      status: 200,
+      image: result.files.myImage.newFilename.split("/").pop(),
+    });
   } catch (error) {
     let message = "Unknown Error";
     if (error instanceof Error) message = error.message;

@@ -1,21 +1,22 @@
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { type, datetime, location } = req.query;
+  const { type, start, location } = req.query;
 
   let where: any = {};
   type && (where.type = type);
-  datetime && (where.datetime = { gte: new Date(<string>datetime) });
+  start && (where.start = { gte: new Date(<string>start) });
   location && (where.location = location);
 
   const data = await prisma.event.findMany({
     where: where,
-    orderBy: { datetime: "asc" },
+    orderBy: { start: "asc" },
     include: {
       participants: true,
     },

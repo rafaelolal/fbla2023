@@ -6,11 +6,13 @@ export default function AddEventForm() {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
 
-  const dateRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const timeRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const startDateRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const startTimeRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const endDateRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const endTimeRef = useRef() as MutableRefObject<HTMLInputElement>;
   const descriptionRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const locationRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const nameRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const titleRef = useRef() as MutableRefObject<HTMLInputElement>;
   const pointsRef = useRef() as MutableRefObject<HTMLInputElement>;
   const typeRef = useRef() as MutableRefObject<HTMLSelectElement>;
 
@@ -25,13 +27,16 @@ export default function AddEventForm() {
       .then(function (data) {
         axios
           .post("/api/addEvent", {
-            datetime: new Date(
-              `${dateRef.current.value}T${timeRef.current.value}`
+            start: new Date(
+              `${startDateRef.current.value}T${startTimeRef.current.value}`
+            ),
+            end: new Date(
+              `${endDateRef.current.value}T${endTimeRef.current.value}`
             ),
             description: descriptionRef.current.value,
-            image: `/images/${data.data.image}`,
+            image: data.data.image,
             location: locationRef.current.value,
-            name: nameRef.current.value,
+            title: titleRef.current.value,
             points: parseInt(pointsRef.current.value),
             type: typeRef.current.value,
           })
@@ -53,8 +58,23 @@ export default function AddEventForm() {
     <>
       <div className="row">
         <div className="col-6">
-          <input type="date" className="form-control" required ref={dateRef} />
-          <input type="time" required ref={timeRef} />
+          <p>Start</p>
+          <input
+            type="date"
+            className="form-control"
+            required
+            ref={startDateRef}
+          />
+          <input type="time" required ref={startTimeRef} />
+
+          <p>End</p>
+          <input
+            type="date"
+            className="form-control"
+            required
+            ref={endDateRef}
+          />
+          <input type="time" required ref={endTimeRef} />
         </div>
 
         <div className="col-6">
@@ -107,8 +127,8 @@ export default function AddEventForm() {
           <input
             type="text"
             className="form-control"
-            placeholder="Name"
-            ref={nameRef}
+            placeholder="Title"
+            ref={titleRef}
           />
         </div>
 
@@ -123,7 +143,7 @@ export default function AddEventForm() {
 
         <div className="col-6">
           <select className="form-select" ref={typeRef}>
-            <option selected>Type</option>
+            <option value="Type">Type</option>
             <option value="Sports">Sports</option>
             <option value="Social">Social</option>
             <option value="Band">Band</option>

@@ -9,12 +9,12 @@ export default function EventList(props: { events: EventType[] }) {
           key={i}
           id={event.id}
           image={event.image}
-          name={event.name}
+          title={event.title}
           type={event.type}
           points={event.points}
           location={event.location}
           description={event.description}
-          datetime={event.datetime}
+          start={event.start}
           isCanceled={event.isCanceled}
           reason={event.reason}
         />

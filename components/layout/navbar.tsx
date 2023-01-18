@@ -42,6 +42,14 @@ export default function Navbar() {
               </li>
             )}
 
+            {user && !isA && (
+              <li className="nav-item">
+                <Link className="nav-link" href={`/profile/${user.uid}`}>
+                  Profile
+                </Link>
+              </li>
+            )}
+
             {!user && (
               <li className="nav-item">
                 <Link className="nav-link" href="/signIn">
