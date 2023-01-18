@@ -13,3 +13,9 @@ export async function isAdmin(id: string) {
 
   return result;
 }
+
+export function addPathToFile(file: File, path: string) {
+  return new File([file], `${path}/${file.name}`, {
+    type: file.type,
+  });
+}

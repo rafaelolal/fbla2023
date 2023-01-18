@@ -1,7 +1,10 @@
 import axios from "axios";
-import { StudentPropsType } from "./types";
+import { KeyedMutator } from "swr";
+import { DashboardStudentType } from "../../../types/students";
 
-export default function DashboardStudent(props: StudentPropsType) {
+export default function DashboardStudent(
+  props: DashboardStudentType & { mutate: KeyedMutator<any> }
+) {
   function deleteHandler(id: string) {
     console;
     axios

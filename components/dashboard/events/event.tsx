@@ -1,9 +1,9 @@
-import axios from "axios";
 import { MutableRefObject, useRef, useState } from "react";
-import { DashBoardEventPropsType } from "../../../types/events";
+import axios from "axios";
 import AttendanceModal from "./attendance-modal";
+import { DashboardEventType } from "../../../types/events";
 
-export default function DashboardEvent(props: DashBoardEventPropsType) {
+export default function DashboardEvent(props: DashboardEventType) {
   const [canceling, setCanceling] = useState(false);
   const cancelingRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const [show, setShow] = useState(false);
@@ -62,10 +62,10 @@ export default function DashboardEvent(props: DashBoardEventPropsType) {
       <div className="col-4" style={{ padding: "1rem" }}>
         <div className="card">
           <div className="card-body">
-            <h5 className="card-title">{props.name}</h5>
+            <h5 className="card-title">{props.title}</h5>
             <p className="card-text">
-              Occurred on{" "}
-              {new Date(props.datetime).toLocaleString(undefined, {
+              {new Date(props.start) < now ? "Occurred on" : "Scheduled for"}{" "}
+              {new Date(props.start).toLocaleString(undefined, {
                 timeZone: "UTC",
                 year: "numeric",
                 month: "long",
@@ -77,7 +77,7 @@ export default function DashboardEvent(props: DashBoardEventPropsType) {
 
             <button
               className={`btn btn-primary me-2 ${
-                new Date(props.datetime) > now ? "disabled" : ""
+                new Date(props.start) > now ? "disabled" : ""
               }`}
               onClick={toggleModal}
             >
@@ -86,7 +86,7 @@ export default function DashboardEvent(props: DashBoardEventPropsType) {
 
             <button
               className={`btn btn-primary me-2 ${
-                new Date(props.datetime) < now ? "disabled" : ""
+                new Date(props.start) < now ? "disabled" : ""
               }`}
               onClick={() => deleteHandler(props.id)}
             >
@@ -95,7 +95,7 @@ export default function DashboardEvent(props: DashBoardEventPropsType) {
 
             <button
               className={`btn btn-primary me-2 ${
-                new Date(props.datetime) < now ? "disabled" : ""
+                new Date(props.start) < now ? "disabled" : ""
               }`}
               onClick={() => setCanceling(!canceling)}
             >

@@ -1,9 +1,9 @@
-import { PrismaClient } from "@prisma/client";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { PrismaClient } from "@prisma/client";
+import { useAppContext } from "../context/state";
 import HomeEvent from "../components/events/home-event";
 import NewsList from "../components/news/news-list";
-import { useAppContext } from "../context/state";
 import { EventType } from "../types/events";
 import { NewsType } from "../types/news";
 
@@ -121,12 +121,12 @@ export default function IndexPage(props: {
               key={i}
               id={event.id}
               image={event.image}
-              name={event.name}
+              title={event.title}
               type={event.type}
               points={event.points}
               description={event.description}
               location={event.location}
-              datetime={event.datetime}
+              start={event.start}
               isCanceled={event.isCanceled}
               reason={event.reason}
             />

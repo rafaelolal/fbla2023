@@ -7,7 +7,7 @@ export default function Search(props: {
   setQuery: Dispatch<SetStateAction<QueryType>>;
 }) {
   const typeRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const datetimeRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const startRef = useRef() as MutableRefObject<HTMLInputElement>;
   const locationRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   const today = new Date();
@@ -36,7 +36,7 @@ export default function Search(props: {
           defaultValue={today.toLocaleDateString("en-CA")}
           className="form-control"
           required
-          ref={datetimeRef}
+          ref={startRef}
         />
       </div>
 
@@ -62,7 +62,7 @@ export default function Search(props: {
           onClick={() => {
             props.setQuery({
               type: typeRef.current.value,
-              datetime: datetimeRef.current.value,
+              start: startRef.current.value,
               location: locationRef.current.value,
             });
           }}
@@ -74,7 +74,7 @@ export default function Search(props: {
           onClick={() => {
             props.setQuery({
               type: "",
-              datetime: "",
+              start: "",
               location: "",
             });
           }}

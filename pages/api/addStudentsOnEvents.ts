@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -10,26 +10,18 @@ export default async function handle(
   const { eventId, studentId } = req.body;
 
   try {
+    const student = await prisma.student.findUniqueOrThrow({
+      where: { id: studentId },
+    });
+    const studentName = `${student.firstName} ${student.middleName} ${student.lastName}`;
+
     const result = await prisma.studentsOnEvents.create({
       data: {
-        studentId: studentId,
-        eventId: eventId,
-        attended: false,
+        studentId,
+        eventId,
+        studentName,
       },
     });
-
-    // const result = await prisma.student.update({
-    //   where: {
-    //     id: studentId,
-    //   },
-    //   data: {
-    //     events: {
-    //       connect: {
-    //         id: eventId,
-    //       },
-    //     },
-    //   },
-    // });
 
     console.log({ studentAddEventResult: result });
 

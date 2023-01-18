@@ -9,9 +9,9 @@ import {
 } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { MyToastType } from "../types/toasts";
 import ToastList from "../components/toasts/toast-list";
-import { isAdmin } from "../prisma/helpers";
+import { isAdmin } from "../helpers";
+import { MyToastType } from "../types/toasts";
 
 type ToastListType = MyToastType[];
 type ContextType = {

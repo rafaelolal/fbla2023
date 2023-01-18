@@ -1,5 +1,5 @@
 import Toast from "react-bootstrap/Toast";
-import { MyToastPropsType } from "../../types/toasts";
+import { MyToastType } from "../../types/toasts";
 
 const statusColors: { [key: number]: string } = {
   400: "warning",
@@ -9,7 +9,7 @@ const statusColors: { [key: number]: string } = {
   200: "success",
 };
 
-export default function MyToast(props: MyToastPropsType) {
+export default function MyToast(props: MyToastType & { onClose: () => void }) {
   return (
     <Toast
       bg={statusColors[props.status]}

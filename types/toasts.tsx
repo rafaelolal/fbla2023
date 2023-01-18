@@ -3,5 +3,3 @@ export type MyToastType = {
   title: string;
   body: string;
 };
-
-export type MyToastPropsType = MyToastType & { onClose: () => void };

@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useState } from "react";
+import axios from "axios";
 import useSWR from "swr";
 import EventList from "../components/events/event-list";
 import Search from "../components/events/search";
@@ -8,7 +8,7 @@ import { QueryType } from "../types/events";
 export default function EventsPage() {
   const [query, setQuery] = useState<QueryType>({
     type: "",
-    datetime: new Date().toLocaleDateString("en-CA"),
+    start: new Date().toLocaleDateString("en-CA"),
     location: "",
   });
 

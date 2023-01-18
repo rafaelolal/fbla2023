@@ -51,7 +51,11 @@ export default function Event(props: EventType) {
         >
           <div className="col-4" style={{ height: "13rem", padding: "0" }}>
             <img
-              src={props.image}
+              src={
+                props.image.includes("http")
+                  ? props.image
+                  : `/images/events/${props.image}`
+              }
               style={{ objectFit: "cover", width: "100%", height: "100%" }}
               alt="..."
             />
@@ -59,7 +63,7 @@ export default function Event(props: EventType) {
 
           <div className="col-6 card-body-right" style={{ padding: "1rem" }}>
             <h5 className="card-title">
-              {props.isCanceled && "CANCELED"} {props.name} ({props.type}) -{" "}
+              {props.isCanceled && "CANCELED"} {props.title} ({props.type}) -{" "}
               {props.points}
             </h5>
 
@@ -82,7 +86,7 @@ export default function Event(props: EventType) {
                 fontSize: "1rem",
               }}
             >
-              {new Date(props.datetime).toLocaleString(undefined, {
+              {new Date(props.start).toLocaleString(undefined, {
                 timeZone: "UTC",
                 year: "numeric",
                 month: "long",
