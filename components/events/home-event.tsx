@@ -40,50 +40,39 @@ export default function HomeEvent(props: HomeEventType) {
 
   return (
     <>
-      <div className="col-8" style={{ padding: "1rem" }}>
+      <div
+        className="d-inline-flex justify-content-center"
+        style={{ padding: "1rem" }}
+      >
         <div
-          className="row"
+          className="card"
           style={{
-            height: "13rem",
-            backgroundColor: "#999999",
-            boxShadow: "5px 5px 0px #000",
+            height: "400px",
+            width: "390px",
+            backgroundColor: "#e6f9ff",
+            boxShadow: "3px 3px 0px #000",
+            border: "solid 3px #000000",
           }}
         >
-          <div className="col-4" style={{ height: "13rem", padding: "0" }}>
-            <img
-              src={
-                props.image.includes("http")
-                  ? props.image
-                  : `/images/events/${props.image}`
-              }
-              style={{ objectFit: "cover", width: "100%", height: "100%" }}
-              alt="..."
-            />
-          </div>
-
-          <div className="col-6 card-body-right" style={{ padding: "1rem" }}>
-            <h5 className="card-title">
+          <img
+            className="card-img-top rounded-0"
+            src={
+              props.image.includes("http")
+                ? props.image
+                : `/images/events/${props.image}`
+            }
+            style={{ objectFit: "cover", width: "100%", height: "300px" }}
+            alt="..."
+          />
+          <div className="card-body">
+            <h5 className="fw-bold fs-6">
               {props.isCanceled && "CANCELED"} {props.title} ({props.type}) -{" "}
               {props.points}
             </h5>
-
-            <p className="card-text">
-              {props.isCanceled
-                ? `Cancelation reason: ${props.reason}`
-                : props.description}
-            </p>
-
-            <a href="#" className="btn btn-primary me-2" onClick={joinHandler}>
-              Join
-            </a>
-          </div>
-          <div className="col-2 d-flex">
             <h6
-              className="my-auto"
+              className="text-start fs-6"
               style={{
-                textAlign: "center",
                 height: "fit-content",
-                fontSize: "1rem",
               }}
             >
               {new Date(props.start).toLocaleString(undefined, {
@@ -92,10 +81,12 @@ export default function HomeEvent(props: HomeEventType) {
                 month: "long",
                 day: "2-digit",
                 weekday: "long",
-              })}
-              {""}
+              })}{" "}
               at {props.location}
             </h6>
+            <a href="#" className="mt-2 eventBtn me-2 " onClick={joinHandler}>
+              Join
+            </a>
           </div>
         </div>
       </div>

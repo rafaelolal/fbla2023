@@ -37,10 +37,18 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="container d-flex">
-      <form className="mx-auto" onSubmit={submitHandler}>
+    <div
+      className="container-fluid d-flex"
+      style={{
+        backgroundColor: "#a0d8ea",
+        height: "100vh",
+        marginTop: `${-18 * 6}px`,
+      }}
+    >
+      <form className="signForm neoBorder m-auto" onSubmit={submitHandler}>
+        <h1 className="text-center fw-semibold">Log In</h1>
         <div className="mb-3">
-          <label htmlFor="emailInput" className="form-label">
+          <label htmlFor="emailInput" className="form-label fw-semibold">
             Email address
           </label>
           <input
@@ -51,7 +59,7 @@ export default function SignInPage() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="passwordInput" className="form-label">
+          <label htmlFor="passwordInput" className="form-label fw-semibold">
             Password
           </label>
           <input
@@ -61,7 +69,7 @@ export default function SignInPage() {
             ref={passwordRef}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn eventBtnO">
           Login
         </button>
       </form>

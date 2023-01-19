@@ -17,7 +17,6 @@ export default function DashboardNavbar(props: {
         </button>
         <div className="collapse navbar-collapse" id="dashboardNavbar">
           <div className="navbar-nav mx-auto">
-            
             <a
               className="nav-link"
               onClick={() => props.setCurrentPage("Home")}

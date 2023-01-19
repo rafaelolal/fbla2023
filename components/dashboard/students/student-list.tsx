@@ -2,6 +2,7 @@ import axios from "axios";
 import useSWR from "swr";
 import DashboardStudent from "./student";
 import { DashboardStudentType } from "../../../types/students";
+import StudentSignUp from "./student-sign-up";
 
 export default function DashboardStudentList() {
   const { data, error, mutate } = useSWR("/api/getStudents", async (url) => {
@@ -20,6 +21,9 @@ export default function DashboardStudentList() {
 
   return (
     <>
+      <div className="my-3 p-3" style={{ border: "solid 1px" }}>
+        <StudentSignUp />
+      </div>
       <div className="row gy-4">
         {data &&
           data.map((student: DashboardStudentType, i: number) => (

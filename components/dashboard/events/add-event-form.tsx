@@ -56,37 +56,47 @@ export default function AddEventForm() {
 
   return (
     <>
-      <div className="row">
-        <div className="col-6">
-          <p>Start</p>
+      <div className="h-100 flex-column align-items-stretch mt-4">
+        <div className="row">
           <input
-            type="date"
+            type="text"
             className="form-control"
-            required
-            ref={startDateRef}
+            placeholder="Title"
+            ref={titleRef}
           />
-          <input type="time" required ref={startTimeRef} />
+        </div>
+        <div className="row">
+          <div className="col-6">
+            <div className="mt-3 fs-6">Start</div>
+            <input
+              type="date"
+              className="form-control"
+              required
+              ref={startDateRef}
+            />
+            <input type="time" required ref={startTimeRef} />
+          </div>
 
-          <p>End</p>
-          <input
-            type="date"
-            className="form-control"
-            required
-            ref={endDateRef}
-          />
-          <input type="time" required ref={endTimeRef} />
+          <div className="col-6">
+            <div className="mt-3 fs-6">End</div>
+            <input
+              type="date"
+              className="form-control"
+              required
+              ref={endDateRef}
+            />
+            <input type="time" required ref={endTimeRef} />
+          </div>
         </div>
 
-        <div className="col-6">
+        <div className="row mt-4">
           <textarea
             className="form-control"
             placeholder="Description"
             ref={descriptionRef}
           />
-        </div>
 
-        <div className="col-6">
-          <label>
+          <label className="mt-4">
             <input
               type="file"
               onChange={({ target }) => {
@@ -97,42 +107,29 @@ export default function AddEventForm() {
                 }
               }}
             />
-            <div>
-              {selectedImage ? (
-                <img src={selectedImage} alt="" />
-              ) : (
-                <span>Select Image</span>
-              )}
-            </div>
-          </label>
-          <button
-            onClick={handleUpload}
-            style={{ opacity: uploading ? ".5" : "1" }}
-            className={`btn btn-primary ${uploading ? "disabled" : ""}`}
-          >
-            {uploading ? "Uploading.." : "Upload"}
-          </button>
-        </div>
 
-        <div className="col-6">
+            {selectedImage ? (
+              <img src={selectedImage} alt="" />
+            ) : (
+              <span>Select Image</span>
+            )}
+
+            <button
+              onClick={handleUpload}
+              style={{ opacity: uploading ? ".5" : "1" }}
+              className={`btn btn-primary ${uploading ? "disabled" : ""}`}
+            >
+              {uploading ? "Uploading.." : "Upload"}
+            </button>
+          </label>
+
           <input
             type="text"
             className="form-control"
             placeholder="Location"
             ref={locationRef}
           />
-        </div>
 
-        <div className="col-6">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Title"
-            ref={titleRef}
-          />
-        </div>
-
-        <div className="col-6">
           <input
             type="number"
             className="form-control"

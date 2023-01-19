@@ -42,11 +42,11 @@ export default function Event(props: EventType) {
     <>
       <div className="col-8" style={{ padding: "1rem" }}>
         <div
-          className="row"
+          className="row neoBorder"
           style={{
             height: "13rem",
-            backgroundColor: "#999999",
-            boxShadow: "5px 5px 0px #000",
+            backgroundColor: "#56becd",
+            overflow: "hidden",
           }}
         >
           <div className="col-4" style={{ height: "13rem", padding: "0" }}>
@@ -56,13 +56,25 @@ export default function Event(props: EventType) {
                   ? props.image
                   : `/images/events/${props.image}`
               }
-              style={{ objectFit: "cover", width: "100%", height: "100%" }}
+              style={{
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+                borderRight: "solid 3px #000000",
+              }}
               alt="..."
             />
           </div>
 
-          <div className="col-6 card-body-right" style={{ padding: "1rem" }}>
-            <h5 className="card-title">
+          <div
+            className="col-6 card-body-right position-relative"
+            style={{
+              padding: "1rem",
+              backgroundColor: "#e6f9ff",
+              borderRight: "solid 3px #000000",
+            }}
+          >
+            <h5 className="card-title fs-5">
               {props.isCanceled && "CANCELED"} {props.title} ({props.type}) -{" "}
               {props.points}
             </h5>
@@ -73,10 +85,16 @@ export default function Event(props: EventType) {
                 : props.description}
             </p>
 
-            <a href="#" className="btn btn-primary me-2" onClick={joinHandler}>
+            <a
+              href="#"
+              className="btn eventBtnO me-2 position-absolute"
+              style={{ top: "70%" }}
+              onClick={joinHandler}
+            >
               Join
             </a>
           </div>
+
           <div className="col-2 d-flex">
             <h6
               className="my-auto"
@@ -92,8 +110,7 @@ export default function Event(props: EventType) {
                 month: "long",
                 day: "2-digit",
                 weekday: "long",
-              })}
-              {""}
+              })}{" "}
               at {props.location}
             </h6>
           </div>

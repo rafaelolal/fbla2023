@@ -1,6 +1,7 @@
 import axios from "axios";
 import useSWR from "swr";
 import DashboardEventList from "./event-list";
+import AddEventForm from "./add-event-form";
 
 export default function DashboardEvents() {
   const { data, error, mutate } = useSWR("/api/getEvents", async (url) => {
@@ -19,5 +20,19 @@ export default function DashboardEvents() {
 
   console.log({ data });
 
-  return <DashboardEventList mutate={mutate} events={data} />;
+  return (
+    <>
+      <div className="row">
+        <div className="col-4 px-5">
+          <h1>Add An Event</h1>
+          <AddEventForm />
+        </div>
+
+        <div className="col-8">
+          <h1>Events</h1>
+          <DashboardEventList mutate={mutate} events={data} />;
+        </div>
+      </div>
+    </>
+  );
 }
