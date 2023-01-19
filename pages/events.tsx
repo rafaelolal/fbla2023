@@ -26,6 +26,9 @@ export default function EventsPage() {
   if (error) return <div>An error occurred.</div>;
   if (!data) return <div>Loading ...</div>;
 
+  // loop through events and store
+  // unique types and locations
+  // to facilitate searching
   var types = new Set<string>();
   var locations = new Set<string>();
   for (let event of data) {
