@@ -40,9 +40,12 @@ export default function HomeEvent(props: HomeEventType) {
 
   return (
     <>
-      <div className="d-inline-flex" style={{ padding: "1rem" }}>
+      <div
+        className="d-inline-flex justify-content-center"
+        style={{ padding: "1rem" }}
+      >
         <div
-          className="card"
+          className="card "
           style={{
             height: "400px",
             width: "390px",
