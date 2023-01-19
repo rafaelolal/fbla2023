@@ -6,7 +6,7 @@ export default function AddNewsForm() {
   const descriptionRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const nameRef = useRef() as MutableRefObject<HTMLInputElement>;
 
-  async function handleUpload() {
+  async function handleSubmit() {
     axios
       .post("/api/addNews", {
         datetime: new Date(`${dateRef.current.value}`),
@@ -46,7 +46,7 @@ export default function AddNewsForm() {
         </div>
       </div>
 
-      <button onClick={handleUpload} className="btn btn-primary">
+      <button onClick={handleSubmit} className="btn btn-primary">
         Add
       </button>
     </>
