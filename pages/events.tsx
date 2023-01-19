@@ -28,7 +28,7 @@ export default function EventsPage() {
 
   var types = new Set<string>();
   var locations = new Set<string>();
-  for (const event of data) {
+  for (let event of data) {
     types.add(event.type);
     locations.add(event.location);
   }
