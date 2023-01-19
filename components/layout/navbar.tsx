@@ -97,7 +97,7 @@ export default function Navbar() {
           )}
         </div>
       </nav>
-      <div className="my-5"></div>
+      <div style={{ margin: `${60 + 16 * 3}px` }}></div>
     </>
   );
 }

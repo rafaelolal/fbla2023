@@ -62,10 +62,11 @@ export default function IndexPage(props: {
           alt=""
           style={{
             width: "100%",
-            height: "100%",
+            height: "120%",
             objectFit: "cover",
             zIndex: -1,
             borderBottom: "solid 4px #000000",
+            marginTop: `${-17 * 3}px`,
           }}
         />
 
@@ -122,21 +123,21 @@ export default function IndexPage(props: {
         </div>
       </div>
 
-      <div className="container my-5">
+      <div className="container my-5 pt-5">
         <div className="d-flex justify-content-between">
-          <h1>Top Events of the Week</h1>
+          <h1 className="pb-2">Top Events of the Week</h1>
           <Link
-            className="signBtn fs-6 mx-3 "
+            className="signBtn fs-5 mx-3 "
             style={{ height: "fit-content" }}
             href="/events"
           >
             See More
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
+              width="64"
               height="32"
               fill="currentColor"
-              className="bi bi-arrow-right"
+              className="bi bi-arrow-right ps-2"
               viewBox="0 0 16 16"
             >
               <path
@@ -146,7 +147,7 @@ export default function IndexPage(props: {
             </svg>
           </Link>
         </div>
-        <div className="">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-evenly">
           {props.events.map((event: EventType, i: number) => (
             <HomeEvent
               key={i}
