@@ -40,20 +40,20 @@ export default function Navbar() {
 
           <div className="collapse navbar-collapse" id="mainNavbar">
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+              <li className="nav-item mx-1">
                 <Link className="nav-link fw-bolder fs-5 fc-2" href="/">
                   Home
                 </Link>
               </li>
 
-              <li className="nav-item">
+              <li className="nav-item mx-1">
                 <Link className="nav-link fw-bolder fs-5 fc-2" href="/events">
                   Events
                 </Link>
               </li>
 
               {user && isA && (
-                <li className="nav-item ">
+                <li className="nav-item mx-1 ">
                   <Link
                     className="nav-link fw-bolder fs-5 fc-2"
                     href="/dashboard"
@@ -63,15 +63,23 @@ export default function Navbar() {
                 </li>
               )}
 
+              {user && isA && (
+                <li className="nav-item mx-1 ">
+                  <Link className="nav-link fw-bolder fs-5 fc-2" href="/rally">
+                    Rally
+                  </Link>
+                </li>
+              )}
+
               {user && !isA && (
-                <li className="nav-item">
+                <li className="nav-item mx-1">
                   <Link className="nav-link" href={`/profile/${user.uid}`}>
                     Profile
                   </Link>
                 </li>
               )}
 
-              <li className="nav-item">
+              <li className="nav-item mx-1">
                 <Link className="nav-link fw-bolder fs-5 fc-2" href="">
                   Help
                 </Link>
@@ -100,7 +108,7 @@ export default function Navbar() {
           )}
         </div>
       </nav>
-      <div style={{ margin: `${60 + 16 * 3}px` }}></div>
+      <div style={{ margin: `${60 + 16}px` }}></div>
     </>
   );
 }

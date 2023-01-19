@@ -74,7 +74,7 @@ export default function Event(props: EventType) {
               borderRight: "solid 3px #000000",
             }}
           >
-            <h5 className="card-title">
+            <h5 className="card-title fs-5">
               {props.isCanceled && "CANCELED"} {props.title} ({props.type}) -{" "}
               {props.points}
             </h5>
