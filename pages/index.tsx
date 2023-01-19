@@ -57,7 +57,6 @@ export default function IndexPage(props: {
         style={{ backgroundColor: "black", height: "60vh" }}
       >
         <img
-          className=""
           src="/images/homepage pic.svg"
           alt=""
           style={{
@@ -65,7 +64,7 @@ export default function IndexPage(props: {
             height: "120%",
             objectFit: "cover",
             zIndex: -1,
-            borderBottom: "solid 4px #000000",
+            borderBottom: "solid 5px #000000",
             marginTop: `${-17 * 3}px`,
           }}
         />
@@ -127,8 +126,8 @@ export default function IndexPage(props: {
         <div className="d-flex justify-content-between">
           <h1 className="pb-2">Top Events of the Week</h1>
           <Link
-            className="signBtn fs-5 mx-3 "
-            style={{ height: "fit-content" }}
+            className="signBtn fs-5 ms-3 "
+            style={{ height: "fit-content", padding: "0" }}
             href="/events"
           >
             See More
@@ -167,9 +166,6 @@ export default function IndexPage(props: {
 
         <div className="d-flex justify-content-between">
           <h1>NEWS</h1>
-          <Link href="/events">
-            <small>See more</small>
-          </Link>
         </div>
 
         <NewsList news={props.news} />

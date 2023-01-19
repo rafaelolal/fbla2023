@@ -15,12 +15,12 @@ export default function Navbar() {
         }}
       >
         <div className="container-fluid mx-2">
-          <Link className="nav-link fw-bold fs-6 px-2" href="/">
+          <Link className="nav-link fw-bold fs-6 px-2 neoBorder py-1" href="/">
             <img
               className="me-2"
               src="images/logo.svg"
-              height="32px"
-              width="32px"
+              height="27px"
+              width="27px"
               style={{ filter: "brightness(0%)" }}
             ></img>
             Seal Coast
@@ -53,8 +53,11 @@ export default function Navbar() {
               </li>
 
               {user && isA && (
-                <li className="nav-item fw-bolder fs-5 fc-2">
-                  <Link className="nav-link" href="/dashboard">
+                <li className="nav-item ">
+                  <Link
+                    className="nav-link fw-bolder fs-5 fc-2"
+                    href="/dashboard"
+                  >
                     Dashboard
                   </Link>
                 </li>

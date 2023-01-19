@@ -45,7 +45,7 @@ export default function HomeEvent(props: HomeEventType) {
         style={{ padding: "1rem" }}
       >
         <div
-          className="card "
+          className="card"
           style={{
             height: "400px",
             width: "390px",
@@ -55,7 +55,7 @@ export default function HomeEvent(props: HomeEventType) {
           }}
         >
           <img
-            className="card-img-top"
+            className="card-img-top rounded-0"
             src={
               props.image.includes("http")
                 ? props.image

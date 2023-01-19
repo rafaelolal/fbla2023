@@ -13,6 +13,10 @@
   color: #000000;
 }
 
+.fc-3 {
+  color: #e6f9ff;
+}
+
 .card-image-cstm {
   height: 100px;
 }
@@ -47,6 +51,38 @@
   background-color: #56becd;
   color: black;
   text-decoration: none;
-  padding: 0.2rem 0.4rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 7px;
+}
+
+.eventBtnO {
+  background-color: #ffb158;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: 7px;
+}
+.eventBtnO:hover {
+  background-color: #ff9955;
+}
+.eventBtnLB {
+  background-color: #e6f9ff;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: 7px;
+}
+
+.eventBtnLB:hover {
+  background-color: #88c8dc;
+}
+
+.signForm {
+  width: 400px;
+  height: 350px;
+  padding: 40px;
+  background-color: #e6f9ff;
+  box-sizing: border-box;
 }
