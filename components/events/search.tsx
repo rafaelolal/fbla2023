@@ -25,8 +25,8 @@ export default function Search(props: {
           />
 
           <datalist id="typeList">
-            {Array.from(props.types).map((datum) => (
-              <option value={datum} />
+            {Array.from(props.types).map((datum, i) => (
+              <option key={i} value={datum} />
             ))}
           </datalist>
         </div>

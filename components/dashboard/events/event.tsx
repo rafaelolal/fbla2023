@@ -71,6 +71,8 @@ export default function DashboardEvent(props: DashboardEventType) {
                 month: "long",
                 day: "2-digit",
                 weekday: "long",
+                hour: "2-digit",
+                minute: "2-digit",
               })}{" "}
               with {props.participants.length} participants
             </p>
