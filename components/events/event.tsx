@@ -110,6 +110,8 @@ export default function Event(props: EventType) {
                 month: "long",
                 day: "2-digit",
                 weekday: "long",
+                hour: "2-digit",
+                minute: "2-digit",
               })}{" "}
               at {props.location}
             </h6>
