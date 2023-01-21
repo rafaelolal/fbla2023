@@ -66,29 +66,47 @@ function randInt(min, max) {
 //   console.log(result);
 // }
 
-const result = await prisma.event.deleteMany({});
+// const result = await prisma.event.deleteMany({});
 
 /////////////////////////////////////////////
 
-for (let i = 0; i < 6; i++) {
-  let start = faker.date.between(
-    "2023-01-14T00:00:00.000Z",
-    "2023-01-20T00:00:00.000Z"
+// for (let i = 0; i < 10; i++) {
+//   let start = faker.date.between(
+//     "2023-20-14T00:00:00.000Z",
+//     "2023-01-25T00:00:00.000Z"
+//   );
+
+//   let end = new Date(start);
+//   end.setHours(end.getHours() + randInt(1, 3));
+
+//   const result = await prisma.event.create({
+//     data: {
+//       start: start,
+//       end: end,
+//       description: faker.lorem.sentences(2),
+//       image: faker.image.imageUrl(640, 480, "people", true),
+//       location: `Room: ${faker.address.buildingNumber()}`,
+//       title: faker.music.songName(),
+//       points: randInt(0, 100),
+//       type: ["Sports", "Social", "Band", "Academic"][randInt(0, 3)],
+//     },
+//   });
+//   console.log(result);
+// }
+
+const result = await prisma.news.deleteMany({});
+
+for (let i = 0; i < 10; i++) {
+  let datetime = faker.date.between(
+    "2023-20-14T00:00:00.000Z",
+    "2023-01-25T00:00:00.000Z"
   );
 
-  let end = new Date(start);
-  end.setHours(end.getHours() + randInt(1, 3));
-
-  const result = await prisma.event.create({
+  const result = await prisma.news.create({
     data: {
-      start: start,
-      end: end,
-      description: faker.lorem.sentences(2),
-      image: faker.image.imageUrl(640, 480, "people", true),
-      location: `Room: ${faker.address.buildingNumber()}`,
-      title: faker.music.songName(),
-      points: randInt(0, 100),
-      type: ["Sports", "Social", "Band", "Academic"][randInt(0, 3)],
+      name: faker.git.commitMessage(),
+      description: faker.lorem.sentences(10),
+      datetime: datetime,
     },
   });
   console.log(result);
