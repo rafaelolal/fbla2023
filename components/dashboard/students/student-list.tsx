@@ -21,24 +21,31 @@ export default function DashboardStudentList() {
 
   return (
     <>
-      <div className="my-3 p-3" style={{ border: "solid 1px" }}>
-        <StudentSignUp />
-      </div>
-      <div className="row gy-4">
-        {data &&
-          data.map((student: DashboardStudentType, i: number) => (
-            <DashboardStudent
-              key={i}
-              id={student.id}
-              firstName={student.firstName}
-              middleName={student.middleName}
-              lastName={student.lastName}
-              grade={student.grade}
-              points={student.points}
-              rank={student.rank}
-              mutate={mutate}
-            />
-          ))}
+      <div className="row">
+        <div className="col-12 col-md-4 px-5">
+          <h2 className="mb-2">Create Student Account</h2>
+          <StudentSignUp />
+        </div>
+
+        <div className="col-12 col-md-8 px-5 mt-5 mt-md-0">
+          <div className="row justify-content-start">
+            <h2 className="mb-2">Students</h2>
+            {data &&
+              data.map((student: DashboardStudentType, i: number) => (
+                <DashboardStudent
+                  key={i}
+                  id={student.id}
+                  firstName={student.firstName}
+                  middleName={student.middleName}
+                  lastName={student.lastName}
+                  grade={student.grade}
+                  points={student.points}
+                  rank={student.rank}
+                  mutate={mutate}
+                />
+              ))}
+          </div>
+        </div>
       </div>
     </>
   );
