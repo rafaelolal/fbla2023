@@ -29,7 +29,7 @@ export default function DashboardEvents() {
 
         <div className="col-8">
           <h1>Events</h1>
-          <DashboardEventList mutate={mutate} events={data} />;
+          <DashboardEventList mutate={mutate} events={data.data} />;
         </div>
       </div>
     </>
