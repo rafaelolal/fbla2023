@@ -25,8 +25,8 @@ export default function Search(props: {
           />
 
           <datalist id="typeList">
-            {Array.from(props.types).map((datum) => (
-              <option value={datum} />
+            {Array.from(props.types).map((datum, i) => (
+              <option key={i} value={datum} />
             ))}
           </datalist>
         </div>
@@ -51,8 +51,8 @@ export default function Search(props: {
           />
 
           <datalist id="locationList">
-            {Array.from(props.locations).map((datum) => (
-              <option value={datum} />
+            {Array.from(props.locations).map((i, datum) => (
+              <option key={i} value={datum} />
             ))}
           </datalist>
         </div>

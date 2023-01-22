@@ -22,7 +22,6 @@ export default function IndexPage(props: {
 
   useEffect(() => {
     const target = rallyTime;
-    console.log({ rallyTime });
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -140,7 +139,7 @@ export default function IndexPage(props: {
               viewBox="0 0 16 16"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
               />
             </svg>
@@ -182,6 +181,18 @@ export async function getServerSideProps() {
     props: {
       events: JSON.parse(JSON.stringify(eventsResult)),
       news: JSON.parse(JSON.stringify(newsResult)),
+      bodyStyle: { backgroundColor: "red" },
     },
   };
 }
+
+// To apply a different background color or any type of body style
+// to any other page, just copy and paste the below snippet.
+// Make sure you use the exact style naming
+// export async function getServerSideProps() {
+//   return {
+//     props: {
+//       bodyStyle: { backgroundColor: "any color" },
+//     },
+//   };
+// }

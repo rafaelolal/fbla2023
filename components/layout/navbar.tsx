@@ -17,7 +17,7 @@ export default function Navbar() {
           <Link className="nav-link fw-bold fs-6 px-2 neoBorder py-1" href="/">
             <img
               className="me-2"
-              src="images/logo.svg"
+              src="/images/logo.svg"
               height="27px"
               width="27px"
               style={{ filter: "brightness(0%)" }}
@@ -72,7 +72,10 @@ export default function Navbar() {
 
               {user && !isA && (
                 <li className="nav-item mx-1">
-                  <Link className="nav-link" href={`/profile/${user.uid}`}>
+                  <Link
+                    className="nav-link fw-bolder fs-5 fc-2"
+                    href={`/profile/${user.uid}`}
+                  >
                     Profile
                   </Link>
                 </li>

@@ -45,7 +45,6 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
       if (user) {
         setUser(user);
         isAdmin(user.uid).then(function (result) {
-          console.log(result);
           setIsA(result);
         });
       } else {
