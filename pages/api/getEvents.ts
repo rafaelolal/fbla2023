@@ -22,7 +22,5 @@ export default async function handle(
     },
   });
 
-  console.log({ apiData: data });
-
   res.json(data);
 }
