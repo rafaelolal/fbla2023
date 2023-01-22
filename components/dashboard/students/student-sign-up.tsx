@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
 import { tempAuth } from "../../../firebaseConfig";
-import { toast } from "react-toastify";
+import { KeyedMutator } from "swr";
 
-export default function StudentSignUp() {
+export default function StudentSignUp(props: { mutate: KeyedMutator<any> }) {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -27,6 +28,7 @@ export default function StudentSignUp() {
             toast.success(response.data.message);
             if (response.data.status == 200) {
               tempAuth.signOut();
+              props.mutate();
             }
           })
           .catch(function (error) {
@@ -53,6 +55,7 @@ export default function StudentSignUp() {
           type="email"
           className="form-control"
           id="emailInput"
+          required
           ref={emailRef}
           onChange={() => {
             const eI = document.getElementById(

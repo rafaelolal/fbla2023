@@ -23,7 +23,7 @@ export default function DashboardStudentList() {
   return (
     <>
       <div className="my-3 p-3" style={{ border: "solid 1px" }}>
-        <StudentSignUp />
+        <StudentSignUp mutate={mutate} />
       </div>
       <div className="row gy-4">
         {data &&
