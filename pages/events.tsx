@@ -50,7 +50,7 @@ export default function EventsPage() {
         ></img>
         <div className="card-img-overlay d-flex">
           <h5
-            className="title m-auto fc-3 fw-bold pb-5"
+            className="title m-auto text- fw-bold pb-5 text-primary"
             style={{ fontSize: "6rem" }}
           >
             Join Events
@@ -66,7 +66,7 @@ export default function EventsPage() {
 export async function getStaticProps() {
   return {
     props: {
-      bodyStyle: { backgroundColor: "green" },
+      bodyStyle: { backgroundColor: "white" },
     },
   };
 }

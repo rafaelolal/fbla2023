@@ -40,7 +40,6 @@ export default function SignInPage() {
     <div
       className="container-fluid d-flex"
       style={{
-        backgroundColor: "#a0d8ea",
         height: "100vh",
         marginTop: `${-18 * 6}px`,
       }}
@@ -75,4 +74,12 @@ export default function SignInPage() {
       </form>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      bodyStyle: { backgroundColor: "#a0d8ea" },
+    },
+  };
 }
