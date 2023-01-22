@@ -1,21 +1,10 @@
 import { useState } from "react";
-import { useAppContext } from "../context/state";
-import ForbiddenPage from "../components/forbiddenPage";
 import HelpNavbar from "../components/help/navbar";
-import HelpHowToGuide from "../components/help/made";
 import HelpHowItsMade from "../components/help/made";
+import HelpHowToGuide from "../components/help/guide";
 
-export default function DashboardPage() {
-  const { user, isA } = useAppContext();
+export default function HelpPage() {
   const [currentPage, setCurrentPage] = useState("Home to Guide");
-
-  if (!user) {
-    return <p>Loading...</p>;
-  }
-
-  if (!isA) {
-    return <ForbiddenPage />;
-  }
 
   return (
     <>
