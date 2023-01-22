@@ -8,9 +8,8 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="navbar fixed-top navbar-expand-lg"
+        className="navbar fixed-top navbar-expand-lg bg-light"
         style={{
-          backgroundColor: "#e6f9ff",
           borderBottom: "solid 4px #000000",
         }}
       >
@@ -80,7 +79,7 @@ export default function Navbar() {
               )}
 
               <li className="nav-item mx-1">
-                <Link className="nav-link fw-bolder fs-5 fc-2" href="">
+                <Link className="nav-link fw-bolder fs-5 fc-2" href="/help">
                   Help
                 </Link>
               </li>
