@@ -1,41 +1,30 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { useAppContext } from "../../context/state";
 import { EventType } from "../../types/events";
 
 export default function Event(props: EventType) {
-  const { user, addToast } = useAppContext();
+  const { user } = useAppContext();
 
   async function joinHandler() {
     if (!user) {
-      addToast({
-        status: 403,
-        title: "Sign Im",
-        body: "Sign in before joining an event",
-      });
+      toast.warning("Sign in before joining an event");
       return;
     }
 
-    const result = await axios
+    await axios
       .post("/api/addStudentsOnEvents", {
         eventId: props.id,
         studentId: user.uid,
       })
       .then(function (response) {
-        addToast({
-          status: response.data.status,
-          title: response.data.title,
-          body: `${response.data.message}`,
-        });
+        toast.success(response.data.message);
       })
       .catch(function (error) {
-        addToast({
-          status: 500,
-          title: "Axios Add StudentsOnEvents Error",
-          body: `Error ${error.code}: ${error.message}`,
-        });
+        toast.error(
+          `Axios add StudentOnEvents Error (${error.code}: ${error.message})`
+        );
       });
-
-    console.log({ studentEventResult: result });
   }
 
   return (
@@ -86,7 +75,6 @@ export default function Event(props: EventType) {
             </p>
 
             <a
-              href="#"
               className="btn eventBtnO me-2 position-absolute"
               style={{ top: "70%" }}
               onClick={joinHandler}

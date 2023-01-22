@@ -10,7 +10,7 @@ export default async function handle(
   const { id, firstName, middleName, lastName } = req.body;
 
   try {
-    const result = await prisma.student.create({
+    await prisma.student.create({
       data: {
         id,
         firstName,
@@ -19,12 +19,10 @@ export default async function handle(
       },
     });
 
-    res
-      .status(200)
-      .json({ status: 200, message: "Student added successfully" });
+    res.status(200).json({ message: "Student added successfully" });
   } catch (error) {
     let message = "Unknown Error";
     if (error instanceof Error) message = error.message;
-    res.status(500).json({ status: 500, title: "Error", message: message });
+    res.status(500).json({ message: message });
   }
 }

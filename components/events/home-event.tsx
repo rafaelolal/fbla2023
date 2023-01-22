@@ -1,41 +1,30 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { useAppContext } from "../../context/state";
 import { HomeEventType } from "../../types/events";
 
 export default function HomeEvent(props: HomeEventType) {
-  const { user, addToast } = useAppContext();
+  const { user } = useAppContext();
 
   async function joinHandler() {
     if (!user) {
-      addToast({
-        status: 403,
-        title: "Sign In",
-        body: "Sign in before joining an event",
-      });
+      toast.warning(`Sign in before joining an event`);
       return;
     }
 
-    const result = await axios
+    await axios
       .post("/api/addStudentsOnEvents", {
         eventId: props.id,
         studentId: user.uid,
       })
       .then(function (response) {
-        addToast({
-          status: response.data.status,
-          title: response.data.title,
-          body: `${response.data.message}`,
-        });
+        toast.success(response.data.message);
       })
       .catch(function (error) {
-        addToast({
-          status: 500,
-          title: "Axios Add StudentsOnEvents Error",
-          body: `Error ${error.code}: ${error.message}`,
-        });
+        toast.error(
+          `Axios add StudentOnEvents Error (${error.code}: ${error.message})`
+        );
       });
-
-    console.log({ studentEventResult: result });
   }
 
   return (
@@ -86,7 +75,7 @@ export default function HomeEvent(props: HomeEventType) {
               })}{" "}
               at {props.location}
             </h6>
-            <a href="#" className="mt-2 eventBtn me-2 " onClick={joinHandler}>
+            <a className="mt-2 eventBtn me-2 " onClick={joinHandler}>
               Join
             </a>
           </div>

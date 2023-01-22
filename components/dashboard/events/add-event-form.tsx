@@ -1,5 +1,6 @@
 import { MutableRefObject, useRef, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function AddEventForm() {
   const [uploading, setUploading] = useState(false);
@@ -22,33 +23,33 @@ export default function AddEventForm() {
     const formData = new FormData();
     formData.append("myImage", selectedFile);
 
-    axios
+    const data = await axios
       .post("/api/addImage", formData)
-      .then(function (data) {
-        axios
-          .post("/api/addEvent", {
-            start: new Date(
-              `${startDateRef.current.value}T${startTimeRef.current.value}`
-            ),
-            end: new Date(
-              `${endDateRef.current.value}T${endTimeRef.current.value}`
-            ),
-            description: descriptionRef.current.value,
-            image: data.data.image,
-            location: locationRef.current.value,
-            title: titleRef.current.value,
-            points: parseInt(pointsRef.current.value),
-            type: typeRef.current.value,
-          })
-          .then(function (response) {
-            console.log({ addEventResponse: response });
-          })
-          .catch(function (error) {
-            console.log({ addEventError: error });
-          });
+      .catch(function (error) {
+        toast.error(`addImage (${error.code}): ${error.message}`);
+        return;
+      });
+
+    await axios
+      .post("/api/addEvent", {
+        start: new Date(
+          `${startDateRef.current.value}T${startTimeRef.current.value}`
+        ),
+        end: new Date(
+          `${endDateRef.current.value}T${endTimeRef.current.value}`
+        ),
+        description: descriptionRef.current.value,
+        image: data.data.image,
+        location: locationRef.current.value,
+        title: titleRef.current.value,
+        points: parseInt(pointsRef.current.value),
+        type: typeRef.current.value,
+      })
+      .then(function (response) {
+        toast.success(response.data.message);
       })
       .catch(function (error) {
-        console.log({ apiImageError: error });
+        toast.error(`addEvent (${error.code}): ${error.message}`);
       });
 
     setUploading(false);

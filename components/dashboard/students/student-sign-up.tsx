@@ -2,11 +2,9 @@ import { useRef } from "react";
 import axios from "axios";
 import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
 import { tempAuth } from "../../../firebaseConfig";
-import { useAppContext } from "../../../context/state";
+import { toast } from "react-toastify";
 
 export default function StudentSignUp() {
-  const { addToast } = useAppContext();
-
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -26,32 +24,22 @@ export default function StudentSignUp() {
             lastName: "",
           })
           .then(function (response) {
-            addToast({
-              status: response.data.status,
-              title: response.data.title,
-              body: `${response.data.message}`,
-            });
-
+            toast.success(response.data.message);
             if (response.data.status == 200) {
               tempAuth.signOut();
             }
           })
           .catch(function (error) {
-            addToast({
-              status: 500,
-              title: "Axios Add Student Error",
-              body: `Error ${error.code}: ${error.message}`,
-            });
-
+            toast.success(
+              `Axios add student (${error.code}): ${error.message}`
+            );
             deleteUser(tempAuth.currentUser!);
           });
       })
       .catch((error) => {
-        addToast({
-          status: 400,
-          title: "Firebase Add Student Error",
-          body: `Error ${error.code}: ${error.message}`,
-        });
+        toast.success(
+          `"Firebase add student (${error.code}): ${error.message}`
+        );
       });
   }
 

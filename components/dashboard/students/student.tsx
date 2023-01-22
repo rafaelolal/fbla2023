@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { KeyedMutator } from "swr";
 import { DashboardStudentType } from "../../../types/students";
 
@@ -12,14 +13,14 @@ export default function DashboardStudent(
         id,
       })
       .then(function (response) {
-        console.log({ deleteStudentResponse: response });
+        toast.success(response.data.message);
 
         if (response.status == 200) {
           props.mutate();
         }
       })
       .catch(function (error) {
-        console.log({ deleteStudentError: error });
+        toast.error(`deleteStudent (${error.code}): ${error.message}`);
       });
   }
 

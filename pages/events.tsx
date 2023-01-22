@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
+import { toast } from "react-toastify";
 import EventList from "../components/events/event-list";
 import Search from "../components/events/search";
 import { QueryType } from "../types/events";
@@ -16,10 +17,11 @@ export default function EventsPage() {
     return await axios
       .get(url, { params: query })
       .then((response) => {
+        toast.success(response.data.message);
         return response.data;
       })
       .catch((error) => {
-        console.log({ getEventsError: error });
+        toast.error(`getEventsError (${error.code}): ${error.message}`);
       });
   });
 
@@ -31,7 +33,7 @@ export default function EventsPage() {
   // to facilitate searching
   var types = new Set<string>();
   var locations = new Set<string>();
-  for (let event of data) {
+  for (let event of data.data) {
     types.add(event.type);
     locations.add(event.location);
   }
@@ -58,7 +60,7 @@ export default function EventsPage() {
         </div>
       </div>
       <Search types={types} locations={locations} setQuery={setQuery} />
-      <EventList events={data} />
+      <EventList events={data.data} />
     </>
   );
 }

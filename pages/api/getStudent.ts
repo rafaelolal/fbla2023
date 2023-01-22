@@ -9,9 +9,17 @@ export default async function handle(
 ) {
   const { id } = req.query;
 
-  const data = await prisma.student.findFirst({
-    where: { id: <string>id },
-  });
+  try {
+    const data = await prisma.student.findFirst({
+      where: { id: <string>id },
+    });
 
-  res.json(data);
+    res
+      .status(200)
+      .json({ message: "Student gotten successfully", data: data });
+  } catch (error) {
+    let message = "Unknown Error";
+    if (error instanceof Error) message = error.message;
+    res.status(500).json({ message });
+  }
 }

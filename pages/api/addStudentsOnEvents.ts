@@ -15,7 +15,7 @@ export default async function handle(
     });
     const studentName = `${student.firstName} ${student.middleName} ${student.lastName}`;
 
-    const result = await prisma.studentsOnEvents.create({
+    await prisma.studentsOnEvents.create({
       data: {
         studentId,
         eventId,
@@ -23,14 +23,10 @@ export default async function handle(
       },
     });
 
-    console.log({ studentAddEventResult: result });
-
-    res
-      .status(200)
-      .json({ status: 200, message: "Student added successfully" });
+    res.status(200).json({ message: "Student added successfully" });
   } catch (error) {
     let message = "Unknown Error";
     if (error instanceof Error) message = error.message;
-    res.status(500).json({ status: 500, title: "Error", message: message });
+    res.status(500).json({ message: message });
   }
 }
