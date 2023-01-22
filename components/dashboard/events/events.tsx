@@ -18,8 +18,6 @@ export default function DashboardEvents() {
   if (error) return <div>An error occurred.</div>;
   if (!data) return <div>Loading ...</div>;
 
-  console.log({ data });
-
   return (
     <>
       <div className="row">

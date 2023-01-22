@@ -7,8 +7,13 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    document.body.style.backgroundColor = pageProps.backgroundColor;
-  });
+    if (pageProps.bodyStyle) {
+      for (const [key, value] of Object.entries(pageProps.bodyStyle)) {
+        document.body.style[key] = value;
+        console.log({ key, value });
+      }
+    }
+  }, [pageProps.bodyStyle]);
 
   return (
     <AppWrapper>

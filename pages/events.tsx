@@ -62,3 +62,11 @@ export default function EventsPage() {
     </>
   );
 }
+
+export async function getStaticProps() {
+  return {
+    props: {
+      bodyStyle: { backgroundColor: "green" },
+    },
+  };
+}

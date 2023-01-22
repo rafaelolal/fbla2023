@@ -22,7 +22,6 @@ export default function IndexPage(props: {
 
   useEffect(() => {
     const target = rallyTime;
-    console.log({ rallyTime });
 
     const interval = setInterval(() => {
       const now = new Date();
