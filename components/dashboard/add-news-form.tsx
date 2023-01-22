@@ -1,5 +1,6 @@
 import { MutableRefObject, useRef } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function AddNewsForm() {
   const dateRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -14,10 +15,10 @@ export default function AddNewsForm() {
         name: nameRef.current.value,
       })
       .then(function (response) {
-        console.log({ addNewsResponse: response });
+        toast.success(response.data.message);
       })
       .catch(function (error) {
-        console.log({ addNewsError: error });
+        toast.error(`addNews (${error.code}): ${error.message}`);
       });
   }
 

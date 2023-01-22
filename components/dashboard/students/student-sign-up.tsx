@@ -1,12 +1,11 @@
 import { useRef } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
 import { tempAuth } from "../../../firebaseConfig";
-import { useAppContext } from "../../../context/state";
+import { KeyedMutator } from "swr";
 
-export default function StudentSignUp() {
-  const { addToast } = useAppContext();
-
+export default function StudentSignUp(props: { mutate: KeyedMutator<any> }) {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -26,32 +25,23 @@ export default function StudentSignUp() {
             lastName: "",
           })
           .then(function (response) {
-            addToast({
-              status: response.data.status,
-              title: response.data.title,
-              body: `${response.data.message}`,
-            });
-
+            toast.success(response.data.message);
             if (response.data.status == 200) {
               tempAuth.signOut();
+              props.mutate();
             }
           })
           .catch(function (error) {
-            addToast({
-              status: 500,
-              title: "Axios Add Student Error",
-              body: `Error ${error.code}: ${error.message}`,
-            });
-
+            toast.success(
+              `Axios add student (${error.code}): ${error.message}`
+            );
             deleteUser(tempAuth.currentUser!);
           });
       })
       .catch((error) => {
-        addToast({
-          status: 400,
-          title: "Firebase Add Student Error",
-          body: `Error ${error.code}: ${error.message}`,
-        });
+        toast.success(
+          `"Firebase add student (${error.code}): ${error.message}`
+        );
       });
   }
 
@@ -65,6 +55,7 @@ export default function StudentSignUp() {
           type="email"
           className="form-control"
           id="emailInput"
+          required
           ref={emailRef}
           onChange={() => {
             const eI = document.getElementById(

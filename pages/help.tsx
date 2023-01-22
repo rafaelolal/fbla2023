@@ -14,3 +14,11 @@ export default function HelpPage() {
     </>
   );
 }
+
+export async function getStaticProps() {
+  return {
+    props: {
+      bodyStyle: { backgroundColor: "#a0d8ea" },
+    },
+  };
+}

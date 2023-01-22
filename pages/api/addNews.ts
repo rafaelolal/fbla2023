@@ -9,10 +9,8 @@ export default async function handler(
 ) {
   const { name, datetime, description } = req.body;
 
-  console.log({ addEventReqBody: req.body });
-
   try {
-    const result = await prisma.news.create({
+    await prisma.news.create({
       data: {
         datetime,
         description,
@@ -20,10 +18,10 @@ export default async function handler(
       },
     });
 
-    res.status(200).json({ status: 200, message: "News added successfully" });
+    res.status(200).json({ message: "News added successfully" });
   } catch (error) {
     let message = "Unknown Error";
     if (error instanceof Error) message = error.message;
-    res.status(500).json({ status: 500, title: "Error", message: message });
+    res.status(500).json({ message: message });
   }
 }

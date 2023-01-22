@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="navbar fixed-top navbar-expand-lg bg-light"
+        className="navbar fixed-top navbar-expand-lg bg-primary"
         style={{
           borderBottom: "solid 4px #000000",
         }}

@@ -7,6 +7,15 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const data = await prisma.student.findMany();
-  res.json(data);
+  try {
+    const data = await prisma.student.findMany();
+    res.json(data);
+    res
+      .status(200)
+      .json({ message: "Students gotten successfully", data: data });
+  } catch (error) {
+    let message = "Unknown Error";
+    if (error instanceof Error) message = error.message;
+    res.status(500).json({ message });
+  }
 }

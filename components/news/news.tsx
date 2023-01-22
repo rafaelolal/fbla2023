@@ -2,9 +2,9 @@ import { NewsType } from "../../types/news";
 
 export default function News(props: NewsType) {
   return (
-    <div className="col-12">
+    <div className="col-12 my-3">
       <div className="card">
-        <div className="card-header">
+        <div className="card-header fw-semibold">
           {new Date(props.datetime).toLocaleString(undefined, {
             timeZone: "UTC",
             year: "numeric",

@@ -51,14 +51,14 @@ export default function Search(props: {
           />
 
           <datalist id="locationList">
-            {Array.from(props.locations).map((i, datum) => (
+            {Array.from(props.locations).map((datum, i) => (
               <option key={i} value={datum} />
             ))}
           </datalist>
         </div>
 
         <div className="col-auto">
-          <button
+          <a
             className="btn eventBtnO mx-1"
             onClick={() => {
               props.setQuery({
@@ -69,8 +69,9 @@ export default function Search(props: {
             }}
           >
             Search
-          </button>
-          <button
+          </a>
+
+          <a
             className="btn eventBtnO mx-1"
             onClick={() => {
               props.setQuery({
@@ -81,7 +82,7 @@ export default function Search(props: {
             }}
           >
             Reset
-          </button>
+          </a>
         </div>
       </div>
     </div>

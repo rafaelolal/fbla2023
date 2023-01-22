@@ -1,6 +1,6 @@
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
-import { useAppContext } from "../../../context/state";
+import { toast } from "react-toastify";
 import { ParticipantsType } from "../../../types/events";
 
 export default function AttendanceModal(props: {
@@ -9,8 +9,6 @@ export default function AttendanceModal(props: {
   toggleModal: () => void;
   participants: ParticipantsType;
 }) {
-  const { addToast } = useAppContext();
-
   async function markAttendanceHandler() {
     const checks = document.querySelectorAll(
       'input[type="checkbox"]'
@@ -27,18 +25,10 @@ export default function AttendanceModal(props: {
         eventId: props.id,
       })
       .then(function (response) {
-        addToast({
-          status: response.data.status,
-          title: response.data.title,
-          body: `${response.data.message}`,
-        });
+        toast.success(`${response.data.title}: ${response.data.message}`);
       })
       .catch(function (error) {
-        addToast({
-          status: 500,
-          title: "Axios Add StudentsOnEvents Error",
-          body: `Error ${error.code}: ${error.message}`,
-        });
+        toast.error(`${error.code}: ${error.message}`);
       });
 
     props.toggleModal();

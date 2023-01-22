@@ -6,6 +6,7 @@ import HomeEvent from "../components/events/home-event";
 import NewsList from "../components/news/news-list";
 import { EventType } from "../types/events";
 import { NewsType } from "../types/news";
+import { toast } from "react-toastify";
 
 const prisma = new PrismaClient();
 
@@ -51,21 +52,12 @@ export default function IndexPage(props: {
 
   return (
     <>
-      <div
-        className="position-relative"
-        style={{ backgroundColor: "black", height: "60vh" }}
-      >
+      <div className="position-relative bg-dark" style={{ height: "60vh" }}>
         <img
           src="/images/homepage pic.svg"
           alt=""
-          style={{
-            width: "100%",
-            height: "120%",
-            objectFit: "cover",
-            zIndex: -1,
-            borderBottom: "solid 5px #000000",
-            marginTop: `${-17 * 3}px`,
-          }}
+          className="homepagePic"
+          style={{ marginTop: `${-17 * 3}px` }}
         />
 
         <div className="position-absolute" style={{ top: "45%", left: "13%" }}>
@@ -79,10 +71,9 @@ export default function IndexPage(props: {
         </div>
 
         <div
-          className="text-center position-absolute bottom-0 end-0 m-5 neoBorder "
+          className="text-center position-absolute bottom-0 end-0 m-5 neoBorder bg-primary"
           style={{
             border: "solid 4px #000000",
-            backgroundColor: "#e6f9ff",
           }}
         >
           {partyTime ? (
@@ -163,7 +154,7 @@ export default function IndexPage(props: {
           ))}
         </div>
 
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between mt-5">
           <h1>NEWS</h1>
         </div>
 
@@ -181,7 +172,7 @@ export async function getServerSideProps() {
     props: {
       events: JSON.parse(JSON.stringify(eventsResult)),
       news: JSON.parse(JSON.stringify(newsResult)),
-      bodyStyle: { backgroundColor: "red" },
+      bodyStyle: { backgroundColor: "white" },
     },
   };
 }
