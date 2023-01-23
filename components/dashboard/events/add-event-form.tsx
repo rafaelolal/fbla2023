@@ -39,7 +39,7 @@ export default function AddEventForm() {
           `${endDateRef.current.value}T${endTimeRef.current.value}`
         ),
         description: descriptionRef.current.value,
-        image: data.data.image,
+        image: data!.data.image,
         location: locationRef.current.value,
         title: titleRef.current.value,
         points: parseInt(pointsRef.current.value),

@@ -21,7 +21,7 @@ export default function PasswordModal(props: {
 
     signInWithEmailAndPassword(
       tempAuth,
-      user!.email,
+      user!.email as string,
       currentPasswordRef.current.value
     )
       .then((userCredential) => {
