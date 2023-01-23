@@ -6,6 +6,7 @@ import HomeEvent from "../components/events/home-event";
 import NewsList from "../components/news/news-list";
 import { EventType } from "../types/events";
 import { NewsType } from "../types/news";
+import { toast } from "react-toastify";
 
 const prisma = new PrismaClient();
 

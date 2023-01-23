@@ -9,15 +9,11 @@ import {
 } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import ToastList from "../components/toasts/toast-list";
 import { isAdmin } from "../helpers";
-import { MyToastType } from "../types/toasts";
 
-type ToastListType = MyToastType[];
 type ContextType = {
   user: User | null;
   isA: boolean;
-  addToast: (toast: MyToastType) => void;
   rallyTime: Date;
   setRallyTime: Dispatch<SetStateAction<Date>>;
 };
@@ -26,13 +22,11 @@ let AppContext: Context<ContextType>;
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [toasts, setToasts] = useState<ToastListType>([]);
   const [rallyTime, setRallyTime] = useState(new Date());
   const [isA, setIsA] = useState(false);
 
   const sharedState = {
     user,
-    addToast,
     isA,
     rallyTime,
     setRallyTime,
@@ -53,17 +47,8 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  function addToast(toast: MyToastType) {
-    setToasts(toasts.concat([toast]));
-  }
-
-  function removeToast() {
-    setToasts(toasts.slice(1, toasts.length));
-  }
-
   return (
     <>
-      {toasts && <ToastList toasts={toasts} removeToast={removeToast} />}
       <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>
     </>
   );

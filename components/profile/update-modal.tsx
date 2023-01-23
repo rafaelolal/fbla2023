@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import { useAppContext } from "../../context/state";
 import { addPathToFile } from "../../helpers";
 import { ProfileModalStudentType } from "../../types/students";
+import { toast } from "react-toastify";
 
 export default function UpdateModal(props: {
   data: ProfileModalStudentType;
@@ -12,8 +13,6 @@ export default function UpdateModal(props: {
   show: boolean;
   toggleModal: () => void;
 }) {
-  const { addToast } = useAppContext();
-
   const [uploading, setUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
@@ -33,7 +32,7 @@ export default function UpdateModal(props: {
   async function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
 
-    const result = await axios
+    await axios
       .post("/api/updateStudent", {
         id: props.data.id,
         firstName: firstNameRef.current.value,
@@ -44,19 +43,13 @@ export default function UpdateModal(props: {
         image: uploadedImageRef.current,
       })
       .then(function (response) {
-        addToast({
-          status: response.data.status,
-          title: response.data.title,
-          body: `${response.data.message}`,
-        });
+        toast.success(`${response.data.title}: ${response.data.message}`);
         refreshData();
       })
       .catch(function (error) {
-        addToast({
-          status: 500,
-          title: "Axios Add UpdateStudent Error",
-          body: `Error ${error.code}: ${error.message}`,
-        });
+        toast.error(
+          `Axios Add UpdateStudent Error (${error.code}): ${error.message}`
+        );
       });
   }
 
@@ -74,10 +67,9 @@ export default function UpdateModal(props: {
       .post("/api/addImage", formData)
       .then(function (data) {
         uploadedImageRef.current = data.data.image;
-        console.log({ uploadedImageRef });
       })
       .catch(function (error) {
-        console.log({ apiImageError: error });
+        toast.error(`addImage (${error.code}): ${error.message}`);
       });
 
     setUploading(false);

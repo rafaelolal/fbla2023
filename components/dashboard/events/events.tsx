@@ -2,6 +2,7 @@ import axios from "axios";
 import useSWR from "swr";
 import DashboardEventList from "./event-list";
 import AddEventForm from "./add-event-form";
+import { toast } from "react-toastify";
 
 export default function DashboardEvents() {
   const { data, error, mutate } = useSWR("/api/getEvents", async (url) => {
@@ -11,7 +12,7 @@ export default function DashboardEvents() {
         return response.data;
       })
       .catch((error) => {
-        console.log({ getEvents: error });
+        toast.success(`getEvents (${error}): ${error.message}`);
       });
   });
 

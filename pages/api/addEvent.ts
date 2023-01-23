@@ -10,10 +10,8 @@ export default async function handler(
   const { start, end, description, image, location, title, points, type } =
     req.body;
 
-  console.log({ addEventReqBody: req.body });
-
   try {
-    const result = await prisma.event.create({
+    await prisma.event.create({
       data: {
         start,
         end,
@@ -26,12 +24,10 @@ export default async function handler(
       },
     });
 
-    console.log({ addEventResult: result });
-
-    res.status(200).json({ status: 200, message: "Event added successfully" });
+    res.status(200).json({ message: "Event added successfully" });
   } catch (error) {
     let message = "Unknown Error";
     if (error instanceof Error) message = error.message;
-    res.status(500).json({ status: 500, title: "Error", message: message });
+    res.status(500).json({ message: message });
   }
 }

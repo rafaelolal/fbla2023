@@ -3,6 +3,7 @@ import useSWR from "swr";
 import DashboardStudent from "./student";
 import { DashboardStudentType } from "../../../types/students";
 import StudentSignUp from "./student-sign-up";
+import { toast } from "react-toastify";
 
 export default function DashboardStudentList() {
   const { data, error, mutate } = useSWR("/api/getStudents", async (url) => {
@@ -12,7 +13,7 @@ export default function DashboardStudentList() {
         return response.data;
       })
       .catch((error) => {
-        console.log({ getStudents: error });
+        toast.success(`getStudents (${error.code}): ${error.message}`);
       });
   });
 
@@ -24,7 +25,7 @@ export default function DashboardStudentList() {
       <div className="row">
         <div className="col-12 col-md-4 px-5">
           <h2 className="mb-2">Create Student Account</h2>
-          <StudentSignUp />
+          <StudentSignUp mutate={mutate} />
         </div>
 
         <div className="col-12 col-md-8 px-5 mt-5 mt-md-0">

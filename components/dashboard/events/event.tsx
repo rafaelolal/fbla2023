@@ -1,5 +1,6 @@
 import { MutableRefObject, useRef, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import AttendanceModal from "./attendance-modal";
 import { DashboardEventType } from "../../../types/events";
 
@@ -20,14 +21,14 @@ export default function DashboardEvent(props: DashboardEventType) {
         id,
       })
       .then(function (response) {
-        console.log({ deleteEventResponse: response });
+        toast.success(response.data.message);
 
         if (response.status == 200) {
           props.mutate();
         }
       })
       .catch(function (error) {
-        console.log({ deleteEventError: error });
+        toast.error(`deleteEvent (${error.code}): ${error.message}`);
       });
   }
 
@@ -38,7 +39,7 @@ export default function DashboardEvent(props: DashboardEventType) {
         reason: reason,
       })
       .then(function (response) {
-        console.log({ cancelEventResponse: response });
+        toast.success(response.data.message);
 
         if (response.status == 200) {
           props.mutate();
@@ -46,7 +47,7 @@ export default function DashboardEvent(props: DashboardEventType) {
         }
       })
       .catch(function (error) {
-        console.log({ cancelEventError: error });
+        toast.success(`cancelEvent (${error.code}): ${error.message}`);
       });
   }
 

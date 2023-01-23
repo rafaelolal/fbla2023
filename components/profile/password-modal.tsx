@@ -1,5 +1,6 @@
-import { MutableRefObject, SyntheticEvent, useRef, useState } from "react";
+import { MutableRefObject, SyntheticEvent, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
+import { toast } from "react-toastify";
 import { useAppContext } from "../../context/state";
 import { tempAuth } from "../../firebaseConfig";
 import { signInWithEmailAndPassword, updatePassword } from "firebase/auth";
@@ -9,7 +10,7 @@ export default function PasswordModal(props: {
   show: boolean;
   toggleModal: () => void;
 }) {
-  const { user, addToast } = useAppContext();
+  const { user } = useAppContext();
 
   const currentPasswordRef = useRef() as MutableRefObject<HTMLInputElement>;
   const newPasswordRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -27,21 +28,25 @@ export default function PasswordModal(props: {
         if (
           newPasswordRef.current.value != newPasswordConfirmRef.current.value
         ) {
-          console.log("New passwords do not match");
+          toast.warning("New passwords do not match");
           return;
         }
 
         const tempUser = userCredential.user;
         updatePassword(tempUser, newPasswordRef.current.value)
           .then(() => {
-            console.log("New password set");
+            toast.success("New password set");
           })
           .catch((error) => {
-            console.log("Could not set new password", { error });
+            toast.error(
+              `Could not set new password (${error.code}): ${error.message}`
+            );
           });
       })
       .catch(function (error) {
-        console.log("Current password is incorrect", { error });
+        toast.warning(
+          `Current password is incorrect (${error.code}): ${error.message}`
+        );
       });
   }
 

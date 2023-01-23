@@ -2,10 +2,9 @@ import React, { useRef } from "react";
 import { useRouter } from "next/router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { useAppContext } from "../context/state";
+import { toast } from "react-toastify";
 
 export default function SignInPage() {
-  const { addToast } = useAppContext();
   const router = useRouter();
 
   const emailRef = useRef<HTMLInputElement>(null);
@@ -21,18 +20,10 @@ export default function SignInPage() {
         emailRef.current!.value = "";
         passwordRef.current!.value = "";
         router.push("/");
-        addToast({
-          status: 200,
-          title: "Signed In",
-          body: `Successfully signed in as ${userCredential.user.email}`,
-        });
+        toast.success(`Successfully signed in as ${userCredential.user.email}`);
       })
       .catch((error) => {
-        addToast({
-          status: 500,
-          title: `Error: ${error.code}`,
-          body: error.message,
-        });
+        toast.error(`Sign in error (${error.code}): ${error.message}`);
       });
   }
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import useSWR from "swr";
+import { toast } from "react-toastify";
 
 export async function isAdmin(id: string) {
   const result = await axios
@@ -8,7 +8,7 @@ export async function isAdmin(id: string) {
       return response.data;
     })
     .catch((error) => {
-      console.log({ isAdminError: error });
+      toast.error(`isAdmin: ${error}`);
     });
 
   return result;
