@@ -7,6 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { toast } from "react-toastify";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { isAdmin } from "../helpers";
@@ -41,8 +42,10 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         isAdmin(user.uid).then(function (result) {
           setIsA(result);
         });
+        toast.success(`Successfully signed in as ${user.email}`);
       } else {
         setUser(null);
+        toast.success(`Successfully signed out`);
       }
     });
   }, []);
