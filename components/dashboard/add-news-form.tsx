@@ -46,7 +46,7 @@ export default function AddNewsForm() {
         </div>
       </div>
 
-      <button onClick={handleSubmit} className="btn btn-primary">
+      <button onClick={handleSubmit} className="btn eventBtn my-3">
         Add
       </button>
     </>

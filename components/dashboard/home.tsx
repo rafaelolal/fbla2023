@@ -11,43 +11,52 @@ export default function DashboardHome() {
 
   return (
     <>
-      <div className="my-3 p-3" style={{ border: "solid 1px" }}>
-        <p>Signed in: {Boolean(user).toString()}</p>
-        {user && (
-          <>
-            <p>Signed in as: {user.email}</p>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                auth.signOut();
-              }}
-            >
-              Sign Out
-            </button>
-          </>
-        )}
-      </div>
-
-      <div className="my-3 p-3" style={{ border: "solid 1px" }}>
-        <div>
-          <p>SET NEXT RALLY DATE</p>
-          <input type="date" className="form-control" required ref={dateRef} />
-          <input type="time" required ref={timeRef} />
-          <button
-            className="btn btn-primary"
-            onClick={() =>
-              setRallyTime(
-                new Date(`${dateRef.current.value}T${timeRef.current.value}`)
-              )
-            }
-          >
-            Set
-          </button>
+      <div className="row mx-5">
+        <div className="my-3 p-3" style={{ border: "solid 1px" }}>
+          <h3>Signed In Status</h3>
+          <p>Signed in: {Boolean(user).toString()}</p>
+          {user && (
+            <>
+              <p>Signed in as: {user.email}</p>
+              <button
+                className="btn eventBtn"
+                onClick={() => {
+                  auth.signOut();
+                }}
+              >
+                Sign Out
+              </button>
+            </>
+          )}
         </div>
-      </div>
 
-      <div className="my-3 p-3" style={{ border: "solid 1px" }}>
-        <AddNewsForm />
+        <div className="my-3 p-3" style={{ border: "solid 1px" }}>
+          <div>
+            <h3>Set Next Rally Date</h3>
+            <input
+              type="date"
+              className="form-control my-2"
+              required
+              ref={dateRef}
+            />
+            <input type="time" required ref={timeRef} />
+            <button
+              className="btn eventBtn mx-3"
+              onClick={() =>
+                setRallyTime(
+                  new Date(`${dateRef.current.value}T${timeRef.current.value}`)
+                )
+              }
+            >
+              Set
+            </button>
+          </div>
+        </div>
+
+        <div className="my-3 p-3" style={{ border: "solid 1px" }}>
+          <h3>Add News</h3>
+          <AddNewsForm />
+        </div>
       </div>
     </>
   );

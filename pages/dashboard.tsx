@@ -27,3 +27,11 @@ export default function DashboardPage() {
     </>
   );
 }
+
+export async function getStaticProps() {
+  return {
+    props: {
+      bodyStyle: { backgroundColor: "white" },
+    },
+  };
+}
