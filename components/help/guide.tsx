@@ -5,7 +5,7 @@ export default function HelpHowToGuide() {
     <>
       <div className="container-fluid">
         <div className="row justify-content-center my-5 ">
-          <div className="col-3 text-end d-none d-lg-block my-auto">
+          <div className="col-12 col-md-3 text-end d-none d-lg-block my-auto">
             <img
               style={{ transform: "scaleX(-1)" }}
               src="/images/help page/arrow.svg"
@@ -14,7 +14,7 @@ export default function HelpHowToGuide() {
             ></img>
           </div>
 
-          <div className="col-3 text-center my-auto">
+          <div className="col-12 col-md-3 text-center my-auto">
             <h1 className="fw-semibold text-center">Join Events</h1>
             <h6 className="text-center">
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -22,7 +22,7 @@ export default function HelpHowToGuide() {
               ever since the 1500s, when an unknown printer
             </h6>
           </div>
-          <div className="col-4 text-center">
+          <div className="col-12 col-md-4 text-center">
             <img
               src="/images/help page/help_image_4.svg"
               width="100%"
@@ -31,7 +31,7 @@ export default function HelpHowToGuide() {
           </div>
         </div>
         <div className="row justify-content-center my-5 ">
-          <div className="col-4 text-center">
+          <div className="col-12 col-md-4 text-center">
             <img
               src="/images/help page/help_image_2.svg"
               width="100%"
@@ -39,7 +39,7 @@ export default function HelpHowToGuide() {
             ></img>
           </div>
 
-          <div className="col-3 text-center my-auto">
+          <div className="col-12 col-md-3 text-center my-auto">
             <h1 className="fw-semibold text-center">Collect Points</h1>
             <h6 className="text-center">
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -49,7 +49,7 @@ export default function HelpHowToGuide() {
             </h6>
           </div>
 
-          <div className="col-3 text-start d-none d-lg-block my-auto">
+          <div className="col-12 col-md-3 text-start d-none d-lg-block my-auto">
             <img
               src="/images/help page/arrow.svg"
               width="60%"
@@ -60,7 +60,7 @@ export default function HelpHowToGuide() {
 
         <div className="row justify-content-center my-5 ">
           <div className="col-xs-0 col-md-4 "></div>
-          <div className="col-3 text-center my-auto">
+          <div className="col-12 col-md-3 text-center my-auto">
             <h1 className="fw-semibold text-center">Win Prizes</h1>
             <h6 className="text-center">
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -69,7 +69,7 @@ export default function HelpHowToGuide() {
             </h6>
           </div>
 
-          <div className="col-4 text-center">
+          <div className="col-12 col-md-4 text-center">
             <img
               src="/images/help page/help_image_5.svg"
               width="100%"

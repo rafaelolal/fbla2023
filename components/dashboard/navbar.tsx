@@ -2,7 +2,7 @@ export default function DashboardNavbar(props: {
   setCurrentPage: (page: string) => void;
 }) {
   return (
-    <nav className="navbar navbar-expand-lg bg-light my-5">
+    <nav className="navbar navbar-expand-lg bg-primary my-5">
       <div className="container-fluid">
         <button
           className="navbar-toggler"
