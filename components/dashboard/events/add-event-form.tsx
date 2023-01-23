@@ -92,54 +92,27 @@ export default function AddEventForm() {
 
         <div className="row mt-4">
           <textarea
-            className="form-control"
+            className="form-control my-2"
             placeholder="Description"
             ref={descriptionRef}
           />
 
-          <label className="mt-4">
-            <input
-              type="file"
-              onChange={({ target }) => {
-                if (target.files) {
-                  const file = target.files[0];
-                  setSelectedImage(URL.createObjectURL(file));
-                  setSelectedFile(file);
-                }
-              }}
-            />
-
-            {selectedImage ? (
-              <img src={selectedImage} alt="" />
-            ) : (
-              <span>Select Image</span>
-            )}
-
-            <button
-              onClick={handleUpload}
-              style={{ opacity: uploading ? ".5" : "1" }}
-              className={`btn btn-primary ${uploading ? "disabled" : ""}`}
-            >
-              {uploading ? "Uploading.." : "Upload"}
-            </button>
-          </label>
-
           <input
             type="text"
-            className="form-control"
+            className="form-control w-50"
             placeholder="Location"
             ref={locationRef}
           />
 
           <input
             type="number"
-            className="form-control"
+            className="form-control w-50"
             placeholder="Points"
             ref={pointsRef}
           />
         </div>
 
-        <div className="col-6">
+        <div className="col-6 mx-auto my-2">
           <select className="form-select" ref={typeRef}>
             <option value="Type">Type</option>
             <option value="Sports">Sports</option>
@@ -148,6 +121,33 @@ export default function AddEventForm() {
             <option value="Academic">Academic</option>
           </select>
         </div>
+
+        <label className="mt-4">
+          <input
+            type="file"
+            onChange={({ target }) => {
+              if (target.files) {
+                const file = target.files[0];
+                setSelectedImage(URL.createObjectURL(file));
+                setSelectedFile(file);
+              }
+            }}
+          />
+
+          {selectedImage ? (
+            <img src={selectedImage} alt="" />
+          ) : (
+            <span>Select Image </span>
+          )}
+
+          <button
+            onClick={handleUpload}
+            style={{ opacity: uploading ? ".5" : "1" }}
+            className={`btn eventBtn ${uploading ? "disabled" : ""}`}
+          >
+            {uploading ? "Uploading.." : "Upload"}
+          </button>
+        </label>
       </div>
     </>
   );

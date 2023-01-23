@@ -79,7 +79,7 @@ export default function DashboardEvent(props: DashboardEventType) {
             </p>
 
             <button
-              className={`btn btn-primary me-2 ${
+              className={`btn btn-primary me-1 ${
                 new Date(props.start) > now ? "disabled" : ""
               }`}
               onClick={toggleModal}
@@ -88,7 +88,7 @@ export default function DashboardEvent(props: DashboardEventType) {
             </button>
 
             <button
-              className={`btn btn-primary me-2 ${
+              className={`btn btn-primary me-1 ${
                 new Date(props.start) < now ? "disabled" : ""
               }`}
               onClick={() => deleteHandler(props.id)}
@@ -97,7 +97,7 @@ export default function DashboardEvent(props: DashboardEventType) {
             </button>
 
             <button
-              className={`btn btn-primary me-2 ${
+              className={`btn btn-primary me-1 ${
                 new Date(props.start) < now ? "disabled" : ""
               }`}
               onClick={() => setCanceling(!canceling)}

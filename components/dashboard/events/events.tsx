@@ -22,14 +22,16 @@ export default function DashboardEvents() {
   return (
     <>
       <div className="row">
-        <div className="col-4 px-5">
-          <h1>Add An Event</h1>
+        <div className="col-12 col-md-4 px-5">
+          <h2 className="mb-2">Add An Event</h2>
           <AddEventForm />
         </div>
 
-        <div className="col-8">
-          <h1>Events</h1>
-          <DashboardEventList mutate={mutate} events={data.data} />;
+        <div className="col-12 col-md-8 px-5 mt-5 mt-md-0">
+          <div className="row justify-content-start">
+            <h2 className="mb-2">Events</h2>
+            <DashboardEventList mutate={mutate} events={data.data} />;
+          </div>
         </div>
       </div>
     </>
