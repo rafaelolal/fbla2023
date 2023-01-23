@@ -20,7 +20,6 @@ export default function SignInPage() {
         emailRef.current!.value = "";
         passwordRef.current!.value = "";
         router.push("/");
-        toast.success(`Successfully signed in as ${userCredential.user.email}`);
       })
       .catch((error) => {
         toast.error(`Sign in error (${error.code}): ${error.message}`);

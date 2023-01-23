@@ -12,7 +12,7 @@ function readFile(
   req: NextApiRequest
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> {
   const options: formidable.Options = {};
-  options.uploadDir = path.join(process.cwd(), `/public/images`);
+  options.uploadDir = path.join(process.cwd(), "/public/images");
   options.filename = (name, ext, path, form) => {
     return `${path.originalFilename}`;
   };

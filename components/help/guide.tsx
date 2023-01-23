@@ -18,7 +18,7 @@ export default function HelpHowToGuide() {
             <h1 className="fw-semibold text-center">Join Events</h1>
             <h6 className="text-center">
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
+              industry. Lorem Ipsum has been the industrys standard dummy text
               ever since the 1500s, when an unknown printer
             </h6>
           </div>
@@ -43,7 +43,7 @@ export default function HelpHowToGuide() {
             <h1 className="fw-semibold text-center">Collect Points</h1>
             <h6 className="text-center">
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
+              industry. Lorem Ipsum has been the industrys standard dummy text
               ever since the 1500s, when an unknown printer took a galley of
               type and scrambled it to
             </h6>
@@ -64,7 +64,7 @@ export default function HelpHowToGuide() {
             <h1 className="fw-semibold text-center">Win Prizes</h1>
             <h6 className="text-center">
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
+              industry. Lorem Ipsum has been the industrys standard dummy text
               ever since the 1500s, when an unknown printer took a
             </h6>
           </div>

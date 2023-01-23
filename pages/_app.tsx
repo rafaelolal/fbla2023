@@ -1,11 +1,12 @@
 import "../styles/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
-import type { AppProps } from "next/app";
+import { useEffect } from "react";
 import Script from "next/script";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
 import Navbar from "../components/layout/navbar";
 import { AppWrapper } from "../context/state";
-import { useEffect } from "react";
-import { ToastContainer } from "react-toastify";
+import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -15,6 +16,12 @@ export default function App({ Component, pageProps }: AppProps) {
       }
     }
   }, [pageProps.bodyStyle]);
+
+  useEffect(() => {
+    setInterval(function () {
+      axios.get("/api/backup");
+    }, 24 * 60 * 60 * 1000);
+  });
 
   return (
     <AppWrapper>

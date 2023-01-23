@@ -59,8 +59,8 @@ export default function ProfilePage(props: {
       <div className="row">
         <div className="col">
           <img src={`/images/profiles/${props.student.image}`} />
-          {props.student.awards.map((award) => (
-            <p>{award.name}</p>
+          {props.student.awards.map((award, i) => (
+            <p key={i}>{award.name}</p>
           ))}
           <p>
             Name: {props.student.firstName} {props.student.middleName}{" "}

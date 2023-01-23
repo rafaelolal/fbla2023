@@ -30,7 +30,7 @@ export default function DashboardEvents() {
         <div className="col-12 col-md-8 px-5 mt-5 mt-md-0">
           <div className="row justify-content-start">
             <h2 className="mb-2">Events</h2>
-            <DashboardEventList mutate={mutate} events={data} />;
+            <DashboardEventList mutate={mutate} events={data.data} />;
           </div>
         </div>
       </div>
