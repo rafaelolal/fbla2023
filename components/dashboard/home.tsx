@@ -33,23 +33,25 @@ export default function DashboardHome() {
         <div className="my-3 p-3" style={{ border: "solid 1px" }}>
           <div>
             <h3>Set Next Rally Date</h3>
-            <input
-              type="date"
-              className="form-control my-2"
-              required
-              ref={dateRef}
-            />
-            <input type="time" required ref={timeRef} />
-            <button
-              className="btn eventBtn mx-3"
-              onClick={() =>
+            <form
+              onSubmit={function (event) {
+                event.preventDefault();
                 setRallyTime(
                   new Date(`${dateRef.current.value}T${timeRef.current.value}`)
-                )
-              }
+                );
+              }}
             >
-              Set
-            </button>
+              <input
+                type="date"
+                className="form-control my-2"
+                required
+                ref={dateRef}
+              />
+              <input type="time" required ref={timeRef} />
+              <button className="btn eventBtn mx-3" type="submit">
+                Set
+              </button>
+            </form>
           </div>
         </div>
 

@@ -42,10 +42,10 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         isAdmin(user.uid).then(function (result) {
           setIsA(result);
         });
-        toast.success(`Successfully signed in as ${user.email}`);
+        // toast.success(`Successfully signed in as ${user.email}`);
       } else {
         setUser(null);
-        toast.success(`Successfully signed out`);
+        // toast.success(`Successfully signed out`);
       }
     });
   }, []);

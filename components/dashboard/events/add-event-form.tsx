@@ -17,7 +17,9 @@ export default function AddEventForm() {
   const pointsRef = useRef() as MutableRefObject<HTMLInputElement>;
   const typeRef = useRef() as MutableRefObject<HTMLSelectElement>;
 
-  async function handleUpload() {
+  async function handleUpload(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
     setUploading(true);
     if (!selectedFile) return;
     const formData = new FormData();
@@ -56,13 +58,14 @@ export default function AddEventForm() {
   }
 
   return (
-    <>
-      <div className="h-100 flex-column align-items-stretch mt-4">
+    <div className="h-100 flex-column align-items-stretch mt-4">
+      <form onSubmit={handleUpload}>
         <div className="row">
           <input
             type="text"
             className="form-control"
             placeholder="Title"
+            required
             ref={titleRef}
           />
         </div>
@@ -94,6 +97,7 @@ export default function AddEventForm() {
           <textarea
             className="form-control my-2"
             placeholder="Description"
+            required
             ref={descriptionRef}
           />
 
@@ -101,6 +105,7 @@ export default function AddEventForm() {
             type="text"
             className="form-control w-50"
             placeholder="Location"
+            required
             ref={locationRef}
           />
 
@@ -108,12 +113,13 @@ export default function AddEventForm() {
             type="number"
             className="form-control w-50"
             placeholder="Points"
+            required
             ref={pointsRef}
           />
         </div>
 
         <div className="col-6 mx-auto my-2">
-          <select className="form-select" ref={typeRef}>
+          <select className="form-select" ref={typeRef} required>
             <option value="Type">Type</option>
             <option value="Sports">Sports</option>
             <option value="Social">Social</option>
@@ -124,6 +130,7 @@ export default function AddEventForm() {
 
         <label className="mt-4">
           <input
+            required
             type="file"
             onChange={({ target }) => {
               if (target.files) {
@@ -141,14 +148,14 @@ export default function AddEventForm() {
           )}
 
           <button
-            onClick={handleUpload}
             style={{ opacity: uploading ? ".5" : "1" }}
             className={`btn eventBtn ${uploading ? "disabled" : ""}`}
+            type="submit"
           >
             {uploading ? "Uploading.." : "Upload"}
           </button>
         </label>
-      </div>
-    </>
+      </form>
+    </div>
   );
 }
