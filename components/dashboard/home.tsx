@@ -11,8 +11,8 @@ export default function DashboardHome() {
 
   return (
     <>
-      <div className="row mx-5">
-        <div className="my-3 p-3" style={{ border: "solid 1px" }}>
+      <div className="row justify-content-center mx-5">
+        <div className="col-2 m-3 p-3 neoBorder">
           <h3>Signed In Status</h3>
           <p>Signed in: {Boolean(user).toString()}</p>
           {user && (
@@ -30,7 +30,7 @@ export default function DashboardHome() {
           )}
         </div>
 
-        <div className="my-3 p-3" style={{ border: "solid 1px" }}>
+        <div className="col-6 m-3 p-3 neoBorder">
           <div>
             <h3>Set Next Rally Date</h3>
             <form
@@ -55,7 +55,7 @@ export default function DashboardHome() {
           </div>
         </div>
 
-        <div className="my-3 p-3" style={{ border: "solid 1px" }}>
+        <div className="col-8 m-3 p-3 neoBorder">
           <h3>Add News</h3>
           <AddNewsForm />
         </div>

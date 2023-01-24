@@ -71,10 +71,10 @@ export default function AddEventForm() {
         </div>
         <div className="row">
           <div className="col-6">
-            <div className="mt-3 fs-6">Start</div>
+            <div className="mt-3 fs-6 fw-semibold">Start Time</div>
             <input
               type="date"
-              className="form-control"
+              className="form-control mb-1"
               required
               ref={startDateRef}
             />
@@ -82,10 +82,10 @@ export default function AddEventForm() {
           </div>
 
           <div className="col-6">
-            <div className="mt-3 fs-6">End</div>
+            <div className="mt-3 fs-6 fw-semibold">End Time</div>
             <input
               type="date"
-              className="form-control"
+              className="form-control mb-1"
               required
               ref={endDateRef}
             />
@@ -100,10 +100,12 @@ export default function AddEventForm() {
             required
             ref={descriptionRef}
           />
-
+        </div>
+        <div className="col-12 mx-auto my-2">
           <input
             type="text"
-            className="form-control w-50"
+            className="form-control d-inline-block mx-1"
+            style={{ width: "30%" }}
             placeholder="Location"
             required
             ref={locationRef}
@@ -111,15 +113,19 @@ export default function AddEventForm() {
 
           <input
             type="number"
-            className="form-control w-50"
+            className="form-control d-inline-block mx-1"
+            style={{ width: "30%" }}
             placeholder="Points"
             required
             ref={pointsRef}
           />
-        </div>
 
-        <div className="col-6 mx-auto my-2">
-          <select className="form-select" ref={typeRef} required>
+          <select
+            className="form-select d-inline-block mx-1"
+            style={{ width: "30%" }}
+            ref={typeRef}
+            required
+          >
             <option value="Type">Type</option>
             <option value="Sports">Sports</option>
             <option value="Social">Social</option>
@@ -141,10 +147,8 @@ export default function AddEventForm() {
             }}
           />
 
-          {selectedImage ? (
-            <img src={selectedImage} alt="" />
-          ) : (
-            <span>Select Image </span>
+          {selectedImage && (
+            <img width="200px" height="auto" src={selectedImage} alt="" />
           )}
 
           <button

@@ -21,13 +21,15 @@ export default function DashboardEvents() {
 
   return (
     <>
-      <div className="row">
-        <div className="col-12 col-md-4 px-5">
-          <h2 className="mb-2">Add An Event</h2>
-          <AddEventForm />
+      <div className="row mt-4">
+        <div className="col-12 col-lg-4 mx-2">
+          <div className="neoBorder p-5">
+            <h2 className="mb-2 ">Add An Event</h2>
+            <AddEventForm />
+          </div>
         </div>
 
-        <div className="col-12 col-md-8 px-5 mt-5 mt-md-0">
+        <div className="col-12 col-lg-7 mx-2 mt-5 mt-lg-0">
           <div className="row justify-content-start">
             <h2 className="mb-2">Events</h2>
             <DashboardEventList mutate={mutate} events={data.data} />;
