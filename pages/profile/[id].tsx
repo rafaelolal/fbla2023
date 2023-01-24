@@ -1,4 +1,3 @@
-import "react-big-calendar/lib/css/react-big-calendar.css";
 import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
 import { PrismaClient } from "@prisma/client";
@@ -56,67 +55,149 @@ export default function ProfilePage(props: {
         toggleModal={togglePasswordModal}
       />
 
-      <div className="row">
-        <div className="col">
-          <img src={`/images/profiles/${props.student.image}`} />
-          {props.student.awards.map((award, i) => (
-            <p key={i}>{award.name}</p>
-          ))}
-          <p>
-            Name: {props.student.firstName} {props.student.middleName}{" "}
-            {props.student.lastName}
-          </p>
-          <p>Grade: {props.student.grade}</p>
-          <p>Bio: {props.student.bio}</p>
-          <button className="btn btn-primary me-2" onClick={toggleUpdateModal}>
-            Update Profile
-          </button>
-          <button
-            className="btn btn-primary me-2"
-            onClick={togglePasswordModal}
-          >
-            Update Password
-          </button>
-        </div>
+      <div className="row justify-content-center m-3">
+        <div className="col-12 col-md-3 col-auto  my-2 ">
+          <div className="col bg-primary p-4 neoBorder">
+            <img
+              className="mx-auto mb-2"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                border: "2px solid black",
+                borderRadius: "50%",
+              }}
+              src={`/images/profiles/${props.student.image}`}
+            />
+            <hr></hr>
+            {props.student.awards.map((award, i) => (
+              <h6 key={i}>{award.name}</h6>
+            ))}
+            <h6 className="fw-bold text-center pt-1">
+              {"   "}
+              {props.student.firstName} {props.student.middleName}{" "}
+              {props.student.lastName}{" "}
+            </h6>
+            <h6 className="text-center pt-1">
+              Grade:
+              {"   "}
+              {props.student.grade}
+            </h6>
+            <hr></hr>
 
-        <div className="col">
-          <h1>Stats</h1>
-          <p>Rank: {props.student.rank}</p>
-          <p>
-            Attended:{" "}
-            {
-              props.student.events.filter((event) => event.attended == true)
-                .length
-            }
-          </p>
-          <p>Points: {props.student.points}</p>
-          <p>Joined: {props.student.events.length}</p>
+            <h6 className="py-1 text-center">
+              {"   "}
+              {props.student.bio}
+            </h6>
+
+            <hr></hr>
+
+            <div className="mt-4 mx-auto" style={{ width: "fit-content" }}>
+              <button className="btn eventBtn mx-3" onClick={toggleUpdateModal}>
+                Update Profile
+              </button>
+              <button
+                className="btn eventBtn mx-3"
+                onClick={togglePasswordModal}
+              >
+                Update Password
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="col-12 col-md-9">
+          <div className="col bg-primary my-2 neoBorder p-1">
+            <h3 className="d-inline mx-2 fw-semibold align-middle">Stats</h3>
+            <img
+              className=" mx-3 d-inline"
+              style={{ height: "100%", width: "auto" }}
+              src="/images/yellow fish.svg"
+            ></img>
+            <h5 className="d-inline mx-2 align-middle">
+              Rank: {props.student.rank}
+            </h5>
+            <h5 className="d-inline mx-2 align-middle">
+              Attended:{" "}
+              {
+                props.student.events.filter((event) => event.attended == true)
+                  .length
+              }
+            </h5>
+            <h5 className="d-inline mx-2 align-middle">
+              Points: {props.student.points}
+            </h5>
+            <h5 className="d-inline mx-2 align-middle">
+              {" "}
+              Joined: {props.student.events.length}
+            </h5>
+          </div>
+          <div className="col">
+            <h6 className="d-inline-block mx-2">
+              {" "}
+              <div
+                className="d-inline-block mx-1"
+                style={{
+                  width: "11px",
+                  height: "11px",
+                  backgroundColor: "#ffb158",
+                }}
+              ></div>
+              - Missed Events
+            </h6>
+            <h6 className="d-inline-block mx-2">
+              {" "}
+              <div
+                className="d-inline-block mx-1"
+                style={{
+                  width: "11px",
+                  height: "11px",
+                  backgroundColor: "gray",
+                }}
+              ></div>
+              - Past Attended Events
+            </h6>
+            <h6 className="d-inline-block mx-2">
+              {" "}
+              <div
+                className="d-inline-block mx-1"
+                style={{
+                  width: "11px",
+                  height: "11px",
+                  backgroundColor: "#56becd",
+                }}
+              ></div>
+              - Future events
+            </h6>
+          </div>
+          <div className="col my-4">
+            <Calendar
+              events={formattedEvents}
+              defaultDate={new Date()}
+              localizer={mLocalizer}
+              eventPropGetter={(event: {
+                id: number;
+                title: string;
+                start: Date;
+                end: Date;
+              }) => {
+                var backgroundColor: string = "#ffb158";
+
+                if (new Date(event.start) > new Date()) {
+                  backgroundColor = "#56becd";
+                } else if (
+                  props.student.events.find((e) => e.eventId == event.id)!
+                    .attended
+                ) {
+                  backgroundColor = "gray";
+                }
+
+                return { style: { backgroundColor } };
+              }}
+              style={{ height: 600 }}
+            />
+          </div>
         </div>
       </div>
-      <Calendar
-        events={formattedEvents}
-        defaultDate={new Date()}
-        localizer={mLocalizer}
-        eventPropGetter={(event: {
-          id: number;
-          title: string;
-          start: Date;
-          end: Date;
-        }) => {
-          var backgroundColor: string = "red";
-
-          if (new Date(event.start) > new Date()) {
-            backgroundColor = "blue";
-          } else if (
-            props.student.events.find((e) => e.eventId == event.id)!.attended
-          ) {
-            backgroundColor = "gray";
-          }
-
-          return { style: { backgroundColor } };
-        }}
-        style={{ height: 500 }}
-      />
     </>
   );
 }
@@ -138,6 +219,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     props: {
       student: JSON.parse(JSON.stringify(student)),
       events: JSON.parse(JSON.stringify(events)),
+      props: {
+        bodyStyle: { backgroundColor: "white" },
+      },
     },
   };
 }
