@@ -87,24 +87,28 @@ export default function IndexPage(props: {
                   style={{ border: "solid 3px #000000" }}
                 >
                   <h2>{days}</h2>
+                  <h6>Days</h6>
                 </div>
                 <div
                   className="col p-2 m-3"
                   style={{ border: "solid 3px #000000" }}
                 >
                   <h2>{hours}</h2>
+                  <h6>Hours</h6>
                 </div>
                 <div
                   className="col p-2 m-3"
                   style={{ border: "solid 3px #000000" }}
                 >
                   <h2>{minutes}</h2>
+                  <h6>Minutes</h6>
                 </div>
                 <div
                   className="col p-2 m-3"
                   style={{ border: "solid 3px #000000" }}
                 >
                   <h2>{seconds}</h2>
+                  <h6>Seconds</h6>
                 </div>
               </div>
             </>

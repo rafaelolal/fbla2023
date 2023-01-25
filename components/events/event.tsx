@@ -65,7 +65,7 @@ export default function Event(props: EventType) {
           >
             <h5 className="card-title fs-5">
               {props.isCanceled && "CANCELED"} {props.title} ({props.type}) -{" "}
-              {props.points}
+              {props.points} points
             </h5>
 
             <p className="card-text">
