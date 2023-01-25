@@ -29,7 +29,7 @@ export default function UpdateModal(props: {
     router.replace(router.asPath);
   };
 
-  async function handleSubmit(event: SyntheticEvent) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     await axios
@@ -77,7 +77,7 @@ export default function UpdateModal(props: {
 
   return (
     <Modal show={props.show} onHide={props.toggleModal} backdrop="static">
-      <Modal.Header closeButton>
+      <Modal.Header closeButton={!props.firstTime}>
         <Modal.Title>Update Profile</Modal.Title>
       </Modal.Header>
 

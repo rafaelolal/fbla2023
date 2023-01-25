@@ -16,7 +16,7 @@ export default function PasswordModal(props: {
   const newPasswordRef = useRef() as MutableRefObject<HTMLInputElement>;
   const newPasswordConfirmRef = useRef() as MutableRefObject<HTMLInputElement>;
 
-  async function handleSubmit(event: SyntheticEvent) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     signInWithEmailAndPassword(

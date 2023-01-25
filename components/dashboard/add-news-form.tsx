@@ -7,7 +7,9 @@ export default function AddNewsForm() {
   const descriptionRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const nameRef = useRef() as MutableRefObject<HTMLInputElement>;
 
-  async function handleSubmit() {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
     axios
       .post("/api/addNews", {
         datetime: new Date(`${dateRef.current.value}`),
@@ -23,8 +25,8 @@ export default function AddNewsForm() {
   }
 
   return (
-    <>
-      <div className="row">
+    <div className="row">
+      <form onSubmit={handleSubmit}>
         <div className="col-6">
           <input type="date" className="form-control" required ref={dateRef} />
         </div>
@@ -33,6 +35,7 @@ export default function AddNewsForm() {
           <textarea
             className="form-control"
             placeholder="Description"
+            required
             ref={descriptionRef}
           />
         </div>
@@ -42,14 +45,14 @@ export default function AddNewsForm() {
             type="text"
             className="form-control"
             placeholder="Name"
+            required
             ref={nameRef}
           />
         </div>
-      </div>
-
-      <button onClick={handleSubmit} className="btn eventBtn my-3">
-        Add
-      </button>
-    </>
+        <button className="btn eventBtn my-3" type="submit">
+          Add
+        </button>
+      </form>
+    </div>
   );
 }

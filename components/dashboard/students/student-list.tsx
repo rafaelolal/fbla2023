@@ -22,14 +22,16 @@ export default function DashboardStudentList() {
 
   return (
     <>
-      <div className="row">
-        <div className="col-12 col-md-4 px-5">
-          <h2 className="mb-2">Create Student Account</h2>
-          <StudentSignUp mutate={mutate} />
+      <div className="row mt-4">
+        <div className="col-12 col-lg-4 ">
+          <div className="neoBorder p-5 m-4">
+            <h2 className="mb-2">Create Student Account</h2>
+            <StudentSignUp mutate={mutate} />
+          </div>
         </div>
 
-        <div className="col-12 col-md-8 px-5 mt-5 mt-md-0">
-          <div className="row justify-content-start">
+        <div className="col-12 col-lg-7 mt-5 mt-lg-0">
+          <div className="row justify-content-start ">
             <h2 className="mb-2">Students</h2>
             {data &&
               data.map((student: DashboardStudentType, i: number) => (

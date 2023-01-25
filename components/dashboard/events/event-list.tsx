@@ -7,7 +7,7 @@ export default function DashboardEventList(props: {
   events: DashboardEventType[];
 }) {
   return (
-    <div className="row">
+    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
       {props.events.map((event, i) => (
         <DashboardEvent
           key={i}
@@ -20,7 +20,6 @@ export default function DashboardEventList(props: {
           mutate={props.mutate}
         />
       ))}
-      ;
     </div>
   );
 }
