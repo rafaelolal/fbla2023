@@ -22,7 +22,7 @@ export default function HomeEvent(props: HomeEventType) {
       })
       .catch(function (error) {
         toast.error(
-          `Axios add StudentOnEvents Error (${error.code}: ${error.message})`
+          `Axios add StudentOnEvents (${error.code}: ${error.message})`
         );
       });
   }
