@@ -37,7 +37,7 @@ export default function AttendanceModal(props: {
   return (
     <Modal show={props.show} onHide={props.toggleModal}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>Attendance</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>

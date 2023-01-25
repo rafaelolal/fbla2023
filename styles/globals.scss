@@ -1,4 +1,5 @@
 @import "./colors";
+@import "./calendar.scss";
 @import "./node_modules/bootstrap/scss/bootstrap.scss";
 @import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
 
@@ -79,4 +80,10 @@
   object-fit: cover;
   z-index: -1;
   border-bottom: solid 5px $dark;
+}
+
+.eventPagePic {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
 }

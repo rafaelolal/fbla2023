@@ -1,0 +1,11 @@
+$calendar-border: #000 !default;
+$cell-border: #000 !default;
+
+$border-color: #000 !default;
+
+$btn-color: #373a3c !default;
+$btn-bg: #ffb158 !default;
+$btn-border: #000 !default;
+
+@import "react-big-calendar/lib/sass/styles";
+@import "react-big-calendar/lib/addons/dragAndDrop/styles";
