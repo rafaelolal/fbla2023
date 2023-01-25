@@ -48,7 +48,7 @@ export default function UpdateModal(props: {
       })
       .catch(function (error) {
         toast.error(
-          `Axios Add UpdateStudent Error (${error.code}): ${error.message}`
+          `Axios Add UpdateStudent (${error.code}): ${error.message}`
         );
       });
   }
