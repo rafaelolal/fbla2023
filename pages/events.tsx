@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import EventList from "../components/events/event-list";
 import Search from "../components/events/search";
 import { QueryType } from "../types/events";
+import Footer from "../components/layout/footer";
 
 export default function EventsPage() {
   const [query, setQuery] = useState<QueryType>({
@@ -66,6 +67,7 @@ export default function EventsPage() {
       </div>
       <Search types={types} locations={locations} setQuery={setQuery} />
       <EventList events={data.data} />
+      <Footer />
     </>
   );
 }

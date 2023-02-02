@@ -70,7 +70,7 @@ export default function IndexPage(props: {
         <span className="bubble k"></span>
 
         <div
-          className="position-absolute"
+          className="position-absolute d-none d-md-block"
           style={{ top: "45%", left: "13%", zIndex: "10" }}
         >
           <Link href="/events">
@@ -131,9 +131,9 @@ export default function IndexPage(props: {
 
       <div className="container my-5 pt-5">
         <div className="d-flex justify-content-between">
-          <h1 className="pb-2">Top Events of the Week</h1>
+          <h1 className="pb-2 ms-3">Top Events of the Week</h1>
           <Link
-            className="signBtn fs-5 ms-3 "
+            className="signBtn fs-5 ms-3 me-3 "
             style={{ height: "fit-content", padding: "0" }}
             href="/events"
           >
@@ -171,11 +171,12 @@ export default function IndexPage(props: {
           ))}
         </div>
 
-        <div className="d-flex justify-content-between mt-5">
-          <h1>NEWS</h1>
-        </div>
+        <a id="news"></a>
+        <h1 className="mt-5 pt-5 mb-3 text-center">NEWS</h1>
 
-        <NewsList news={props.news} />
+        <div className="mx-5">
+          <NewsList news={props.news} />
+        </div>
       </div>
       <Footer />
     </>
