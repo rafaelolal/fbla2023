@@ -10,7 +10,7 @@ export default function DashboardStudentList() {
     return await axios
       .get(url)
       .then((response) => {
-        return response.data;
+        return response.data.data;
       })
       .catch((error) => {
         toast.success(`getStudents (${error.code}): ${error.message}`);

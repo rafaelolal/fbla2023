@@ -9,7 +9,6 @@ export default async function handle(
 ) {
   try {
     const data = await prisma.student.findMany();
-    res.json(data);
     res
       .status(200)
       .json({ message: "Students gotten successfully", data: data });
