@@ -18,7 +18,7 @@
 }
 
 .homePageButton:hover {
-  transition: 0.6s ease-in-out;
+  transition: 0.4s ease-in-out;
   transform: scale(1.03);
 }
 
@@ -97,10 +97,22 @@
 .bubble-container {
   background-image: url("/images/homepage pic.svg");
   width: 100%;
-  height: 60vh;
+  height: 65vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
+  position: relative;
+  z-index: -1;
+}
+
+.bubble-container2 {
+  width: 100%;
+  background-image: url("/images/signInPage.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
   overflow: hidden;
   position: relative;
   z-index: -1;
@@ -123,52 +135,52 @@
 
 .bubble.b {
   left: 15%;
-  animation: bubble 5s ease-in 1.4s infinite;
+  animation: bubble 6s ease-in 1.4s infinite;
 }
 
 .bubble.c {
   left: 23%;
-  animation: bubble 6s ease-in 0.5s infinite;
+  animation: bubble 6s ease-in 0.6s infinite;
 }
 
 .bubble.d {
   left: 35%;
-  animation: bubble 5s ease-in 3.8s infinite;
+  animation: bubble 6s ease-in 3.6s infinite;
 }
 
 .bubble.e {
   left: 0%;
-  animation: bubble 4.6s ease-in 1.2s infinite;
+  animation: bubble 7.6s ease-in 1.2s infinite;
 }
 
 .bubble.f {
   left: 52%;
-  animation: bubble 5.6s ease-in 2s infinite;
+  animation: bubble 6.5s ease-in 2s infinite;
 }
 
 .bubble.g {
   left: 60%;
-  animation: bubble 4.7s ease-in 2s infinite;
+  animation: bubble 7.6s ease-in 2s infinite;
 }
 
 .bubble.h {
   left: 65%;
-  animation: bubble 7.2s ease-in 1.6s infinite;
+  animation: bubble 6.5s ease-in 1.6s infinite;
 }
 
 .bubble.i {
   left: 80%;
-  animation: bubble 4.5s ease-in 4s infinite;
+  animation: bubble 6s ease-in 4s infinite;
 }
 
 .bubble.j {
   left: 85%;
-  animation: bubble 6s ease-in 2s infinite;
+  animation: bubble 6s ease-out 2s infinite;
 }
 
 .bubble.k {
   left: 70%;
-  animation: bubble 4s ease-in 2.1s infinite;
+  animation: bubble 6.5s ease-out 2.1s infinite;
 }
 
 @keyframes bubble {
@@ -185,4 +197,18 @@
     display: none;
     scale: (1.3);
   }
+}
+
+.eventEffect {
+  box-shadow: 3px 3px 0px $dark;
+  border: solid 3px $dark;
+  border: solid 3px $dark;
+  transition: 0.3s;
+}
+
+.eventEffect:hover {
+  transform: scale(1.01);
+  border: 0;
+  box-shadow: 0px 0px 0px;
+  border: solid 2px $secondary;
 }
