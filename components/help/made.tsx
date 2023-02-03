@@ -23,6 +23,7 @@ export default function HelpHowItsMade() {
 
           <div className="col-12 col-md-3 text-start d-none d-lg-block my-auto order-sm-3">
             <img
+              className="shake"
               src="/images/help page/arrow.svg"
               width="60%"
               height="auto"
@@ -33,8 +34,8 @@ export default function HelpHowItsMade() {
         <div className="row justify-content-center my-5 ">
           <div className="col-12 col-md-3 text-end d-none d-lg-block my-auto">
             <img
-              style={{ transform: "scaleX(-1)" }}
-              src="/images/help page/arrow.svg"
+              className="shake"
+              src="/images/help page/arrowFlipped.svg"
               width="60%"
               height="auto"
             ></img>
@@ -73,7 +74,14 @@ export default function HelpHowItsMade() {
               ever since the 1500s, when an unknown printer took a
             </h6>
           </div>
-          <div className="col-md-0 col-lg-4 order-sm-3"></div>
+          <div className="col-12 col-md-3 text-start d-none d-lg-block my-auto order-sm-3">
+            <img
+              className="shake"
+              src="/images/help page/arrow.svg"
+              width="60%"
+              height="auto"
+            ></img>
+          </div>
         </div>
       </div>
     </>
