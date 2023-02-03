@@ -30,70 +30,58 @@ export default function Footer() {
 
           <div className="col-12 col-md-9 col-lg-7">
             <div className="row row-cols-1 row-cols-md-3">
-              <div className="col text-break ps-5">
+              <div className="col text-break">
                 <h5 className="fw-bolder text-center ">Reach Out to Us!</h5>
                 <div className="mx-auto" style={{ width: "fit-content" }}>
-                  <h6 className="">
+                  <h6 className="text-center fw-normal">
                     {" "}
-                    <img
-                      style={{
-                        width: "33px",
-                        height: "33px",
-                        marginRight: "8px",
-                      }}
-                      src="images/icons/icons8-mail-64.png"
-                      alt=""
-                    />
-                    <span className="fw-semibold">134 West Minister st,</span>{" "}
+                    <span className="fw-semibold">
+                      134 West Minister st,
+                    </span>{" "}
                     Plainfield, Ny
                   </h6>
-                  <h6 className="">
-                    <img
-                      className="icon"
-                      src="images/icons/icons8-phone-64.png"
-                      alt=""
-                    />
+                  <h6 className="text-center fw-normal">
                     1 {"(199)"} 838-2727
                   </h6>
-                  <h6 className="">
-                    <img
-                      className="icon"
-                      src="images/icons/icons8-place-marker-64.png"
-                      alt=""
-                    />{" "}
+                  <h6 className="text-center fw-normal">
                     sealcoastcharter123@gmail.com
                   </h6>
                 </div>
               </div>
 
               <div className="col text-break mt-5 mt-md-0">
-                <h5 className="fw-bolder text-center">
-                  Call For An Appointment!
-                </h5>
-                <h6 className="text-center fw-lighter ">+1 (555) 555 5556</h6>
-                <h6 className="text-center fw-lighter">
-                  beautyandthechic@gmail.com
+                <h5 className="fw-bolder text-center">About Us!</h5>
+                <h6 className="text-center fw-normal ">Our Policies</h6>
+                <h6 className="text-center fw-normal">
+                  Official District Handbook 2022
                 </h6>
+                <h6 className="text-center fw-normal">Board of Directors</h6>
               </div>
 
               <div className="col text-break mt-5 mt-md-0">
                 <h5 className="fw-bolder text-center">QuickLinks</h5>
                 <Link
-                  className="text-center nav-link d-block"
+                  className="text-center nav-link d-block fw-normal"
                   href="/help?page=howToGuide"
                 >
                   How do you use this Site
                 </Link>
                 <Link
-                  className="text-center nav-link d-block"
+                  className="text-center nav-link d-block fw-normal"
                   href="/help?page=howWasItMade"
                 >
                   How the website was made
                 </Link>
-                <Link className="text-center nav-link d-block" href="/#news">
+                <Link
+                  className="text-center nav-link d-block fw-normal"
+                  href="/#news"
+                >
                   News
                 </Link>
-                <Link className="text-center nav-link d-block" href="/help">
+                <Link
+                  className="text-center nav-link d-block fw-normal"
+                  href="/help"
+                >
                   Copyright and Resources
                 </Link>
               </div>
