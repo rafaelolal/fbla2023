@@ -15,7 +15,7 @@ export default function HelpHowItsMade() {
             <h1 className="fw-semibold text-center">Technologies Used</h1>
             <h6 className="text-center">
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industrys standard dummy text
+              industry. Lorem Ipsum has been the industry's standard dummy text
               ever since the 1500s, when an unknown printer took a galley of
               type and scrambled it to
             </h6>
@@ -45,7 +45,7 @@ export default function HelpHowItsMade() {
             <h1 className="fw-semibold text-center">Art Tools</h1>
             <h6 className="text-center">
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industrys standard dummy text
+              industry. Lorem Ipsum has been the industry's standard dummy text
               ever since the 1500s, when an unknown printer
             </h6>
           </div>
@@ -70,7 +70,7 @@ export default function HelpHowItsMade() {
             <h1 className="fw-semibold text-center">Styling Tools</h1>
             <h6 className="text-center">
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industrys standard dummy text
+              industry. Lorem Ipsum has been the industry's standard dummy text
               ever since the 1500s, when an unknown printer took a
             </h6>
           </div>
