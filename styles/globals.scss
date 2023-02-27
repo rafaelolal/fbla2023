@@ -42,6 +42,10 @@
   border-radius: 7px;
 }
 
+.eventBtn:hover {
+  background-color: #88c8dc;
+}
+
 .eventBtnO {
   background-color: $tertiary;
   color: $dark;

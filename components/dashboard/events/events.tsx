@@ -22,8 +22,8 @@ export default function DashboardEvents() {
   return (
     <>
       <div className="row mt-4">
-        <div className="col-12 col-lg-4 mx-2">
-          <div className="neoBorder p-5">
+        <div className="col-12 col-lg-4 ">
+          <div className="neoBorder p-5 m-4">
             <h2 className="mb-2 ">Add An Event</h2>
             <AddEventForm />
           </div>

@@ -30,7 +30,7 @@ export default function DashboardStudentList() {
           </div>
         </div>
 
-        <div className="col-12 col-lg-7 mt-5 mt-lg-0">
+        <div className="col-12 col-lg-7 mx-2 mt-5 mt-lg-0">
           <div className="row justify-content-start ">
             <h2 className="mb-2">Students</h2>
             {data &&
