@@ -53,10 +53,7 @@ export default function IndexPage(props: {
 
   return (
     <>
-      <div
-        className="bubble-container"
-        style={{ marginTop: `${-8 * 3}px`, borderBottom: "4px solid #000" }}
-      >
+      <div className="bubble-container" style={{ marginTop: `${-8 * 3}px` }}>
         <span className="bubble a"></span>
         <span className="bubble b"></span>
         <span className="bubble c"></span>
