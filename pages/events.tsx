@@ -44,19 +44,17 @@ export default function EventsPage() {
       <div className="card rounded-0 ">
         <div className="position-relative bg-dark" style={{ height: "40vh" }}>
           <img
-            src="/images/events pic.svg"
+            src="/images/events page/eventsPageWithoutFish.svg"
             alt=""
             className="homepagePic"
             style={{ marginTop: `${-17 * 3}px` }}
           />
-
-          <div
-            className="position-absolute"
-            style={{ top: "45%", left: "13%" }}
-          ></div>
         </div>
 
         <div className="card-img-overlay d-flex">
+          <span className="fish a"></span>
+          <span className="fish b"></span>
+          <span className="fish c"></span>
           <h5
             className="title m-auto text- fw-bold pb-5 text-primary"
             style={{ fontSize: "6rem" }}
