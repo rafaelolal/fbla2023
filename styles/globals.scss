@@ -74,19 +74,7 @@
   box-sizing: border-box;
 }
 
-.homepagePic {
-  width: 100%;
-  height: 120%;
-  object-fit: cover;
-  z-index: -3;
-  border-bottom: solid 5px $dark;
-}
-
-.eventPagePic {
-  width: 100%;
-  height: 120%;
-  object-fit: cover;
-}
+/* */
 
 .icon {
   width: 28px;
@@ -104,6 +92,7 @@
   overflow: hidden;
   position: relative;
   z-index: -1;
+  border-bottom: 4px solid #000;
 }
 
 .bubble-container2 {
@@ -125,7 +114,7 @@
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  bottom: 0;
+  top: 105%;
 }
 
 .bubble.a {
@@ -199,6 +188,135 @@
   }
 }
 
+.fish-container {
+  background-image: url("/images/events page/eventsPageWithoutFish.svg");
+  width: 100%;
+  height: 40vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  position: relative;
+  z-index: -2;
+  border-bottom: solid 5px $dark;
+}
+
+.fish {
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 110px;
+  height: 100px;
+  margin-left: -10%;
+  background-size: contain;
+  z-index: -1;
+}
+
+.fish.a {
+  background-image: url("/images/events page/leftBlue1.svg");
+  top: 10%;
+  animation: fishLeft 30s infinite;
+  animation-delay: 2s;
+}
+.fish.b {
+  background-image: url("/images/events page/leftGreen1.svg");
+  top: 15%;
+  animation: fishLeft 50s infinite;
+  animation-delay: 15s;
+}
+.fish.c {
+  background-image: url("/images/events page/leftOrange1.svg");
+  top: 10%;
+  animation: fishLeft 28s infinite;
+  animation-delay: 30s;
+}
+
+.fish.d {
+  background-image: url("/images/events page/leftPink1.svg");
+  top: 32%;
+  animation: fishLeft 40s infinite;
+  animation-delay: 15s;
+}
+.fish.e {
+  background-image: url("/images/events page/leftGreen2.svg");
+  top: 70%;
+  animation: fishLeft 50s infinite;
+}
+.fish.f {
+  background-image: url("/images/events page/leftOrange2.svg");
+  top: 20%;
+  animation: fishLeft 35s infinite;
+  animation-delay: 20s;
+}
+
+.fish.g {
+  background-image: url("/images/events page/leftPink2.svg");
+  top: 35%;
+  animation: fishLeft 37s infinite;
+  animation-delay: 30s;
+}
+
+.fish.h {
+  background-image: url("/images/events page/rightPurple1.svg");
+  top: 53%;
+  animation: fishRight 39s infinite;
+  animation-delay: 30s;
+}
+.fish.i {
+  background-image: url("/images/events page/rightYellow1.svg");
+  top: 60%;
+  animation: fishRight 30s infinite;
+  animation-delay: 40s;
+}
+
+.fish.j {
+  background-image: url("/images/events page/rightPink1.svg");
+  top: 26%;
+  animation: fishRight 39s infinite;
+  animation-delay: 10s;
+}
+.fish.k {
+  background-image: url("/images/events page/rightBlue1.svg");
+  top: 55%;
+  animation: fishRight 35s infinite;
+}
+.fish.l {
+  background-image: url("/images/events page/rightPink2.svg");
+  top: 50%;
+  animation: fishRight 60s infinite;
+}
+.fish.m {
+  background-image: url("/images/events page/rightPurple2.svg");
+  top: 75%;
+  animation: fishRight 65s infinite;
+  animation-delay: 50s;
+}
+.fish.n {
+  background-image: url("/images/events page/rightYellow2.svg");
+  top: 78%;
+  animation: fishRight 42s infinite;
+  animation-delay: 3s;
+}
+
+@keyframes fishLeft {
+  0% {
+    margin-left: -10%;
+  }
+
+  100% {
+    margin-left: 130%;
+  }
+}
+
+@keyframes fishRight {
+  0% {
+    margin-left: 110%;
+  }
+
+  100% {
+    margin-left: -30%;
+  }
+}
 .eventEffect {
   box-shadow: 3px 3px 0px $dark;
   border: solid 3px $dark;
