@@ -60,74 +60,76 @@ export default function DashboardEvent(props: DashboardEventType) {
         participants={props.participants}
       />
 
-      <div className="col-4" style={{ padding: "1rem" }}>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">{props.title}</h5>
-            <p className="card-text">
-              {new Date(props.start) < now ? "Occurred on" : "Scheduled for"}{" "}
-              {new Date(props.start).toLocaleString(undefined, {
-                timeZone: "UTC",
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-                weekday: "long",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}{" "}
-              with {props.participants.length} participants
-            </p>
+      <div className="row justify-content-around py-3  px-3 border-bottom">
+        <div className="col-3 d-flex">
+          <h5 className="my-auto">{props.title}</h5>
+        </div>
 
-            <button
-              className={`btn btn-primary me-1 ${
-                new Date(props.start) > now ? "disabled" : ""
-              }`}
-              onClick={toggleModal}
-            >
-              Mark Attendance
-            </button>
+        <div className="col-5 d-flex ">
+          <h6 className="m-auto">
+            {new Date(props.start) < now ? "Occurred on" : "Scheduled for"}{" "}
+            {new Date(props.start).toLocaleString(undefined, {
+              timeZone: "UTC",
+              year: "numeric",
+              month: "long",
+              day: "2-digit",
+              weekday: "long",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}{" "}
+            with {props.participants.length} participants
+          </h6>
+        </div>
 
-            <button
-              className={`btn btn-primary me-1 ${
-                new Date(props.start) < now ? "disabled" : ""
-              }`}
-              onClick={() => deleteHandler(props.id)}
-            >
-              Delete
-            </button>
+        <div className="col-4 d-flex">
+          <button
+            className={`btn btn-primary mx-1 ${
+              new Date(props.start) > now ? "disabled" : ""
+            }`}
+            onClick={toggleModal}
+          >
+            Attendance
+          </button>
 
-            <button
-              className={`btn btn-primary me-1 ${
-                new Date(props.start) < now ? "disabled" : ""
-              }`}
-              onClick={() => setCanceling(!canceling)}
-            >
-              Cancel
-            </button>
+          <button
+            className={`btn btn-primary mx-1 ${
+              new Date(props.start) < now ? "disabled" : ""
+            }`}
+            onClick={() => deleteHandler(props.id)}
+          >
+            Delete
+          </button>
 
-            {canceling && (
-              <>
-                <div className="form-floating">
-                  <textarea
-                    className="form-control"
-                    placeholder="Reason for cancelation"
-                    id="floatingTextarea"
-                    ref={cancelingRef}
-                  ></textarea>
-                  <label htmlFor="floatingTextarea">Reason</label>
-                </div>
+          <button
+            className={`btn btn-primary mx-1 ${
+              new Date(props.start) < now ? "disabled" : ""
+            }`}
+            onClick={() => setCanceling(!canceling)}
+          >
+            Cancel
+          </button>
+          {canceling && (
+            <>
+              <div className="form-floating">
+                <textarea
+                  className="form-control"
+                  placeholder="Reason for cancelation"
+                  id="floatingTextarea"
+                  ref={cancelingRef}
+                ></textarea>
+                <label htmlFor="floatingTextarea">Reason</label>
+              </div>
 
-                <button
-                  className="btn btn-danger"
-                  onClick={() =>
-                    cancelHandler(props.id, cancelingRef.current.value)
-                  }
-                >
-                  Cancel
-                </button>
-              </>
-            )}
-          </div>
+              <button
+                className="btn btn-danger"
+                onClick={() =>
+                  cancelHandler(props.id, cancelingRef.current.value)
+                }
+              >
+                Cancel
+              </button>
+            </>
+          )}
         </div>
       </div>
     </>

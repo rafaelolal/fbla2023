@@ -7,7 +7,18 @@ export default function DashboardEventList(props: {
   events: DashboardEventType[];
 }) {
   return (
-    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+    <div className="container">
+      <div className="row justify-content-around py-3 px-5 border-bottom">
+        <div className="col-3 d-flex border-end">
+          <h5 className="my-auto">Event Name</h5>
+        </div>
+        <div className="col-5 d-flex border-end">
+          <h5 className="m-auto">Description</h5>
+        </div>
+        <div className="col-4 d-flex">
+          <h5 className="m-auto">Actions</h5>
+        </div>
+      </div>
       {props.events.map((event, i) => (
         <DashboardEvent
           key={i}

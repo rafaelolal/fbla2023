@@ -22,31 +22,49 @@ export default function DashboardStudentList() {
 
   return (
     <>
-      <div className="row mt-4">
+      <div className="row mt-4 justify-content-center">
         <div className="col-12 col-lg-4 ">
-          <div className="neoBorder p-5 m-4">
+          <div className="neoBorder p-5">
             <h2 className="mb-2">Create Student Account</h2>
             <StudentSignUp mutate={mutate} />
           </div>
         </div>
 
         <div className="col-12 col-lg-7 mx-2 mt-5 mt-lg-0">
-          <div className="row justify-content-start ">
-            <h2 className="mb-2">Students</h2>
-            {data &&
-              data.map((student: DashboardStudentType, i: number) => (
-                <DashboardStudent
-                  key={i}
-                  id={student.id}
-                  firstName={student.firstName}
-                  middleName={student.middleName}
-                  lastName={student.lastName}
-                  grade={student.grade}
-                  points={student.points}
-                  rank={student.rank}
-                  mutate={mutate}
-                />
-              ))}
+          <div className="pt-1 neoBorder">
+            <h2 className="mb-2 py-4 px-5 border-bottom text-center w-100">
+              Students
+            </h2>
+            <div className="container">
+              <div className="row justify-content-around py-3 px-2 border-bottom">
+                <div className="col-3 d-flex border-end">
+                  <h5 className="m-auto">Student Name</h5>
+                </div>
+                <div className="col-3 d-flex border-end">
+                  <h5 className="m-auto">Id</h5>
+                </div>
+                <div className="col-3 d-flex border-end">
+                  <h5 className="m-auto">Description</h5>
+                </div>
+                <div className="col-2 d-flex">
+                  <h5 className="m-auto">Action</h5>
+                </div>
+              </div>
+              {data &&
+                data.map((student: DashboardStudentType, i: number) => (
+                  <DashboardStudent
+                    key={i}
+                    id={student.id}
+                    firstName={student.firstName}
+                    middleName={student.middleName}
+                    lastName={student.lastName}
+                    grade={student.grade}
+                    points={student.points}
+                    rank={student.rank}
+                    mutate={mutate}
+                  />
+                ))}
+            </div>
           </div>
         </div>
       </div>

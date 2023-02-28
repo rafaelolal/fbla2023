@@ -21,18 +21,20 @@ export default function DashboardEvents() {
 
   return (
     <>
-      <div className="row mt-4">
+      <div className="row mt-4 justify-content-center">
         <div className="col-12 col-lg-4 ">
-          <div className="neoBorder p-5 m-4">
+          <div className="neoBorder p-5">
             <h2 className="mb-2 ">Add An Event</h2>
             <AddEventForm />
           </div>
         </div>
 
-        <div className="col-12 col-lg-7 mx-2 mt-5 mt-lg-0">
-          <div className="row justify-content-start">
-            <h2 className="mb-2">Events</h2>
-            <DashboardEventList mutate={mutate} events={data.data} />;
+        <div className="col-12 col-lg-7 mx-2 mt-5 mt-lg-0 ">
+          <div className="pt-1 neoBorder">
+            <h2 className="mb-2 py-4 px-5 border-bottom text-center w-100">
+              Events
+            </h2>
+            <DashboardEventList mutate={mutate} events={data.data} />
           </div>
         </div>
       </div>

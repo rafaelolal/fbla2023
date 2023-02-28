@@ -211,7 +211,7 @@
   position: absolute;
   width: 110px;
   height: 100px;
-  margin-left: -10%;
+  margin-left: -30%;
   background-size: contain;
   z-index: -1;
 }
@@ -304,7 +304,7 @@
 
 @keyframes fishLeft {
   0% {
-    margin-left: -10%;
+    margin-left: -30%;
   }
 
   100% {
@@ -314,7 +314,7 @@
 
 @keyframes fishRight {
   0% {
-    margin-left: 110%;
+    margin-left: 130%;
   }
 
   100% {

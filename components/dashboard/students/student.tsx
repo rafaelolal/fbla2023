@@ -25,20 +25,27 @@ export default function DashboardStudent(
   }
 
   return (
-    <div className="card m-3" style={{ width: "18rem" }}>
-      <div className="card-body">
-        <h5 className="card-title">
+    <div className="row justify-content-around py-3 px-2 border-bottom">
+      <div className="col-3 d-flex">
+        <h6 className="my-auto">
           {props.firstName} {props.middleName} {props.lastName}
-        </h5>
-        <h6 className="card-subtitle mb-2 text-muted">
-          <span className="text-dark">Id:</span> {props.id}
         </h6>
-        <p className="card-text">
+      </div>
+
+      <div className="col-3  d-flex">
+        <h6 className="my-auto text-break">{props.id}</h6>
+      </div>
+
+      <div className="col-3 d-flex">
+        <h6 className="my-auto">
           {props.firstName} is currently in grade {props.grade}, ranked{" "}
           {props.rank} with {props.points} points
-        </p>
+        </h6>
+      </div>
+
+      <div className="col-2 d-flex">
         <button
-          className="btn eventBtn"
+          className="btn eventBtn m-auto"
           onClick={() => deleteHandler(props.id)}
         >
           Delete
