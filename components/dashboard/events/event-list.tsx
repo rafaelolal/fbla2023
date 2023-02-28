@@ -8,7 +8,7 @@ export default function DashboardEventList(props: {
 }) {
   return (
     <div className="container">
-      <div className="row justify-content-around py-3 px-5 border-bottom">
+      <div className="row justify-content-around py-3 px-5 border-bottom border-top bg-primary">
         <div className="col-3 d-flex border-end">
           <h5 className="my-auto">Event Name</h5>
         </div>
