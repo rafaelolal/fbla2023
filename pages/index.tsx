@@ -181,7 +181,7 @@ export default function IndexPage(props: {
         <a id="news"></a>
         <h1 className="mt-5 pt-5 mb-3 text-center">NEWS</h1>
 
-        <div className="mx-5">
+        <div className="mx-4">
           <NewsList news={props.news} />
         </div>
       </div>
