@@ -1,9 +1,17 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import useSWR, { KeyedMutator } from "swr";
 import { useAppContext } from "../../context/state";
+import { formatStartAndFinish } from "../../helpers";
 import { EventType } from "../../types/events";
 
-export default function Event(props: EventType) {
+export default function Event(
+  props: EventType & {
+    joined: boolean;
+    attendancePk: number | null;
+    attendancesMutate: KeyedMutator<any>;
+  }
+) {
   const { user } = useAppContext();
 
   async function joinHandler() {
@@ -13,100 +21,105 @@ export default function Event(props: EventType) {
     }
 
     await axios
-      .post("/api/addStudentsOnEvents", {
-        eventId: props.id,
-        studentId: user.uid,
+      .post("http://127.0.0.1:8000/api/attendance/create/", {
+        event: props.pk,
+        student: user.uid,
       })
       .then(function (response) {
-        toast.success(response.data.message);
+        if (response.status == 201) {
+          toast.success("Joined event successfully");
+          props.attendancesMutate();
+        }
+      })
+      .catch(function (error) {
+        toast.error(`attendance/create/ (${error.code}: ${error.message})`);
+      });
+  }
+
+  async function leaveHandler() {
+    await axios
+      .delete(
+        `http://127.0.0.1:8000/api/attendance/${props.attendancePk}/destroy/`
+      )
+      .then(function (response) {
+        if (response.status == 204) {
+          toast.success("Left event successfully");
+          props.attendancesMutate();
+        }
       })
       .catch(function (error) {
         toast.error(
-          `Axios add StudentOnEvents Error (${error.code}: ${error.message})`
+          `attendance/${props.attendancePk}/destroy/ (${error.code}: ${error.message})`
         );
       });
   }
 
   return (
-    <>
-      <div className="col-8" style={{ padding: "1rem" }}>
-        <div
-          className="row eventEffect"
-          style={{
-            height: "13rem",
-            backgroundColor: "#56becd",
-            overflow: "hidden",
-            borderRadius: "7px",
-          }}
-        >
-          <div className="col-4" style={{ height: "13rem", padding: "0" }}>
-            <img
-              src={
-                props.image.includes("http")
-                  ? props.image
-                  : `/images/events/${props.image}`
-              }
-              style={{
-                objectFit: "cover",
-                width: "100%",
-                height: "100%",
-                borderRight: "solid 3px #000",
-              }}
-              alt="Event Image"
-            />
-          </div>
-
-          <div
-            className="col-6 card-body-right position-relative borRight"
+    <div className="col-8" style={{ padding: "1rem" }} id={props.pk.toString()}>
+      <div
+        className="row eventEffect"
+        style={{
+          height: "13rem",
+          backgroundColor: "#56becd",
+          overflow: "hidden",
+          borderRadius: "7px",
+        }}
+      >
+        <div className="col-4" style={{ height: "13rem", padding: "0" }}>
+          <img
+            src={props.image.includes("http") ? props.image : `${props.image}`}
             style={{
-              padding: "1rem",
-              backgroundColor: "#e6f9ff",
+              objectFit: "cover",
+              width: "100%",
+              height: "100%",
               borderRight: "solid 3px #000",
             }}
+            alt="Event Image"
+          />
+        </div>
+
+        <div
+          className="col-6 card-body-right position-relative borRight"
+          style={{
+            padding: "1rem",
+            backgroundColor: "#e6f9ff",
+            borderRight: "solid 3px #000",
+          }}
+        >
+          <h5 className="card-title fs-5">
+            {props.cancellationReason && "CANCELED"} {props.title} ({props.type}
+            ) - <span className="text-tertiary">{props.points}</span> points
+          </h5>
+
+          <p className="card-text">
+            {props.cancellationReason
+              ? `Cancelation reason: ${props.cancellationReason}`
+              : props.description}
+          </p>
+
+          <a
+            className="btn eventBtnO me-2 position-absolute"
+            style={{ top: "70%" }}
+            onClick={props.joined ? leaveHandler : joinHandler}
           >
-            <h5 className="card-title fs-5">
-              {props.isCanceled && "CANCELED"} {props.title} ({props.type}) -{" "}
-              <span className="text-tertiary">{props.points}</span> points
-            </h5>
+            {props.joined ? "Leave" : "Join"}
+          </a>
+        </div>
 
-            <p className="card-text">
-              {props.isCanceled
-                ? `Cancelation reason: ${props.reason}`
-                : props.description}
-            </p>
-
-            <a
-              className="btn eventBtnO me-2 position-absolute"
-              style={{ top: "70%" }}
-              onClick={joinHandler}
-            >
-              Join
-            </a>
-          </div>
-
-          <div className="col-2 d-flex">
-            <h6
-              className="my-auto"
-              style={{
-                textAlign: "center",
-                height: "fit-content",
-                fontSize: "1rem",
-              }}
-            >
-              {new Date(props.start).toLocaleString(undefined, {
-                timeZone: "UTC",
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-                weekday: "long",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}{" "}
-              at {props.location}
-            </h6>
-          </div>
+        <div className="col-2 d-flex">
+          <h6
+            className="my-auto"
+            style={{
+              textAlign: "center",
+              height: "fit-content",
+              fontSize: "1rem",
+            }}
+          >
+            {formatStartAndFinish(props.startsOn, props.finishesOn)} at{" "}
+            {props.location}
+          </h6>
         </div>
       </div>
-    </>
+    </div>
   );
 }

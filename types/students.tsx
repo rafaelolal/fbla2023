@@ -1,5 +1,5 @@
 import { AwardType } from "./awards";
-import { StudentsOnEventsType } from "./events";
+import { ProfileEventType } from "./events";
 
 type CommonStudentType = {
   id: string;
@@ -10,36 +10,36 @@ type CommonStudentType = {
 };
 
 export type DashboardStudentType = {
-  id: string;
+  pk: string;
+  email: string;
   firstName: string;
   middleName: string;
   lastName: string;
   grade: number;
-  points: number;
-  rank: number | null;
 };
 
 export type ProfileStudentType = {
-  id: string;
+  pk: string;
   firstName: string;
   middleName: string;
   lastName: string;
   grade: number;
   points: number;
   rank: number | null;
-  bio: string;
+  biography: string;
   image: string;
   awards: AwardType[];
-  events: StudentsOnEventsType[];
+  events: { attended: boolean; event: ProfileEventType }[];
+  prizes: string[];
 };
 
 export type ProfileModalStudentType = {
-  id: string;
+  pk: string;
   firstName: string;
   middleName: string;
   lastName: string;
   grade: number;
-  bio: string;
+  biography: string;
 };
 
 export type StudentType = {

@@ -7,10 +7,10 @@ export default function NewsList(props: { news: NewsType[] }) {
       {props.news.map((newsItem, i) => (
         <News
           key={i}
-          id={newsItem.id}
-          name={newsItem.name}
-          description={newsItem.description}
-          datetime={newsItem.datetime}
+          pk={newsItem.pk}
+          title={newsItem.title}
+          content={newsItem.content}
+          createdOn={newsItem.createdOn}
         />
       ))}
     </div>

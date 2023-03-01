@@ -1,0 +1,7 @@
+{
+  "prettier.singleQuote": false,
+  "prettier.semi": true,
+  "prettier.jsxSingleQuote": false,
+  "prettier.withNodeModules": true,
+  "prettier.resolveGlobalModules": true
+}

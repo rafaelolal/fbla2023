@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { PrismaClient } from "@prisma/client";
 import { useAppContext } from "../context/state";
 import HomeEvent from "../components/events/home-event";
 import NewsList from "../components/news/news-list";
 import { EventType } from "../types/events";
 import { NewsType } from "../types/news";
-import { toast } from "react-toastify";
+import axios from "axios";
 import Footer from "../components/layout/footer";
-
-const prisma = new PrismaClient();
 
 export default function IndexPage(props: {
   events: EventType[];
@@ -144,7 +141,7 @@ export default function IndexPage(props: {
             style={{ height: "fit-content", padding: "0" }}
             href="/events"
           >
-            See More
+            See All
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="64"
@@ -164,16 +161,16 @@ export default function IndexPage(props: {
           {props.events.map((event: EventType, i: number) => (
             <HomeEvent
               key={i}
-              id={event.id}
+              pk={event.pk}
               image={event.image}
               title={event.title}
               type={event.type}
               points={event.points}
               description={event.description}
               location={event.location}
-              start={event.start}
-              isCanceled={event.isCanceled}
-              reason={event.reason}
+              startsOn={event.startsOn}
+              finishesOn={event.finishesOn}
+              cancellationReason={event.cancellationReason}
             />
           ))}
         </div>
@@ -191,13 +188,17 @@ export default function IndexPage(props: {
 }
 
 export async function getServerSideProps() {
-  const eventsResult = (await prisma.event.findMany()).slice(0, 3);
-  const newsResult = (await prisma.news.findMany()).slice(0, 3);
-
+  const events = (
+    await axios.get("http://127.0.0.1:8000/api/events/")
+  ).data.slice(0, 3);
+  const news = (await axios.get("http://127.0.0.1:8000/api/news/")).data.slice(
+    0,
+    3
+  );
   return {
     props: {
-      events: JSON.parse(JSON.stringify(eventsResult)),
-      news: JSON.parse(JSON.stringify(newsResult)),
+      events: events,
+      news: news,
       bodyStyle: { backgroundColor: "white" },
     },
   };

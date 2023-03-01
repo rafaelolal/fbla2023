@@ -1,22 +1,44 @@
 import Event from "./event";
 import { EventType } from "../../types/events";
+import { KeyedMutator } from "swr";
 
-export default function EventList(props: { events: EventType[] }) {
+export default function EventList(props: {
+  events: EventType[];
+  attendancesData: { pk: number; event: number }[];
+  attendancesMutate: KeyedMutator<any>;
+}) {
+  var attendedEvents: number[] = [];
+  if (props.attendancesData) {
+    attendedEvents = props.attendancesData.map((o) => o.event);
+  }
+
+  function getAttendancePk(eventPk: number) {
+    if (attendedEvents.includes(eventPk)) {
+      return props.attendancesData.find((o) => {
+        return o.event == eventPk;
+      })!.pk;
+    }
+    return null;
+  }
+
   return (
     <div className="row row-cols-1 justify-content-center">
       {props.events.map((event, i) => (
         <Event
           key={i}
-          id={event.id}
+          pk={event.pk}
           image={event.image}
           title={event.title}
           type={event.type}
           points={event.points}
           location={event.location}
           description={event.description}
-          start={event.start}
-          isCanceled={event.isCanceled}
-          reason={event.reason}
+          startsOn={event.startsOn}
+          finishesOn={event.finishesOn}
+          cancellationReason={event.cancellationReason}
+          joined={attendedEvents.includes(event.pk)}
+          attendancePk={getAttendancePk(event.pk)}
+          attendancesMutate={props.attendancesMutate}
         />
       ))}
       ;

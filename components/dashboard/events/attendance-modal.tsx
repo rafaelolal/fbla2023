@@ -1,37 +1,39 @@
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
-import { ParticipantsType } from "../../../types/events";
+import { ParticipantType } from "../../../types/events";
 
 export default function AttendanceModal(props: {
-  id: number;
+  pk: number;
   show: boolean;
   toggleModal: () => void;
-  participants: ParticipantsType;
+  participants: ParticipantType[];
 }) {
   async function markAttendanceHandler() {
     const checks = document.querySelectorAll(
       'input[type="checkbox"]'
     ) as NodeListOf<HTMLInputElement>;
 
-    var attendance = [];
+    var requests = [];
     for (let check of checks) {
-      attendance.push({ id: check.value, attended: check.checked });
+      requests.push(
+        axios.patch(
+          `http://127.0.0.1:8000/api/attendance/${check.value}/update/`,
+          {
+            attended: check.checked,
+          }
+        )
+      );
     }
 
-    const result = await axios
-      .post("/api/markAttendance", {
-        attendance,
-        eventId: props.id,
+    Promise.all(requests)
+      .then(() => {
+        toast.success("Attendance marked successfully");
+        props.toggleModal();
       })
-      .then(function (response) {
-        toast.success(`${response.data.title}: ${response.data.message}`);
-      })
-      .catch(function (error) {
-        toast.error(`${error.code}: ${error.message}`);
+      .catch((error) => {
+        toast.error(`attendanceHandler (${error.code}): ${error.message}`);
       });
-
-    props.toggleModal();
   }
 
   return (
@@ -44,20 +46,20 @@ export default function AttendanceModal(props: {
         {props.participants.length == 0 ? (
           <p>No participants</p>
         ) : (
-          props.participants.map((comb, i) => (
+          props.participants.map((o, i) => (
             <div key={i} className="form-check">
               <input
                 className="form-check-input"
                 type="checkbox"
-                value={comb.studentId}
-                id={`check-${props.id}-${comb.studentId}`}
-                defaultChecked={comb.attended}
+                value={o.pk}
+                id={`check-${props.pk}-${o.student}`}
+                defaultChecked={o.attended}
               />
               <label
                 className="form-check-label"
-                htmlFor={`check-${comb.studentId}`}
+                htmlFor={`check-${props.pk}-${o.student}`}
               >
-                {comb.studentName}
+                {o.studentName}
               </label>
             </div>
           ))

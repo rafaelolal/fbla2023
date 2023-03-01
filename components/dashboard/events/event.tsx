@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import AttendanceModal from "./attendance-modal";
 import { DashboardEventType } from "../../../types/events";
+import { formatStartAndFinish } from "../../../helpers";
 
 export default function DashboardEvent(props: DashboardEventType) {
   const [canceling, setCanceling] = useState(false);
@@ -15,15 +16,12 @@ export default function DashboardEvent(props: DashboardEventType) {
     setShow(!show);
   }
 
-  function deleteHandler(id: number) {
+  function deleteHandler(pk: number) {
     axios
-      .post("/api/deleteEvent", {
-        id,
-      })
+      .delete(`http://127.0.0.1:8000/api/event/${pk}/destroy/`)
       .then(function (response) {
-        toast.success(response.data.message);
-
         if (response.status == 200) {
+          toast.success("Event deleted successfully");
           props.mutate();
         }
       })
@@ -32,29 +30,27 @@ export default function DashboardEvent(props: DashboardEventType) {
       });
   }
 
-  function cancelHandler(id: number, reason: string) {
+  function cancelHandler(pk: number, cancellationReason: string) {
     axios
-      .post("/api/cancelEvent", {
-        id,
-        reason: reason,
+      .patch(`http://127.0.0.1:8000/api/event/${pk}/cancel/`, {
+        cancellationReason,
       })
       .then(function (response) {
-        toast.success(response.data.message);
-
         if (response.status == 200) {
+          toast.success("Canceled event successfully");
           props.mutate();
           setCanceling(false);
         }
       })
       .catch(function (error) {
-        toast.success(`cancelEvent (${error.code}): ${error.message}`);
+        toast.error(`cancelEvent (${error.code}): ${error.message}`);
       });
   }
 
   return (
     <>
       <AttendanceModal
-        id={props.id}
+        pk={props.pk}
         toggleModal={toggleModal}
         show={show}
         participants={props.participants}
@@ -67,24 +63,25 @@ export default function DashboardEvent(props: DashboardEventType) {
 
         <div className="col-5 d-flex ">
           <h6 className="m-auto">
-            {new Date(props.start) < now ? "Occurred on" : "Scheduled for"}{" "}
-            {new Date(props.start).toLocaleString(undefined, {
-              timeZone: "UTC",
-              year: "numeric",
-              month: "long",
-              day: "2-digit",
-              weekday: "long",
-              hour: "2-digit",
-              minute: "2-digit",
-            })}{" "}
-            with {props.participants.length} participants
+            {props.cancellationReason
+              ? "Cancelled: "
+              : new Date(props.startsOn) < now
+              ? "Occurred on"
+              : "Scheduled for"}{" "}
+            {props.cancellationReason
+              ? props.cancellationReason
+              : formatStartAndFinish(props.startsOn, props.finishesOn)}{" "}
+            with ${props.participants.length} participants
           </h6>
         </div>
 
         <div className="col-4 d-flex">
           <button
             className={`btn btn-primary mx-1 ${
-              new Date(props.start) > now ? "disabled" : ""
+              props.participants.some((o) => o.final) ||
+              new Date(props.startsOn) > now
+                ? "disabled"
+                : ""
             }`}
             onClick={toggleModal}
           >
@@ -93,16 +90,18 @@ export default function DashboardEvent(props: DashboardEventType) {
 
           <button
             className={`btn btn-primary mx-1 ${
-              new Date(props.start) < now ? "disabled" : ""
+              new Date(props.startsOn) < now ? "disabled" : ""
             }`}
-            onClick={() => deleteHandler(props.id)}
+            onClick={() => deleteHandler(props.pk)}
           >
             Delete
           </button>
 
           <button
             className={`btn btn-primary mx-1 ${
-              new Date(props.start) < now ? "disabled" : ""
+              props.cancellationReason || new Date(props.startsOn) < now
+                ? "disabled"
+                : ""
             }`}
             onClick={() => setCanceling(!canceling)}
           >
@@ -123,7 +122,7 @@ export default function DashboardEvent(props: DashboardEventType) {
               <button
                 className="btn btn-danger"
                 onClick={() =>
-                  cancelHandler(props.id, cancelingRef.current.value)
+                  cancelHandler(props.pk, cancelingRef.current.value)
                 }
               >
                 Cancel

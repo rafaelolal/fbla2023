@@ -2,7 +2,6 @@ import "../styles/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import Script from "next/script";
-import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import Navbar from "../components/layout/navbar";
 import { AppWrapper } from "../context/state";
@@ -17,17 +16,17 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, [pageProps.bodyStyle]);
 
-  useEffect(() => {
-    setInterval(function () {
-      axios.get("/api/backup");
-    }, 24 * 60 * 60 * 1000);
-  });
-
   return (
     <AppWrapper>
-      <Script src="/js/bootstrap.bundle.min.js" />
+      <Script
+        type="text/javascript"
+        src="/js/bootstrap.bundle.min.js"
+        strategy="beforeInteractive"
+      />
+
       <Navbar />
       <Component {...pageProps} />
+
       <ToastContainer
         position="bottom-right"
         autoClose={5000}

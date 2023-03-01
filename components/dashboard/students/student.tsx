@@ -6,16 +6,13 @@ import { DashboardStudentType } from "../../../types/students";
 export default function DashboardStudent(
   props: DashboardStudentType & { mutate: KeyedMutator<any> }
 ) {
-  function deleteHandler(id: string) {
+  function deleteHandler(pk: string) {
     console;
     axios
-      .post("/api/deleteStudent", {
-        id,
-      })
+      .delete(`http://127.0.0.1:8000/api/student/${pk}/destroy/`)
       .then(function (response) {
-        toast.success(response.data.message);
-
-        if (response.status == 200) {
+        if (response.status == 204) {
+          toast.success("Student deleted successfully");
           props.mutate();
         }
       })
@@ -38,15 +35,14 @@ export default function DashboardStudent(
 
       <div className="col-3 d-flex">
         <h6 className="my-auto">
-          {props.firstName} is currently in grade {props.grade}, ranked{" "}
-          {props.rank} with {props.points} points
+          {props.firstName} is currently in grade {props.grade}
         </h6>
       </div>
 
       <div className="col-2 d-flex">
         <button
           className="btn eventBtn m-auto"
-          onClick={() => deleteHandler(props.id)}
+          onClick={() => deleteHandler(props.pk)}
         >
           Delete
         </button>

@@ -1,32 +1,8 @@
-import axios from "axios";
-import { toast } from "react-toastify";
-import { useAppContext } from "../../context/state";
+import Link from "next/link";
+import { formatStartAndFinish } from "../../helpers";
 import { HomeEventType } from "../../types/events";
 
 export default function HomeEvent(props: HomeEventType) {
-  const { user } = useAppContext();
-
-  async function joinHandler() {
-    if (!user) {
-      toast.warning(`Sign in before joining an event`);
-      return;
-    }
-
-    await axios
-      .post("/api/addStudentsOnEvents", {
-        eventId: props.id,
-        studentId: user.uid,
-      })
-      .then(function (response) {
-        toast.success(response.data.message);
-      })
-      .catch(function (error) {
-        toast.error(
-          `Axios add StudentOnEvents (${error.code}: ${error.message})`
-        );
-      });
-  }
-
   return (
     <>
       <div
@@ -61,29 +37,30 @@ export default function HomeEvent(props: HomeEventType) {
 
           <div className="card-body">
             <h5 className="fw-bold fs-6">
-              {props.isCanceled && "CANCELED"} {props.title} ({props.type}) -{" "}
-              <span className="text-tertiary"> {props.points} </span> points
+              {props.cancellationReason && "CANCELED"} {props.title} (
+              <span className="text-tertiary">
+                {" "}
+                {props.type}) - {props.points}{" "}
+              </span>{" "}
+              points
             </h5>
+
             <h6
               className="text-start fs-6"
               style={{
                 height: "fit-content",
               }}
             >
-              {new Date(props.start).toLocaleString(undefined, {
-                timeZone: "UTC",
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-                weekday: "long",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}{" "}
-              at {props.location}
+              {formatStartAndFinish(props.startsOn, props.finishesOn)} at{" "}
+              {props.location}
             </h6>
-            <a className="mt-2 btn eventBtn me-2 " onClick={joinHandler}>
-              Join
-            </a>
+
+            <Link
+              className="mt-2 btn eventBtn me-2"
+              href={`/events#${props.pk}`}
+            >
+              Visit
+            </Link>
           </div>
         </div>
       </div>

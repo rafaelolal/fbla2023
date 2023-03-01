@@ -2,20 +2,20 @@ import { KeyedMutator } from "swr";
 import { StudentType } from "./students";
 
 export type ParticipantType = {
+  pk: number;
   attended: boolean;
-  eventId: number;
-  studentId: string;
+  final: boolean;
+  event: number;
+  student: string;
   studentName: string;
 };
 
-export type ParticipantsType = ParticipantType[];
-
 type CommonEventType = {
-  id: number;
+  pk: number;
   title: string;
-  start: string;
-  isCanceled: string;
-  reason: string;
+  startsOn: string;
+  finishesOn: string;
+  cancellationReason: string;
 };
 
 export type EventType = CommonEventType & {
@@ -27,7 +27,7 @@ export type EventType = CommonEventType & {
 };
 
 export type DashboardEventType = CommonEventType & {
-  participants: ParticipantsType;
+  participants: ParticipantType[];
   mutate: KeyedMutator<any>;
 };
 
@@ -39,21 +39,10 @@ export type HomeEventType = CommonEventType & {
   description: string;
 };
 
-export type ProfileEventType = CommonEventType & {
-  end: string;
-};
-
-export type StudentsOnEventsType = {
-  event: EventType;
-  eventId: number;
-  student: StudentType;
-  studentId: string;
-  attended: boolean;
-  studentName: string;
-};
+export type ProfileEventType = CommonEventType;
 
 export type QueryType = {
   type: string;
-  start: string;
+  startsOn: string;
   location: string;
 };
