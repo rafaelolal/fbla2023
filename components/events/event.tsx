@@ -31,11 +31,12 @@ export default function Event(props: EventType) {
     <>
       <div className="col-8" style={{ padding: "1rem" }}>
         <div
-          className="row neoBorder"
+          className="row eventEffect"
           style={{
             height: "13rem",
             backgroundColor: "#56becd",
             overflow: "hidden",
+            borderRadius: "7px",
           }}
         >
           <div className="col-4" style={{ height: "13rem", padding: "0" }}>
@@ -49,23 +50,23 @@ export default function Event(props: EventType) {
                 objectFit: "cover",
                 width: "100%",
                 height: "100%",
-                borderRight: "solid 3px #000000",
+                borderRight: "solid 3px #000",
               }}
-              alt="..."
+              alt="Event Image"
             />
           </div>
 
           <div
-            className="col-6 card-body-right position-relative"
+            className="col-6 card-body-right position-relative borRight"
             style={{
               padding: "1rem",
               backgroundColor: "#e6f9ff",
-              borderRight: "solid 3px #000000",
+              borderRight: "solid 3px #000",
             }}
           >
             <h5 className="card-title fs-5">
               {props.isCanceled && "CANCELED"} {props.title} ({props.type}) -{" "}
-              {props.points} points
+              <span className="text-tertiary">{props.points}</span> points
             </h5>
 
             <p className="card-text">

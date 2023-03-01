@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import EventList from "../components/events/event-list";
 import Search from "../components/events/search";
 import { QueryType } from "../types/events";
+import Footer from "../components/layout/footer";
 
 export default function EventsPage() {
   const [query, setQuery] = useState<QueryType>({
@@ -40,32 +41,35 @@ export default function EventsPage() {
 
   return (
     <>
-      <div className="card rounded-0 ">
-        <div className="position-relative bg-dark" style={{ height: "40vh" }}>
-          <img
-            src="/images/events pic.svg"
-            alt=""
-            className="homepagePic"
-            style={{ marginTop: `${-17 * 3}px` }}
-          />
-
-          <div
-            className="position-absolute"
-            style={{ top: "45%", left: "13%" }}
-          ></div>
-        </div>
-
-        <div className="card-img-overlay d-flex">
-          <h5
-            className="title m-auto text- fw-bold pb-5 text-primary"
-            style={{ fontSize: "6rem" }}
-          >
-            Join Events
-          </h5>
-        </div>
+      <div
+        className="fish-container d-flex"
+        style={{ marginTop: `${-17 * 3}px` }}
+      >
+        <h5
+          className="title m-auto fw-bold text-primary"
+          style={{ fontSize: "6rem", zIndex: "10" }}
+        >
+          Join Events
+        </h5>
+        <span className="fish a"></span>
+        <span className="fish b"></span>
+        <span className="fish c"></span>
+        <span className="fish d"></span>
+        <span className="fish e"></span>
+        <span className="fish f"></span>
+        <span className="fish g"></span>
+        <span className="fish h"></span>
+        <span className="fish i"></span>
+        <span className="fish j"></span>
+        <span className="fish k"></span>
+        <span className="fish l"></span>
+        <span className="fish m"></span>
+        <span className="fish n"></span>
       </div>
+
       <Search types={types} locations={locations} setQuery={setQuery} />
       <EventList events={data.data} />
+      <Footer />
     </>
   );
 }

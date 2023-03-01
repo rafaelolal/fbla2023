@@ -64,7 +64,8 @@ export default function ProfilePage(props: {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                border: "2px solid black",
+                aspectRatio: "1/1",
+                border: "4px solid black",
                 borderRadius: "50%",
               }}
               src={`/images/profiles/${props.student.image}`}

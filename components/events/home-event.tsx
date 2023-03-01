@@ -34,29 +34,35 @@ export default function HomeEvent(props: HomeEventType) {
         style={{ padding: "1rem" }}
       >
         <div
-          className="card"
+          className="card eventEffect"
           style={{
             height: "400px",
             width: "390px",
             backgroundColor: "#e6f9ff",
-            boxShadow: "3px 3px 0px #000",
-            border: "solid 3px #000000",
+            borderRadius: "7px",
           }}
         >
           <img
-            className="card-img-top rounded-0"
             src={
               props.image.includes("http")
                 ? props.image
                 : `/images/events/${props.image}`
             }
-            style={{ objectFit: "cover", width: "100%", height: "300px" }}
-            alt="..."
+            style={{
+              objectFit: "cover",
+              width: "100%",
+              height: "265px",
+              borderTopRightRadius: "3px",
+              borderTopLeftRadius: "3px",
+              borderBottom: "solid 3px #000",
+            }}
+            alt="Event Image"
           />
+
           <div className="card-body">
             <h5 className="fw-bold fs-6">
               {props.isCanceled && "CANCELED"} {props.title} ({props.type}) -{" "}
-              {props.points}
+              <span className="text-tertiary"> {props.points} </span> points
             </h5>
             <h6
               className="text-start fs-6"
@@ -75,7 +81,7 @@ export default function HomeEvent(props: HomeEventType) {
               })}{" "}
               at {props.location}
             </h6>
-            <a className="mt-2 eventBtn me-2 " onClick={joinHandler}>
+            <a className="mt-2 btn eventBtn me-2 " onClick={joinHandler}>
               Join
             </a>
           </div>

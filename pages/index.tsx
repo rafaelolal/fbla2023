@@ -7,6 +7,7 @@ import NewsList from "../components/news/news-list";
 import { EventType } from "../types/events";
 import { NewsType } from "../types/news";
 import { toast } from "react-toastify";
+import Footer from "../components/layout/footer";
 
 const prisma = new PrismaClient();
 
@@ -52,15 +53,33 @@ export default function IndexPage(props: {
 
   return (
     <>
-      <div className="position-relative bg-dark" style={{ height: "60vh" }}>
-        <img
-          src="/images/homepage pic.svg"
-          alt=""
-          className="homepagePic"
-          style={{ marginTop: `${-17 * 3}px` }}
-        />
+      <div className="bubble-container" style={{ marginTop: `${-8 * 3}px` }}>
+        <span className="bubble a"></span>
+        <span className="bubble b"></span>
+        <span className="bubble c"></span>
+        <span className="bubble d"></span>
+        <span className="bubble e"></span>
+        <span className="bubble f"></span>
+        <span className="bubble g"></span>
+        <span className="bubble h"></span>
+        <span className="bubble i"></span>
+        <span className="bubble j"></span>
+        <span className="bubble k"></span>
+      </div>
 
-        <div className="position-absolute" style={{ top: "45%", left: "13%" }}>
+      <div
+        style={{
+          width: "100%",
+          height: "60vh",
+          position: "absolute",
+          top: "10%",
+          left: "0",
+        }}
+      >
+        <div
+          className="position-absolute d-none d-md-block"
+          style={{ top: "45%", left: "13%", zIndex: "10" }}
+        >
           <Link href="/events">
             <img
               className="homePageButton"
@@ -74,6 +93,7 @@ export default function IndexPage(props: {
           className="text-center position-absolute bottom-0 end-0 m-5 neoBorder bg-primary"
           style={{
             border: "solid 4px #000000",
+            zIndex: "10",
           }}
         >
           {partyTime ? (
@@ -118,9 +138,9 @@ export default function IndexPage(props: {
 
       <div className="container my-5 pt-5">
         <div className="d-flex justify-content-between">
-          <h1 className="pb-2">Top Events of the Week</h1>
+          <h1 className="pb-2 ms-3">Top Events of the Week</h1>
           <Link
-            className="signBtn fs-5 ms-3 "
+            className="signBtn fs-5 ms-3 me-3 "
             style={{ height: "fit-content", padding: "0" }}
             href="/events"
           >
@@ -158,12 +178,14 @@ export default function IndexPage(props: {
           ))}
         </div>
 
-        <div className="d-flex justify-content-between mt-5">
-          <h1>NEWS</h1>
-        </div>
+        <a id="news"></a>
+        <h1 className="mt-5 pt-5 mb-3 text-center">NEWS</h1>
 
-        <NewsList news={props.news} />
+        <div className="mx-4">
+          <NewsList news={props.news} />
+        </div>
       </div>
+      <Footer />
     </>
   );
 }

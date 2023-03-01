@@ -155,8 +155,8 @@ export default function UpdateModal(props: {
             />
           </div>
 
-          <div className="col-6">
-            <label>
+          <div className="col-12">
+            <label style={{ width: "100%" }}>
               <input
                 type="file"
                 onChange={({ target }) => {
@@ -169,7 +169,12 @@ export default function UpdateModal(props: {
               />
               <div>
                 {selectedImage ? (
-                  <img src={selectedImage} alt="" />
+                  <img
+                    className="my-2"
+                    style={{ width: "100%" }}
+                    src={selectedImage}
+                    alt=""
+                  />
                 ) : (
                   <span>Select Image</span>
                 )}
