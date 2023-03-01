@@ -182,8 +182,6 @@ export default function ProfilePage(props: {
               }) => {
                 var backgroundColor: string = "#ffb158";
 
-                console.log({ event });
-
                 if (new Date(event.start) > new Date()) {
                   backgroundColor = "#56becd";
                 } else if (

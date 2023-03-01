@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import EventList from "../components/events/event-list";
 import Search from "../components/events/search";
@@ -8,33 +8,24 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { useAppContext } from "../context/state";
 
-export default function EventsPage() {
+export default function EventsPage(props: { events: EventType[] }) {
   const { user } = useAppContext();
   const router = useRouter();
-  const [currentEvents, setCurrentEvents] = useState<EventType[]>([]);
+  const initialEvents = useRef<EventType[]>(props.events);
+  const [currentEvents, setCurrentEvents] = useState<EventType[]>(
+    initialEvents.current
+  );
   const [query, setQuery] = useState<QueryType>({
     type: "",
     startsOn: "",
     location: "",
   });
-  var initialEvents: EventType[] = [];
+  const [filterOptions, setFilterOptions] = useState({
+    types: new Set<string>(),
+    locations: new Set<string>(),
+  });
 
   const anchorId = router.asPath.split("#")[1];
-
-  const { error: eventsError } = useSWR(
-    "http://127.0.0.1:8000/api/events/",
-    async (url) => {
-      return await axios
-        .get(url)
-        .then((response) => {
-          setCurrentEvents(response.data);
-          initialEvents = response.data;
-        })
-        .catch((error) => {
-          throw error;
-        });
-    }
-  );
 
   const {
     data: attendances,
@@ -57,19 +48,33 @@ export default function EventsPage() {
   );
 
   useEffect(() => {
-    var newEvents = initialEvents;
+    var newEvents = initialEvents.current;
     if (query.type) {
-      newEvents = initialEvents.filter((e) => e.type == query.type);
+      newEvents = initialEvents.current.filter((e) => e.type == query.type);
     }
     if (query.startsOn) {
-      newEvents = initialEvents.filter(
+      newEvents = initialEvents.current.filter(
         (e) => new Date(e.startsOn) >= new Date(query.startsOn)
       );
     }
     if (query.location) {
-      newEvents = initialEvents.filter((e) => e.location == query.location);
+      newEvents = initialEvents.current.filter(
+        (e) => e.location == query.location
+      );
     }
     setCurrentEvents(newEvents);
+    // loop through events and store
+    // unique types and locations
+    // to facilitate searching
+    var types = new Set<string>();
+    var locations = new Set<string>();
+    for (let event of newEvents) {
+      types.add(event.type);
+      locations.add(event.location);
+    }
+    setFilterOptions({ types, locations });
+    console.log({ newEvents });
+    console.log({ types, locations });
   }, [query]);
 
   useEffect(() => {
@@ -81,24 +86,11 @@ export default function EventsPage() {
     }
   });
 
-  if (eventsError || attendancesError) {
+  if (attendancesError) {
     return <p>An error occurred</p>;
   }
-  if (!initialEvents || (user ? !attendances : false)) {
-    console.log({ initialEvents });
-    console.log({ attendances });
-    console.log({ user: user });
+  if (user ? !attendances : false) {
     return <p>Loading...</p>;
-  }
-
-  // loop through events and store
-  // unique types and locations
-  // to facilitate searching
-  var types = new Set<string>();
-  var locations = new Set<string>();
-  for (let event of currentEvents) {
-    types.add(event.type);
-    locations.add(event.location);
   }
 
   return (
@@ -131,7 +123,7 @@ export default function EventsPage() {
         <span className="fish n"></span>
       </div>
 
-      <Search types={types} locations={locations} setQuery={setQuery} />
+      <Search filterOptions={filterOptions} setQuery={setQuery} />
 
       <EventList
         events={currentEvents}
@@ -144,8 +136,16 @@ export default function EventsPage() {
 }
 
 export async function getStaticProps() {
+  const response = await axios
+    .get("http://127.0.0.1:8000/api/events/")
+    .then((response) => response)
+    .catch((error) => {
+      throw error;
+    });
+
   return {
     props: {
+      events: response.data,
       bodyStyle: { backgroundColor: "white" },
     },
   };

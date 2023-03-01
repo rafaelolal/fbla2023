@@ -2,8 +2,7 @@ import { Dispatch, MutableRefObject, SetStateAction, useRef } from "react";
 import { QueryType } from "../../types/events";
 
 export default function Search(props: {
-  types: Set<string>;
-  locations: Set<string>;
+  filterOptions: { types: Set<string>; locations: Set<string> };
   setQuery: Dispatch<SetStateAction<QueryType>>;
 }) {
   const typeRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -25,20 +24,14 @@ export default function Search(props: {
           />
 
           <datalist id="typeList">
-            {Array.from(props.types).map((datum, i) => (
+            {Array.from(props.filterOptions.types).map((datum, i) => (
               <option key={i} value={datum} />
             ))}
           </datalist>
         </div>
 
         <div className="col">
-          <input
-            type="date"
-            defaultValue={today.toLocaleDateString("en-CA")}
-            className="form-control"
-            required
-            ref={startRef}
-          />
+          <input type="date" className="form-control" required ref={startRef} />
         </div>
 
         <div className="col">
@@ -51,7 +44,7 @@ export default function Search(props: {
           />
 
           <datalist id="locationList">
-            {Array.from(props.locations).map((datum, i) => (
+            {Array.from(props.filterOptions.locations).map((datum, i) => (
               <option key={i} value={datum} />
             ))}
           </datalist>
