@@ -22,12 +22,12 @@ export default function DashboardEventList(props: {
       {props.events.map((event, i) => (
         <DashboardEvent
           key={i}
-          id={event.id}
+          pk={event.pk}
           title={event.title}
-          start={event.start}
+          startsOn={event.startsOn}
+          finishesOn={event.finishesOn}
           participants={event.participants}
-          isCanceled={event.isCanceled}
-          reason={event.reason}
+          cancellationReason={event.cancellationReason}
           mutate={props.mutate}
         />
       ))}

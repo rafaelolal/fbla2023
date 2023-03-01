@@ -36,6 +36,7 @@ export default function PasswordModal(props: {
         updatePassword(tempUser, newPasswordRef.current.value)
           .then(() => {
             toast.success("New password set");
+            props.toggleModal();
           })
           .catch((error) => {
             toast.error(
@@ -51,7 +52,12 @@ export default function PasswordModal(props: {
   }
 
   return (
-    <Modal show={props.show} onHide={props.toggleModal} backdrop="static">
+    <Modal
+      show={props.show}
+      onHide={props.toggleModal}
+      centered
+      backdrop="static"
+    >
       <Modal.Header closeButton>
         <Modal.Title>Update Password</Modal.Title>
       </Modal.Header>
@@ -63,10 +69,10 @@ export default function PasswordModal(props: {
               Current Password
             </label>
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="firstNameInput"
-              placeholder="John"
+              placeholder="Current Password"
               required
               ref={currentPasswordRef}
             />
@@ -76,7 +82,7 @@ export default function PasswordModal(props: {
               New Password
             </label>
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="middleNameInput"
               placeholder="New Current"
@@ -90,7 +96,7 @@ export default function PasswordModal(props: {
               Confirm New Password
             </label>
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="middleNameInput"
               placeholder="Confirm"

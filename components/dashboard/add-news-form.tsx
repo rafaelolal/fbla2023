@@ -4,23 +4,23 @@ import { toast } from "react-toastify";
 
 export default function AddNewsForm() {
   const dateRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const descriptionRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
-  const nameRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const contentRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const titleRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     axios
-      .post("/api/addNews", {
+      .post("http://127.0.0.1:8000/api/news/create/", {
         datetime: new Date(`${dateRef.current.value}`),
-        description: descriptionRef.current.value,
-        name: nameRef.current.value,
+        content: contentRef.current.value,
+        title: titleRef.current.value,
       })
       .then(function (response) {
-        toast.success(response.data.message);
+        toast.success("News created successfully");
       })
       .catch(function (error) {
-        toast.error(`addNews (${error.code}): ${error.message}`);
+        toast.error(`news/create/ (${error.code}): ${error.message}`);
       });
   }
 
@@ -35,27 +35,29 @@ export default function AddNewsForm() {
           <input
             type="text"
             className="form-control"
-            placeholder="Name"
+            placeholder="Title"
             required
-            ref={nameRef}
+            ref={titleRef}
           />
         </div>
 
-        <div className="col-12 my-2">
-          <textarea
+        <div className="col-12 col-md-6 my-2">
+          <input
+            type="textarea"
             className="form-control"
-            placeholder="Description"
+            placeholder="Content"
             required
-            ref={descriptionRef}
+            ref={contentRef}
           />
         </div>
       </div>
+
       <button
         className="btn eventBtn my-3"
         style={{ width: "100px" }}
         type="submit"
       >
-        Add
+        Create
       </button>
     </form>
   );

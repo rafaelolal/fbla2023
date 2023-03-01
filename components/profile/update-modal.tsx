@@ -1,9 +1,7 @@
-import { MutableRefObject, SyntheticEvent, useRef, useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
-import { useAppContext } from "../../context/state";
-import { addPathToFile } from "../../helpers";
 import { ProfileModalStudentType } from "../../types/students";
 import { toast } from "react-toastify";
 
@@ -16,13 +14,15 @@ export default function UpdateModal(props: {
   const [uploading, setUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
-  const uploadedImageRef = useRef("default.jpg");
+  const uploadedImageRef = useRef(
+    "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+  ); // use this default until actually using files
 
   const firstNameRef = useRef() as MutableRefObject<HTMLInputElement>;
   const middleNameRef = useRef() as MutableRefObject<HTMLInputElement>;
   const lastNameRef = useRef() as MutableRefObject<HTMLInputElement>;
   const gradeRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const bioRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
+  const biographyRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
 
   const router = useRouter();
   const refreshData = () => {
@@ -33,22 +33,21 @@ export default function UpdateModal(props: {
     event.preventDefault();
 
     await axios
-      .post("/api/updateStudent", {
-        id: props.data.id,
+      .patch(`http://127.0.0.1:8000/api/student/${props.data.pk}/update/`, {
         firstName: firstNameRef.current.value,
         middleName: middleNameRef.current.value,
         lastName: lastNameRef.current.value,
         grade: +gradeRef.current.value,
-        bio: bioRef.current.value,
+        biography: biographyRef.current.value,
         image: uploadedImageRef.current,
       })
       .then(function (response) {
-        toast.success(`${response.data.title}: ${response.data.message}`);
+        toast.success(`Successfully updated profile`);
         refreshData();
       })
       .catch(function (error) {
         toast.error(
-          `Axios Add UpdateStudent (${error.code}): ${error.message}`
+          `student/${props.data.pk}/update/ (${error.code}): ${error.message}`
         );
       });
   }
@@ -57,26 +56,18 @@ export default function UpdateModal(props: {
     setUploading(true);
 
     if (!selectedFile) return;
-
-    const newFile = addPathToFile(selectedFile, "/profiles");
-
-    const formData = new FormData();
-    formData.append("myImage", newFile);
-
-    axios
-      .post("/api/addImage", formData)
-      .then(function (data) {
-        uploadedImageRef.current = data.data.image;
-      })
-      .catch(function (error) {
-        toast.error(`addImage (${error.code}): ${error.message}`);
-      });
+    uploadedImageRef.current = "https://picsum.photos/seed/00001/300"; // use this default until actually using files
 
     setUploading(false);
   }
 
   return (
-    <Modal show={props.show} onHide={props.toggleModal} backdrop="static">
+    <Modal
+      show={props.show}
+      onHide={props.toggleModal}
+      centered
+      backdrop="static"
+    >
       <Modal.Header closeButton={!props.firstTime}>
         <Modal.Title>Update Profile</Modal.Title>
       </Modal.Header>
@@ -136,7 +127,7 @@ export default function UpdateModal(props: {
               type="number"
               className="form-control"
               id="gradeInput"
-              placeholder="9"
+              placeholder="5"
               defaultValue={props.data.grade}
               required
               ref={gradeRef}
@@ -144,14 +135,14 @@ export default function UpdateModal(props: {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="bioInput" className="form-label">
+            <label htmlFor="biographyInput" className="form-label">
               Biography
             </label>
             <textarea
               className="form-control"
-              id="bioInput"
-              defaultValue={props.data.bio}
-              ref={bioRef}
+              id="biographyInput"
+              defaultValue={props.data.biography}
+              ref={biographyRef}
             />
           </div>
 

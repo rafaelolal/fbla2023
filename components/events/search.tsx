@@ -63,7 +63,7 @@ export default function Search(props: {
             onClick={() => {
               props.setQuery({
                 type: typeRef.current.value,
-                start: startRef.current.value,
+                startsOn: startRef.current.value,
                 location: locationRef.current.value,
               });
             }}
@@ -76,12 +76,12 @@ export default function Search(props: {
             onClick={() => {
               props.setQuery({
                 type: "",
-                start: "",
+                startsOn: "",
                 location: "",
               });
             }}
           >
-            Reset
+            Clear
           </a>
         </div>
       </div>

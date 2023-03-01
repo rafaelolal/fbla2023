@@ -1,28 +1,25 @@
 import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
-import { PrismaClient } from "@prisma/client";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import UpdateModal from "../../components/profile/update-modal";
 import { ProfileStudentType } from "../../types/students";
 import { ProfileEventType } from "../../types/events";
 import PasswordModal from "../../components/profile/password-modal";
-
-const prisma = new PrismaClient();
+import axios from "axios";
 
 export default function ProfilePage(props: {
-  student: ProfileStudentType & { bio: string };
-  events: ProfileEventType[];
+  data: ProfileStudentType & { biography: string };
 }) {
-  const [showUpdate, setShowUpdate] = useState(props.student.grade == -1);
+  const [showUpdate, setShowUpdate] = useState(props.data.grade === null);
   const [showPassword, setShowPassword] = useState(false);
 
   const mLocalizer = momentLocalizer(moment);
-  const formattedEvents = props.events.map((e) => ({
-    id: e.id,
-    title: e.title,
-    start: new Date(e.start),
-    end: new Date(e.end),
+  const formattedEvents = props.data.events.map((e) => ({
+    pk: e.event.pk,
+    title: e.event.title,
+    start: new Date(e.event.startsOn),
+    end: new Date(e.event.finishesOn),
   }));
 
   function toggleUpdateModal() {
@@ -37,20 +34,20 @@ export default function ProfilePage(props: {
     <>
       <UpdateModal
         data={{
-          id: props.student.id,
-          firstName: props.student.firstName,
-          middleName: props.student.middleName,
-          lastName: props.student.lastName,
-          grade: props.student.grade,
-          bio: props.student.bio,
+          pk: props.data.pk,
+          firstName: props.data.firstName,
+          middleName: props.data.middleName,
+          lastName: props.data.lastName,
+          grade: props.data.grade,
+          biography: props.data.biography,
         }}
-        firstTime={props.student.grade == -1}
+        firstTime={showUpdate}
         show={showUpdate}
         toggleModal={toggleUpdateModal}
       />
 
       <PasswordModal
-        firstTime={props.student.grade == -1}
+        firstTime={showUpdate}
         show={showPassword}
         toggleModal={togglePasswordModal}
       />
@@ -64,31 +61,31 @@ export default function ProfilePage(props: {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+                borderRadius: "50%",
                 aspectRatio: "1/1",
                 border: "4px solid black",
-                borderRadius: "50%",
               }}
-              src={`/images/profiles/${props.student.image}`}
+              src={props.data.image}
             />
             <hr></hr>
-            {props.student.awards.map((award, i) => (
-              <h6 key={i}>{award.name}</h6>
+            {props.data.prizes.map((award, i) => (
+              <h6 key={i}>{award}</h6>
             ))}
             <h6 className="fw-bold text-center pt-1">
               {"   "}
-              {props.student.firstName} {props.student.middleName}{" "}
-              {props.student.lastName}{" "}
+              {props.data.firstName} {props.data.middleName}{" "}
+              {props.data.lastName}{" "}
             </h6>
             <h6 className="text-center pt-1">
               Grade:
               {"   "}
-              {props.student.grade}
+              {props.data.grade}
             </h6>
             <hr></hr>
 
             <h6 className="py-1 text-center">
               {"   "}
-              {props.student.bio}
+              {props.data.biography}
             </h6>
 
             <hr></hr>
@@ -113,25 +110,30 @@ export default function ProfilePage(props: {
               className=" mx-3 d-inline"
               style={{ height: "100%", width: "auto" }}
               src="/images/yellow fish.svg"
-            ></img>
+            />
+
             <h5 className="d-inline mx-2 align-middle">
-              Rank: {props.student.rank}
+              Rank: {props.data.rank}
             </h5>
+
             <h5 className="d-inline mx-2 align-middle">
               Attended:{" "}
               {
-                props.student.events.filter((event) => event.attended == true)
+                props.data.events.filter((event) => event.attended == true)
                   .length
               }
             </h5>
+
             <h5 className="d-inline mx-2 align-middle">
-              Points: {props.student.points}
+              Points: {props.data.points}
             </h5>
+
             <h5 className="d-inline mx-2 align-middle">
               {" "}
-              Joined: {props.student.events.length}
+              Joined: {props.data.events.length}
             </h5>
           </div>
+
           <div className="col">
             <h6 className="d-inline-block mx-2">
               {" "}
@@ -142,9 +144,10 @@ export default function ProfilePage(props: {
                   height: "11px",
                   backgroundColor: "#ffb158",
                 }}
-              ></div>
+              />
               - Missed Events
             </h6>
+
             <h6 className="d-inline-block mx-2">
               {" "}
               <div
@@ -154,9 +157,10 @@ export default function ProfilePage(props: {
                   height: "11px",
                   backgroundColor: "gray",
                 }}
-              ></div>
+              />
               - Past Attended Events
             </h6>
+
             <h6 className="d-inline-block mx-2">
               {" "}
               <div
@@ -166,27 +170,30 @@ export default function ProfilePage(props: {
                   height: "11px",
                   backgroundColor: "#56becd",
                 }}
-              ></div>
+              />
               - Future events
             </h6>
           </div>
+
           <div className="col my-4">
             <Calendar
               events={formattedEvents}
               defaultDate={new Date()}
               localizer={mLocalizer}
               eventPropGetter={(event: {
-                id: number;
+                pk: number;
                 title: string;
                 start: Date;
                 end: Date;
               }) => {
                 var backgroundColor: string = "#ffb158";
 
+                console.log({ event });
+
                 if (new Date(event.start) > new Date()) {
                   backgroundColor = "#56becd";
                 } else if (
-                  props.student.events.find((e) => e.eventId == event.id)!
+                  props.data.events.find((e) => e.event.pk == event.pk)!
                     .attended
                 ) {
                   backgroundColor = "gray";
@@ -204,22 +211,19 @@ export default function ProfilePage(props: {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { id } = context.query;
-  const student = await prisma.student.findUniqueOrThrow({
-    where: { id: id as string },
-    include: { awards: true, events: true },
-  });
-
-  const events = await prisma.event.findMany({
-    where: {
-      id: { in: student.events.map((event) => event.eventId) },
-    },
-  });
+  const { pk } = context.query;
+  const data = await axios
+    .get(`http://127.0.0.1:8000/api/student/${pk}/`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
 
   return {
     props: {
-      student: JSON.parse(JSON.stringify(student)),
-      events: JSON.parse(JSON.stringify(events)),
+      data: data,
       props: {
         bodyStyle: { backgroundColor: "white" },
       },

@@ -18,15 +18,13 @@ export default function StudentSignUp(props: { mutate: KeyedMutator<any> }) {
       .then((userCredential) => {
         const user = userCredential.user;
         axios
-          .post("/api/addStudent", {
+          .post("http://127.0.0.1:8000/api/student/create/", {
             id: user.uid,
-            firstName: user.email,
-            middleName: "",
-            lastName: "",
+            email: user.email,
           })
           .then(function (response) {
-            toast.success(response.data.message);
-            if (response.data.status == 200) {
+            if (response.request.status == 201) {
+              toast.success("Student created successfully");
               tempAuth.signOut();
               props.mutate();
             }

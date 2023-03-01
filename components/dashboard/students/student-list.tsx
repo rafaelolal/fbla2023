@@ -6,16 +6,19 @@ import StudentSignUp from "./student-sign-up";
 import { toast } from "react-toastify";
 
 export default function DashboardStudentList() {
-  const { data, error, mutate } = useSWR("/api/getStudents", async (url) => {
-    return await axios
-      .get(url)
-      .then((response) => {
-        return response.data.data;
-      })
-      .catch((error) => {
-        toast.success(`getStudents (${error.code}): ${error.message}`);
-      });
-  });
+  const { data, error, mutate } = useSWR(
+    "http://127.0.0.1:8000/api/students/",
+    async (url) => {
+      return await axios
+        .get(url)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          toast.success(`students/ (${error.code}): ${error.message}`);
+        });
+    }
+  );
 
   if (error) return <div>An error occurred.</div>;
   if (!data) return <div>Loading ...</div>;
@@ -52,13 +55,12 @@ export default function DashboardStudentList() {
                 data.map((student: DashboardStudentType, i: number) => (
                   <DashboardStudent
                     key={i}
-                    id={student.id}
+                    pk={student.pk}
                     firstName={student.firstName}
                     middleName={student.middleName}
                     lastName={student.lastName}
                     grade={student.grade}
-                    points={student.points}
-                    rank={student.rank}
+                    email={student.email}
                     mutate={mutate}
                   />
                 ))}

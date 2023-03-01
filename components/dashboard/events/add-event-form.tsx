@@ -1,16 +1,15 @@
 import { MutableRefObject, useRef, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { KeyedMutator } from "swr";
 
-export default function AddEventForm() {
+export default function AddEventForm(props: { mutate: KeyedMutator<any> }) {
   const [uploading, setUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
 
-  const startDateRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const startTimeRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const endDateRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const endTimeRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const startsOnRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const endsOnRef = useRef() as MutableRefObject<HTMLInputElement>;
   const descriptionRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const locationRef = useRef() as MutableRefObject<HTMLInputElement>;
   const titleRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -21,37 +20,26 @@ export default function AddEventForm() {
     event.preventDefault();
 
     setUploading(true);
-    if (!selectedFile) return;
-    const formData = new FormData();
-    formData.append("myImage", selectedFile);
 
-    const data = await axios
-      .post("/api/addImage", formData)
-      .catch(function (error) {
-        toast.error(`addImage (${error.code}): ${error.message}`);
-        return;
-      });
+    if (!selectedFile) return;
 
     await axios
-      .post("/api/addEvent", {
-        start: new Date(
-          `${startDateRef.current.value}T${startTimeRef.current.value}`
-        ),
-        end: new Date(
-          `${endDateRef.current.value}T${endTimeRef.current.value}`
-        ),
+      .post("http://127.0.0.1:8000/api/event/create/", {
+        startsOn: new Date(`${startsOnRef.current.value}+00:00`),
+        finishesOn: new Date(`${endsOnRef.current.value}+00:00`),
         description: descriptionRef.current.value,
-        image: data!.data.image,
+        image: "https://picsum.photos/seed/00000/300", // use this default until actually using files
         location: locationRef.current.value,
         title: titleRef.current.value,
         points: parseInt(pointsRef.current.value),
         type: typeRef.current.value,
       })
       .then(function (response) {
-        toast.success(response.data.message);
+        toast.success("Event created successfully");
+        props.mutate();
       })
       .catch(function (error) {
-        toast.error(`addEvent (${error.code}): ${error.message}`);
+        toast.error(`createEvent (${error.code}): ${error.message}`);
       });
 
     setUploading(false);
@@ -73,23 +61,21 @@ export default function AddEventForm() {
           <div className="col-6">
             <div className="mt-3 fs-6 fw-semibold">Start Time</div>
             <input
-              type="date"
+              type="datetime-local"
               className="form-control mb-1"
               required
-              ref={startDateRef}
+              ref={startsOnRef}
             />
-            <input type="time" required ref={startTimeRef} />
           </div>
 
           <div className="col-6">
             <div className="mt-3 fs-6 fw-semibold">End Time</div>
             <input
-              type="date"
+              type="datetime-local"
               className="form-control mb-1"
               required
-              ref={endDateRef}
+              ref={endsOnRef}
             />
-            <input type="time" required ref={endTimeRef} />
           </div>
         </div>
 
@@ -127,10 +113,11 @@ export default function AddEventForm() {
             required
           >
             <option value="Type">Type</option>
-            <option value="Sports">Sports</option>
-            <option value="Social">Social</option>
-            <option value="Band">Band</option>
-            <option value="Academic">Academic</option>
+            <option value="Competition">Competition</option>
+            <option value="Show">Show</option>
+            <option value="Fundraiser">Fundraiser</option>
+            <option value="Trip">Trip</option>
+            <option value="Fair">Fair</option>
           </select>
         </div>
 
