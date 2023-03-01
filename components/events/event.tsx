@@ -55,19 +55,23 @@ export default function Event(
   }
 
   return (
-    <div className="col-8" style={{ padding: "1rem" }} id={props.pk.toString()}>
+    <>
       <div
-        className="row eventEffect"
+        className="row eventEffect bg-secondary m-4"
         style={{
-          height: "13rem",
-          backgroundColor: "#56becd",
           overflow: "hidden",
           borderRadius: "7px",
+          height: "fit-content",
         }}
+        id={props.pk.toString()}
       >
-        <div className="col-4" style={{ height: "13rem", padding: "0" }}>
+        <div className="col-4 p-0">
           <img
-            src={props.image.includes("http") ? props.image : `${props.image}`}
+            src={
+              props.image.includes("http")
+                ? props.image
+                : `/images/events/${props.image}`
+            }
             style={{
               objectFit: "cover",
               width: "100%",
@@ -79,10 +83,8 @@ export default function Event(
         </div>
 
         <div
-          className="col-6 card-body-right position-relative borRight"
+          className="col-6 card-body-right d-flex flex-column borRight p-3 bg-primary"
           style={{
-            padding: "1rem",
-            backgroundColor: "#e6f9ff",
             borderRight: "solid 3px #000",
           }}
         >
@@ -99,7 +101,7 @@ export default function Event(
 
           <a
             className="btn eventBtnO me-2 position-absolute"
-            style={{ top: "70%" }}
+            style={{ width: "60px" }}
             onClick={props.joined ? leaveHandler : joinHandler}
           >
             {props.joined ? "Leave" : "Join"}
@@ -108,11 +110,9 @@ export default function Event(
 
         <div className="col-2 d-flex">
           <h6
-            className="my-auto"
+            className="my-auto text-center fs-6"
             style={{
-              textAlign: "center",
               height: "fit-content",
-              fontSize: "1rem",
             }}
           >
             {formatStartAndFinish(props.startsOn, props.finishesOn)} at{" "}
@@ -120,6 +120,6 @@ export default function Event(
           </h6>
         </div>
       </div>
-    </div>
+    </>
   );
 }

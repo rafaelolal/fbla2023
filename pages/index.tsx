@@ -51,6 +51,7 @@ export default function IndexPage(props: {
   return (
     <>
       <div className="bubble-container" style={{ marginTop: `${-8 * 3}px` }}>
+        <span className="seal"></span>
         <span className="bubble a"></span>
         <span className="bubble b"></span>
         <span className="bubble c"></span>
@@ -64,15 +65,7 @@ export default function IndexPage(props: {
         <span className="bubble k"></span>
       </div>
 
-      <div
-        style={{
-          width: "100%",
-          height: "60vh",
-          position: "absolute",
-          top: "10%",
-          left: "0",
-        }}
-      >
+      <div className="randContainer">
         <div
           className="position-absolute d-none d-md-block"
           style={{ top: "45%", left: "13%", zIndex: "10" }}
@@ -137,8 +130,8 @@ export default function IndexPage(props: {
         <div className="d-flex justify-content-between">
           <h1 className="pb-2 ms-3">Top Events of the Week</h1>
           <Link
-            className="signBtn fs-5 ms-3 me-3 "
-            style={{ height: "fit-content", padding: "0" }}
+            className="signBtn fs-5 ms-3 me-3 p-0"
+            style={{ height: "fit-content" }}
             href="/events"
           >
             See All
