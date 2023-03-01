@@ -52,14 +52,12 @@ export default function ProfilePage(props: {
         toggleModal={togglePasswordModal}
       />
 
-      <div className="row justify-content-center m-3">
-        <div className="col-12 col-md-3 col-auto  my-2 ">
+      <div className="row justify-content-center my-5 py-3 mx-3">
+        <div className="col-12 col-md-3 ">
           <div className="col bg-primary p-4 neoBorder">
             <img
-              className="mx-auto mb-2"
+              className="mx-auto mb-2 w-100 h-100"
               style={{
-                width: "100%",
-                height: "100%",
                 objectFit: "cover",
                 borderRadius: "50%",
                 aspectRatio: "1/1",
@@ -103,12 +101,12 @@ export default function ProfilePage(props: {
             </div>
           </div>
         </div>
-        <div className="col-12 col-md-9">
-          <div className="col bg-primary my-2 neoBorder p-1">
+        <div className="col-12 col-md-9 mt-4 mt-md-0 d-flex flex-column">
+          <div className="bg-primary neoBorder p-1">
             <h3 className="d-inline mx-2 fw-semibold align-middle">Stats</h3>
             <img
-              className=" mx-3 d-inline"
-              style={{ height: "100%", width: "auto" }}
+              className="d-inline mx-3"
+              style={{ height: "2rem", width: "auto" }}
               src="/images/yellow fish.svg"
             />
 
@@ -133,16 +131,14 @@ export default function ProfilePage(props: {
               Joined: {props.data.events.length}
             </h5>
           </div>
-
-          <div className="col">
+          <div className="my-2">
             <h6 className="d-inline-block mx-2">
               {" "}
               <div
-                className="d-inline-block mx-1"
+                className="d-inline-block mx-1 bg-tertiary"
                 style={{
                   width: "11px",
                   height: "11px",
-                  backgroundColor: "#ffb158",
                 }}
               />
               - Missed Events
@@ -164,18 +160,16 @@ export default function ProfilePage(props: {
             <h6 className="d-inline-block mx-2">
               {" "}
               <div
-                className="d-inline-block mx-1"
+                className="d-inline-block mx-1 bg-secondary"
                 style={{
                   width: "11px",
                   height: "11px",
-                  backgroundColor: "#56becd",
                 }}
               />
               - Future events
             </h6>
           </div>
-
-          <div className="col my-4">
+          <div className="mt-auto">
             <Calendar
               events={formattedEvents}
               defaultDate={new Date()}

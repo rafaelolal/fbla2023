@@ -3,6 +3,10 @@
 @import "./node_modules/bootstrap/scss/bootstrap.scss";
 @import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
 
+$border-normal: 4px solid $dark;
+$border-thin: 3px solid $dark;
+$b-radius-normal: 7px;
+
 * {
   font-family: "Dosis", sans-serif;
 }
@@ -24,8 +28,8 @@
 
 .neoBorder {
   box-shadow: 2px 2px 0px $dark;
-  border-radius: 7px;
-  border: solid 3px $dark;
+  border-radius: $b-radius-normal;
+  border: $border-thin;
 }
 
 .signBtn {
@@ -39,7 +43,7 @@
   color: $dark;
   text-decoration: none;
   padding: 0.3rem 0.5rem;
-  border-radius: 7px;
+  border-radius: $b-radius-normal;
 }
 
 .eventBtn:hover {
@@ -52,7 +56,7 @@
   font-weight: 600;
   text-decoration: none;
   padding: 0.3rem 0.5rem;
-  border-radius: 7px;
+  border-radius: $b-radius-normal;
 }
 .eventBtnO:hover {
   background-color: #ff9955;
@@ -63,7 +67,7 @@
   font-weight: 600;
   text-decoration: none;
   padding: 0.3rem 0.5rem;
-  border-radius: 7px;
+  border-radius: $b-radius-normal;
 }
 
 .eventBtnLB:hover {
@@ -96,7 +100,7 @@
   overflow: hidden;
   position: relative;
   z-index: -1;
-  border-bottom: 4px solid #000;
+  border-bottom: $border-normal;
 }
 
 .bubble-container2 {
@@ -119,6 +123,7 @@
   background-repeat: no-repeat;
   position: absolute;
   top: 105%;
+  z-index: 2;
 }
 
 .bubble.a {
@@ -195,7 +200,7 @@
 .fish-container {
   background-image: url("/images/events page/eventsPageWithoutFish.svg");
   width: 100%;
-  height: 40vh;
+  height: 53vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -321,10 +326,35 @@
     margin-left: -30%;
   }
 }
+
+.seal {
+  background-image: url("/images/seal.svg");
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+  animation: seal 8s ease-in-out infinite;
+}
+
+@keyframes seal {
+  0% {
+    transform: translate(0px, 5px);
+  }
+
+  50% {
+    transform: translate(0px, -10px);
+  }
+  100% {
+    transform: translate(0px, 5px);
+  }
+}
 .eventEffect {
   box-shadow: 3px 3px 0px $dark;
-  border: solid 3px $dark;
-  border: solid 3px $dark;
+  border: $border-thin;
   transition: 0.3s;
 }
 
@@ -364,4 +394,12 @@
   100% {
     transform: rotate(0deg);
   }
+}
+
+.randContainer {
+  width: 100%;
+  height: 60vh;
+  position: absolute;
+  top: 10%;
+  left: 0;
 }
