@@ -14,22 +14,17 @@ import { isAdmin } from "../helpers";
 type ContextType = {
   user: User | null;
   isA: boolean;
-  rallyTime: Date;
-  setRallyTime: Dispatch<SetStateAction<Date>>;
 };
 
 let AppContext: Context<ContextType>;
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [rallyTime, setRallyTime] = useState(new Date());
   const [isA, setIsA] = useState(false);
 
   const sharedState = {
     user,
     isA,
-    rallyTime,
-    setRallyTime,
   };
 
   AppContext = createContext(sharedState);

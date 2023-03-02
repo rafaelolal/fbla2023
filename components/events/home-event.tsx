@@ -5,15 +5,12 @@ import { HomeEventType } from "../../types/events";
 export default function HomeEvent(props: HomeEventType) {
   return (
     <>
-      <div
-        className="d-inline-flex justify-content-center"
-        style={{ padding: "1rem" }}
-      >
+      <div className="d-inline-flex justify-content-center p-3">
         <div
           className="card eventEffect"
           style={{
-            height: "400px",
-            width: "390px",
+            height: "auto",
+            maxWidth: "390px",
             backgroundColor: "#e6f9ff",
             borderRadius: "7px",
           }}

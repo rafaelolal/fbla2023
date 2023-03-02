@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useAppContext } from "../context/state";
 import HomeEvent from "../components/events/home-event";
 import NewsList from "../components/news/news-list";
 import { EventType } from "../types/events";
@@ -11,8 +10,8 @@ import Footer from "../components/layout/footer";
 export default function IndexPage(props: {
   events: EventType[];
   news: NewsType[];
+  rally: any;
 }) {
-  const { rallyTime } = useAppContext();
   const [partyTime, setPartyTime] = useState(false);
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
@@ -20,7 +19,7 @@ export default function IndexPage(props: {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    const target = rallyTime;
+    const target = new Date(props.rally.startsOn);
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -188,10 +187,12 @@ export async function getServerSideProps() {
     0,
     3
   );
+  const rally = (await axios.get("http://127.0.0.1:8000/api/rally/1/")).data;
   return {
     props: {
       events: events,
       news: news,
+      rally: rally,
       bodyStyle: { backgroundColor: "white" },
     },
   };
