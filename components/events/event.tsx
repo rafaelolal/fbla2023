@@ -88,8 +88,9 @@ export default function Event(
           }}
         >
           <h5 className="card-title fs-5">
-            {props.cancellationReason && "CANCELED"} {props.title} ({props.type}
-            ) - <span className="text-tertiary">{props.points}</span> points
+            {props.cancellationReason && "CANCELED"} {props.title} (
+            <span className="text-secondary">{props.type}</span>) -{" "}
+            <span className="text-tertiary">{props.points}</span> points
           </h5>
 
           <p className="card-text">

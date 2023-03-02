@@ -22,7 +22,7 @@ export default function EventList(props: {
   }
 
   return (
-    <div className="col-8 mx-auto" style={{ maxWidth: "800px" }}>
+    <div className="col-8 mx-auto" style={{ maxWidth: "900px" }}>
       {props.events.map((event, i) => (
         <Event
           key={i}
