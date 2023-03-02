@@ -57,10 +57,9 @@ export default function Event(
   return (
     <>
       <div
-        className="row eventEffect bg-secondary m-4"
+        className="row eventEffect bg-secondary m-4 b-radius-normal"
         style={{
           overflow: "hidden",
-          borderRadius: "7px",
           height: "fit-content",
         }}
         id={props.pk.toString()}
@@ -100,8 +99,7 @@ export default function Event(
           </p>
 
           <a
-            className="btn eventBtnO me-2 position-absolute"
-            style={{ width: "60px" }}
+            className="btn eventBtnO mt-auto"
             onClick={props.joined ? leaveHandler : joinHandler}
           >
             {props.joined ? "Leave" : "Join"}

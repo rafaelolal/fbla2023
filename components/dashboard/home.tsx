@@ -84,12 +84,7 @@ export default function DashboardHome() {
                     />
                   </div>
                 </div>
-
-                <button
-                  className="btn eventBtn my-3"
-                  style={{ width: "60px" }}
-                  type="submit"
-                >
+                <button className="btn eventBtn my-3" type="submit">
                   Set
                 </button>
               </form>

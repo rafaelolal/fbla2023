@@ -101,7 +101,7 @@ export default function ProfilePage(props: {
             </div>
           </div>
         </div>
-        <div className="col-12 col-md-9 mt-4 mt-md-0 d-flex flex-column">
+        <div className="col-12 col-md-9 mt-4 mt-md-0">
           <div className="bg-primary neoBorder p-1">
             <h3 className="d-inline mx-2 fw-semibold align-middle">Stats</h3>
             <img
@@ -131,7 +131,7 @@ export default function ProfilePage(props: {
               Joined: {props.data.events.length}
             </h5>
           </div>
-          <div className="my-2">
+          <div className="mt-2 mb-5">
             <h6 className="d-inline-block mx-2">
               {" "}
               <div
@@ -169,7 +169,7 @@ export default function ProfilePage(props: {
               - Future events
             </h6>
           </div>
-          <div className="mt-auto">
+          <div>
             <Calendar
               events={formattedEvents}
               defaultDate={new Date()}

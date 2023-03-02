@@ -79,9 +79,8 @@ export default function IndexPage(props: {
         </div>
 
         <div
-          className="text-center position-absolute bottom-0 end-0 m-5 neoBorder bg-primary"
+          className="text-center position-absolute bottom-0 end-0 m-5 neoBorder bg-primary border-normal"
           style={{
-            border: "solid 4px #000000",
             zIndex: "10",
           }}
         >
@@ -91,31 +90,19 @@ export default function IndexPage(props: {
             <>
               <h1 className="mt-3">NEXT RALLY IN</h1>
               <div className="row m-0">
-                <div
-                  className="col p-2 m-3"
-                  style={{ border: "solid 3px #000000" }}
-                >
+                <div className="col p-2 m-3 border-thin">
                   <h2>{days}</h2>
                   <h6>Days</h6>
                 </div>
-                <div
-                  className="col p-2 m-3"
-                  style={{ border: "solid 3px #000000" }}
-                >
+                <div className="col p-2 m-3 border-thin">
                   <h2>{hours}</h2>
                   <h6>Hours</h6>
                 </div>
-                <div
-                  className="col p-2 m-3"
-                  style={{ border: "solid 3px #000000" }}
-                >
+                <div className="col p-2 m-3 border-thin">
                   <h2>{minutes}</h2>
                   <h6>Minutes</h6>
                 </div>
-                <div
-                  className="col p-2 m-3"
-                  style={{ border: "solid 3px #000000" }}
-                >
+                <div className="col p-2 m-3 border-thin">
                   <h2>{seconds}</h2>
                   <h6>Seconds</h6>
                 </div>

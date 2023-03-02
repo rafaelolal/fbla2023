@@ -10,7 +10,7 @@ export default function DashboardStudentList() {
     "http://127.0.0.1:8000/api/students/",
     async (url) => {
       return await axios
-        .get(url)
+        .get(url)fstyle
         .then((response) => {
           return response.data;
         })
