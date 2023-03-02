@@ -42,9 +42,11 @@ export type ProfileModalStudentType = {
   biography: string;
 };
 
-export type StudentType = {
-  points: number;
+export type LeaderboardStudentType = {
+  email: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
   rank: number | null;
-  image: string;
-  awards: AwardType[];
+  points: number;
 };

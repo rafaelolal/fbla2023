@@ -62,19 +62,11 @@ export default function Navbar() {
                 </li>
               )}
 
-              {user && isA && (
-                <li className="nav-item mx-1 ">
-                  <Link className="nav-link fw-bolder fs-5 fc-2" href="/rally">
-                    Rally
-                  </Link>
-                </li>
-              )}
-
               {user && !isA && (
                 <li className="nav-item mx-1">
                   <Link
                     className="nav-link fw-bolder fs-5 fc-2"
-                    href={`/profile/${user.uid}`}
+                    href={`/profile/${user.uid}/`}
                   >
                     Profile
                   </Link>
@@ -82,7 +74,16 @@ export default function Navbar() {
               )}
 
               <li className="nav-item mx-1">
-                <Link className="nav-link fw-bolder fs-5 fc-2" href="/help">
+                <Link
+                  className="nav-link fw-bolder fs-5 fc-2"
+                  href={`/leaderboard/`}
+                >
+                  Leaderboard
+                </Link>
+              </li>
+
+              <li className="nav-item mx-1">
+                <Link className="nav-link fw-bolder fs-5 fc-2" href="/help/">
                   Help
                 </Link>
               </li>
