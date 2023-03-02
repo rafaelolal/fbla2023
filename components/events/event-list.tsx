@@ -42,7 +42,6 @@ export default function EventList(props: {
             attendancesMutate={props.attendancesMutate}
           />
         ))}
-        ;
       </div>
     </div>
   );
