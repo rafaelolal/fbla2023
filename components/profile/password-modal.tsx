@@ -1,9 +1,10 @@
-import { MutableRefObject, SyntheticEvent, useRef } from "react";
+import { MutableRefObject, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 import { useAppContext } from "../../context/state";
 import { tempAuth } from "../../firebaseConfig";
 import { signInWithEmailAndPassword, updatePassword } from "firebase/auth";
+import { useRouter } from "next/router";
 
 export default function PasswordModal(props: {
   firstTime: boolean;
@@ -12,6 +13,7 @@ export default function PasswordModal(props: {
 }) {
   const { user } = useAppContext();
 
+  const router = useRouter();
   const currentPasswordRef = useRef() as MutableRefObject<HTMLInputElement>;
   const newPasswordRef = useRef() as MutableRefObject<HTMLInputElement>;
   const newPasswordConfirmRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -37,6 +39,9 @@ export default function PasswordModal(props: {
           .then(() => {
             toast.success("New password set");
             props.toggleModal();
+            if (props.firstTime) {
+              router.replace(router.asPath);
+            }
           })
           .catch((error) => {
             toast.error(

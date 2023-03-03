@@ -45,7 +45,7 @@ export default function DashboardStudentList() {
                   <h5 className="m-auto">Id</h5>
                 </div>
                 <div className="col-3 d-flex border-end">
-                  <h5 className="m-auto">Description</h5>
+                  <h5 className="m-auto">Grade</h5>
                 </div>
                 <div className="col-2 d-flex">
                   <h5 className="m-auto">Action</h5>

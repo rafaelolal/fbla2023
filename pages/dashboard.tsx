@@ -5,6 +5,7 @@ import DashboardNavbar from "../components/dashboard/navbar";
 import DashboardHome from "../components/dashboard/home";
 import DashboardStudentList from "../components/dashboard/students/student-list";
 import DashboardEvents from "../components/dashboard/events/events";
+import DashboardReports from "../components/dashboard/reports";
 
 export default function DashboardPage() {
   const { user, isA } = useAppContext();
@@ -22,6 +23,7 @@ export default function DashboardPage() {
     <>
       <DashboardNavbar setCurrentPage={setCurrentPage} />
       {currentPage == "Home" && <DashboardHome />}
+      {currentPage == "Reports" && <DashboardReports />}
       {currentPage == "Events" && <DashboardEvents />}
       {currentPage == "Students" && <DashboardStudentList />}
     </>

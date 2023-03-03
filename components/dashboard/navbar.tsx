@@ -10,6 +10,12 @@ export default function DashboardNavbar(props: {
           </a>
           <a
             className="nav-link"
+            onClick={() => props.setCurrentPage("Reports")}
+          >
+            Reports
+          </a>
+          <a
+            className="nav-link"
             onClick={() => props.setCurrentPage("Events")}
           >
             Events

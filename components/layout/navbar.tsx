@@ -51,6 +51,12 @@ export default function Navbar() {
                 </Link>
               </li>
 
+              <li className="nav-item mx-1">
+                <Link className="nav-link fw-bolder fs-5 fc-2" href="/news/">
+                  News Room
+                </Link>
+              </li>
+
               {user && isA && (
                 <li className="nav-item mx-1 ">
                   <Link

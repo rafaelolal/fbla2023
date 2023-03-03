@@ -1,5 +1,6 @@
 import News from "./news";
 import { NewsType } from "../../types/news";
+import Link from "next/link";
 
 export default function NewsList(props: { news: NewsType[] }) {
   return (

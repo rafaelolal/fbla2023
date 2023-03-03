@@ -25,17 +25,21 @@ export default function DashboardStudent(
     <div className="row justify-content-around py-3 px-2 border-bottom">
       <div className="col-3 d-flex">
         <h6 className="my-auto">
-          {props.firstName} {props.middleName} {props.lastName}
+          {![props.firstName, props.middleName, props.lastName].every((i) =>
+            Boolean(i)
+          )
+            ? `${props.email}`
+            : `${props.firstName} ${props.middleName} ${props.lastName}`}
         </h6>
       </div>
 
       <div className="col-3  d-flex">
-        <h6 className="my-auto text-break">{props.id}</h6>
+        <h6 className="my-auto text-break">{props.pk}</h6>
       </div>
 
       <div className="col-3 d-flex">
         <h6 className="my-auto">
-          {props.firstName} is currently in grade {props.grade}
+          {props.grade === null ? "N/A" : props.grade}
         </h6>
       </div>
 
