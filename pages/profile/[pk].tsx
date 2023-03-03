@@ -31,6 +31,16 @@ export default function ProfilePage(props: {
     setShowPassword(!showPassword);
   }
 
+  function prizeCount(type: string) {
+    var c = 0;
+    for (const award of props.data.prizes) {
+      if (award == type) {
+        c += 1;
+      }
+    }
+    return c;
+  }
+
   return (
     <>
       <UpdateModal
@@ -55,7 +65,7 @@ export default function ProfilePage(props: {
       />
 
       <div className="row justify-content-center my-5 py-3 mx-3">
-        <div className="col-12 col-md-3 ">
+        <div className="col-12 col-md-3" style={{ minWidth: "fit-content" }}>
           <div className="col bg-primary p-4 neoBorder">
             <img
               className="mx-auto mb-2 w-100 h-100"
@@ -68,9 +78,12 @@ export default function ProfilePage(props: {
               src={props.data.image}
             />
             <hr></hr>
-            {props.data.prizes.map((award, i) => (
-              <h6 key={i}>{award}</h6>
+            {["Food", "Spirit", "School"].map((type, i) => (
+              <h6 className="inline-block" key={i}>
+                {type} {prizeCount(type)}
+              </h6>
             ))}
+
             <h6 className="fw-bold text-center pt-1">
               {"   "}
               {props.data.firstName} {props.data.middleName}{" "}
@@ -90,12 +103,15 @@ export default function ProfilePage(props: {
 
             <hr></hr>
 
-            <div className="mt-4 mx-auto" style={{ width: "fit-content" }}>
-              <button className="btn eventBtn mx-3" onClick={toggleUpdateModal}>
+            <div
+              className="mt-4 d-flex mx-auto"
+              style={{ width: "fit-content" }}
+            >
+              <button className="btn eventBtn mx-2" onClick={toggleUpdateModal}>
                 Update Profile
               </button>
               <button
-                className="btn eventBtn mx-3"
+                className="btn eventBtn mx-2"
                 onClick={togglePasswordModal}
               >
                 Update Password
@@ -103,7 +119,7 @@ export default function ProfilePage(props: {
             </div>
           </div>
         </div>
-        <div className="col-12 col-md-9 mt-4 mt-md-0 d-flex flex-column">
+        <div className="col-12 col-md mt-4 mt-md-0">
           <div className="bg-primary neoBorder p-1">
             <h3 className="d-inline mx-2 fw-semibold align-middle">Stats</h3>
             <img
@@ -129,7 +145,7 @@ export default function ProfilePage(props: {
               Joined: {props.data.events.length}
             </h5>
           </div>
-          <div className="my-2">
+          <div className="mt-2 mb-5">
             <h6 className="d-inline-block mx-2">
               {" "}
               <div
@@ -167,7 +183,7 @@ export default function ProfilePage(props: {
               - Future events
             </h6>
           </div>
-          <div className="mt-auto">
+          <div>
             <Calendar
               events={formattedEvents}
               defaultDate={new Date()}

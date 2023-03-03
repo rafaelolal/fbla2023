@@ -7,12 +7,10 @@ export default function HomeEvent(props: HomeEventType) {
     <>
       <div className="d-inline-flex justify-content-center p-3">
         <div
-          className="card eventEffect"
+          className="card bg-primary eventEffect b-radius-normal"
           style={{
             height: "auto",
             maxWidth: "390px",
-            backgroundColor: "#e6f9ff",
-            borderRadius: "7px",
           }}
         >
           <img
@@ -32,18 +30,15 @@ export default function HomeEvent(props: HomeEventType) {
             alt="Event Image"
           />
 
-          <div className="card-body">
+          <div className="card-body d-flex flex-column">
             <h5 className="fw-bold fs-6">
               {props.cancellationReason && "CANCELED"} {props.title} (
-              <span className="text-tertiary">
-                {" "}
-                {props.type}) - {props.points}{" "}
-              </span>{" "}
-              points
+              <span className="text-secondary"> {props.type}</span>) -{" "}
+              <span className="text-tertiary">{props.points}</span> points
             </h5>
 
             <h6
-              className="text-start fs-6"
+              className="text-start fs-6 mb-3"
               style={{
                 height: "fit-content",
               }}
@@ -52,10 +47,7 @@ export default function HomeEvent(props: HomeEventType) {
               {props.location}
             </h6>
 
-            <Link
-              className="mt-2 btn eventBtn me-2"
-              href={`/events#${props.pk}`}
-            >
+            <Link className="mt-auto btn eventBtn" href={`/events#${props.pk}`}>
               Visit
             </Link>
           </div>

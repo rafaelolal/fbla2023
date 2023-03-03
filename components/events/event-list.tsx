@@ -22,27 +22,25 @@ export default function EventList(props: {
   }
 
   return (
-    <div className="row row-cols-1 justify-content-center">
-      <div className="col-8">
-        {props.events.map((event, i) => (
-          <Event
-            key={i}
-            pk={event.pk}
-            image={event.image}
-            title={event.title}
-            type={event.type}
-            points={event.points}
-            location={event.location}
-            description={event.description}
-            startsOn={event.startsOn}
-            finishesOn={event.finishesOn}
-            cancellationReason={event.cancellationReason}
-            joined={attendedEvents.includes(event.pk)}
-            attendancePk={getAttendancePk(event.pk)}
-            attendancesMutate={props.attendancesMutate}
-          />
-        ))}
-      </div>
+    <div className="col-8 mx-auto" style={{ maxWidth: "900px" }}>
+      {props.events.map((event, i) => (
+        <Event
+          key={i}
+          pk={event.pk}
+          image={event.image}
+          title={event.title}
+          type={event.type}
+          points={event.points}
+          location={event.location}
+          description={event.description}
+          startsOn={event.startsOn}
+          finishesOn={event.finishesOn}
+          cancellationReason={event.cancellationReason}
+          joined={attendedEvents.includes(event.pk)}
+          attendancePk={getAttendancePk(event.pk)}
+          attendancesMutate={props.attendancesMutate}
+        />
+      ))}
     </div>
   );
 }
