@@ -9,14 +9,13 @@ export default function UpdateModal(props: {
   data: ProfileModalStudentType;
   firstTime: boolean;
   show: boolean;
+  togglePasswordModal: () => void;
   toggleModal: () => void;
 }) {
   const [uploading, setUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
-  const uploadedImageRef = useRef(
-    "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-  ); // use this default until actually using files
+  const uploadedImageRef = useRef<string>(); // use this default until actually using files
 
   const firstNameRef = useRef() as MutableRefObject<HTMLInputElement>;
   const middleNameRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -25,9 +24,6 @@ export default function UpdateModal(props: {
   const biographyRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
 
   const router = useRouter();
-  const refreshData = () => {
-    router.replace(router.asPath);
-  };
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -43,7 +39,12 @@ export default function UpdateModal(props: {
       })
       .then(function (response) {
         toast.success(`Successfully updated profile`);
-        refreshData();
+        if (props.firstTime) {
+          props.toggleModal();
+          props.togglePasswordModal();
+        } else {
+          router.replace(router.asPath);
+        }
       })
       .catch(function (error) {
         toast.error(
@@ -56,7 +57,9 @@ export default function UpdateModal(props: {
     setUploading(true);
 
     if (!selectedFile) return;
-    uploadedImageRef.current = "https://picsum.photos/seed/00001/300"; // use this default until actually using files
+
+    uploadedImageRef.current =
+      "https://static.generated.photos/vue-static/face-generator/landing/wall/20.jpg"; // use this default until actually using files
 
     setUploading(false);
   }

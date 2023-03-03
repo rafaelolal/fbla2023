@@ -11,7 +11,8 @@ import axios from "axios";
 export default function ProfilePage(props: {
   data: ProfileStudentType & { biography: string };
 }) {
-  const [showUpdate, setShowUpdate] = useState(props.data.grade === null);
+  const firstTime = props.data.grade === null;
+  const [showUpdate, setShowUpdate] = useState(firstTime);
   const [showPassword, setShowPassword] = useState(false);
 
   const mLocalizer = momentLocalizer(moment);
@@ -41,13 +42,14 @@ export default function ProfilePage(props: {
           grade: props.data.grade,
           biography: props.data.biography,
         }}
-        firstTime={showUpdate}
+        firstTime={firstTime}
         show={showUpdate}
+        togglePasswordModal={togglePasswordModal}
         toggleModal={toggleUpdateModal}
       />
 
       <PasswordModal
-        firstTime={showUpdate}
+        firstTime={firstTime}
         show={showPassword}
         toggleModal={togglePasswordModal}
       />
@@ -120,10 +122,6 @@ export default function ProfilePage(props: {
                 props.data.events.filter((event) => event.attended == true)
                   .length
               }
-            </h5>
-
-            <h5 className="d-inline mx-2 align-middle">
-              Points: {props.data.points}
             </h5>
 
             <h5 className="d-inline mx-2 align-middle">
