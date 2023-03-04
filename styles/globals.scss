@@ -2,6 +2,7 @@
 @import "./calendar.scss";
 @import "./node_modules/bootstrap/scss/bootstrap.scss";
 @import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 
 $border-normal: 4px solid $dark;
 $border-thin: 3px solid $dark;
@@ -22,6 +23,10 @@ $b-radius-normal: 7px;
   font-family: "Dosis", sans-serif;
 }
 
+.monospace {
+  font-family: "Roboto Mono", monospace;
+}
+
 .card-image-cstm {
   height: 100px;
 }
@@ -40,7 +45,7 @@ $b-radius-normal: 7px;
 .neoBorder {
   box-shadow: 2px 2px 0px $dark;
   border-radius: $b-radius-normal;
-  border: $border-thin;
+  border: $border-normal;
 }
 
 .signBtn {
@@ -56,6 +61,7 @@ $b-radius-normal: 7px;
   padding: 0.3rem 0.7rem;
   border-radius: $b-radius-normal;
   width: fit-content;
+  height: fit-content;
 }
 
 .eventBtn:hover {
@@ -70,6 +76,7 @@ $b-radius-normal: 7px;
   padding: 0.3rem 0.7rem;
   border-radius: $b-radius-normal;
   width: fit-content;
+  height: fit-content;
 }
 .eventBtnO:hover {
   background-color: #ff9955;
@@ -82,6 +89,7 @@ $b-radius-normal: 7px;
   padding: 0.3rem 0.7rem;
   border-radius: $b-radius-normal;
   width: fit-content;
+  height: fit-content;
 }
 
 .eventBtnLB:hover {
@@ -212,7 +220,7 @@ $b-radius-normal: 7px;
 }
 
 .fish-container {
-  background-image: url("/images/events page/events pic.svg");
+  background-image: url("/images/events page/eventsPageWithoutFish.svg");
   width: 100%;
   height: 50vh;
   background-repeat: no-repeat;
@@ -239,7 +247,6 @@ $b-radius-normal: 7px;
   background-image: url("/images/events page/leftBlue1.svg");
   top: 10%;
   animation: fishLeft 30s infinite;
-  animation-delay: 2s;
 }
 .fish.b {
   background-image: url("/images/events page/leftGreen1.svg");
@@ -258,7 +265,6 @@ $b-radius-normal: 7px;
   background-image: url("/images/events page/leftPink1.svg");
   top: 32%;
   animation: fishLeft 40s infinite;
-  animation-delay: 15s;
 }
 .fish.e {
   background-image: url("/images/events page/leftGreen2.svg");
@@ -296,7 +302,7 @@ $b-radius-normal: 7px;
   background-image: url("/images/events page/rightPink1.svg");
   top: 26%;
   animation: fishRight 39s infinite;
-  animation-delay: 10s;
+  animation-delay: 4s;
 }
 .fish.k {
   background-image: url("/images/events page/rightBlue1.svg");
@@ -318,7 +324,6 @@ $b-radius-normal: 7px;
   background-image: url("/images/events page/rightYellow2.svg");
   top: 78%;
   animation: fishRight 42s infinite;
-  animation-delay: 3s;
 }
 
 @keyframes fishLeft {

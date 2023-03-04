@@ -54,7 +54,7 @@ export default function DashboardEvent(
         </div>
 
         <div className="col-5 d-flex ">
-          <h6 className="m-auto">
+          <h6 className="m-auto px-3">
             {props.cancellationReason
               ? "Cancelled: "
               : new Date(props.startsOn) < now
