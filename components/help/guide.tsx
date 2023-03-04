@@ -16,32 +16,32 @@ export default function HelpHowToGuide() {
 
           <div className="col-12 col-md-3 text-center my-auto">
             <h1 className="fw-semibold text-center">Join Events</h1>
-            <h6 className="text-center">
+            <h6 className="text-center px-3">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industrys standard dummy text
               ever since the 1500s, when an unknown printer
             </h6>
           </div>
-          <div className="col-12 col-md-4 text-center">
+          <div className="col-12 col-md-3">
             <img
               src="/images/help page/help_image_4.svg"
-              width="100%"
+              width="80%"
               height="auto"
             ></img>
           </div>
         </div>
         <div className="row justify-content-center my-5 ">
-          <div className="col-12 col-md-4 text-center order-2 order-md-1">
+          <div className="col-12 col-md-3 text-end order-2 order-md-1">
             <img
               src="/images/help page/help_image_2.svg"
-              width="100%"
+              width="80%"
               height="auto"
             ></img>
           </div>
 
           <div className="col-12 col-md-3 text-center my-auto order-1 order-md-2">
             <h1 className="fw-semibold text-center">Collect Points</h1>
-            <h6 className="text-center">
+            <h6 className="text-center px-3">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industrys standard dummy text
               ever since the 1500s, when an unknown printer took a galley of
@@ -49,7 +49,7 @@ export default function HelpHowToGuide() {
             </h6>
           </div>
 
-          <div className="col-12 col-md-3 text-start d-none d-lg-block my-auto order-sm-3">
+          <div className="col-12 col-md-3 d-none d-lg-block my-auto order-sm-3">
             <img
               className="shake"
               src="/images/help page/arrow.svg"
@@ -70,17 +70,17 @@ export default function HelpHowToGuide() {
           </div>
           <div className="col-12 col-md-3 text-center my-auto">
             <h1 className="fw-semibold text-center">Win Prizes</h1>
-            <h6 className="text-center">
+            <h6 className="text-center px-3">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industrys standard dummy text
               ever since the 1500s, when an unknown printer took a
             </h6>
           </div>
 
-          <div className="col-12 col-md-4 text-center">
+          <div className="col-12 col-md-3">
             <img
               src="/images/help page/help_image_5.svg"
-              width="100%"
+              width="80%"
               height="auto"
             ></img>
           </div>

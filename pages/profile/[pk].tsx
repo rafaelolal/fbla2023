@@ -31,10 +31,11 @@ export default function ProfilePage(props: {
     setShowPassword(!showPassword);
   }
 
-  function prizeCount(type: string) {
+  function prizeCount(i: number) {
+    const order = ["Food", "Spirit", "School"];
     var c = 0;
     for (const award of props.data.prizes) {
-      if (award == type) {
+      if (award == order[i]) {
         c += 1;
       }
     }
@@ -65,37 +66,60 @@ export default function ProfilePage(props: {
       />
 
       <div className="row justify-content-center my-5 py-3 mx-3">
-        <div className="col-12 col-md-3" style={{ minWidth: "fit-content" }}>
-          <div className="col bg-primary p-4 neoBorder">
+        <div className="col-12 col-md-3 mb-4 mt-md-0">
+          <div
+            className="bg-primary p-4 neoBorder"
+            style={{ minWidth: "fit-content" }}
+          >
             <img
               className="mx-auto mb-2 w-100 h-100"
               style={{
                 objectFit: "cover",
                 borderRadius: "50%",
                 aspectRatio: "1/1",
+
                 border: "4px solid black",
               }}
               src={props.data.image}
             />
             <hr></hr>
-            {["Food", "Spirit", "School"].map((type, i) => (
-              <h6 className="inline-block" key={i}>
-                {type} {prizeCount(type)}
-              </h6>
-            ))}
 
-            <h6 className="fw-bold text-center pt-1">
+            <h5 className="fw-bold text-center pt-1">
               {"   "}
               {props.data.firstName} {props.data.middleName}{" "}
               {props.data.lastName}{" "}
-            </h6>
+            </h5>
             <h6 className="text-center pt-1">
               Grade:
               {"   "}
               {props.data.grade}
             </h6>
             <hr></hr>
-
+            <h6 className="text-center fw-bold">Awards</h6>
+            <div className="text-center mt-3">
+              {[
+                <img
+                  src="/images/icons/snacks.png"
+                  style={{ width: "45px", height: "45px" }}
+                />,
+                <img
+                  src="/images/icons/seal.png"
+                  style={{ width: "45px", height: "45px" }}
+                />,
+                <img
+                  src="/images/icons/books.png"
+                  style={{ width: "45px", height: "45px" }}
+                />,
+              ].map((type, i) => (
+                <div className="d-inline-block mx-2" key={i}>
+                  {type}
+                  <br></br>
+                  <div className="text-center">{prizeCount(i)}</div>
+                </div>
+              ))}
+            </div>
+            <hr></hr>
+            <h6 className="text-center fw-bold">Biography</h6>
             <h6 className="py-1 text-center">
               {"   "}
               {props.data.biography}

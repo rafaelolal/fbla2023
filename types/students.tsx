@@ -44,6 +44,7 @@ export type ProfileModalStudentType = {
 
 export type LeaderboardStudentType = {
   email: string;
+  image: string;
   firstName: string;
   middleName: string;
   lastName: string;

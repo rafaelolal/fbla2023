@@ -9,27 +9,75 @@ export default function LeaderboardPage(props: {
 }) {
   return (
     <>
-      <h1>Leaderboard created on: {props.leaderboard.createdOn}</h1>
-      <div className="row">
-        <div className="col col-3">Rank</div>
-        <div className="col col-3">Points</div>
-        <div className="col col-3">Last name</div>
-        <div className="col col-3">First Name</div>
+      <div className="position-absolute top-0" style={{ zIndex: "-10" }}>
+        <img
+          className="w-100"
+          src="/images/leaderboard/topOfLeaderboard.svg"
+        ></img>
       </div>
-      <div>
-        {props.students.map((student, i) => (
-          <LeaderboardRow
-            key={i}
-            email={student.email}
-            firstName={student.firstName}
-            middleName={student.middleName}
-            lastName={student.lastName}
-            rank={student.rank}
-            points={student.points}
-          />
-        ))}
+      <h6
+        className="bg-lightTertiary text-dark ms-auto me-3 py-1 px-3 "
+        style={{
+          width: "fit-content",
+          borderRadius: "20px",
+        }}
+      >
+        Leaderboard updated on: {props.leaderboard.createdOn}
+      </h6>
+      <div className="col-10 col-md-8 col-xl-7 fs-4 mx-auto pt-5 ">
+        <div
+          className="container-fluid neoBorder my-5 pb-4  b-radius-normal position-relative px-0  "
+          style={{
+            zIndex: "-10",
+            backgroundColor: "#e6f9ff",
+          }}
+        >
+          <div className="row justify-content-center position-relative">
+            <div
+              className="col-auto border-normal bg-secondary text-light position-absolute bottom-50"
+              style={{ borderRadius: "20px" }}
+            >
+              <h1 className="py-1 px-3 fw-bold">Leaderboard</h1>
+            </div>
+
+            <h1 className="text-primary px-3">i</h1>
+          </div>
+          <div
+            className="row px-3 mx-3 border-thin mb-3 bg-lightTertiary"
+            style={{ borderRadius: "20px" }}
+          >
+            <div
+              className="col-2 col-lg-3 text-center  py-2"
+              style={{ borderRight: "3px solid #000" }}
+            >
+              Rank
+            </div>
+
+            <div
+              className="col-8 col-lg-6 text-center py-2"
+              style={{ borderRight: "3px solid #000" }}
+            >
+              Student
+            </div>
+            <div className="col-2 col-lg-3 text-center  py-2">Points</div>
+          </div>
+          <div>
+            {props.students.map((student, i) => (
+              <LeaderboardRow
+                key={i}
+                email={student.email}
+                image={student.image}
+                firstName={student.firstName}
+                middleName={student.middleName}
+                lastName={student.lastName}
+                rank={student.rank}
+                points={student.points}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-      <Footer />;
+      <Footer />
     </>
   );
 }
@@ -47,7 +95,7 @@ export async function getServerSideProps() {
     props: {
       students: studentsResponse.data,
       leaderboard: leaderboardResponse.data,
-      bodyStyle: { backgroundColor: "white" },
+      bodyStyle: { backgroundColor: "#67dbeb" },
     },
   };
 }
