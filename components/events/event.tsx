@@ -60,25 +60,27 @@ export default function Event(
         className="row eventEffect bg-secondary m-4 b-radius-normal"
         style={{
           overflow: "hidden",
-          height: "fit-content",
+          minHeight: "220px",
         }}
         id={props.pk.toString()}
       >
-        <div className="col-4 p-0">
-          <img
-            src={
-              props.image.includes("http")
-                ? props.image
-                : `/images/events/${props.image}`
-            }
-            style={{
-              objectFit: "cover",
-              width: "100%",
-              height: "100%",
-              borderRight: "solid 3px #000",
-            }}
-            alt="Event Image"
-          />
+        <div
+          className="col-4 p-0 position-relative overflow-hidden"
+          style={{ borderRight: "solid 3px #000" }}
+        >
+          <div className="position-absolute">
+            <img
+              src={
+                props.image.includes("http")
+                  ? props.image
+                  : `/images/events/${props.image}`
+              }
+              style={{
+                objectPosition: "center",
+              }}
+              alt="Event Image"
+            />
+          </div>
         </div>
 
         <div
@@ -89,7 +91,7 @@ export default function Event(
         >
           <h5 className="card-title fs-5">
             {props.cancellationReason && "CANCELED"} {props.title} (
-            <span className="text-secondary">{props.type}</span>) -{" "}
+            <span className="text-quaternary">{props.type}</span>) -{" "}
             <span className="text-tertiary">{props.points}</span> points
           </h5>
 
