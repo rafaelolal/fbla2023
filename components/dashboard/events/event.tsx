@@ -1,20 +1,16 @@
-import {
-  Dispatch,
-  MutableRefObject,
-  SetStateAction,
-  useRef,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import AttendanceModal from "./attendance-modal";
 import { DashboardEventType } from "../../../types/events";
 import { formatStartAndFinish } from "../../../helpers";
+import { KeyedMutator } from "swr";
 
 export default function DashboardEvent(
   props: DashboardEventType & {
+    mutate: KeyedMutator<any>;
     setCanceling: Dispatch<SetStateAction<number | undefined>>;
-    setShowCancellingModal: Dispatch<SetStateAction<boolean>>;
+    setShowCancelingModal: Dispatch<SetStateAction<boolean>>;
   }
 ) {
   const [show, setShow] = useState(false);
@@ -25,17 +21,16 @@ export default function DashboardEvent(
     setShow(!show);
   }
 
-  function deleteHandler(pk: number) {
+  function handleDelete(pk: number) {
     axios
       .delete(`http://127.0.0.1:8000/api/event/${pk}/destroy/`)
-      .then(function (response) {
-        if (response.status == 200) {
-          toast.success("Event deleted successfully");
-          props.mutate();
-        }
+      .then(() => {
+        props.mutate();
+        toast.success("Event deleted successfully");
       })
-      .catch(function (error) {
-        toast.error(`deleteEvent (${error.code}): ${error.message}`);
+      .catch((error) => {
+        toast.error(`/event/${pk}/destroy/ (${error.code}): ${error.message}`);
+        throw error;
       });
   }
 
@@ -55,13 +50,13 @@ export default function DashboardEvent(
 
         <div className="col-5 d-flex ">
           <h6 className="m-auto px-3">
-            {props.cancellationReason
-              ? "Cancelled: "
+            {props.cancelationReason
+              ? "Canceled: "
               : new Date(props.startsOn) < now
               ? "Occurred on"
               : "Scheduled for"}{" "}
-            {props.cancellationReason
-              ? props.cancellationReason
+            {props.cancelationReason
+              ? props.cancelationReason
               : `${formatStartAndFinish(props.startsOn, props.finishesOn)}
             with ${props.participants.length} participants`}
           </h6>
@@ -84,20 +79,20 @@ export default function DashboardEvent(
             className={`btn btn-primary mx-1 ${
               new Date(props.startsOn) < now ? "disabled" : ""
             }`}
-            onClick={() => deleteHandler(props.pk)}
+            onClick={() => handleDelete(props.pk)}
           >
             Delete
           </button>
 
           <button
             className={`btn btn-primary mx-1 ${
-              props.cancellationReason || new Date(props.startsOn) < now
+              props.cancelationReason || new Date(props.startsOn) < now
                 ? "disabled"
                 : ""
             }`}
             onClick={() => {
               props.setCanceling(props.pk);
-              props.setShowCancellingModal(true);
+              props.setShowCancelingModal(true);
             }}
           >
             Cancel

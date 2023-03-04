@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { MutableRefObject, useRef } from "react";
 import { useRouter } from "next/router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
@@ -7,22 +7,23 @@ import { toast } from "react-toastify";
 export default function SignInPage() {
   const router = useRouter();
 
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   function submitHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const email = emailRef.current!.value;
-    const password = passwordRef.current!.value;
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
 
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        emailRef.current!.value = "";
-        passwordRef.current!.value = "";
+      .then(() => {
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
         router.push("/");
       })
       .catch((error) => {
         toast.error(`Sign in error (${error.code}): ${error.message}`);
+        throw error;
       });
   }
 

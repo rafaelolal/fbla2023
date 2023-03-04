@@ -9,8 +9,6 @@ export default function Search(props: {
   const startRef = useRef() as MutableRefObject<HTMLInputElement>;
   const locationRef = useRef() as MutableRefObject<HTMLInputElement>;
 
-  const today = new Date();
-
   return (
     <div className="col-11 col-md-10 col-xxl-9 mx-auto">
       <div className="row my-5 mx-auto justify-content-center">
@@ -72,6 +70,9 @@ export default function Search(props: {
                 startsOn: "",
                 location: "",
               });
+              typeRef.current.value = "";
+              startRef.current.value = "";
+              locationRef.current.value = "";
             }}
           >
             Clear

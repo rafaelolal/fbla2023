@@ -7,8 +7,6 @@ import Footer from "../../components/layout/footer";
 export default function IndexPage(props: { news: NewsType[] }) {
   const initialNews = useRef<NewsType[]>(props.news);
 
-  console.log({ initialNews });
-
   return (
     <>
       <div className="mx-4">
@@ -20,7 +18,15 @@ export default function IndexPage(props: { news: NewsType[] }) {
 }
 
 export async function getServerSideProps() {
-  const response = await axios.get("http://127.0.0.1:8000/api/news/");
+  const response = await axios
+    .get("http://127.0.0.1:8000/api/news/")
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
+
   return {
     props: {
       news: response.data,

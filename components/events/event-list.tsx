@@ -7,7 +7,7 @@ export default function EventList(props: {
   attendancesData: { pk: number; event: number }[];
   attendancesMutate: KeyedMutator<any>;
 }) {
-  var attendedEvents: number[] = [];
+  let attendedEvents: number[] = [];
   if (props.attendancesData) {
     attendedEvents = props.attendancesData.map((o) => o.event);
   }
@@ -16,9 +16,9 @@ export default function EventList(props: {
     if (attendedEvents.includes(eventPk)) {
       return props.attendancesData.find((o) => {
         return o.event == eventPk;
-      })!.pk;
+      })?.pk;
     }
-    return null;
+    return undefined;
   }
 
   return (
@@ -35,7 +35,7 @@ export default function EventList(props: {
           description={event.description}
           startsOn={event.startsOn}
           finishesOn={event.finishesOn}
-          cancellationReason={event.cancellationReason}
+          cancelationReason={event.cancelationReason}
           joined={attendedEvents.includes(event.pk)}
           attendancePk={getAttendancePk(event.pk)}
           attendancesMutate={props.attendancesMutate}

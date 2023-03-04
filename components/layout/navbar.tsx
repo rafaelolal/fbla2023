@@ -82,7 +82,7 @@ export default function Navbar() {
               <li className="nav-item mx-1">
                 <Link
                   className="nav-link fw-bolder fs-5 fc-2"
-                  href={`/leaderboard/`}
+                  href="/leaderboard/"
                 >
                   Leaderboard
                 </Link>

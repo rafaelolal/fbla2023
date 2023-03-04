@@ -1,6 +1,7 @@
 import axios from "axios";
 import Footer from "../components/layout/footer";
 import LeaderboardRow from "../components/leaderboard-row";
+import { toFormattedDate } from "../helpers";
 import { LeaderboardStudentType } from "../types/students";
 
 export default function LeaderboardPage(props: {
@@ -12,7 +13,8 @@ export default function LeaderboardPage(props: {
       <div className="position-absolute top-0" style={{ zIndex: "-10" }}>
         <img
           className="w-100"
-          src="/images/leaderboard/topOfLeaderboard.svg"
+          src="/images/leaderboard/topOf
+        Leaderboard.svg"
         ></img>
       </div>
       <h6
@@ -22,7 +24,7 @@ export default function LeaderboardPage(props: {
           borderRadius: "20px",
         }}
       >
-        Leaderboard updated on: {props.leaderboard.createdOn}
+        Leaderboard updated on: {toFormattedDate(props.leaderboard.createdOn)}
       </h6>
       <div className="col-10 col-md-8 col-xl-7 fs-4 mx-auto pt-5 ">
         <div
@@ -83,18 +85,28 @@ export default function LeaderboardPage(props: {
 }
 
 export async function getServerSideProps() {
-  const leaderboardResponse = await axios.get(
-    "http://127.0.0.1:8000/api/leaderboard/1/"
-  );
+  const leaderboardResponse = await axios
+    .get("http://127.0.0.1:8000/api/leaderboard/1/")
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
 
-  const studentsResponse = await axios.get(
-    "http://127.0.0.1:8000/api/students/leaderboard/"
-  );
+  const studentsResponse = await axios
+    .get("http://127.0.0.1:8000/api/students/leaderboard/")
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
 
   return {
     props: {
-      students: studentsResponse.data,
       leaderboard: leaderboardResponse.data,
+      students: studentsResponse.data,
       bodyStyle: { backgroundColor: "#67dbeb" },
     },
   };

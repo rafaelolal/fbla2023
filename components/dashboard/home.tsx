@@ -11,32 +11,30 @@ export default function DashboardHome() {
 
   const datetimeRef = useRef() as MutableRefObject<HTMLInputElement>;
 
-  function updateRallyHandler(event: React.FormEvent<HTMLFormElement>) {
+  function handleUpdateRally(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     axios
       .patch("http://127.0.0.1:8000/api/rally/1/update/", {
         startsOn: datetimeRef.current.value,
       })
-      .then(function (response) {
-        if (response.status == 200) {
-          toast.success("Rally set successfully");
-        }
+      .then(() => {
+        toast.success("Rally set successfully");
       })
-      .catch(function (error) {
-        toast.error(`rally/1/update/ (${error.code}): ${error.message}`);
+      .catch((error) => {
+        toast.error(`/rally/1/update/ (${error.code}): ${error.message}`);
+        throw error;
       });
   }
 
   function updateLeaderboard() {
     axios
       .put("http://127.0.0.1:8000/api/leaderboard/1/update/")
-      .then(function (response) {
-        if (response.status == 200) {
-          toast.success("Leaderboard updated successfully");
-        }
+      .then(() => {
+        toast.success("Leaderboard updated successfully");
       })
-      .catch(function (error) {
-        toast.error(`leaderboard/1/update/ (${error.code}): ${error.message}`);
+      .catch((error) => {
+        toast.error(`/leaderboard/1/update/ (${error.code}): ${error.message}`);
+        throw error;
       });
   }
 
@@ -55,10 +53,13 @@ export default function DashboardHome() {
           <div className="row">
             <div className="col-12 col-md me-0 me-md-4 p-4 mb-4 mb-md-0 neoBorder">
               <h3>Signed In Status</h3>
+
               <p>Signed in: {Boolean(user).toString()}</p>
+
               {user && (
                 <>
                   <p>Signed in as: {user.email}</p>
+
                   <button
                     className="btn eventBtn"
                     onClick={() => {
@@ -73,7 +74,8 @@ export default function DashboardHome() {
 
             <div className="col-12 col-md-8 p-4 neoBorder">
               <h3>Set Next Rally Date</h3>
-              <form onSubmit={updateRallyHandler}>
+
+              <form onSubmit={handleUpdateRally}>
                 <div className="row">
                   <div className="col-12 col-md-6 my-2">
                     <input
@@ -84,6 +86,7 @@ export default function DashboardHome() {
                     />
                   </div>
                 </div>
+
                 <button className="btn eventBtn my-3" type="submit">
                   Set
                 </button>

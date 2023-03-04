@@ -32,7 +32,7 @@ export default function HomeEvent(props: HomeEventType) {
 
           <div className="card-body d-flex flex-column">
             <h5 className="fw-bold fs-6">
-              {props.cancellationReason && "CANCELED"} {props.title} (
+              {props.cancelationReason && "CANCELED"} {props.title} (
               <span className="text-secondary"> {props.type}</span>) -{" "}
               <span className="text-tertiary">{props.points}</span> points
             </h5>

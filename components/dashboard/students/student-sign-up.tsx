@@ -1,18 +1,23 @@
-import { useRef } from "react";
+import { MutableRefObject, useRef } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  deleteUser,
+  User,
+} from "firebase/auth";
 import { tempAuth } from "../../../firebaseConfig";
 import { KeyedMutator } from "swr";
 
 export default function StudentSignUp(props: { mutate: KeyedMutator<any> }) {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
 
-  async function submitHandler(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const email = emailRef.current!.value;
-    const password = passwordRef.current!.value;
+
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
 
     createUserWithEmailAndPassword(tempAuth, email, password)
       .then((userCredential) => {
@@ -22,18 +27,14 @@ export default function StudentSignUp(props: { mutate: KeyedMutator<any> }) {
             id: user.uid,
             email: user.email,
           })
-          .then(function (response) {
-            if (response.request.status == 201) {
-              toast.success("Student created successfully");
-              tempAuth.signOut();
-              props.mutate();
-            }
+          .then(() => {
+            tempAuth.signOut();
+            props.mutate();
+            toast.success("Student created successfully");
           })
-          .catch(function (error) {
-            toast.success(
-              `Axios add student (${error.code}): ${error.message}`
-            );
-            deleteUser(tempAuth.currentUser!);
+          .catch((error) => {
+            deleteUser(tempAuth.currentUser as User);
+            toast.success(`student/create/ (${error.code}): ${error.message}`);
           });
       })
       .catch((error) => {
@@ -44,7 +45,7 @@ export default function StudentSignUp(props: { mutate: KeyedMutator<any> }) {
   }
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="emailInput" className="form-label">
           Student email

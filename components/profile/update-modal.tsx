@@ -37,19 +37,20 @@ export default function UpdateModal(props: {
         biography: biographyRef.current.value,
         image: uploadedImageRef.current,
       })
-      .then(function (response) {
-        toast.success(`Successfully updated profile`);
+      .then(() => {
         if (props.firstTime) {
           props.toggleModal();
           props.togglePasswordModal();
         } else {
           router.replace(router.asPath);
         }
+        toast.success("Successfully updated profile");
       })
-      .catch(function (error) {
+      .catch((error) => {
         toast.error(
-          `student/${props.data.pk}/update/ (${error.code}): ${error.message}`
+          `/student/${props.data.pk}/update/ (${error.code}): ${error.message}`
         );
+        throw error;
       });
   }
 
@@ -134,6 +135,8 @@ export default function UpdateModal(props: {
               defaultValue={props.data.grade}
               required
               ref={gradeRef}
+              min="5"
+              max="8"
             />
           </div>
 

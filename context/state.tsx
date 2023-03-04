@@ -1,12 +1,4 @@
-import {
-  Context,
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { Context, createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { isAdmin } from "../helpers";
@@ -33,7 +25,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        isAdmin(user.uid).then(function (result) {
+        isAdmin(user.uid).then((result) => {
           setIsA(result);
         });
       } else {

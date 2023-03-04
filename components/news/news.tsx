@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { toFormattedDate } from "../../helpers";
 import { NewsType } from "../../types/news";
 
 export default function News(props: NewsType) {
@@ -7,13 +8,7 @@ export default function News(props: NewsType) {
       <div className="card">
         <div className="card-header">
           <span className="fw-semibold">
-            {new Date(props.createdOn).toLocaleString(undefined, {
-              timeZone: "UTC",
-              year: "numeric",
-              month: "long",
-              day: "2-digit",
-              weekday: "long",
-            })}
+            {toFormattedDate(props.createdOn)}
           </span>
           <Link href={`/news/${props.pk}`} style={{ color: "orange" }}>
             <small className="ms-2">read more...</small>

@@ -10,11 +10,10 @@ export default function DashboardEvents() {
     async (url) => {
       return await axios
         .get(url)
-        .then((response) => {
-          return response.data;
-        })
+        .then((response) => response.data)
         .catch((error) => {
-          toast.error(`getEvents (${error}): ${error.message}`);
+          toast.error(`/events/dashboard/ (${error}): ${error.message}`);
+          throw error;
         });
     }
   );

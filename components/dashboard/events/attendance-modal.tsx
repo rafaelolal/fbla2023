@@ -9,13 +9,13 @@ export default function AttendanceModal(props: {
   toggleModal: () => void;
   participants: ParticipantType[];
 }) {
-  async function markAttendanceHandler() {
+  async function handleAttendance() {
     const checks = document.querySelectorAll(
-      'input[type="checkbox"]'
+      "input[type='checkbox']"
     ) as NodeListOf<HTMLInputElement>;
 
-    var requests = [];
-    for (let check of checks) {
+    const requests = [];
+    for (const check of checks) {
       requests.push(
         axios.patch(
           `http://127.0.0.1:8000/api/attendance/${check.value}/update/`,
@@ -32,7 +32,8 @@ export default function AttendanceModal(props: {
         props.toggleModal();
       })
       .catch((error) => {
-        toast.error(`attendanceHandler (${error.code}): ${error.message}`);
+        toast.error(`/attendance/ /update/ (${error.code}): ${error.message}`);
+        throw error;
       });
   }
 
@@ -55,6 +56,7 @@ export default function AttendanceModal(props: {
                 id={`check-${props.pk}-${o.student}`}
                 defaultChecked={o.attended}
               />
+
               <label
                 className="form-check-label"
                 htmlFor={`check-${props.pk}-${o.student}`}
@@ -70,10 +72,8 @@ export default function AttendanceModal(props: {
         <button className="btn btn-primary me-2" onClick={props.toggleModal}>
           Close
         </button>
-        <button
-          className="btn btn-primary me-2"
-          onClick={markAttendanceHandler}
-        >
+
+        <button className="btn btn-primary me-2" onClick={handleAttendance}>
           Save Changes
         </button>
       </Modal.Footer>

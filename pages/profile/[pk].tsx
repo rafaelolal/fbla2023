@@ -4,7 +4,6 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import UpdateModal from "../../components/profile/update-modal";
 import { ProfileStudentType } from "../../types/students";
-import { ProfileEventType } from "../../types/events";
 import PasswordModal from "../../components/profile/password-modal";
 import axios from "axios";
 
@@ -31,9 +30,9 @@ export default function ProfilePage(props: {
     setShowPassword(!showPassword);
   }
 
-  function prizeCount(i: number) {
+  function countPrizes(i: number) {
     const order = ["Food", "Spirit", "School"];
-    var c = 0;
+    let c = 0;
     for (const award of props.data.prizes) {
       if (award == order[i]) {
         c += 1;
@@ -89,12 +88,14 @@ export default function ProfilePage(props: {
               {props.data.firstName} {props.data.middleName}{" "}
               {props.data.lastName}{" "}
             </h5>
+
             <h6 className="text-center pt-1">
               Grade:
               {"   "}
               {props.data.grade}
             </h6>
-            <hr></hr>
+
+            <hr />
             <h6 className="text-center fw-bold">Awards</h6>
             <div className="text-center mt-3">
               {[
@@ -102,10 +103,12 @@ export default function ProfilePage(props: {
                   src="/images/icons/snacks.png"
                   style={{ width: "45px", height: "45px" }}
                 />,
+
                 <img
                   src="/images/icons/seal.png"
                   style={{ width: "45px", height: "45px" }}
                 />,
+
                 <img
                   src="/images/icons/books.png"
                   style={{ width: "45px", height: "45px" }}
@@ -113,19 +116,16 @@ export default function ProfilePage(props: {
               ].map((type, i) => (
                 <div className="d-inline-block mx-2" key={i}>
                   {type}
-                  <br></br>
-                  <div className="text-center">{prizeCount(i)}</div>
+                  <br />
+                  <div className="text-center">{countPrizes(i)}</div>
                 </div>
               ))}
             </div>
-            <hr></hr>
+            <hr />
             <h6 className="text-center fw-bold">Biography</h6>
-            <h6 className="py-1 text-center">
-              {"   "}
-              {props.data.biography}
-            </h6>
+            <h6 className="py-1 text-center">{props.data.biography}</h6>
 
-            <hr></hr>
+            <hr />
 
             <div
               className="mt-4 d-flex mx-auto"
@@ -134,6 +134,7 @@ export default function ProfilePage(props: {
               <button className="btn eventBtn mx-2" onClick={toggleUpdateModal}>
                 Update Profile
               </button>
+
               <button
                 className="btn eventBtn mx-2"
                 onClick={togglePasswordModal}
@@ -143,6 +144,7 @@ export default function ProfilePage(props: {
             </div>
           </div>
         </div>
+
         <div className="col-12 col-md mt-4 mt-md-0">
           <div className="bg-primary neoBorder p-1">
             <h3 className="d-inline mx-2 fw-semibold align-middle">Stats</h3>
@@ -169,6 +171,7 @@ export default function ProfilePage(props: {
               Joined: {props.data.events.length}
             </h5>
           </div>
+
           <div className="mt-2 mb-5">
             <h6 className="d-inline-block mx-2">
               {" "}
@@ -207,33 +210,31 @@ export default function ProfilePage(props: {
               - Future events
             </h6>
           </div>
-          <div>
-            <Calendar
-              events={formattedEvents}
-              defaultDate={new Date()}
-              localizer={mLocalizer}
-              eventPropGetter={(event: {
-                pk: number;
-                title: string;
-                start: Date;
-                end: Date;
-              }) => {
-                var backgroundColor: string = "#ffb158";
 
-                if (new Date(event.start) > new Date()) {
-                  backgroundColor = "#56becd";
-                } else if (
-                  props.data.events.find((e) => e.event.pk == event.pk)!
-                    .attended
-                ) {
-                  backgroundColor = "gray";
-                }
+          <Calendar
+            style={{ height: 600 }}
+            events={formattedEvents}
+            defaultDate={new Date()}
+            localizer={mLocalizer}
+            eventPropGetter={(event: {
+              pk: number;
+              title: string;
+              start: Date;
+              end: Date;
+            }) => {
+              let backgroundColor = "#ffb158";
 
-                return { style: { backgroundColor } };
-              }}
-              style={{ height: 600 }}
-            />
-          </div>
+              if (new Date(event.start) > new Date()) {
+                backgroundColor = "#56becd";
+              } else if (
+                props.data.events.find((e) => e.event.pk == event.pk)?.attended
+              ) {
+                backgroundColor = "gray";
+              }
+
+              return { style: { backgroundColor } };
+            }}
+          />
         </div>
       </div>
     </>
