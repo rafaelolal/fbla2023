@@ -16,14 +16,10 @@ export default function AddEventForm(props: { mutate: KeyedMutator<any> }) {
   const pointsRef = useRef() as MutableRefObject<HTMLInputElement>;
   const typeRef = useRef() as MutableRefObject<HTMLSelectElement>;
 
-  async function handleUpload(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    setUploading(true);
-
-    if (!selectedFile) return;
-
-    await axios
+    axios
       .post("http://127.0.0.1:8000/api/event/create/", {
         startsOn: new Date(`${startsOnRef.current.value}+00:00`),
         finishesOn: new Date(`${endsOnRef.current.value}+00:00`),
@@ -34,20 +30,27 @@ export default function AddEventForm(props: { mutate: KeyedMutator<any> }) {
         points: parseInt(pointsRef.current.value),
         type: typeRef.current.value,
       })
-      .then(function (response) {
-        toast.success("Event created successfully");
+      .then(function () {
         props.mutate();
+        toast.success("Event created successfully");
       })
       .catch(function (error) {
-        toast.error(`createEvent (${error.code}): ${error.message}`);
+        toast.error(`/event/create/ (${error.code}): ${error.message}`);
+        throw error;
       });
+  }
+
+  function handleImageUpload() {
+    setUploading(true);
+
+    if (!selectedFile) return;
 
     setUploading(false);
   }
 
   return (
     <div className="h-100 flex-column align-items-stretch mt-4">
-      <form onSubmit={handleUpload}>
+      <form onSubmit={handleSubmit}>
         <div className="row">
           <input
             type="text"
@@ -130,6 +133,7 @@ export default function AddEventForm(props: { mutate: KeyedMutator<any> }) {
                 const file = target.files[0];
                 setSelectedImage(URL.createObjectURL(file));
                 setSelectedFile(file);
+                handleImageUpload();
               }
             }}
           />
@@ -139,11 +143,10 @@ export default function AddEventForm(props: { mutate: KeyedMutator<any> }) {
           )}
 
           <button
-            style={{ opacity: uploading ? ".5" : "1" }}
             className={`btn eventBtn ${uploading ? "disabled" : ""}`}
             type="submit"
           >
-            {uploading ? "Uploading.." : "Upload"}
+            {uploading ? "Uploading.." : "Save"}
           </button>
         </label>
       </form>

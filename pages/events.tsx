@@ -36,9 +36,7 @@ export default function EventsPage(props: { events: EventType[] }) {
     async (url) => {
       return await axios
         .get(url)
-        .then((response) => {
-          return response.data.attendances;
-        })
+        .then((response) => response.data.attendances)
         .catch((error) => {
           if (user) {
             throw error;
@@ -48,33 +46,35 @@ export default function EventsPage(props: { events: EventType[] }) {
   );
 
   useEffect(() => {
-    var newEvents = initialEvents.current;
+    let newEvents = initialEvents.current;
     if (query.type) {
       newEvents = initialEvents.current.filter((e) => e.type == query.type);
     }
+
     if (query.startsOn) {
       newEvents = initialEvents.current.filter(
         (e) => new Date(e.startsOn) >= new Date(query.startsOn)
       );
     }
+
     if (query.location) {
       newEvents = initialEvents.current.filter(
         (e) => e.location == query.location
       );
     }
+
     setCurrentEvents(newEvents);
+
     // loop through events and store
     // unique types and locations
     // to facilitate searching
-    var types = new Set<string>();
-    var locations = new Set<string>();
-    for (let event of newEvents) {
+    const types = new Set<string>();
+    const locations = new Set<string>();
+    for (const event of newEvents) {
       types.add(event.type);
       locations.add(event.location);
     }
     setFilterOptions({ types, locations });
-    console.log({ newEvents });
-    console.log({ types, locations });
   }, [query]);
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function EventsPage(props: { events: EventType[] }) {
         anchorButton.click();
       }
     }
-  });
+  }, []);
 
   if (attendancesError) {
     return <p>An error occurred</p>;

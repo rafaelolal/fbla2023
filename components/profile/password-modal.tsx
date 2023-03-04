@@ -23,7 +23,7 @@ export default function PasswordModal(props: {
 
     signInWithEmailAndPassword(
       tempAuth,
-      user!.email as string,
+      user?.email as string,
       currentPasswordRef.current.value
     )
       .then((userCredential) => {
@@ -47,6 +47,7 @@ export default function PasswordModal(props: {
             toast.error(
               `Could not set new password (${error.code}): ${error.message}`
             );
+            throw error;
           });
       })
       .catch(function (error) {
@@ -63,7 +64,7 @@ export default function PasswordModal(props: {
       centered
       backdrop="static"
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton={!props.firstTime}>
         <Modal.Title>Update Password</Modal.Title>
       </Modal.Header>
 

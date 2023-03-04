@@ -10,13 +10,15 @@ import Footer from "../components/layout/footer";
 export default function IndexPage(props: {
   events: EventType[];
   news: NewsType[];
-  rally: any;
+  rally: { startsOn: string };
 }) {
-  const [partyTime, setPartyTime] = useState(false);
-  const [days, setDays] = useState(0);
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const [isRallyTime, setIsRallyTime] = useState(false);
+  const [rallyDatetime, setRallyDatetime] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const target = new Date(props.rally.startsOn);
@@ -25,22 +27,17 @@ export default function IndexPage(props: {
       const now = new Date();
       const difference = target.getTime() - now.getTime();
 
-      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-      setDays(d);
+      setRallyDatetime({
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor(
+          (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        ),
+        minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((difference % (1000 * 60)) / 1000),
+      });
 
-      const h = Math.floor(
-        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      setHours(h);
-
-      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      setMinutes(m);
-
-      const s = Math.floor((difference % (1000 * 60)) / 1000);
-      setSeconds(s);
-
-      if (d <= 0 && h <= 0 && m <= 0 && s <= 0) {
-        setPartyTime(true);
+      if (Object.values(rallyDatetime).every((value) => value <= 0)) {
+        setIsRallyTime(true);
       }
     }, 1000);
 
@@ -84,26 +81,29 @@ export default function IndexPage(props: {
             zIndex: "10",
           }}
         >
-          {partyTime ? (
+          {isRallyTime ? (
             <h2 className="p-3">RALLY STARTED</h2>
           ) : (
             <>
               <h1 className="mt-3">NEXT RALLY IN</h1>
               <div className="row m-0 monospace">
                 <div className="col p-2 m-3 border-thin">
-                  <h2>{days}</h2>
+                  <h2>{rallyDatetime.days}</h2>
                   <h6>Days</h6>
                 </div>
+
                 <div className="col p-2 m-3 border-thin">
-                  <h2>{hours}</h2>
+                  <h2>{rallyDatetime.hours}</h2>
                   <h6>Hours</h6>
                 </div>
+
                 <div className="col p-2 m-3 border-thin">
-                  <h2>{minutes}</h2>
+                  <h2>{rallyDatetime.minutes}</h2>
                   <h6>Minutes</h6>
                 </div>
+
                 <div className="col p-2 m-3 border-thin">
-                  <h2>{seconds}</h2>
+                  <h2>{rallyDatetime.seconds}</h2>
                   <h6>Seconds</h6>
                 </div>
               </div>
@@ -115,10 +115,11 @@ export default function IndexPage(props: {
       <div className="container my-5 pt-5">
         <div className="d-flex justify-content-between">
           <h1 className="pb-2 ms-3">Top Events of the Week</h1>
+
           <Link
             className="signBtn fs-5 ms-3 me-3 p-0"
             style={{ height: "fit-content" }}
-            href="/events"
+            href="/events/"
           >
             See All
             <svg
@@ -136,6 +137,7 @@ export default function IndexPage(props: {
             </svg>
           </Link>
         </div>
+
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-evenly">
           {props.events.map((event: EventType, i: number) => (
             <HomeEvent
@@ -149,7 +151,7 @@ export default function IndexPage(props: {
               location={event.location}
               startsOn={event.startsOn}
               finishesOn={event.finishesOn}
-              cancellationReason={event.cancellationReason}
+              cancelationReason={event.cancelationReason}
             />
           ))}
         </div>
@@ -173,31 +175,39 @@ export default function IndexPage(props: {
 }
 
 export async function getServerSideProps() {
-  const events = (
-    await axios.get("http://127.0.0.1:8000/api/events/")
-  ).data.slice(0, 3);
-  const news = (await axios.get("http://127.0.0.1:8000/api/news/")).data.slice(
-    0,
-    3
-  );
-  const rally = (await axios.get("http://127.0.0.1:8000/api/rally/1/")).data;
+  const eventsResponse = await axios
+    .get("http://127.0.0.1:8000/api/events/")
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
+
+  const newsResponse = await axios
+    .get("http://127.0.0.1:8000/api/news/")
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
+
+  const rallyResponse = await axios
+    .get("http://127.0.0.1:8000/api/rally/1/")
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
+
   return {
     props: {
-      events: events,
-      news: news,
-      rally: rally,
+      events: eventsResponse.data.slice(0, 3),
+      news: newsResponse.data.slice(0, 3),
+      rally: rallyResponse.data,
       bodyStyle: { backgroundColor: "white" },
     },
   };
 }
-
-// To apply a different background color or any type of body style
-// to any other page, just copy and paste the below snippet.
-// Make sure you use the exact style naming
-// export async function getServerSideProps() {
-//   return {
-//     props: {
-//       bodyStyle: { backgroundColor: "any color" },
-//     },
-//   };
-// }

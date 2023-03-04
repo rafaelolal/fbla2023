@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import useSWR, { KeyedMutator } from "swr";
+import { KeyedMutator } from "swr";
 import { useAppContext } from "../../context/state";
 import { formatStartAndFinish } from "../../helpers";
 import { EventType } from "../../types/events";
@@ -8,13 +8,13 @@ import { EventType } from "../../types/events";
 export default function Event(
   props: EventType & {
     joined: boolean;
-    attendancePk: number | null;
+    attendancePk: number | undefined;
     attendancesMutate: KeyedMutator<any>;
   }
 ) {
   const { user } = useAppContext();
 
-  async function joinHandler() {
+  async function handleJoin() {
     if (!user) {
       toast.warning("Sign in before joining an event");
       return;
@@ -25,32 +25,30 @@ export default function Event(
         event: props.pk,
         student: user.uid,
       })
-      .then(function (response) {
-        if (response.status == 201) {
-          toast.success("Joined event successfully");
-          props.attendancesMutate();
-        }
+      .then(() => {
+        props.attendancesMutate();
+        toast.success("Joined event successfully");
       })
       .catch(function (error) {
-        toast.error(`attendance/create/ (${error.code}: ${error.message})`);
+        toast.error(`/attendance/create/ (${error.code}: ${error.message})`);
+        throw error;
       });
   }
 
-  async function leaveHandler() {
+  async function handleLeave() {
     await axios
       .delete(
         `http://127.0.0.1:8000/api/attendance/${props.attendancePk}/destroy/`
       )
-      .then(function (response) {
-        if (response.status == 204) {
-          toast.success("Left event successfully");
-          props.attendancesMutate();
-        }
+      .then(() => {
+        toast.success("Left event successfully");
+        props.attendancesMutate();
       })
-      .catch(function (error) {
+      .catch((error) => {
         toast.error(
-          `attendance/${props.attendancePk}/destroy/ (${error.code}: ${error.message})`
+          `/attendance/${props.attendancePk}/destroy/ (${error.code}: ${error.message})`
         );
+        throw error;
       });
   }
 
@@ -90,20 +88,20 @@ export default function Event(
           }}
         >
           <h5 className="card-title fs-5">
-            {props.cancellationReason && "CANCELED"} {props.title} (
+            {props.cancelationReason && "CANCELED"} {props.title} (
             <span className="text-quaternary">{props.type}</span>) -{" "}
             <span className="text-tertiary">{props.points}</span> points
           </h5>
 
           <p className="card-text">
-            {props.cancellationReason
-              ? `Cancelation reason: ${props.cancellationReason}`
+            {props.cancelationReason
+              ? `Cancelation reason: ${props.cancelationReason}`
               : props.description}
           </p>
 
           <a
             className="btn eventBtnO mt-auto"
-            onClick={props.joined ? leaveHandler : joinHandler}
+            onClick={props.joined ? handleLeave : handleJoin}
           >
             {props.joined ? "Leave" : "Join"}
           </a>

@@ -16,11 +16,12 @@ export default function AddNewsForm() {
         content: contentRef.current.value,
         title: titleRef.current.value,
       })
-      .then(function (response) {
+      .then(() => {
         toast.success("News created successfully");
       })
-      .catch(function (error) {
-        toast.error(`news/create/ (${error.code}): ${error.message}`);
+      .catch((error) => {
+        toast.error(`/news/create/ (${error.code}): ${error.message}`);
+        throw error;
       });
   }
 

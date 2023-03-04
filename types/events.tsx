@@ -1,5 +1,4 @@
 import { KeyedMutator } from "swr";
-import { StudentType } from "./students";
 
 export type ParticipantType = {
   pk: number;
@@ -15,7 +14,7 @@ type CommonEventType = {
   title: string;
   startsOn: string;
   finishesOn: string;
-  cancellationReason: string;
+  cancelationReason: string;
 };
 
 export type EventType = CommonEventType & {
@@ -28,7 +27,6 @@ export type EventType = CommonEventType & {
 
 export type DashboardEventType = CommonEventType & {
   participants: ParticipantType[];
-  mutate: KeyedMutator<any>;
 };
 
 export type HomeEventType = CommonEventType & {

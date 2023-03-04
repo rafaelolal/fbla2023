@@ -11,11 +11,9 @@ export default function DashboardStudentList() {
     async (url) => {
       return await axios
         .get(url)
-        .then((response) => {
-          return response.data;
-        })
+        .then((response) => response.data)
         .catch((error) => {
-          toast.success(`students/ (${error.code}): ${error.message}`);
+          toast.success(`/students/ (${error.code}): ${error.message}`);
         });
     }
   );
@@ -41,16 +39,20 @@ export default function DashboardStudentList() {
                 <div className="col-3 d-flex border-end">
                   <h5 className="m-auto">Student Name</h5>
                 </div>
+
                 <div className="col-3 d-flex border-end">
                   <h5 className="m-auto">Id</h5>
                 </div>
+
                 <div className="col-3 d-flex border-end">
                   <h5 className="m-auto">Grade</h5>
                 </div>
+
                 <div className="col-2 d-flex">
                   <h5 className="m-auto">Action</h5>
                 </div>
               </div>
+
               {data &&
                 data.map((student: DashboardStudentType, i: number) => (
                   <DashboardStudent
