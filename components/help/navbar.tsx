@@ -1,38 +1,16 @@
-import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function HelpNavbar(props: {
-  setCurrentPage: (page: string) => void;
-}) {
-  const router = useRouter();
-
-  function changeToHowToGuide() {
-    props.setCurrentPage("How to Guide");
-    router.push(
-      { pathname: "help", query: { page: "howToGuide" } },
-      undefined,
-      { shallow: true }
-    );
-  }
-
-  function changeToHowWasItMade() {
-    props.setCurrentPage("How was it Made");
-    router.push(
-      { pathname: "help", query: { page: "howWasItMade" } },
-      undefined,
-      { shallow: true }
-    );
-  }
-
+export default function HelpNavbar() {
   return (
     <nav className="navbar navbar-expand bg-light ">
       <div className="container-fluid justify-content-center">
         <div className="navbar-nav">
-          <a className="nav-link text-center" onClick={changeToHowToGuide}>
+          <Link href="help?page=howToGuide" className="nav-link text-center">
             How to Guide
-          </a>
-          <a className="nav-link text-center" onClick={changeToHowWasItMade}>
+          </Link>
+          <Link href="help?page=howWasItMade" className="nav-link text-center">
             How was it Made
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
