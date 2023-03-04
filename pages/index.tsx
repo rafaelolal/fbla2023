@@ -89,7 +89,7 @@ export default function IndexPage(props: {
           ) : (
             <>
               <h1 className="mt-3">NEXT RALLY IN</h1>
-              <div className="row m-0">
+              <div className="row m-0 monospace">
                 <div className="col p-2 m-3 border-thin">
                   <h2>{days}</h2>
                   <h6>Days</h6>
