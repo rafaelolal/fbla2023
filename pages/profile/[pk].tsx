@@ -168,7 +168,7 @@ export default function ProfilePage(props: ProfileStudentType) {
             </h5>
           </div>
 
-          <div className="mt-2 mb-5">
+          <div className="mt-3 mb-2">
             <h6 className="d-inline-block mx-2">
               {" "}
               <div
@@ -208,7 +208,7 @@ export default function ProfilePage(props: ProfileStudentType) {
           </div>
 
           <Calendar
-            style={{ height: 600 }}
+            style={{ height: "calc(100% - 130px)" }}
             events={formattedEvents}
             defaultDate={new Date()}
             localizer={mLocalizer}
