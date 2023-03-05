@@ -4,7 +4,7 @@ import { NewsType } from "../../types/news";
 import axios from "axios";
 import Footer from "../../components/layout/footer";
 
-export default function IndexPage(props: { news: NewsType[] }) {
+export default function NewsListPage(props: { news: NewsType[] }) {
   const initialNews = useRef<NewsType[]>(props.news);
 
   return (

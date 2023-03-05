@@ -1,31 +1,25 @@
-export default function DashboardNavbar(props: {
-  setCurrentPage: (page: string) => void;
-}) {
+import Link from "next/link";
+
+export default function DashboardNavbar() {
   return (
     <nav className="navbar navbar-expand bg-primary ">
       <div className="container-fluid justify-content-center">
         <div className="navbar-nav">
-          <a className="nav-link" onClick={() => props.setCurrentPage("Home")}>
+          <Link className="nav-link" href="/dashboard?page=home">
             Home
-          </a>
-          <a
-            className="nav-link"
-            onClick={() => props.setCurrentPage("Reports")}
-          >
+          </Link>
+
+          <Link className="nav-link" href="/dashboard?page=reports">
             Reports
-          </a>
-          <a
-            className="nav-link"
-            onClick={() => props.setCurrentPage("Events")}
-          >
+          </Link>
+
+          <Link className="nav-link" href="/dashboard?page=events">
             Events
-          </a>
-          <a
-            className="nav-link"
-            onClick={() => props.setCurrentPage("Students")}
-          >
+          </Link>
+
+          <Link className="nav-link" href="/dashboard?page=students">
             Students
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

@@ -27,16 +27,21 @@ export default function IndexPage(props: {
       const now = new Date();
       const difference = target.getTime() - now.getTime();
 
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
       setRallyDatetime({
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor(
-          (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        ),
-        minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        days,
+        hours,
+        minutes,
+        seconds,
       });
 
-      if (Object.values(rallyDatetime).every((value) => value <= 0)) {
+      if ([days, hours, minutes, seconds].every((value) => value <= 0)) {
         setIsRallyTime(true);
       }
     }, 1000);

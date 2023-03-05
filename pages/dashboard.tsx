@@ -6,10 +6,13 @@ import DashboardHome from "../components/dashboard/home";
 import DashboardStudentList from "../components/dashboard/students/student-list";
 import DashboardEvents from "../components/dashboard/events/events";
 import DashboardReports from "../components/dashboard/reports";
+import { useRouter } from "next/router";
 
 export default function DashboardPage() {
   const { user, isA } = useAppContext();
-  const [currentPage, setCurrentPage] = useState("Home");
+  const router = useRouter();
+
+  const page = router.query.page;
 
   if (!user) {
     return <p>Loading...</p>;
@@ -21,11 +24,11 @@ export default function DashboardPage() {
 
   return (
     <>
-      <DashboardNavbar setCurrentPage={setCurrentPage} />
-      {currentPage == "Home" && <DashboardHome />}
-      {currentPage == "Reports" && <DashboardReports />}
-      {currentPage == "Events" && <DashboardEvents />}
-      {currentPage == "Students" && <DashboardStudentList />}
+      <DashboardNavbar />
+      {page == "home" && <DashboardHome />}
+      {page == "reports" && <DashboardReports />}
+      {page == "events" && <DashboardEvents />}
+      {page == "students" && <DashboardStudentList />}
     </>
   );
 }

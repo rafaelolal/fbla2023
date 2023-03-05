@@ -17,8 +17,12 @@ export default function LeaderboardRow(props: LeaderboardStudentType) {
             className="my-auto mx-auto fw-semibold "
             style={{ color: "#3ba4aa" }}
           >
-            {[1, 2, 3].includes(props.rank!) ? (
-              <img height={70} width={70} src={icons[props.rank! - 1]}></img>
+            {[1, 2, 3].includes(props.rank as number) ? (
+              <img
+                height={70}
+                width={70}
+                src={icons[(props.rank as number) - 1]}
+              ></img>
             ) : (
               `${props.rank === null ? "N/A" : props.rank}`
             )}

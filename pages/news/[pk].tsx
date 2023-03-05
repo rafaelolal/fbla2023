@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import axios from "axios";
 import { toFormattedDatetime } from "../../helpers";
 
-export default function ProfilePage(props: { news: NewsType }) {
+export default function NewsPage(props: { news: NewsType }) {
   return (
     <div className="m-4">
       <h1>{props.news.title}</h1>
@@ -28,9 +28,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       news: response.data,
-      props: {
-        bodyStyle: { backgroundColor: "white" },
-      },
+      bodyStyle: { backgroundColor: "white" },
     },
   };
 }
