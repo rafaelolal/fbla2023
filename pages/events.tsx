@@ -9,7 +9,7 @@ import useSWR from "swr";
 import { useAppContext } from "../context/state";
 
 export default function EventsPage(props: { events: EventType[] }) {
-  const { user } = useAppContext();
+  const { user, isA } = useAppContext();
   const router = useRouter();
   const initialEvents = useRef<EventType[]>(props.events);
   const [currentEvents, setCurrentEvents] = useState<EventType[]>(
@@ -86,10 +86,11 @@ export default function EventsPage(props: { events: EventType[] }) {
     }
   }, []);
 
-  if (attendancesError) {
+  if (attendancesError && !isA) {
     return <p>An error occurred</p>;
   }
-  if (user ? !attendances : false) {
+
+  if (user && !isA ? !attendances : false) {
     return <p>Loading...</p>;
   }
 
