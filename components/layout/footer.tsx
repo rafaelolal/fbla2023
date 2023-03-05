@@ -1,8 +1,22 @@
 import Link from "next/link";
 
-export default function Footer() {
+export default function Footer(props: any) {
   return (
     <>
+      {props.isLB == true && (
+        <img
+          className=""
+          style={{
+            objectFit: "cover",
+            height: "75vh",
+            width: "100%",
+            objectPosition: "center bottom",
+            overflow: "hidden",
+          }}
+          src="/images/leaderboard/bottomOfLeaderboard.svg"
+        ></img>
+      )}
+
       <div
         className="bg-primary overflow-hidden text-light py-5"
         style={{ borderTop: "solid 4px #000" }}

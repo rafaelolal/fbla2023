@@ -40,15 +40,16 @@ export default function DashboardHome() {
 
   return (
     <>
-      <button className="btn eventBtn" onClick={updateLeaderboard}>
-        Update Leaderboard
-      </button>
-
-      <Link href="/rally">
-        <button className="btn eventBtn">Access Rally</button>
-      </Link>
-
       <div className="row justify-content-center">
+        <div className="col-8 mt-4 p-0">
+          <button className="btn eventBtn me-3" onClick={updateLeaderboard}>
+            Update Leaderboard
+          </button>
+
+          <Link href="/rally">
+            <button className="btn eventBtn">Access Rally</button>
+          </Link>
+        </div>
         <div className="col-8 mt-4 mb-2">
           <div className="row">
             <div className="col-12 col-md me-0 me-md-4 p-4 mb-4 mb-md-0 neoBorder">

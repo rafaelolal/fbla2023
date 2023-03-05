@@ -422,3 +422,16 @@ $b-radius-normal: 7px;
   top: 10%;
   left: 0;
 }
+
+.leaderboard-bg {
+  background-image: url("/images/leaderboard/leaderboardBG.svg");
+  background-position: center bottom;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 780px) {
+  .leaderboard-bg {
+    background-image: url("/images/leaderboard/leaderboardBG2.svg");
+  }
+}

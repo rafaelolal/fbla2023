@@ -3,7 +3,7 @@ import { NewsType } from "../../types/news";
 
 export default function NewsList(props: { news: NewsType[] }) {
   return (
-    <div className="row bg-lightTertiary py-3 neoBorder">
+    <div className="row bg-lightTertiary justify-content-center p-3 neoBorder">
       {props.news.map((newsItem, i) => (
         <News
           key={i}
