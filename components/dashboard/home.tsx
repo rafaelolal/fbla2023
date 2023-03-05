@@ -41,35 +41,29 @@ export default function DashboardHome() {
   return (
     <>
       <div className="row justify-content-center">
-        <div className="col-8 mt-4 p-0">
-          <button className="btn eventBtn me-3" onClick={updateLeaderboard}>
-            Update Leaderboard
-          </button>
-
-          <Link href="/rally">
-            <button className="btn eventBtn">Access Rally</button>
-          </Link>
-        </div>
+        <div className="col-8 mt-4 p-0"></div>
         <div className="col-8 mt-4 mb-2">
           <div className="row">
             <div className="col-12 col-md me-0 me-md-4 p-4 mb-4 mb-md-0 neoBorder">
-              <h3>Signed In Status</h3>
+              <h3>Actions</h3>
 
-              <p>Signed in: {Boolean(user).toString()}</p>
+              <button className="btn eventBtn me-3" onClick={updateLeaderboard}>
+                Update Leaderboard
+              </button>
+
+              <Link href="/rally">
+                <button className="btn eventBtn">Access Rally</button>
+              </Link>
 
               {user && (
-                <>
-                  <p>Signed in as: {user.email}</p>
-
-                  <button
-                    className="btn eventBtn"
-                    onClick={() => {
-                      auth.signOut();
-                    }}
-                  >
-                    Sign Out
-                  </button>
-                </>
+                <button
+                  className="btn eventBtn"
+                  onClick={() => {
+                    auth.signOut();
+                  }}
+                >
+                  Sign Out
+                </button>
               )}
             </div>
 

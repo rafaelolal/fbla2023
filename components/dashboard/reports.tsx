@@ -73,16 +73,12 @@ export default function DashboardReports() {
               >
                 <h2 className="my-auto p-3">Reports</h2>
               </div>
+
               <div className="col d-flex">
-                <button
-                  className="btn btn-primary d-inline-block my-auto my-3 mx-4"
-                  onClick={handleCreate}
-                >
-                  Create Report
-                </button>
                 <p className="d-inline-block my-auto my-3 mx-2">View Report:</p>
+
                 <select
-                  className="d-inline-block my-auto my-3"
+                  className="form-select d-inline-block my-auto my-3"
                   aria-label="Select Report"
                   defaultValue="report Date"
                   ref={reportRef}
@@ -90,23 +86,33 @@ export default function DashboardReports() {
                 >
                   <option selected>Report Date</option>
                   {data.map((news: { createdOn: string }, i: number) => (
-          <option key={i} value={news.createdOn}>
-            {news.createdOn}
-          </option>
-        ))}
+                    <option key={i} value={news.createdOn}>
+                      {news.createdOn}
+                    </option>
+                  ))}
                 </select>
+
+                <button
+                  className="btn btn-primary d-inline-block my-auto my-3 mx-4"
+                  onClick={handleCreate}
+                >
+                  Create Report
+                </button>
               </div>
             </div>
           </div>
           <div className="container  my-5 neoBorder">
-            <h2 className="text-center py-4 px-5">Report Data</h2>
+            <h2 className="text-center py-4 px-5">Data</h2>
+
             <div className="row justify-content-around py-3 px-5 border-bottom border-top bg-primary">
               <div className="col-4 d-flex border-end">
                 <h5 className="m-auto">Name</h5>
               </div>
+
               <div className="col-4 d-flex border-end">
                 <h5 className="m-auto">Points</h5>
               </div>
+
               <div className="col-4 d-flex">
                 <h5 className="m-auto">Grade</h5>
               </div>
@@ -120,15 +126,20 @@ export default function DashboardReports() {
                 >
                   <div className="col-4 d-flex ">
                     <h5 className="m-auto">
-                      {" "}
-                      {report.firstName + " " + report.middleName + " " + report.lastName}
+                      {report.firstName +
+                        " " +
+                        (report.middleName || "") +
+                        " " +
+                        (report.lastName || "")}
                     </h5>
                   </div>
+
                   <div className="col-4 d-flex">
                     <h5 className="m-auto">{report.points}</h5>
                   </div>
+
                   <div className="col-4 d-flex">
-                    <h5 className="m-auto"> {report.grade ? report.grade : "N/A"}</h5>
+                    <h5 className="m-auto">{report.grade || "N/A"}</h5>
                   </div>
                 </div>
               ))}
