@@ -34,7 +34,7 @@ export default function DashboardStudentList() {
         <div className="col-12 col-lg-7 mx-2 mt-5 mt-lg-0">
           <div className="pt-1 neoBorder">
             <h2 className="mb-2 py-4 px-5 text-center w-100">Students</h2>
-            <div className="container">
+            <div className="container-fluid">
               <div className="row justify-content-around py-3 px-2 border-bottom border-top bg-primary">
                 <div className="col-3 d-flex border-end">
                   <h5 className="m-auto">Student Name</h5>

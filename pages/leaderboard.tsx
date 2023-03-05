@@ -104,6 +104,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
+      students: studentsResponse.data,
       leaderboard: leaderboardResponse.data,
       bodyStyle: { backgroundColor: "#67dbeb" },
     },

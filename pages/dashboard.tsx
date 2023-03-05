@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useAppContext } from "../context/state";
 import ForbiddenPage from "../components/forbiddenPage";
 import DashboardNavbar from "../components/dashboard/navbar";
@@ -25,7 +24,7 @@ export default function DashboardPage() {
   return (
     <>
       <DashboardNavbar />
-      {page == "home" && <DashboardHome />}
+      {(page == "home" || page === undefined) && <DashboardHome />}
       {page == "reports" && <DashboardReports />}
       {page == "events" && <DashboardEvents />}
       {page == "students" && <DashboardStudentList />}

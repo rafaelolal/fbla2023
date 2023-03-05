@@ -63,40 +63,45 @@ export default function DashboardEvent(
         </div>
 
         <div className="col-4 d-flex">
-          <button
-            className={`btn btn-primary mx-1 ${
-              props.participants.some((o) => o.final) ||
-              new Date(props.startsOn) > now
-                ? "disabled"
-                : ""
-            }`}
-            onClick={toggleModal}
-          >
-            Attendance
-          </button>
+          <div className="mx-auto">
+            <button
+              className={`btn eventBtn mx-1 ${
+                props.participants.some((o) => o.final) ||
+                new Date(props.startsOn) > now
+                  ? "disabled"
+                  : ""
+              }`}
+              style={{ height: "fit-content", margin: "auto 0" }}
+              onClick={toggleModal}
+            >
+              Attendance
+            </button>
 
-          <button
-            className={`btn btn-primary mx-1 ${
-              new Date(props.startsOn) < now ? "disabled" : ""
-            }`}
-            onClick={() => handleDelete(props.pk)}
-          >
-            Delete
-          </button>
+            <button
+              className={`btn eventBtn mx-1 ${
+                new Date(props.startsOn) < now ? "disabled" : ""
+              }`}
+              style={{ height: "fit-content", margin: "auto 0" }}
+              onClick={() => handleDelete(props.pk)}
+            >
+              Delete
+            </button>
 
-          <button
-            className={`btn btn-primary mx-1 ${
-              props.cancelationReason || new Date(props.startsOn) < now
-                ? "disabled"
-                : ""
-            }`}
-            onClick={() => {
-              props.setCanceling(props.pk);
-              props.setShowCancelingModal(true);
-            }}
-          >
-            Cancel
-          </button>
+            <button
+              className={`btn eventBtn mx-1 ${
+                props.cancelationReason || new Date(props.startsOn) < now
+                  ? "disabled"
+                  : ""
+              }`}
+              style={{ height: "fit-content", margin: "auto 0" }}
+              onClick={() => {
+                props.setCanceling(props.pk);
+                props.setShowCancelingModal(true);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </>

@@ -33,7 +33,7 @@ export default function DashboardEvents() {
 
         <div className="col-12 col-lg-7 mx-2 mt-5 mt-lg-0 ">
           <div className="pt-1 neoBorder">
-            <h2 className="mb-2 py-4 px-5 text-center w-100">Events</h2>
+            <h2 className="mb-2 py-4 text-center">Events</h2>
             <DashboardEventList mutate={mutate} events={data} />
           </div>
         </div>

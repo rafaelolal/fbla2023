@@ -59,66 +59,77 @@ export default function QNA() {
 
   return (
     <>
-      <div className="bg-white p-5" style={{ borderTop: "solid 4px #000" }}>
-        <div className="col-8 mx-auto">
-        <h2>Questions and Answers</h2>
-        <div className="mt-3 w-100 mx-auto"
-      
+      <div
+        className="bg-white p-5 h-100"
+        style={{ borderTop: "solid 4px #000" }}
       >
-        <div className="form-floating mb-3 border-normal " style={{borderRadius: "10px"}}>
-          <input
-            type="text"
-            className="form-control "
-            id="search"
-            placeholder="Keywords"
-            ref={searchRef}
-            onChange={getTopAnswer}
-          />
-          <label htmlFor="search">Search</label>
-        </div>
-
-        {currentQuestion ? (
-          <div>
-            <ReactMarkdown className="markdown">
-              {currentQuestion.question}
-            </ReactMarkdown>
-            <ReactMarkdown className="markdown">
-              {currentQuestion.answer}
-            </ReactMarkdown>
-          </div>
-        ) : (
-          "No search item yet"
-        )}
-
-        <div className="accordion border-normal " style={{borderRadius: "10px"}} id="accordionExample">
-          {questions.map((question, i) => (
-            <div key={i} className="accordion-item" style={{borderBottom: "3px solid black"}}>
-              <h2 className="accordion-header border-0" id={`heading${i}`}>
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target={`#collapse${i}`}
-                  aria-controls={`collapse${i}`}
-                >
-                  {question.question}
-                </button>
-              </h2>
-              <div
-                id={`collapse${i}`}
-                className="accordion-collapse collapse border-0"
-                aria-labelledby={`heading${i}`}
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">{question.answer}</div>
-              </div>
+        <div className="col-11 mx-auto">
+          <h2>Questions and Answers</h2>
+          <div className="mt-3 w-100 mx-auto">
+            <div
+              className="form-floating mb-3 border-normal "
+              style={{ borderRadius: "10px" }}
+            >
+              <input
+                type="text"
+                className="form-control "
+                id="search"
+                placeholder="Keywords"
+                ref={searchRef}
+                onChange={getTopAnswer}
+              />
+              <label htmlFor="search">Search</label>
             </div>
-          ))}
+
+            {currentQuestion ? (
+              <div>
+                <ReactMarkdown className="markdown">
+                  {currentQuestion.question}
+                </ReactMarkdown>
+                <ReactMarkdown className="markdown">
+                  {currentQuestion.answer}
+                </ReactMarkdown>
+              </div>
+            ) : (
+              "No search item yet"
+            )}
+
+            <div
+              className="accordion border-normal "
+              style={{ borderRadius: "10px" }}
+              id="accordionExample"
+            >
+              {questions.map((question, i) => (
+                <div
+                  key={i}
+                  className="accordion-item"
+                  style={{ borderBottom: "3px solid black" }}
+                >
+                  <h2 className="accordion-header border-0" id={`heading${i}`}>
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target={`#collapse${i}`}
+                      aria-controls={`collapse${i}`}
+                    >
+                      {question.question}
+                    </button>
+                  </h2>
+                  <div
+                    id={`collapse${i}`}
+                    className="accordion-collapse collapse border-0"
+                    aria-labelledby={`heading${i}`}
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div className="accordion-body">{question.answer}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-      </div>
-      </div>
-      
     </>
   );
 }

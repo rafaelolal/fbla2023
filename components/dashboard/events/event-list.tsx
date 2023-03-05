@@ -20,10 +20,10 @@ export default function DashboardEventList(props: {
         showCancelingModal={showCancelingModal}
       />
 
-      <div className="container">
+      <div className="container-fluid">
         <div className="row justify-content-around py-3 px-5 border-bottom border-top bg-primary">
           <div className="col-3 d-flex border-end">
-            <h5 className="my-auto">Event Name</h5>
+            <h5 className="m-auto">Event Name</h5>
           </div>
 
           <div className="col-5 d-flex border-end">
