@@ -7,15 +7,13 @@ import { ProfileStudentType } from "../../types/students";
 import PasswordModal from "../../components/profile/password-modal";
 import axios from "axios";
 
-export default function ProfilePage(props: {
-  data: ProfileStudentType & { biography: string };
-}) {
-  const firstTime = props.data.grade === null;
+export default function ProfilePage(props: ProfileStudentType) {
+  const firstTime = props.grade === null;
   const [showUpdate, setShowUpdate] = useState(firstTime);
   const [showPassword, setShowPassword] = useState(false);
 
   const mLocalizer = momentLocalizer(moment);
-  const formattedEvents = props.data.events.map((e) => ({
+  const formattedEvents = props.events.map((e) => ({
     pk: e.event.pk,
     title: e.event.title,
     start: new Date(e.event.startsOn),
@@ -33,7 +31,7 @@ export default function ProfilePage(props: {
   function countPrizes(i: number) {
     const order = ["Food", "Spirit", "School"];
     let c = 0;
-    for (const award of props.data.prizes) {
+    for (const award of props.prizes) {
       if (award == order[i]) {
         c += 1;
       }
@@ -45,12 +43,12 @@ export default function ProfilePage(props: {
     <>
       <UpdateModal
         data={{
-          pk: props.data.pk,
-          firstName: props.data.firstName,
-          middleName: props.data.middleName,
-          lastName: props.data.lastName,
-          grade: props.data.grade,
-          biography: props.data.biography,
+          pk: props.pk,
+          firstName: props.firstName,
+          middleName: props.middleName,
+          lastName: props.lastName,
+          grade: props.grade,
+          biography: props.biography,
         }}
         firstTime={firstTime}
         show={showUpdate}
@@ -79,20 +77,19 @@ export default function ProfilePage(props: {
 
                 border: "4px solid black",
               }}
-              src={props.data.image}
+              src={props.image}
             />
             <hr></hr>
 
             <h5 className="fw-bold text-center pt-1">
               {"   "}
-              {props.data.firstName} {props.data.middleName}{" "}
-              {props.data.lastName}{" "}
+              {props.firstName} {props.middleName} {props.lastName}{" "}
             </h5>
 
             <h6 className="text-center pt-1">
               Grade:
               {"   "}
-              {props.data.grade}
+              {props.grade}
             </h6>
 
             <hr />
@@ -123,7 +120,7 @@ export default function ProfilePage(props: {
             </div>
             <hr />
             <h6 className="text-center fw-bold">Biography</h6>
-            <h6 className="py-1 text-center">{props.data.biography}</h6>
+            <h6 className="py-1 text-center">{props.biography}</h6>
 
             <hr />
 
@@ -155,20 +152,19 @@ export default function ProfilePage(props: {
             />
 
             <h5 className="d-inline mx-2 align-middle">
-              Rank: {props.data.rank}
+              Points: {props.points}
             </h5>
+
+            <h5 className="d-inline mx-2 align-middle">Rank: {props.rank}</h5>
 
             <h5 className="d-inline mx-2 align-middle">
               Attended:{" "}
-              {
-                props.data.events.filter((event) => event.attended == true)
-                  .length
-              }
+              {props.events.filter((event) => event.attended == true).length}
             </h5>
 
             <h5 className="d-inline mx-2 align-middle">
               {" "}
-              Joined: {props.data.events.length}
+              Joined: {props.events.length}
             </h5>
           </div>
 
@@ -227,7 +223,7 @@ export default function ProfilePage(props: {
               if (new Date(event.start) > new Date()) {
                 backgroundColor = "#56becd";
               } else if (
-                props.data.events.find((e) => e.event.pk == event.pk)?.attended
+                props.events.find((e) => e.event.pk == event.pk)?.attended
               ) {
                 backgroundColor = "gray";
               }
@@ -243,10 +239,10 @@ export default function ProfilePage(props: {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { pk } = context.query;
-  const data = await axios
+  const response = await axios
     .get(`http://127.0.0.1:8000/api/student/${pk}/`)
     .then((response) => {
-      return response.data;
+      return response;
     })
     .catch((error) => {
       throw error;
@@ -254,10 +250,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      data: data,
-      props: {
-        bodyStyle: { backgroundColor: "white" },
-      },
+      ...response.data,
+      bodyStyle: { backgroundColor: "white" },
     },
   };
 }
