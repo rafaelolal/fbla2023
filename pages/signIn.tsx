@@ -16,10 +16,14 @@ export default function SignInPage() {
     const password = passwordRef.current?.value;
 
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
         emailRef.current.value = "";
         passwordRef.current.value = "";
-        router.push("/");
+        if (userCredential.user.email?.includes("admin")) {
+          router.push("/dashboard?page=home");
+        } else {
+          router.push("/");
+        }
       })
       .catch((error) => {
         toast.error(`Sign in error (${error.code}): ${error.message}`);
@@ -52,6 +56,7 @@ export default function SignInPage() {
       >
         <form className="signForm neoBorder m-auto" onSubmit={submitHandler}>
           <h1 className="text-center fw-semibold">Log In</h1>
+
           <div className="mb-3">
             <label htmlFor="emailInput" className="form-label fw-semibold">
               Email address
@@ -63,6 +68,7 @@ export default function SignInPage() {
               ref={emailRef}
             />
           </div>
+
           <div className="mb-3">
             <label htmlFor="passwordInput" className="form-label fw-semibold">
               Password
@@ -74,6 +80,7 @@ export default function SignInPage() {
               ref={passwordRef}
             />
           </div>
+
           <button type="submit" className="btn eventBtnO">
             Login
           </button>
