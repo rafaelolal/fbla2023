@@ -101,6 +101,13 @@ $b-radius-normal: 7px;
   background-color: #88c8dc;
 }
 
+
+.disabledBtn{
+  background-color: #f6f6f6;
+  color: #c4c4c4;
+
+}
+
 .signForm {
   width: 400px;
   height: 350px;
@@ -440,3 +447,5 @@ $b-radius-normal: 7px;
     background-image: url("/images/leaderboard/leaderboardBG2.svg");
   }
 }
+
+

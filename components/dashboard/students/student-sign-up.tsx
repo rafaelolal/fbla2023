@@ -82,7 +82,7 @@ export default function StudentSignUp(props: { mutate: KeyedMutator<any> }) {
           readOnly
         />
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn eventBtn">
         Create account
       </button>
     </form>

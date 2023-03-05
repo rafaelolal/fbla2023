@@ -75,10 +75,19 @@ export default function DashboardReports() {
               </div>
 
               <div className="col d-flex">
-                <p className="d-inline-block my-auto my-3 mx-2">View Report:</p>
+                
+                
+                  <button
+                  className="btn eventBtn m-3 me-5 my-auto"
+                  onClick={handleCreate}
+                >
+                  Create Report
+                </button>
+                <div className=" d-inline-block m-1 my-auto">View Report:</div>
 
                 <select
-                  className="form-select d-inline-block my-auto my-3"
+                  className="form-select d-inline-block m-3 my-auto"
+                  style={{flex: "1"}}
                   aria-label="Select Report"
                   defaultValue="report Date"
                   ref={reportRef}
@@ -92,15 +101,12 @@ export default function DashboardReports() {
                   ))}
                 </select>
 
-                <button
-                  className="btn btn-primary d-inline-block my-auto my-3 mx-4"
-                  onClick={handleCreate}
-                >
-                  Create Report
-                </button>
+                
+             
               </div>
             </div>
           </div>
+          
           <div className="container  my-5 neoBorder">
             <h2 className="text-center py-4 px-5">Data</h2>
 

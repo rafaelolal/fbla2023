@@ -27,26 +27,28 @@ export default function AddNewsForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="row">
+      <div className="row mt-3">
         <div className="col-12 col-md-6 my-2">
-          <input type="date" className="form-control" required ref={dateRef} />
-        </div>
-
-        <div className="col-12 col-md-6 my-2">
+           <h6 className="fw-semibold">Title</h6>
           <input
             type="text"
             className="form-control"
-            placeholder="Title"
             required
             ref={titleRef}
           />
         </div>
-
         <div className="col-12 col-md-6 my-2">
+           <h6 className="fw-semibold">Release Date</h6>
+          <input type="date" className="form-control" required ref={dateRef} />
+        </div>
+
+        
+
+        <div className="col-12 my-2">
+           <h6 className="fw-semibold">Content</h6>
           <input
             type="textarea"
             className="form-control"
-            placeholder="Content"
             required
             ref={contentRef}
           />
@@ -55,7 +57,6 @@ export default function AddNewsForm() {
 
       <button
         className="btn eventBtn my-3"
-        style={{ width: "100px" }}
         type="submit"
       >
         Create

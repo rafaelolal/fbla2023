@@ -49,71 +49,82 @@ export default function AddEventForm(props: { mutate: KeyedMutator<any> }) {
   }
 
   return (
-    <div className="h-100 flex-column align-items-stretch mt-4">
+    
+    <div className="mt-4">
       <form onSubmit={handleSubmit}>
-        <div className="row">
+        <div className="col-12 my-4">
+          <h6 className="fw-semibold p-0">Title</h6>
           <input
             type="text"
             className="form-control"
-            placeholder="Title"
+           
             required
             ref={titleRef}
           />
         </div>
-        <div className="row">
-          <div className="col-6">
-            <div className="mt-3 fs-6 fw-semibold">Start Time</div>
+        
+          <div className="col-12 p-0 my-4">
+            <div className="w-50 d-inline-block pe-2">
+            <h6 className="fw-semibold">Start Time</h6>
             <input
               type="datetime-local"
-              className="form-control mb-1"
+              className="form-control"
               required
               ref={startsOnRef}
             />
-          </div>
+        </div>
 
-          <div className="col-6">
-            <div className="mt-3 fs-6 fw-semibold">End Time</div>
+          <div className="w-50 d-inline-block ps-2">
+            <h6 className="fw-semibold">End Time</h6>
             <input
               type="datetime-local"
-              className="form-control mb-1"
+              className="form-control"
               required
               ref={endsOnRef}
             />
+            </div>
           </div>
-        </div>
+       
 
-        <div className="row mt-4">
+        <div className="col-12 my-4">
+          <h6 className="fw-semibold p-0">Description</h6>
           <textarea
-            className="form-control my-2"
-            placeholder="Description"
+            className="form-control "
+            placeholder="The event is about..."
             required
             ref={descriptionRef}
           />
         </div>
-        <div className="col-12 mx-auto my-2">
-          <input
-            type="text"
-            className="form-control d-inline-block mx-1"
-            style={{ width: "30%" }}
-            placeholder="Location"
-            required
-            ref={locationRef}
+        
+       <h6 className="fw-semibold p-0 mt-4">Attributes</h6>
+        <div className="col-12 d-flex mb-4">
+         
+          <div className="d-inline-flex">
+            <input
+              type="text"
+              className="form-control"
+              
+              placeholder="Location"
+              required
+              ref={locationRef}
           />
-
-          <input
-            type="number"
-            className="form-control d-inline-block mx-1"
-            style={{ width: "30%" }}
-            placeholder="Points"
-            required
-            ref={pointsRef}
-          />
-
-          <select
-            className="form-select d-inline-block mx-1"
-            style={{ width: "30%" }}
-            ref={typeRef}
-            required
+          </div>
+          <div className="d-inline-flex">
+            <input
+                        type="number"
+                        className="form-control mx-2"
+                        
+                        placeholder="Points"
+                        required
+                        ref={pointsRef}
+                      />
+          </div>
+          <div className=" d-inline-flex">
+            <select
+              className="form-select"
+              
+              ref={typeRef}
+              required
           >
             <option value="Type">Type</option>
             <option value="Competition">Competition</option>
@@ -122,10 +133,20 @@ export default function AddEventForm(props: { mutate: KeyedMutator<any> }) {
             <option value="Trip">Trip</option>
             <option value="Fair">Fair</option>
           </select>
+          </div>
+          
+
+          
+
+          
         </div>
 
-        <label className="mt-4">
+        <div className="col-12 my-4">
+
+       <h6 className="fw-semibold p-0">Profile Image</h6>
+        <label className="d-flex flex-column">
           <input
+         
             required
             type="file"
             onChange={({ target }) => {
@@ -139,17 +160,23 @@ export default function AddEventForm(props: { mutate: KeyedMutator<any> }) {
           />
 
           {selectedImage && (
-            <img width="200px" height="auto" src={selectedImage} alt="" />
+            <img className="mx-auto mt-4" width="70%" height="auto" src={selectedImage} alt="" />
           )}
 
-          <button
+        </label>
+      </div>
+
+
+      <div className="col-12 mt-4">
+        <button
             className={`btn eventBtn ${uploading ? "disabled" : ""}`}
             type="submit"
           >
-            {uploading ? "Uploading.." : "Save"}
+            {uploading ? "Uploading.." : "Save Event"}
           </button>
-        </label>
+      </div>
       </form>
+      
     </div>
   );
 }

@@ -44,20 +44,21 @@ export default function DashboardHome() {
         <div className="col-8 mt-4 p-0"></div>
         <div className="col-8 mt-4 mb-2">
           <div className="row">
-            <div className="col-12 col-md me-0 me-md-4 p-4 mb-4 mb-md-0 neoBorder">
+            <div className="col-12 col-md-auto me-0 me-md-4 p-4 mb-4 mb-md-0 neoBorder">
               <h3>Actions</h3>
-
-              <button className="btn eventBtn me-3" onClick={updateLeaderboard}>
+              <div className="d-flex flex-column">
+              
+              <button className="btn eventBtn my-2" onClick={updateLeaderboard}>
                 Update Leaderboard
               </button>
 
               <Link href="/rally">
-                <button className="btn eventBtn">Access Rally</button>
+                <button className="btn eventBtn my-2">Access Rally</button>
               </Link>
 
               {user && (
                 <button
-                  className="btn eventBtn"
+                  className="btn eventBtn my-2"
                   onClick={() => {
                     auth.signOut();
                   }}
@@ -65,14 +66,15 @@ export default function DashboardHome() {
                   Sign Out
                 </button>
               )}
+              </div>
             </div>
 
-            <div className="col-12 col-md-8 p-4 neoBorder">
+            <div className="col-12 col-md p-4 neoBorder">
               <h3>Set Next Rally Date</h3>
 
               <form onSubmit={handleUpdateRally}>
-                <div className="row">
-                  <div className="col-12 col-md-6 my-2">
+                
+                  <div className="col-12 col-md-6 my-3">
                     <input
                       type="datetime-local"
                       className="form-control w-100 h-100"
@@ -80,7 +82,7 @@ export default function DashboardHome() {
                       ref={datetimeRef}
                     />
                   </div>
-                </div>
+                
 
                 <button className="btn eventBtn my-3" type="submit">
                   Set
