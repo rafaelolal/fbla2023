@@ -160,8 +160,8 @@ export default function IndexPage(props: {
         <h1 className="mt-5 pt-5 mb-3 text-center">NEWS</h1>
 
         <div className="mx-4">
-          <a className="btn btn-primary">
-            <Link className="nav-link fw-bolder fs-5 fc-2" href="/news/">
+          <a className="btn eventBtnO mb-3">
+            <Link className="nav-link fs-6 fc-2" href="/news/">
               See All
             </Link>
           </a>

@@ -4,14 +4,18 @@ import { NewsType } from "../../types/news";
 
 export default function News(props: NewsType) {
   return (
-    <div className="col-12 my-3">
+    <div className=" my-2">
       <div className="card">
-        <div className="card-header">
-          <span className="fw-semibold">
-            {toFormattedDate(props.createdOn)}
+        <div className="card-header w-100">
+          <span className="fw-semibold ">
+           {toFormattedDate(props.createdOn)}
           </span>
-          <Link href={`/news/${props.pk}`} style={{ color: "orange" }}>
-            <small className="ms-2">read more...</small>
+          <Link
+            className="text-end"
+            href={`/news/${props.pk}`}
+            style={{ color: "orange" }}
+          >
+            <small className="ms-2 ">read more...</small>
           </Link>
         </div>
         <div className="card-body">

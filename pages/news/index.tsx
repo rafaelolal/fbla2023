@@ -9,7 +9,8 @@ export default function IndexPage(props: { news: NewsType[] }) {
 
   return (
     <>
-      <div className="mx-4">
+      <div className="col-11 mx-auto my-5">
+        <h1 className="mt-5 pt-5 mb-4 text-center">Seal Coast Weekly</h1>
         <NewsList news={initialNews.current} />
       </div>
       <Footer />

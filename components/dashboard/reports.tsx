@@ -63,54 +63,78 @@ export default function DashboardReports() {
 
   return (
     <>
-      <h1>Reports</h1>
-
-      <button className="btn btn-primary" onClick={handleCreate}>
-        Create Report
-      </button>
-
-      <p>View Report:</p>
-
-      <select
-        className=""
-        aria-label="Select Report"
-        defaultValue="Report Date"
-        ref={reportRef}
-        onChange={retrieveHandler}
-      >
-        {data.map((news: { createdOn: string }, i: number) => (
+      <div className="row justify-content-center">
+        <div className="col-8 my-4 p-0">
+          <div className="container neoBorder">
+            <div className="row ">
+              <div
+                className="col-auto d-flex"
+                style={{ borderRight: "3px solid black" }}
+              >
+                <h2 className="my-auto p-3">Reports</h2>
+              </div>
+              <div className="col d-flex">
+                <button
+                  className="btn btn-primary d-inline-block my-auto my-3 mx-4"
+                  onClick={handleCreate}
+                >
+                  Create Report
+                </button>
+                <p className="d-inline-block my-auto my-3 mx-2">View Report:</p>
+                <select
+                  className="d-inline-block my-auto my-3"
+                  aria-label="Select Report"
+                  defaultValue="report Date"
+                  ref={reportRef}
+                  onChange={retrieveHandler}
+                >
+                  <option selected>Report Date</option>
+                  {data.map((news: { createdOn: string }, i: number) => (
           <option key={i} value={news.createdOn}>
             {news.createdOn}
           </option>
         ))}
-      </select>
-
-      <h2>Report Data</h2>
-
-      <div className="row">
-        <div className="col col-3">Name</div>
-
-        <div className="col col-3">Points</div>
-
-        <div className="col col-3">Grade</div>
-      </div>
-
-      {currentReport &&
-        currentReport.map((report, i) => (
-          <div key={i} className="row">
-            <div className="col col-3">
-              {report.firstName +
-                " " +
-                report.middleName +
-                " " +
-                report.lastName}
-            </div>
-            <div className="col col-3">{report.points}</div>
-            <div className="col col-3">
-              {report.grade ? report.grade : "N/A"}
+                </select>
+              </div>
             </div>
           </div>
-        ))}
+          <div className="container  my-5 neoBorder">
+            <h2 className="text-center py-4 px-5">Report Data</h2>
+            <div className="row justify-content-around py-3 px-5 border-bottom border-top bg-primary">
+              <div className="col-4 d-flex border-end">
+                <h5 className="m-auto">Name</h5>
+              </div>
+              <div className="col-4 d-flex border-end">
+                <h5 className="m-auto">Points</h5>
+              </div>
+              <div className="col-4 d-flex">
+                <h5 className="m-auto">Grade</h5>
+              </div>
+            </div>
+
+            {currentReport &&
+              currentReport.map((report, i) => (
+                <div
+                  key={i}
+                  className="row justify-content-around py-3  px-5 border-bottom"
+                >
+                  <div className="col-4 d-flex ">
+                    <h5 className="m-auto">
+                      {" "}
+                      {report.firstName + " " + report.middleName + " " + report.lastName}
+                    </h5>
+                  </div>
+                  <div className="col-4 d-flex">
+                    <h5 className="m-auto">{report.points}</h5>
+                  </div>
+                  <div className="col-4 d-flex">
+                    <h5 className="m-auto"> {report.grade ? report.grade : "N/A"}</h5>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

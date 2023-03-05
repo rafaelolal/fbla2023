@@ -6,10 +6,10 @@ import { toFormattedDatetime } from "../../helpers";
 
 export default function ProfilePage(props: { news: NewsType }) {
   return (
-    <>
+    <div className="m-4">
       <h1>{props.news.title}</h1>
       <p>Posted on: {toFormattedDatetime(props.news.createdOn)}</p>
-      <ReactMarkdown className="markdown">{props.news.content}</ReactMarkdown>
+      <ReactMarkdown className="reactMarkDown">{props.news.content}</ReactMarkdown>
     </>
   );
 }
