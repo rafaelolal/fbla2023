@@ -121,7 +121,7 @@ export default function DashboardReports() {
                   <div className="col-4 d-flex ">
                     <h5 className="m-auto">
                       {" "}
-                      {report.firstName + " " + report.middleName + " " + e.lastName}
+                      {report.firstName + " " + report.middleName + " " + report.lastName}
                     </h5>
                   </div>
                   <div className="col-4 d-flex">

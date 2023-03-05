@@ -60,19 +60,15 @@ export default function QNA() {
   return (
     <>
       <div className="bg-white p-5" style={{ borderTop: "solid 4px #000" }}>
+        <div className="col-8 mx-auto">
         <h2>Questions and Answers</h2>
-      </div>
-      <div
-        style={{
-          maxWidth: 500,
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
+        <div className="mt-3 w-100 mx-auto"
+      
       >
-        <div className="form-floating mb-3">
+        <div className="form-floating mb-3 border-normal " style={{borderRadius: "10px"}}>
           <input
             type="text"
-            className="form-control"
+            className="form-control "
             id="search"
             placeholder="Keywords"
             ref={searchRef}
@@ -94,10 +90,10 @@ export default function QNA() {
           "No search item yet"
         )}
 
-        <div className="accordion" id="accordionExample">
+        <div className="accordion border-normal " style={{borderRadius: "10px"}} id="accordionExample">
           {questions.map((question, i) => (
-            <div key={i} className="accordion-item">
-              <h2 className="accordion-header" id={`heading${i}`}>
+            <div key={i} className="accordion-item" style={{borderBottom: "3px solid black"}}>
+              <h2 className="accordion-header border-0" id={`heading${i}`}>
                 <button
                   className="accordion-button collapsed"
                   type="button"
@@ -110,7 +106,7 @@ export default function QNA() {
               </h2>
               <div
                 id={`collapse${i}`}
-                className="accordion-collapse collapse"
+                className="accordion-collapse collapse border-0"
                 aria-labelledby={`heading${i}`}
                 data-bs-parent="#accordionExample"
               >
@@ -120,6 +116,9 @@ export default function QNA() {
           ))}
         </div>
       </div>
+      </div>
+      </div>
+      
     </>
   );
 }
