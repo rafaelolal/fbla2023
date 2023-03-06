@@ -32,18 +32,34 @@ export default function DashboardStudentList() {
         mutate={mutate}
       />
 
-      <div className="row mt-4 justify-content-center">
-        <button
-          className="btn btn-primary"
+      <div className="row justify-content-center">
+        <div className="col-8 my-4 p-0">
+          <div className="container neoBorder  bg-light">
+            <div className="row ">
+              <div
+                className="col-auto d-flex"
+                style={{ borderRight: "3px solid black" }}
+              >
+                <h2 className="my-auto p-3">Students</h2>
+              </div>
+
+              <div className="col d-flex">
+                
+                <button
+          className="btn eventBtn m-3 me-5 my-auto"
           onClick={() => setShowCreateModal(true)}
         >
           Create Student
         </button>
-
-        <div className="pt-1 neoBorder  bg-light">
-          <h2 className="mb-2 py-4 px-5 text-center w-100">Students</h2>
-          <div className="container-fluid">
-            <div className="row justify-content-around py-3 px-2 border-bottom border-top bg-primary">
+                 </div>
+            </div>
+           
+          </div>
+          
+           <div className="container-fluid neoBorder my-5 bg-light">
+            
+            <div className="row justify-content-around py-3 px-3 border-bottom border-top bg-primary">
+              
               <div className="col-3 d-flex border-end">
                 <h5 className="m-auto">Student Name</h5>
               </div>
@@ -77,6 +93,8 @@ export default function DashboardStudentList() {
           </div>
         </div>
       </div>
+
+      
     </>
   );
 }
