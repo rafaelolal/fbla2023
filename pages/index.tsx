@@ -119,7 +119,7 @@ export default function IndexPage(props: {
 
       <div className="container my-5 pt-5">
         <div className="d-flex justify-content-between">
-          <h1 className="pb-2 ms-3">Top Events of the Week</h1>
+          <h1 className="pb-2 ms-3 ">Top Events of the Week</h1>
 
           <Link className="signBtn fs-5 ms-3 me-3 p-0" href="/events/">
             See All
@@ -139,7 +139,7 @@ export default function IndexPage(props: {
           </Link>
         </div>
 
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-evenly">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center justify-content-lg-between">
           {props.events.map((event: EventType, i: number) => (
             <HomeEvent
               key={i}

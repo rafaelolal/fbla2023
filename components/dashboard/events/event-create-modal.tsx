@@ -76,6 +76,7 @@ export default function CreateModal(props: {
 
       <form onSubmit={handleSubmit}>
         <Modal.Body>
+          <div className="container-fluid p-3">
           <div className="row">
             <input
               type="text"
@@ -87,7 +88,7 @@ export default function CreateModal(props: {
           </div>
 
           <div className="row">
-            <div className="col-6">
+            <div className="col-6 p-0 pe-2">
               <div className="mt-3 fs-6 fw-semibold">Start Time</div>
               <input
                 type="datetime-local"
@@ -97,7 +98,7 @@ export default function CreateModal(props: {
               />
             </div>
 
-            <div className="col-6">
+            <div className="col-6 p-0 ps-2">
               <div className="mt-3 fs-6 fw-semibold">End Time</div>
               <input
                 type="datetime-local"
@@ -108,7 +109,7 @@ export default function CreateModal(props: {
             </div>
           </div>
 
-          <div className="row mt-4">
+          <div className="row">
             <textarea
               className="form-control my-2"
               placeholder="Description"
@@ -117,11 +118,11 @@ export default function CreateModal(props: {
             />
           </div>
 
-          <div className="col-12 mx-auto my-2">
+          <div className="row justify-content-between">
             <input
               type="text"
-              className="form-control d-inline-block mx-1"
-              style={{ width: "30%" }}
+              className="form-control d-inline-block"
+              style={{ width: "32%" }}
               placeholder="Location"
               required
               ref={locationRef}
@@ -129,16 +130,16 @@ export default function CreateModal(props: {
 
             <input
               type="number"
-              className="form-control d-inline-block mx-1"
-              style={{ width: "30%" }}
+              className="form-control d-inline-block"
+              style={{ width: "32%" }}
               placeholder="Points"
               required
               ref={pointsRef}
             />
 
             <select
-              className="form-select d-inline-block mx-1"
-              style={{ width: "30%" }}
+              className="form-select d-inline-block"
+              style={{ width: "32%" }}
               ref={typeRef}
               required
             >
@@ -169,6 +170,7 @@ export default function CreateModal(props: {
               <img width="200px" height="auto" src={selectedImage} alt="" />
             )}
           </label>
+          </div>
         </Modal.Body>
 
         <Modal.Footer>
