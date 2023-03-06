@@ -12,22 +12,29 @@ export default function HelpPage() {
 
   return (
     <>
-      <div className="row justify-content-around my-5">
-        <div className="col-4 p-0 neoBorder b-radius-normal mt-5">
+    <div className="container-fluid" style={{ marginTop: `${-8 * 3}px` }}>
+      <div className="row ">
+        <div className="col-4 p-0 b-radius-normal" style={{borderRight: "4px solid #000"}}>
           <QNA />
         </div>
-        <div className="col-7 mt-5">
+        <div className="col-8 p-0 overflow-hidden">
+          
           <HelpNavbar />
+            <div className="container-fluid h-100" style={{borderTop: "4px solid #000"}}>
           <div
-            className="neoBorder pt-3"
-            style={{ backgroundColor: "#bbe4f2" }}
+            className="row h-100"
+            style={{ backgroundColor: "#bbe4f2", }}
           >
             {(page == "howToGuide" || page === undefined) && <HelpHowToGuide />}
             {page == "howWasItMade" && <HelpHowItsMade />}
           </div>
+          </div>
         </div>
       </div>
-      <Footer />
+     
+      </div>
+     <Footer />
+      
     </>
   );
 }

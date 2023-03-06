@@ -3,21 +3,23 @@ import Link from "next/link";
 export default function HelpNavbar() {
   return (
     <>
-      <div className="container-fluid justify-content-center">
-        <div className="">
+    <div className="container-fluid ">
+      <div className="row justify-content-center my-4">
+        
           <Link
             href="help?page=howToGuide"
-            className="btn eventBtnLB text-center"
+            className="btn eventBtn text-center fs-5 mx-3"
           >
-            How to Guide
+            How to Use Site
           </Link>
           <Link
             href="help?page=howWasItMade"
-            className="btn eventBtnLB text-center"
+            className="btn eventBtn text-center fs-5 mx-3"
           >
             How was it Made
           </Link>
-        </div>
+        
+      </div>
       </div>
     </>
   );

@@ -61,13 +61,24 @@ export default function QNA() {
     <>
       <div
         className="bg-white p-5 h-100"
-        style={{ borderTop: "solid 4px #000" }}
       >
         <div className="col-11 mx-auto">
           <h2>Questions and Answers</h2>
-          <div className="mt-3 w-100 mx-auto">
+          <div className="mt-4 w-100 mx-auto">
+             <div className="my-3"> {currentQuestion ? (
+              <div>
+                <ReactMarkdown className="markdown">
+                  {currentQuestion.question}
+                </ReactMarkdown>
+                <ReactMarkdown className="markdown">
+                  {currentQuestion.answer}
+                </ReactMarkdown>
+              </div>
+            ) : (
+              "No search item yet"
+            )}</div>
             <div
-              className="form-floating mb-3 border-normal "
+              className="form-floating mb-3 border-thin "
               style={{ borderRadius: "10px" }}
             >
               <input
@@ -81,33 +92,22 @@ export default function QNA() {
               <label htmlFor="search">Search</label>
             </div>
 
-            {currentQuestion ? (
-              <div>
-                <ReactMarkdown className="markdown">
-                  {currentQuestion.question}
-                </ReactMarkdown>
-                <ReactMarkdown className="markdown">
-                  {currentQuestion.answer}
-                </ReactMarkdown>
-              </div>
-            ) : (
-              "No search item yet"
-            )}
+          
 
             <div
-              className="accordion border-normal "
+              className="accordion"
               style={{ borderRadius: "10px" }}
               id="accordionExample"
             >
               {questions.map((question, i) => (
                 <div
                   key={i}
-                  className="accordion-item"
-                  style={{ borderBottom: "3px solid black" }}
+                  className="accordion-item my-3 b-radius-normal"
+                  style={{ border: "3px solid black" }}
                 >
                   <h2 className="accordion-header border-0" id={`heading${i}`}>
                     <button
-                      className="accordion-button collapsed"
+                      className="accordion-button collapsed b-radius-normal"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target={`#collapse${i}`}
@@ -116,6 +116,7 @@ export default function QNA() {
                       {question.question}
                     </button>
                   </h2>
+                  
                   <div
                     id={`collapse${i}`}
                     className="accordion-collapse collapse border-0"

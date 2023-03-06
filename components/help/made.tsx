@@ -3,15 +3,14 @@ export default function HelpHowItsMade() {
     <>
       <div className="container-fluid">
         <div className="row justify-content-center my-5 ">
-          <div className="col-12 col-md-3 text-end order-2 order-md-1">
+          <div className="col-12 col-lg-3 text-end order-2 order-lg-1">
             <img
               src="/images/help page/help_image_1.svg"
-              width="80%"
-              height="auto"
+              className="helpImage"
             ></img>
           </div>
 
-          <div className="col-12 col-md-3 text-center my-auto order-1 order-md-2">
+          <div className="col-12 col-lg-3 text-center my-auto order-1 order-lg-2">
             <h1 className="fw-semibold text-center">Technologies Used</h1>
             <h6 className="text-center px-3">
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -21,7 +20,7 @@ export default function HelpHowItsMade() {
             </h6>
           </div>
 
-          <div className="col-12 col-md-3 d-none d-lg-block my-auto order-sm-3">
+          <div className="col-12 col-lg-3 d-none d-lg-block my-auto order-sm-3">
             <img
               className="shake"
               src="/images/help page/arrow.svg"
@@ -32,7 +31,7 @@ export default function HelpHowItsMade() {
         </div>
 
         <div className="row justify-content-center my-5 ">
-          <div className="col-12 col-md-3 text-end d-none d-lg-block my-auto">
+          <div className="col-12 col-lg-3 text-end d-none d-lg-block my-auto">
             <img
               className="shake"
               src="/images/help page/arrowFlipped.svg"
@@ -41,7 +40,7 @@ export default function HelpHowItsMade() {
             ></img>
           </div>
 
-          <div className="col-12 col-md-3 text-center my-auto">
+          <div className="col-12 col-lg-3 text-center my-auto">
             <h1 className="fw-semibold text-center">Art Tools</h1>
             <h6 className="text-center px-3">
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -49,24 +48,22 @@ export default function HelpHowItsMade() {
               ever since the 1500s, when an unknown printer
             </h6>
           </div>
-          <div className="col-12 col-md-3">
+          <div className="col-12 col-lg-3">
             <img
               src="/images/help page/help_image_6.svg"
-              width="80%"
-              height="auto"
+              className="helpImage"
             ></img>
           </div>
         </div>
 
         <div className="row justify-content-center my-5 ">
-          <div className="col-12 col-md-3 text-end order-2 order-md-1">
+          <div className="col-12 col-lg-3 text-end order-2 order-lg-1">
             <img
               src="/images/help page/help_image_3.svg"
-              width="80%"
-              height="auto"
+              className="helpImage"
             ></img>
           </div>
-          <div className="col-12 col-md-3 text-center my-auto order-1 order-md-2">
+          <div className="col-12 col-lg-3 text-center my-auto order-1 order-lg-2">
             <h1 className="fw-semibold text-center">Styling Tools</h1>
             <h6 className="text-center px-3">
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -74,7 +71,7 @@ export default function HelpHowItsMade() {
               ever since the 1500s, when an unknown printer took a
             </h6>
           </div>
-          <div className="col-12 col-md-3 d-none d-lg-block my-auto order-sm-3">
+          <div className="col-12 col-lg-3 d-none d-lg-block my-auto order-sm-3">
             <img
               className="shake"
               src="/images/help page/arrow.svg"

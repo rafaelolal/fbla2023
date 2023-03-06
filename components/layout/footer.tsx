@@ -18,7 +18,7 @@ export default function Footer(props: any) {
       )}
 
       <div
-        className="bg-primary overflow-hidden text-light py-5"
+        className="container-fluid bg-primary overflow-hidden text-light py-5"
         style={{ borderTop: "solid 4px #000" }}
       >
         <div className="row row-cols-1 row-cols-md-2 justify-content-center text-dark">
