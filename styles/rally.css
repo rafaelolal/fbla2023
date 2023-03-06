@@ -1,39 +1,16 @@
-html,
-body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  border: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+.rally{
+    width: 100%;
+    height: auto;
+    object-fit: contain;     
 }
 
-*,
-*::before,
-*::after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
-  box-sizing: inherit;
+@media (min-width: 760px){
+  .rally{
+    height: 70vh;
+    width: auto;
+    margin: auto 0;
+  }
 }
-
-#app {
-  width: 100%;
-  height: 100%;
-
-  background: #212121;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.doors {
-  display: flex;
-}
-
 .door {
   background: #fafafa;
   box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.4) inset;
@@ -53,26 +30,49 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  font-size: 3rem;
+  font-size: 4rem;
 }
 
-.buttons {
-  margin: 1rem 0 2rem 0;
+@media (max-width: 768px){
+  .box{
+    font-size: 2rem;
+  }
 }
 
-button {
-  cursor: pointer;
-
-  font-size: 1.2rem;
-  text-transform: uppercase;
-
-  margin: 0 0.2rem 0 0.2rem;
+.rallySpinBtn, .rallyResetBtn, .rallyRewardBtn{
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 200px;
+  width: 200px;
 }
 
-.info {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
+.rallySpinBtn{
+  background-image: url("/images/slot page/spinUpBtn.svg");
 }
+
+.rallyResetBtn{
+  background-image: url("/images/slot page/resetUpBtn.svg");
+
+}
+
+.rallyRewardBtn{
+  background-image: url("/images/slot page/rewardUpBtn.svg");
+  width: 347px;
+
+}
+
+
+.rallySpinBtn:hover{
+  background-image: url("/images/slot page/spinDownBtn.svg");
+}
+
+.rallyResetBtn:hover{
+  background-image: url("/images/slot page/resetDownBtn.svg");
+
+}
+
+.rallyRewardBtn:hover{
+  background-image: url("/images/slot page/rewardDownBtn.svg");
+
+}
+
