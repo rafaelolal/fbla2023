@@ -65,7 +65,7 @@ export default function DashboardReports() {
     <>
       <div className="row justify-content-center">
         <div className="col-8 my-4 p-0">
-          <div className="container neoBorder">
+          <div className="container neoBorder  bg-light">
             <div className="row ">
               <div
                 className="col-auto d-flex"
@@ -107,7 +107,7 @@ export default function DashboardReports() {
             </div>
           </div>
           
-          <div className="container  my-5 neoBorder">
+          <div className="container  my-5 neoBorder  bg-light">
             <h2 className="text-center py-4 px-5">Data</h2>
 
             <div className="row justify-content-around py-3 px-5 border-bottom border-top bg-primary">

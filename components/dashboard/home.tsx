@@ -44,7 +44,7 @@ export default function DashboardHome() {
         <div className="col-8 mt-4 p-0"></div>
         <div className="col-8 mt-4 mb-2">
           <div className="row">
-            <div className="col-12 col-md-auto me-0 me-md-4 p-4 mb-4 mb-md-0 neoBorder">
+            <div className="col-12 col-md-auto me-0 me-md-4 p-4 mb-4 mb-md-0 neoBorder bg-light">
               <h3>Actions</h3>
               <div className="d-flex flex-column">
               
@@ -69,7 +69,7 @@ export default function DashboardHome() {
               </div>
             </div>
 
-            <div className="col-12 col-md p-4 neoBorder">
+            <div className="col-12 col-md p-4 neoBorder  bg-light">
               <h3>Set Next Rally Date</h3>
 
               <form onSubmit={handleUpdateRally}>
@@ -92,7 +92,7 @@ export default function DashboardHome() {
           </div>
         </div>
 
-        <div className="col-8 p-4 mb-4 mt-3 neoBorder">
+        <div className="col-8 p-4 mb-4 mt-3 neoBorder  bg-light">
           <h3>Add News</h3>
           <AddNewsForm />
         </div>
