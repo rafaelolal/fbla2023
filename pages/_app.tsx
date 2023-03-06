@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import Navbar from "../components/layout/navbar";
 import { AppWrapper } from "../context/state";
 import type { AppProps } from "next/app";
+import "../styles/rally.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
