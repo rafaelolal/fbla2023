@@ -7,6 +7,7 @@ import Footer from "../components/layout/footer";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { useAppContext } from "../context/state";
+import HomeEvent from "../components/events/home-event";
 
 export default function EventsPage(props: { events: EventType[] }) {
   const { user, isA } = useAppContext();
@@ -96,6 +97,8 @@ export default function EventsPage(props: { events: EventType[] }) {
 
   return (
     <>
+    <div className="container-fluid p-0">
+      <div className="row">
       <a className="visually-hidden" id="anchorButton" href={"#" + anchorId} />
 
       <div
@@ -125,12 +128,35 @@ export default function EventsPage(props: { events: EventType[] }) {
       </div>
 
       <Search filterOptions={filterOptions} setQuery={setQuery} />
-
+      <div className="d-none d-md-block my-5">
+        
+        <div className="row  ">
       <EventList
         events={currentEvents}
         attendancesData={attendances}
         attendancesMutate={attendancesMutate}
       />
+      </div></div>
+      </div>
+
+       <div className="row row-cols-1 justify-content-center d-block d-md-none  my-5">
+          {props.events.map((event: EventType, i: number) => (
+            <HomeEvent
+              key={i}
+              pk={event.pk}
+              image={event.image}
+              title={event.title}
+              type={event.type}
+              points={event.points}
+              description={event.description}
+              location={event.location}
+              startsOn={event.startsOn}
+              finishesOn={event.finishesOn}
+              cancelationReason={event.cancelationReason}
+            />
+          ))}
+        </div>
+        </div>
       <Footer />
     </>
   );

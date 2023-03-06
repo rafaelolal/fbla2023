@@ -3,7 +3,7 @@ export default function HelpHowToGuide() {
     <>
       <div className="container-fluid">
         <div className="row justify-content-center my-5 ">
-          <div className="col-12 col-md-3 text-end d-none d-lg-block my-auto">
+          <div className="col-12 col-xl-3 text-end d-none d-xl-block my-auto">
             <img
               className="shake"
               src="/images/help page/arrowFlipped.svg"
@@ -12,7 +12,7 @@ export default function HelpHowToGuide() {
             ></img>
           </div>
 
-          <div className="col-12 col-md-3 text-center my-auto">
+          <div className="col-12 col-xl-3 text-center my-auto">
             <h1 className="fw-semibold text-center">Join Events</h1>
             <h6 className="text-center px-3">
               To join an event, make sure you are logged in with the correct
@@ -20,24 +20,22 @@ export default function HelpHowToGuide() {
               the week; on the events page, you can see all events.
             </h6>
           </div>
-          <div className="col-12 col-md-3">
+          <div className="col-12 col-xl-3 text-center text-xl-start">
             <img
               src="/images/help page/help_image_4.svg"
-              width="80%"
-              height="auto"
+              className="helpImage"
             ></img>
           </div>
         </div>
         <div className="row justify-content-center my-5 ">
-          <div className="col-12 col-md-3 text-end order-2 order-md-1">
+          <div className="col-12 col-xl-3 text-center text-xl-end order-2 order-xl-1">
             <img
               src="/images/help page/help_image_2.svg"
-              width="80%"
-              height="auto"
+              className="helpImage"
             ></img>
           </div>
 
-          <div className="col-12 col-md-3 text-center my-auto order-1 order-md-2">
+          <div className="col-12 col-xl-3 text-center my-auto order-1 order-xl-2">
             <h1 className="fw-semibold text-center">Collect Points</h1>
             <h6 className="text-center px-3">
               When you join an event, it is added to your calender in your
@@ -47,7 +45,7 @@ export default function HelpHowToGuide() {
             </h6>
           </div>
 
-          <div className="col-12 col-md-3 d-none d-lg-block my-auto order-sm-3">
+          <div className="col-12 col-xl-3 d-none d-xl-block my-auto order-sm-3">
             <img
               className="shake"
               src="/images/help page/arrow.svg"
@@ -58,7 +56,7 @@ export default function HelpHowToGuide() {
         </div>
 
         <div className="row justify-content-center my-5 ">
-          <div className="col-12 col-md-3 text-end d-none d-lg-block my-auto">
+          <div className="col-12 col-xl-3 text-end d-none d-xl-block my-auto">
             <img
               className="shake"
               src="/images/help page/arrowFlipped.svg"
@@ -66,7 +64,7 @@ export default function HelpHowToGuide() {
               height="auto"
             ></img>
           </div>
-          <div className="col-12 col-md-3 text-center my-auto">
+          <div className="col-12 col-xl-3 text-center my-auto">
             <h1 className="fw-semibold text-center">Win Prizes</h1>
             <h6 className="text-center px-3">
               Every quarter we will have a rally. In the rally, a random winner
@@ -75,11 +73,11 @@ export default function HelpHowToGuide() {
             </h6>
           </div>
 
-          <div className="col-12 col-md-3">
+          <div className="col-12 col-xl-3 text-center text-xl-start">
             <img
+           
               src="/images/help page/help_image_5.svg"
-              width="80%"
-              height="auto"
+              className="helpImage"
             ></img>
           </div>
         </div>

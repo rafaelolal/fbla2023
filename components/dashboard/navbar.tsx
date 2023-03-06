@@ -2,6 +2,7 @@ import Link from "next/link";
 
 export default function DashboardNavbar() {
   return (
+    <div className="row">
     <nav className="navbar navbar-expand bg-primary ">
       <div className="container-fluid justify-content-center">
         <div className="navbar-nav">
@@ -23,5 +24,6 @@ export default function DashboardNavbar() {
         </div>
       </div>
     </nav>
+    </div>
   );
 }

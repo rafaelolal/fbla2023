@@ -2,12 +2,12 @@ import Link from "next/link";
 import { formatStartAndFinish } from "../../helpers";
 import { HomeEventType } from "../../types/events";
 
-export default function HomeEvent(props: HomeEventType) {
+export default function  HomeEvent(props: HomeEventType) {
   return (
     <>
-      <div className="d-inline-flex p-3">
+      <div className="d-inline-flex  p-3">
         <div
-          className="card bg-primary eventEffect b-radius-normal"
+          className="card bg-primary mx-auto mx-lg-0 eventEffect b-radius-normal"
           style={{
             height: "auto",
             maxWidth: "390px",
