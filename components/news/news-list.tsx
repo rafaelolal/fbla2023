@@ -3,7 +3,7 @@ import { NewsType } from "../../types/news";
 
 export default function NewsList(props: { news: NewsType[], orange: boolean }) {
   return (
-    <div className={`row ${props.orange ? "bg-lightTertiary" : "bg-primary"} justify-content-center p-3 neoBorder`}>
+    <div className={`container ${props.orange ? "bg-lightTertiary" : "bg-primary"} justify-content-center p-3 neoBorder`}>
       {props.news.map((newsItem, i) => (
         <News
           key={i}

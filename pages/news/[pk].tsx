@@ -6,8 +6,9 @@ import { toFormattedDatetime } from "../../helpers";
 
 export default function NewsPage(props: { news: NewsType }) {
   return (
-    <div className="m-5 pt-5">
-      <div className="col-11 col-md-8 col-xxl-5 mx-auto neoBorder bg-primary p-4">
+    <div className="newsroom-container">
+      <div className="col-11 col-md-9 col-xxl-6 mx-auto " style={{padding: "4% 0 4%"}}>
+        <div className="neoBorder bg-primary p-4">
       <h1>This Week at Seal Coast Charter...</h1>
       <p>Posted on: {toFormattedDatetime(props.news.createdOn)}</p>
       <h1 className="mt-5 fw-bold">{props.news.title}</h1>
@@ -19,6 +20,7 @@ export default function NewsPage(props: { news: NewsType }) {
       }}>
         {props.news.content}
       </ReactMarkdown>
+    </div>
     </div>
     </div>
   );
@@ -38,7 +40,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       news: response.data,
-      bodyStyle: { backgroundColor: "white" },
+      bodyStyle: { backgroundColor: "#a0d8ea" },
     },
   };
 }

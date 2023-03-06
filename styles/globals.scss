@@ -63,6 +63,8 @@ $b-radius-normal: 7px;
   padding: 0.25rem 1.4rem;
   text-decoration: none;
   color: $dark;
+  height: fit-content;
+  width: fit-content;
 }
 
 .eventBtn {
@@ -137,6 +139,7 @@ $b-radius-normal: 7px;
   background-size: cover; 
   background-position: right bottom; 
   background-repeat: no-repeat;
+  margin-top: -20px;
 }
 
 .bubble-container {
