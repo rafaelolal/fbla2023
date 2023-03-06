@@ -38,7 +38,7 @@ export default function AttendanceModal(props: {
   }
 
   return (
-    <Modal show={props.show} onHide={props.toggleModal}>
+    <Modal centered show={props.show} onHide={props.toggleModal}>
       <Modal.Header closeButton>
         <Modal.Title>Attendance</Modal.Title>
       </Modal.Header>
