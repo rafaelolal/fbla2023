@@ -32,7 +32,7 @@ export default function DashboardPage() {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   return {
     props: {
       bodyStyle: { backgroundColor: "#fff" },

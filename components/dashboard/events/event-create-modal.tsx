@@ -35,7 +35,7 @@ export default function CreateModal(props: {
         startsOn: new Date(`${startsOnRef.current.value}+00:00`),
         finishesOn: new Date(`${endsOnRef.current.value}+00:00`),
         description: descriptionRef.current.value,
-        image: "https://picsum.photos/seed/00000/300", // use this default until actually using files
+        image: selectedImage, // selectedFile
         location: locationRef.current.value,
         title: titleRef.current.value,
         points: parseInt(pointsRef.current.value),
@@ -57,7 +57,8 @@ export default function CreateModal(props: {
 
     if (!selectedFile) return;
 
-    console.log("image uploaded");
+    setSelectedImage("https://picsum.photos/seed/00000/300");
+    console.log("Event image uploaded");
 
     setUploading(false);
   }

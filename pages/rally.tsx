@@ -1,9 +1,21 @@
-import { url } from "inspector";
+import axios from "axios";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
-export default function RallyPage() {
+export default function RallyPage(props: {
+  names: {
+    pk: string;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+  }[];
+}) {
+  console.log({ names: props.names });
+
   useEffect(() => {
-    const items = ["RAfael", "DJ", "Breno"];
+    const items = props.names
+      .filter((name) => name.firstName !== null)
+      .map((name) => `${name.firstName} ${name.lastName.slice(0, 1)}.`);
     const doors = document.querySelectorAll(".door");
 
     document.querySelector("#spinner").addEventListener("click", spin);
@@ -90,42 +102,53 @@ export default function RallyPage() {
     init();
   });
 
+  function handleGivePrize() {
+    // axios
+    //   .post("http://127.0.0.1:8000/api/prize/create/", {
+    //     student: 100,
+    //     type: "Spirit",
+    //   })
+    //   .then(() => {
+    //     toast.success("Prize given successfully");
+    //   })
+    //   .catch((error) => {
+    //     throw error;
+    //   });
+    toast.success("Prize given successfully");
+  }
+
   return (
     <>
-    <div className="d-flex flex-column">
-      <div className="position-relative mx-auto" style={{height: "fit-content", width: "fit-content",}}>
-        <img
-          className="mx-auto rally"
-          
-          src="/images/slot page/slot machine.svg"
-        ></img>
-
+      <div className="d-flex flex-column">
         <div
-        className="door d-flex"
-        style={{
-          position: "absolute",
-          top: "40.5%",
-          left: "17.5%",
-          width: "54%",
-          height: "27%",
-          zIndex: "-1",
-        }}
-      >
-        <div className="boxes mx-auto my-auto"></div>
-      </div>
- <div className="">
+          className="position-relative mx-auto"
+          style={{ height: "fit-content", width: "fit-content" }}
+        >
+          <img
+            className="mx-auto rally"
+            src="/images/slot page/slot machine.svg"
+          ></img>
 
-      </div>
+          <div
+            className="door d-flex actual-door"
+            style={{
+              position: "absolute",
+              top: "40.5%",
+              left: "17.5%",
+              width: "54%",
+              height: "27%",
+              zIndex: "-1",
+            }}
+          >
+            <div className="boxes mx-auto my-auto"></div>
+          </div>
 
-      <div className="door visually-hidden">
-        <div className="boxes"></div>
-      </div>
+          <div className="door visually-hidden">
+            <div className="boxes"></div>
+          </div>
+        </div>
 
-      </div>
-     
-      
-
-      {/* <div
+        {/* <div
         className="fixed-bottom"
         style={{
           width: "100%",
@@ -135,27 +158,34 @@ export default function RallyPage() {
         }}
       ></div> */}
 
-      
-
-      
-
-      <div className="dashboard row">
-        
-        <div  className="rallySpinBtn d-inline-block" id="spinner"></ div>
-        <div className="rallyResetBtn d-inline-block" id="reseter"></div>
-        <div className="rallyRewardBtn d-inline-block" id="rewarder"></div>
-        
-      </div>
+        <div className="dashboard row">
+          <div className="rallySpinBtn d-inline-block" id="spinner"></div>
+          <div className="rallyResetBtn d-inline-block" id="reseter"></div>
+          <div
+            className="rallyRewardBtn d-inline-block"
+            id="rewarder"
+            onClick={handleGivePrize}
+          ></div>
+        </div>
       </div>
     </>
   );
 }
 
 export async function getStaticProps() {
+  const response = await axios
+    .get("http://127.0.0.1:8000/api/students/rally/")
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
+
   return {
     props: {
+      names: response.data,
       bodyStyle: { backgroundColor: "#fff" },
     },
   };
 }
-

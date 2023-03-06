@@ -45,19 +45,19 @@ export default function DashboardEvent(
 
       <div className="row justify-content-around py-3  px-3 border-bottom">
         <div className="col-3 d-flex">
-          <h5 className="my-auto">{props.title}</h5>
+          <h6 className="my-auto">{props.title}</h6>
         </div>
 
         <div className="col-3 d-flex">
-          <h5 className="my-auto">{toFormattedDatetime(props.startsOn)}</h5>
+          <h6 className="my-auto">{toFormattedDatetime(props.startsOn)}</h6>
         </div>
 
         <div className="col-3 d-flex">
-          <h5 className="my-auto">{toFormattedDatetime(props.finishesOn)}</h5>
+          <h6 className="my-auto">{toFormattedDatetime(props.finishesOn)}</h6>
         </div>
 
         <div className="col-3 d-flex">
-          <div className="mx-auto my-auto">
+          <div className="m-auto">
             <button
               className={`btn eventBtn mx-1 ${
                 props.participants.some((o) => o.final) ||

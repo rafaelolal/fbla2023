@@ -4,7 +4,7 @@ import { MutableRefObject, useRef } from "react";
 import { toast } from "react-toastify";
 import { useAppContext } from "../../context/state";
 import { auth } from "../../firebaseConfig";
-import AddNewsForm from "./add-news-form";
+import CreateNewsForm from "./add-news-form";
 
 export default function DashboardHome() {
   const { user } = useAppContext();
@@ -47,25 +47,27 @@ export default function DashboardHome() {
             <div className="col-12 col-md-auto me-0 me-md-4 p-4 mb-4 mb-md-0 neoBorder bg-light">
               <h3>Actions</h3>
               <div className="d-flex flex-column">
-              
-              <button className="btn eventBtn my-2" onClick={updateLeaderboard}>
-                Update Leaderboard
-              </button>
-
-              <Link href="/rally">
-                <button className="btn eventBtn my-2">Access Rally</button>
-              </Link>
-
-              {user && (
                 <button
                   className="btn eventBtn my-2"
-                  onClick={() => {
-                    auth.signOut();
-                  }}
+                  onClick={updateLeaderboard}
                 >
-                  Sign Out
+                  Update Leaderboard
                 </button>
-              )}
+
+                <Link href="/rally">
+                  <button className="btn eventBtn my-2">Access Rally</button>
+                </Link>
+
+                {user && (
+                  <button
+                    className="btn eventBtn my-2"
+                    onClick={() => {
+                      auth.signOut();
+                    }}
+                  >
+                    Sign Out
+                  </button>
+                )}
               </div>
             </div>
 
@@ -73,16 +75,14 @@ export default function DashboardHome() {
               <h3>Set Next Rally Date</h3>
 
               <form onSubmit={handleUpdateRally}>
-                
-                  <div className="col-12 col-md-6 my-3">
-                    <input
-                      type="datetime-local"
-                      className="form-control w-100 h-100"
-                      required
-                      ref={datetimeRef}
-                    />
-                  </div>
-                
+                <div className="col-12 col-md-6 my-3">
+                  <input
+                    type="datetime-local"
+                    className="form-control w-100 h-100"
+                    required
+                    ref={datetimeRef}
+                  />
+                </div>
 
                 <button className="btn eventBtn my-3" type="submit">
                   Set
@@ -93,8 +93,8 @@ export default function DashboardHome() {
         </div>
 
         <div className="col-8 p-4 mb-4 mt-3 neoBorder  bg-light">
-          <h3>Add News</h3>
-          <AddNewsForm />
+          <h3>Create News</h3>
+          <CreateNewsForm />
         </div>
       </div>
     </>
