@@ -17,6 +17,7 @@ export default function NewsPage(props: { news: NewsType }) {
       components={{
         p: ({node, ...props}) => <p className="ms-5"{...props}/>,
         h3: ({node, ...props}) => <h3 className="mt-3 fw-semibold"{...props}/>,
+        img: ({node, ...props}) => <img className="border-thin"{...props}/>
       }}>
         {props.news.content}
       </ReactMarkdown>
