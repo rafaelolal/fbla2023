@@ -1,10 +1,13 @@
+import { useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import DashboardEventList from "./event-list";
-import AddEventForm from "./add-event-form";
 import { toast } from "react-toastify";
+import CreateModal from "./event-create-modal";
 
 export default function DashboardEvents() {
+  const [showCreateModal, setShowCreateModal] = useState(false);
+
   const { data, error, mutate } = useSWR(
     "http://127.0.0.1:8000/api/events/dashboard",
     async (url) => {
@@ -23,19 +26,22 @@ export default function DashboardEvents() {
 
   return (
     <>
-      <div className="row mt-4 justify-content-center">
-        <div className="col-12 col-lg-4 ">
-          <div className="neoBorder  bg-light p-5">
-            <h2 className="mb-2 ">Add An Event</h2>
-            <AddEventForm mutate={mutate} />
-          </div>
-        </div>
+      <CreateModal
+        show={showCreateModal}
+        setShow={setShowCreateModal}
+        mutate={mutate}
+      />
 
-        <div className="col-12 col-lg-7 mx-2 mt-5 mt-lg-0 ">
-          <div className="pt-1 neoBorder  bg-light">
-            <h2 className="mb-2 py-4 text-center">Events</h2>
-            <DashboardEventList mutate={mutate} events={data} />
-          </div>
+      <div className="row mt-4 justify-content-center">
+        <button
+          className="btn btn-primary"
+          onClick={() => setShowCreateModal(true)}
+        >
+          Create Event
+        </button>
+        <div className="pt-1 neoBorder  bg-light">
+          <h2 className="mb-2 py-4 text-center">Events</h2>
+          <DashboardEventList mutate={mutate} events={data} />
         </div>
       </div>
     </>

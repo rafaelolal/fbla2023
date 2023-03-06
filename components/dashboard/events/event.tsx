@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import AttendanceModal from "./attendance-modal";
 import { DashboardEventType } from "../../../types/events";
-import { formatStartAndFinish } from "../../../helpers";
+import { toFormattedDatetime } from "../../../helpers";
 import { KeyedMutator } from "swr";
 
 export default function DashboardEvent(
@@ -48,21 +48,15 @@ export default function DashboardEvent(
           <h5 className="my-auto">{props.title}</h5>
         </div>
 
-        <div className="col-5 d-flex ">
-          <h6 className="m-auto px-3">
-            {props.cancelationReason
-              ? "Canceled: "
-              : new Date(props.startsOn) < now
-              ? "Occurred on"
-              : "Scheduled for"}{" "}
-            {props.cancelationReason
-              ? props.cancelationReason
-              : `${formatStartAndFinish(props.startsOn, props.finishesOn)}
-            with ${props.participants.length} participants`}
-          </h6>
+        <div className="col-3 d-flex">
+          <h5 className="my-auto">{toFormattedDatetime(props.startsOn)}</h5>
         </div>
 
-        <div className="col-4 d-flex">
+        <div className="col-3 d-flex">
+          <h5 className="my-auto">{toFormattedDatetime(props.finishesOn)}</h5>
+        </div>
+
+        <div className="col-3 d-flex">
           <div className="mx-auto my-auto">
             <button
               className={`btn eventBtn mx-1 ${
@@ -81,7 +75,7 @@ export default function DashboardEvent(
               className={`btn eventBtn mx-1 ${
                 new Date(props.startsOn) < now ? "disabledBtn" : ""
               }`}
-              style={{ height: "fit-content"}}
+              style={{ height: "fit-content" }}
               onClick={() => handleDelete(props.pk)}
             >
               Delete
@@ -93,7 +87,7 @@ export default function DashboardEvent(
                   ? "disabledBtn"
                   : ""
               }`}
-              style={{ height: "fit-content"}}
+              style={{ height: "fit-content" }}
               onClick={() => {
                 props.setCanceling(props.pk);
                 props.setShowCancelingModal(true);
