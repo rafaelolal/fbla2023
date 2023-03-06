@@ -124,6 +124,14 @@ $b-radius-normal: 7px;
   margin-right: 9px;
 }
 
+.newsroom-container{
+  min-height: 100vh; 
+  background-image: url(/images/newsroomBG.svg); 
+  background-size: cover; 
+  background-position: right bottom; 
+  background-repeat: no-repeat;
+}
+
 .bubble-container {
   background-image: url("/images/homepage pic.svg");
   width: 100%;
