@@ -12,12 +12,12 @@ export default function HelpPage() {
 
   return (
     <>
-    <div className="container-fluid" style={{ marginTop: `${-8 * 3}px` }}>
+    <div className="container-fluid" style={{ marginTop: "-1rem"}}>
       <div className="row ">
-        <div className="col-4 p-0 b-radius-normal" style={{borderRight: "4px solid #000"}}>
+        <div className="col-12 col-lg-4 p-0" style={{borderRight: "4px solid #000"}}>
           <QNA />
         </div>
-        <div className="col-8 p-0 overflow-hidden">
+        <div className="col-12 col-lg-8 p-0 overflow-hidden" style={{ borderTop: "4px solid #000"}}>
           
           <HelpNavbar />
             <div className="container-fluid h-100" style={{borderTop: "4px solid #000"}}>

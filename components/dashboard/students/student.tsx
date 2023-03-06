@@ -38,7 +38,7 @@ export default function DashboardStudent(
       </div>
 
       <div className="col-3 d-flex">
-        <h6 className="my-auto">
+        <h6 className="m-auto">
           {props.grade === null ? "N/A" : props.grade}
         </h6>
       </div>
