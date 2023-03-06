@@ -1,16 +1,12 @@
+@import "./colors";
+
 .rally{
     width: 100%;
     height: auto;
     object-fit: contain;     
 }
 
-@media (min-width: 760px){
-  .rally{
-    height: 70vh;
-    width: auto;
-    margin: auto 0;
-  }
-}
+
 .door {
   background: #fafafa;
   box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.4) inset;
@@ -76,3 +72,22 @@
 
 }
 
+
+.dashboard{
+  background-color: $primary;
+  border-top: 4px solid #000;
+  padding: 1% 2% 5%;
+  justify-content: center;
+}
+
+
+@media (min-width: 760px){
+  .rally{
+    height: 70vh;
+    width: auto;
+    margin: auto 0;
+  }
+  .dashboard{
+    height: 30vh;
+  }
+}

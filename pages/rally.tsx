@@ -1,3 +1,4 @@
+import { url } from "inspector";
 import { useEffect } from "react";
 
 export default function RallyPage() {
@@ -92,7 +93,7 @@ export default function RallyPage() {
   return (
     <>
     <div className="d-flex flex-column">
-      <div className="position-relative mx-auto" style={{height: "fit-content", width: "fit-content"}}>
+      <div className="position-relative mx-auto" style={{height: "fit-content", width: "fit-content",}}>
         <img
           className="mx-auto rally"
           
@@ -138,7 +139,7 @@ export default function RallyPage() {
 
       
 
-      <div className="dashboard bg-primary d-flex" style={{borderTop: "4px solid #000", alignSelf: "stretch", padding: "1% 2% 5%"}}>
+      <div className="dashboard row">
         
         <div  className="rallySpinBtn d-inline-block" id="spinner"></ div>
         <div className="rallyResetBtn d-inline-block" id="reseter"></div>
