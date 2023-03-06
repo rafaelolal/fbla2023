@@ -33,8 +33,9 @@ export default function DashboardReports() {
     axios
       .post("http://127.0.0.1:8000/api/report/create/")
       .then((response) => {
-        reportRef.current.value = response.data.createdOn;
         mutate();
+        reportRef.current.value = response.data.createdOn;
+        retrieveHandler();
         toast.success("Report created successfully");
       })
       .catch((error) => {
@@ -75,9 +76,7 @@ export default function DashboardReports() {
               </div>
 
               <div className="col d-flex">
-                
-                
-                  <button
+                <button
                   className="btn eventBtn m-3 me-5 my-auto"
                   onClick={handleCreate}
                 >
@@ -87,7 +86,7 @@ export default function DashboardReports() {
 
                 <select
                   className="form-select d-inline-block m-3 my-auto"
-                  style={{flex: "1"}}
+                  style={{ flex: "1" }}
                   aria-label="Select Report"
                   defaultValue="report Date"
                   ref={reportRef}
@@ -100,13 +99,10 @@ export default function DashboardReports() {
                     </option>
                   ))}
                 </select>
-
-                
-             
               </div>
             </div>
           </div>
-          
+
           <div className="container  my-5 neoBorder  bg-light">
             <h2 className="text-center py-4 px-5">Data</h2>
 

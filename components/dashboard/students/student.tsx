@@ -29,7 +29,7 @@ export default function DashboardStudent(
             Boolean(i)
           )
             ? `${props.email}`
-            : `${props.firstName} ${props.middleName} ${props.lastName}`}
+            : `${props.lastName}, ${props.firstName} ${props.middleName}`}
         </h6>
       </div>
 
@@ -38,7 +38,9 @@ export default function DashboardStudent(
       </div>
 
       <div className="col-3 d-flex">
-        <h6 className="m-auto">{props.grade === null ? "N/A" : props.grade}</h6>
+        <h6 className="my-auto">
+          {props.grade === null ? "N/A" : props.grade}
+        </h6>
       </div>
 
       <div className="col-2 d-flex">

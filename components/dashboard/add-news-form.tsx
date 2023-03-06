@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 export default function AddNewsForm() {
   const dateRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const contentRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const contentRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const titleRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -29,36 +29,21 @@ export default function AddNewsForm() {
     <form onSubmit={handleSubmit}>
       <div className="row mt-3">
         <div className="col-12 col-md-6 my-2">
-           <h6 className="fw-semibold">Title</h6>
-          <input
-            type="text"
-            className="form-control"
-            required
-            ref={titleRef}
-          />
+          <h6 className="fw-semibold">Title</h6>
+          <input type="text" className="form-control" required ref={titleRef} />
         </div>
         <div className="col-12 col-md-6 my-2">
-           <h6 className="fw-semibold">Release Date</h6>
+          <h6 className="fw-semibold">Release Date</h6>
           <input type="date" className="form-control" required ref={dateRef} />
         </div>
 
-        
-
         <div className="col-12 my-2">
-           <h6 className="fw-semibold">Content</h6>
-          <input
-            type="textarea"
-            className="form-control"
-            required
-            ref={contentRef}
-          />
+          <h6 className="fw-semibold">Content</h6>
+          <textarea className="form-control" required ref={contentRef} />
         </div>
       </div>
 
-      <button
-        className="btn eventBtn my-3"
-        type="submit"
-      >
+      <button className="btn eventBtn my-3" type="submit">
         Create
       </button>
     </form>

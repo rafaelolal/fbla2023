@@ -15,7 +15,6 @@ export default function UpdateModal(props: {
   const [uploading, setUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
-  const uploadedImageRef = useRef<string>(); // use this default until actually using files
 
   const firstNameRef = useRef() as MutableRefObject<HTMLInputElement>;
   const middleNameRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -35,7 +34,7 @@ export default function UpdateModal(props: {
         lastName: lastNameRef.current.value,
         grade: +gradeRef.current.value,
         biography: biographyRef.current.value,
-        image: uploadedImageRef.current,
+        image: selectedImage, // selectedFile
       })
       .then(() => {
         if (props.firstTime) {
@@ -59,8 +58,11 @@ export default function UpdateModal(props: {
 
     if (!selectedFile) return;
 
-    uploadedImageRef.current =
-      "https://static.generated.photos/vue-static/face-generator/landing/wall/20.jpg"; // use this default until actually using files
+    setSelectedImage(
+      "https://static.generated.photos/vue-static/face-generator/landing/wall/20.jpg"
+    ); // use this default until actually using files
+
+    console.log("Profile image uploaded");
 
     setUploading(false);
   }
@@ -161,6 +163,7 @@ export default function UpdateModal(props: {
                     const file = target.files[0];
                     setSelectedImage(URL.createObjectURL(file));
                     setSelectedFile(file);
+                    handleUpload();
                   }
                 }}
               />
@@ -172,14 +175,6 @@ export default function UpdateModal(props: {
                 )}
               </div>
             </label>
-            <button
-              onClick={handleUpload}
-              style={{ opacity: uploading ? ".5" : "1" }}
-              className={`btn btn-primary ${uploading ? "disabled" : ""}`}
-              type="button"
-            >
-              {uploading ? "Uploading.." : "Upload"}
-            </button>
           </div>
         </Modal.Body>
 

@@ -74,7 +74,6 @@ export default function ProfilePage(props: ProfileStudentType) {
                 objectFit: "cover",
                 borderRadius: "50%",
                 aspectRatio: "1/1",
-
                 border: "4px solid black",
               }}
               src={props.image}
@@ -82,15 +81,10 @@ export default function ProfilePage(props: ProfileStudentType) {
             <hr></hr>
 
             <h5 className="fw-bold text-center pt-1">
-              {"   "}
-              {props.firstName} {props.middleName} {props.lastName}{" "}
+              {props.firstName} {props.middleName} {props.lastName}
             </h5>
 
-            <h6 className="text-center pt-1">
-              Grade:
-              {"   "}
-              {props.grade}
-            </h6>
+            <h6 className="text-center pt-1">Grade: {props.grade}</h6>
 
             <hr />
             <h6 className="text-center fw-bold">Awards</h6>
@@ -163,14 +157,12 @@ export default function ProfilePage(props: ProfileStudentType) {
             </h5>
 
             <h5 className="d-inline mx-2 align-middle">
-              {" "}
               Joined: {props.events.length}
             </h5>
           </div>
 
           <div className="mt-3 mb-2">
             <h6 className="d-inline-block mx-2">
-              {" "}
               <div
                 className="d-inline-block mx-1 bg-tertiary"
                 style={{
@@ -182,7 +174,6 @@ export default function ProfilePage(props: ProfileStudentType) {
             </h6>
 
             <h6 className="d-inline-block mx-2">
-              {" "}
               <div
                 className="d-inline-block mx-1"
                 style={{
@@ -195,7 +186,6 @@ export default function ProfilePage(props: ProfileStudentType) {
             </h6>
 
             <h6 className="d-inline-block mx-2">
-              {" "}
               <div
                 className="d-inline-block mx-1 bg-secondary"
                 style={{

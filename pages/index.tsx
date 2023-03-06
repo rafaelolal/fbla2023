@@ -121,10 +121,7 @@ export default function IndexPage(props: {
         <div className="d-flex justify-content-between">
           <h1 className="pb-2 ms-3">Top Events of the Week</h1>
 
-          <Link
-            className="signBtn fs-5 ms-3 me-3 p-0"
-            href="/events/"
-          >
+          <Link className="signBtn fs-5 ms-3 me-3 p-0" href="/events/">
             See All
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -160,15 +157,16 @@ export default function IndexPage(props: {
           ))}
         </div>
 
-        <a id="news"></a>
-        
-        <h1 className="mt-5 pt-5 mb-3 text-center">NEWS</h1>
+        <a id="news" />
+        <div className="mt-5 d-flex justify-content-between">
+          <h1 className="pb-2 ms-3">News</h1>
 
-        <div className="d-flex flex-column">
-          
-            <a className="signBtn fs-5 p-0 ms-auto my-3">
-            <Link className="nav-link fs-6 fc-2" href="/news/">
-             See All
+          <Link
+            className="signBtn fs-5 ms-3 me-3 p-0"
+            style={{ height: "fit-content" }}
+            href="/news/"
+          >
+            See All
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="64"
@@ -182,11 +180,10 @@ export default function IndexPage(props: {
                 d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
               />
             </svg>
-            </Link>
-          </a>
-          <NewsList news={props.news} orange={true} />
-          
+          </Link>
         </div>
+
+        <NewsList news={props.news} orange={true} />
       </div>
       <Footer />
     </>
