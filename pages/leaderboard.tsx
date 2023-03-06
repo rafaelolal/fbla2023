@@ -10,7 +10,7 @@ export default function LeaderboardPage(props: {
 }) {
   return (
     <>
-      <div className="w-100 p-0 p-5 border-0 leaderboard-bg">
+      <div className="w-100 p-1 p-md-5 border-0 leaderboard-bg">
         <h6
           className="bg-lightTertiary text-dark ms-auto me-3 py-1 mt-5 px-3 "
           style={{
@@ -21,7 +21,7 @@ export default function LeaderboardPage(props: {
           Leaderboard updated on: {toFormattedDate(props.leaderboard.createdOn)}
         </h6>
         <div className="container" style={{ padding: "7% 0" }}>
-          <div className="col-10 col-md-8 col-xl-7 fs-4 mx-auto pt-5 ">
+          <div className="col-11 col-md-9 col-xl-7 fs-4 mx-auto pt-5 ">
             <div
               className="container-fluid neoBorder pb-4  b-radius-normal position-relative px-0  "
               style={{
@@ -39,23 +39,23 @@ export default function LeaderboardPage(props: {
                 <h1 className="text-primary px-3">i</h1>
               </div>
               <div
-                className="row px-3 mx-3 border-thin mb-3 bg-lightTertiary"
+                className="row mx-3 border-thin mb-3 bg-lightTertiary"
                 style={{ borderRadius: "20px" }}
               >
                 <div
-                  className="col-2 col-lg-3 text-center  py-2 fs-5"
+                  className="col-3 col-lg-3 text-center  py-2 fs-5"
                   style={{ borderRight: "3px solid #000" }}
                 >
                   Rank
                 </div>
 
                 <div
-                  className="col-8 col-lg-6 text-center py-2 fs-5"
+                  className="col-6 col-lg-6 text-center py-2 fs-5"
                   style={{ borderRight: "3px solid #000" }}
                 >
                   Student
                 </div>
-                <div className="col-2 col-lg-3 text-center py-2 fs-5">
+                <div className="col-3 col-lg-3 text-center py-2 fs-5">
                   Points
                 </div>
               </div>

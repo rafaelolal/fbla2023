@@ -65,38 +65,41 @@ export default function QNA() {
         <div className="col-11 mx-auto">
           <h2>Questions and Answers</h2>
           <div className="mt-4 w-100 mx-auto">
-             <div className="my-3"> {currentQuestion ? (
+             <div className="mt-3 mb-4"> {currentQuestion ? (
               <div>
+                <div className="bg-quaternary text-light b-radius-normal p-3">
                 <ReactMarkdown className="markdown">
                   {currentQuestion.question}
                 </ReactMarkdown>
                 <ReactMarkdown className="markdown">
                   {currentQuestion.answer}
                 </ReactMarkdown>
+                </div>
               </div>
             ) : (
               "No search item yet"
             )}</div>
             <div
-              className="form-floating mb-3 border-thin "
-              style={{ borderRadius: "10px" }}
+              className="form-floating mb-4 border-thin "
+              style={{ borderRadius: "30px" }}
             >
               <input
                 type="text"
-                className="form-control "
+                className="form-control border-0 ps-4"
                 id="search"
                 placeholder="Keywords"
+                style={{ borderRadius: "30px" }}
                 ref={searchRef}
                 onChange={getTopAnswer}
               />
-              <label htmlFor="search">Search</label>
+              <label className="ps-4"htmlFor="search" >Search</label>
             </div>
 
           
 
             <div
               className="accordion"
-              style={{ borderRadius: "10px" }}
+              style={{ borderRadius: "30px" }}
               id="accordionExample"
             >
               {questions.map((question, i) => (

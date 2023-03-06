@@ -6,7 +6,7 @@ export default function NewsList(props: { news: NewsType[]; orange: boolean }) {
     <div
       className={`container ${
         props.orange ? "bg-lightTertiary" : "bg-primary"
-      } justify-content-center p-3 neoBorder mx-2`}
+      } justify-content-center p-3 neoBorder`}
     >
       {props.news.map((newsItem, i) => (
         <News

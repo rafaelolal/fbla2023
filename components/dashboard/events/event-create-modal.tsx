@@ -78,10 +78,10 @@ export default function CreateModal(props: {
         <Modal.Body>
           <div className="container-fluid p-3">
           <div className="row">
+            <div className="mb-1 fs-6 fw-semibold p-0">Title</div>
             <input
               type="text"
               className="form-control"
-              placeholder="Title"
               required
               ref={titleRef}
             />
@@ -89,7 +89,7 @@ export default function CreateModal(props: {
 
           <div className="row">
             <div className="col-6 p-0 pe-2">
-              <div className="mt-3 fs-6 fw-semibold">Start Time</div>
+              <div className="mt-3 mb-1 fs-6 fw-semibold">Start Time</div>
               <input
                 type="datetime-local"
                 className="form-control mb-1"
@@ -99,7 +99,7 @@ export default function CreateModal(props: {
             </div>
 
             <div className="col-6 p-0 ps-2">
-              <div className="mt-3 fs-6 fw-semibold">End Time</div>
+              <div className="mt-3 mb-1 fs-6 fw-semibold">End Time</div>
               <input
                 type="datetime-local"
                 className="form-control mb-1"
@@ -110,15 +110,17 @@ export default function CreateModal(props: {
           </div>
 
           <div className="row">
+            <div className="p-0 mt-3 mb-1 fs-6 fw-semibold">Description</div>
             <textarea
               className="form-control my-2"
-              placeholder="Description"
+              placeholder="This event is about..."
               required
               ref={descriptionRef}
             />
           </div>
 
           <div className="row justify-content-between">
+            <div className="p-0 mt-3 mb-1 fs-6 fw-semibold">Attributes</div>
             <input
               type="text"
               className="form-control d-inline-block"
@@ -151,8 +153,12 @@ export default function CreateModal(props: {
               <option value="Fair">Fair</option>
             </select>
           </div>
+          </div>
 
-          <label className="mt-4">
+
+          <div className="row">
+            <label>
+            <div className="mt-3 mb-1 fs-6 fw-semibold p-0">Profile Image</div>
             <input
               required
               type="file"

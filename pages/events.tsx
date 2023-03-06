@@ -97,8 +97,7 @@ export default function EventsPage(props: { events: EventType[] }) {
 
   return (
     <>
-    <div className="container-fluid p-0">
-      <div className="row">
+    
       <a className="visually-hidden" id="anchorButton" href={"#" + anchorId} />
 
       <div
@@ -106,8 +105,7 @@ export default function EventsPage(props: { events: EventType[] }) {
         style={{ marginTop: `${-17 * 3}px` }}
       >
         <h5
-          className="title m-auto fw-bold text-primary"
-          style={{ fontSize: "6rem", zIndex: "10" }}
+          className="title m-auto fw-bold text-primary eventsPageStyle"
         >
           Join Events
         </h5>
@@ -126,17 +124,17 @@ export default function EventsPage(props: { events: EventType[] }) {
         <span className="fish m"></span>
         <span className="fish n"></span>
       </div>
-
+<div className="container-fluid">
       <Search filterOptions={filterOptions} setQuery={setQuery} />
-      <div className="d-none d-md-block my-5">
+      <div className="row d-none d-md-block my-5">
         
-        <div className="row  ">
+        
       <EventList
         events={currentEvents}
         attendancesData={attendances}
         attendancesMutate={attendancesMutate}
       />
-      </div></div>
+      
       </div>
 
        <div className="row row-cols-1 justify-content-center d-block d-md-none  my-5">
@@ -156,6 +154,7 @@ export default function EventsPage(props: { events: EventType[] }) {
             />
           ))}
         </div>
+        
         </div>
       <Footer />
     </>

@@ -63,7 +63,8 @@ export default function StudentCreateModal(props: {
 
       <form onSubmit={handleSubmit}>
         <Modal.Body>
-          <div className="mb-3">
+          <div className="container-fluid p-3">
+          <div className="row mb-1">
             <label htmlFor="emailInput" className="form-label">
               Student email
             </label>
@@ -85,7 +86,8 @@ export default function StudentCreateModal(props: {
               }}
             />
           </div>
-          <div className="mb-3">
+         
+          <div className="row mt-3 mb-1">
             <label htmlFor="passwordInput" className="form-label">
               Default password
             </label>
@@ -98,6 +100,7 @@ export default function StudentCreateModal(props: {
               readOnly
             />
           </div>
+           </div>
         </Modal.Body>
 
         <Modal.Footer>

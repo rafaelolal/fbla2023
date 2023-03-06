@@ -12,7 +12,7 @@ export default function LeaderboardRow(props: LeaderboardStudentType) {
         className="row py-2 border-thin m-3 bg-light"
         style={{ borderRadius: "20px", zIndex: "10" }}
       >
-        <div className="col-2 col-lg-3 d-flex">
+        <div className="col-3 col-lg-3 d-flex">
           <h3
             className="my-auto mx-auto fw-semibold "
             style={{ color: "#3ba4aa" }}
@@ -29,7 +29,7 @@ export default function LeaderboardRow(props: LeaderboardStudentType) {
           </h3>
         </div>
 
-        <div className="col-8 col-lg-6 d-flex">
+        <div className="col-6 col-lg-6 d-flex">
           <div className="my-auto mx-auto mx-md-0 text-center text-md-start fs-6 fs-md-4">
             <img
               className="border- mx-4"
@@ -50,7 +50,7 @@ export default function LeaderboardRow(props: LeaderboardStudentType) {
           </div>
         </div>
 
-        <div className="col-2 col-lg-3 d-flex">
+        <div className="col-3 col-lg-3 d-flex">
           <h4 className="my-auto mx-auto">{props.points}</h4>
         </div>
       </div>
