@@ -6,14 +6,14 @@ export default function News(props: NewsType) {
   return (
     <div className=" my-2">
       <div className="card">
-        <div className="card-header w-100">
-          <span className="fw-semibold ">
+        <div className="card-header d-flex">
+          <span className="fw-semibold " style={{flex: "1"}}>
            {toFormattedDate(props.createdOn)}
           </span>
           <Link
-            className="text-end"
+            className="text-quaternary"
             href={`/news/${props.pk}`}
-            style={{ color: "orange" }}
+            
           >
             <small className="ms-2 ">read more...</small>
           </Link>

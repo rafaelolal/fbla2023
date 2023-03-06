@@ -11,7 +11,7 @@ export default function Search(props: {
 
   return (
     <div className="col-11 col-md-10 col-xxl-9 mx-auto">
-      <div className="row my-5 mx-auto justify-content-center">
+      <div className="row mt-5 mx-auto justify-content-center">
         <div className="col">
           <input
             className="form-control"

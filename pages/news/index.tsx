@@ -9,12 +9,15 @@ export default function NewsListPage(props: { news: NewsType[] }) {
 
   return (
     <>
-      <div className="col-11 mx-auto my-5">
-        <h1 className="mt-5 pt-5 mb-4 text-center">Seal Coast Weekly</h1>
-        <NewsList news={initialNews.current} />
+    <div className="newsroom-container" >
+      <div className="col-8 col-md-7 col-xxl-5 mx-auto" style={{padding: "4% 0 8%"}}>
+        <h1 className="m-auto fw-bold text-primary text-center mb-4"
+          style={{ fontSize: "4rem", zIndex: "10" }} >Seal Coast Weekly</h1>
+        <NewsList news={initialNews.current} orange={false} />
       </div>
-      <Footer />
-    </>
+      
+    </div>
+    <Footer /></>
   );
 }
 
@@ -31,7 +34,7 @@ export async function getServerSideProps() {
   return {
     props: {
       news: response.data,
-      bodyStyle: { backgroundColor: "white" },
+      bodyStyle: { backgroundColor: "#a0d8ea" },
     },
   };
 }

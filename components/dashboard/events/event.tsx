@@ -63,15 +63,15 @@ export default function DashboardEvent(
         </div>
 
         <div className="col-4 d-flex">
-          <div className="mx-auto">
+          <div className="mx-auto my-auto">
             <button
               className={`btn eventBtn mx-1 ${
                 props.participants.some((o) => o.final) ||
                 new Date(props.startsOn) > now
-                  ? "disabled"
+                  ? "disabledBtn"
                   : ""
               }`}
-              style={{ height: "fit-content", margin: "auto 0" }}
+              style={{ height: "fit-content" }}
               onClick={toggleModal}
             >
               Attendance
@@ -79,9 +79,9 @@ export default function DashboardEvent(
 
             <button
               className={`btn eventBtn mx-1 ${
-                new Date(props.startsOn) < now ? "disabled" : ""
+                new Date(props.startsOn) < now ? "disabledBtn" : ""
               }`}
-              style={{ height: "fit-content", margin: "auto 0" }}
+              style={{ height: "fit-content"}}
               onClick={() => handleDelete(props.pk)}
             >
               Delete
@@ -90,10 +90,10 @@ export default function DashboardEvent(
             <button
               className={`btn eventBtn mx-1 ${
                 props.cancelationReason || new Date(props.startsOn) < now
-                  ? "disabled"
+                  ? "disabledBtn"
                   : ""
               }`}
-              style={{ height: "fit-content", margin: "auto 0" }}
+              style={{ height: "fit-content"}}
               onClick={() => {
                 props.setCanceling(props.pk);
                 props.setShowCancelingModal(true);

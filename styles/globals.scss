@@ -101,6 +101,13 @@ $b-radius-normal: 7px;
   background-color: #88c8dc;
 }
 
+
+.disabledBtn{
+  background-color: #f6f6f6;
+  color: #c4c4c4;
+
+}
+
 .signForm {
   width: 400px;
   height: 350px;
@@ -115,6 +122,14 @@ $b-radius-normal: 7px;
   width: 28px;
   height: 28px;
   margin-right: 9px;
+}
+
+.newsroom-container{
+  min-height: 100vh; 
+  background-image: url(/images/newsroomBG.svg); 
+  background-size: cover; 
+  background-position: right bottom; 
+  background-repeat: no-repeat;
 }
 
 .bubble-container {
@@ -440,3 +455,5 @@ $b-radius-normal: 7px;
     background-image: url("/images/leaderboard/leaderboardBG2.svg");
   }
 }
+
+

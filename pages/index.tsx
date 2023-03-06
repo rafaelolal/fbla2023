@@ -171,7 +171,7 @@ export default function IndexPage(props: {
             </Link>
           </a>
 
-          <NewsList news={props.news} />
+          <NewsList news={props.news} orange={true} />
         </div>
       </div>
       <Footer />
