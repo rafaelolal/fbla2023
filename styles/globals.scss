@@ -454,16 +454,11 @@ $b-radius-normal: 7px;
 }
 
 .leaderboard-bg {
-  background-image: url("/images/leaderboard/leaderboardBG.svg");
-  background-position: center bottom;
+  background-image: url("/images/leaderboard/topOfLeaderboard.svg"), url("/images/leaderboard/bottomOfLeaderboard.svg"), url("/images/leaderboard/bubbles.svg");
+  background-position: top, bottom, center;
   background-size: 100% auto;
-  background-repeat: no-repeat;
-}
-
-@media (min-width: 780px) {
-  .leaderboard-bg {
-    background-image: url("/images/leaderboard/leaderboardBG2.svg");
-  }
+  background-repeat: no-repeat, no-repeat, repeat;
+  margin-top: -100px;
 }
 
 

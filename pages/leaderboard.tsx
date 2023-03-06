@@ -10,9 +10,9 @@ export default function LeaderboardPage(props: {
 }) {
   return (
     <>
-      <div className="w-100 p-0 p-0 border-0 leaderboard-bg">
+      <div className="w-100 p-0 p-5 border-0 leaderboard-bg">
         <h6
-          className="bg-lightTertiary text-dark ms-auto me-3 py-1 px-3 "
+          className="bg-lightTertiary text-dark ms-auto me-3 py-1 mt-5 px-3 "
           style={{
             width: "fit-content",
             borderRadius: "20px",
