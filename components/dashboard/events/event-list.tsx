@@ -26,11 +26,15 @@ export default function DashboardEventList(props: {
             <h5 className="m-auto">Event Name</h5>
           </div>
 
-          <div className="col-5 d-flex border-end">
-            <h5 className="m-auto">Description</h5>
+          <div className="col-3 d-flex border-end">
+            <h5 className="m-auto">Starts On</h5>
           </div>
 
-          <div className="col-4 d-flex">
+          <div className="col-3 d-flex border-end">
+            <h5 className="m-auto">Finishes On</h5>
+          </div>
+
+          <div className="col-3 d-flex">
             <h5 className="m-auto">Actions</h5>
           </div>
         </div>
