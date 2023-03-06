@@ -35,7 +35,7 @@ export default function DashboardPage() {
 export async function getStaticProps() {
   return {
     props: {
-      bodyStyle: { backgroundColor: "#a0d8ea" },
+      bodyStyle: { backgroundColor: "#fff" },
     },
   };
 }

@@ -31,19 +31,38 @@ export default function DashboardEvents() {
         setShow={setShowCreateModal}
         mutate={mutate}
       />
+      <div className="row justify-content-center">
+        <div className="col-8 my-4 p-0">
+          <div className="container neoBorder  bg-light">
+            <div className="row ">
+              <div
+                className="col-auto d-flex"
+                style={{ borderRight: "3px solid black" }}
+              >
+                <h2 className="my-auto p-3">Events</h2>
+              </div>
 
-      <div className="row mt-4 justify-content-center">
-        <button
-          className="btn btn-primary"
+              <div className="col d-flex">
+                
+                
+                  <button
+          className="btn btn eventBtn m-3 me-5 my-auto"
           onClick={() => setShowCreateModal(true)}
         >
           Create Event
         </button>
-        <div className="pt-1 neoBorder  bg-light">
-          <h2 className="mb-2 py-4 text-center">Events</h2>
-          <DashboardEventList mutate={mutate} events={data} />
+                
+             
+              </div>
+            </div>
+          </div>
+          
+          <div className="container-fluid  my-5 neoBorder  bg-light">
+            <DashboardEventList mutate={mutate} events={data} />
+          </div>
         </div>
       </div>
+      
     </>
   );
 }

@@ -123,7 +123,6 @@ export default function IndexPage(props: {
 
           <Link
             className="signBtn fs-5 ms-3 me-3 p-0"
-            style={{ height: "fit-content" }}
             href="/events/"
           >
             See All
@@ -162,16 +161,31 @@ export default function IndexPage(props: {
         </div>
 
         <a id="news"></a>
+        
         <h1 className="mt-5 pt-5 mb-3 text-center">NEWS</h1>
 
-        <div className="mx-4">
-          <a className="btn eventBtnO mb-3">
+        <div className="d-flex flex-column">
+          
+            <a className="signBtn fs-5 p-0 ms-auto my-3">
             <Link className="nav-link fs-6 fc-2" href="/news/">
-              See All
+             See All
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="64"
+              height="32"
+              fill="currentColor"
+              className="bi bi-arrow-right ps-2"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+              />
+            </svg>
             </Link>
           </a>
-
           <NewsList news={props.news} orange={true} />
+          
         </div>
       </div>
       <Footer />

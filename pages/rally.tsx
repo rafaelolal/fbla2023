@@ -1,3 +1,4 @@
+import { url } from "inspector";
 import { useEffect } from "react";
 
 export default function RallyPage() {
@@ -91,18 +92,38 @@ export default function RallyPage() {
 
   return (
     <>
-      <div className="d-flex" style={{ height: "80vh", width: "100%" }}>
+    <div className="d-flex flex-column">
+      <div className="position-relative mx-auto" style={{height: "fit-content", width: "fit-content",}}>
         <img
-          className="mx-auto"
-          style={{
-            width: "auto",
-            height: "100%",
-            marginBottom: "8rem",
-            objectFit: "contain",
-          }}
-          src="/images/slot machine.svg"
+          className="mx-auto rally"
+          
+          src="/images/slot page/slot machine.svg"
         ></img>
+
+        <div
+        className="door d-flex"
+        style={{
+          position: "absolute",
+          top: "40.5%",
+          left: "17.5%",
+          width: "54%",
+          height: "27%",
+          zIndex: "-1",
+        }}
+      >
+        <div className="boxes mx-auto my-auto"></div>
       </div>
+ <div className="">
+
+      </div>
+
+      <div className="door visually-hidden">
+        <div className="boxes"></div>
+      </div>
+
+      </div>
+     
+      
 
       {/* <div
         className="fixed-bottom"
@@ -114,28 +135,27 @@ export default function RallyPage() {
         }}
       ></div> */}
 
-      <div
-        className="door"
-        style={{
-          position: "absolute",
-          top: "40%",
-          left: "32.2%",
-          width: "32%",
-          height: "20%",
-          zIndex: "-1",
-        }}
-      >
-        <div className="boxes"></div>
-      </div>
+      
 
-      <div className="door visually-hidden">
-        <div className="boxes"></div>
-      </div>
+      
 
-      <div className="buttons">
-        <button id="spinner">Spin</button>
-        <button id="reseter">Reset</button>
+      <div className="dashboard row">
+        
+        <div  className="rallySpinBtn d-inline-block" id="spinner"></ div>
+        <div className="rallyResetBtn d-inline-block" id="reseter"></div>
+        <div className="rallyRewardBtn d-inline-block" id="rewarder"></div>
+        
+      </div>
       </div>
     </>
   );
 }
+
+export async function getStaticProps() {
+  return {
+    props: {
+      bodyStyle: { backgroundColor: "#fff" },
+    },
+  };
+}
+

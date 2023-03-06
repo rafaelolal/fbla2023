@@ -5,7 +5,7 @@ import { HomeEventType } from "../../types/events";
 export default function HomeEvent(props: HomeEventType) {
   return (
     <>
-      <div className="d-inline-flex justify-content-center p-3">
+      <div className="d-inline-flex p-3">
         <div
           className="card bg-primary eventEffect b-radius-normal"
           style={{

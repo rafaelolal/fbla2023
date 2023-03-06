@@ -10,8 +10,8 @@ export default function NewsListPage(props: { news: NewsType[] }) {
   return (
     <>
     <div className="newsroom-container" >
-      <div className="col-8 col-md-7 col-xxl-5 mx-auto" style={{padding: "4% 0 8%"}}>
-        <h1 className="m-auto fw-bold text-primary text-center mb-4"
+      <div className="col-11 col-md-9 col-xxl-6 mx-auto" style={{padding: "4% 0 4%"}}>
+        <h1 className="m-auto fw-bold text-dark text-center mb-4"
           style={{ fontSize: "4rem", zIndex: "10" }} >Seal Coast Weekly</h1>
         <NewsList news={initialNews.current} orange={false} />
       </div>
