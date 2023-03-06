@@ -19,7 +19,7 @@ export default function DashboardStudentList() {
   );
 
   if (error) return <div>An error occurred.</div>;
-  if (!data) return <div>Loading ...</div>;
+  if (!data) return <div>Loading...</div>;
 
   return (
     <>
