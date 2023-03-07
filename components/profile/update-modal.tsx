@@ -114,6 +114,7 @@ export default function UpdateModal(props: {
             <label htmlFor="lastNameInput" className="form-label">
               Last Name
             </label>
+
             <input
               type="text"
               className="form-control"
