@@ -121,7 +121,7 @@ export default function RallyPage(props: {
     <>
       <div className="d-flex flex-column">
         <div
-          className="position-relative mx-auto"
+          className="position-relative mx-auto sandBg"
           style={{ height: "fit-content", width: "fit-content" }}
         >
           <img
