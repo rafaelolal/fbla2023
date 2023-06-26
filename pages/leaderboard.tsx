@@ -69,7 +69,7 @@ export default function LeaderboardPage(props: {
                     middleName={student.middleName}
                     lastName={student.lastName}
                     rank={student.rank}
-                    points={student.points}
+                    currentPoints={student.currentPoints}
                   />
                 ))}
               </div>
@@ -101,6 +101,8 @@ export async function getServerSideProps() {
     .catch((error) => {
       throw error;
     });
+
+  console.log({ data: studentsResponse.data });
 
   return {
     props: {

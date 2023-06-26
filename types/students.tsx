@@ -24,7 +24,8 @@ export type ProfileStudentType = {
   middleName: string;
   lastName: string;
   grade: number;
-  points: number;
+  currentPoints: number;
+  balance: number;
   rank: number | null;
   biography: string;
   image: string;
@@ -49,5 +50,5 @@ export type LeaderboardStudentType = {
   middleName: string;
   lastName: string;
   rank: number | null;
-  points: number;
+  currentPoints: number;
 };

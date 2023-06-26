@@ -51,7 +51,7 @@ export default function LeaderboardRow(props: LeaderboardStudentType) {
         </div>
 
         <div className="col-3 col-lg-3 d-flex">
-          <h4 className="my-auto mx-auto">{props.points}</h4>
+          <h4 className="my-auto mx-auto">{props.currentPoints}</h4>
         </div>
       </div>
     </>

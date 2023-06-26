@@ -152,7 +152,7 @@ export default function ProfilePage(
             />
 
             <h5 className="d-inline mx-2 align-middle">
-              Points: {props.points}
+              Balance: {props.balance}
             </h5>
 
             <h5 className="d-inline mx-2 align-middle">Rank: {props.rank}</h5>
