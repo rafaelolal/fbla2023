@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 export default function RallyPage(props: {
   names: {
-    pk: string;
+    id: string;
     firstName: string;
     middleName: string;
     lastName: string;

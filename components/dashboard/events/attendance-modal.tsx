@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { ParticipantType } from "../../../types/events";
 
 export default function AttendanceModal(props: {
-  pk: number;
+  id: number;
   show: boolean;
   toggleModal: () => void;
   participants: ParticipantType[];
@@ -52,14 +52,14 @@ export default function AttendanceModal(props: {
               <input
                 className="form-check-input"
                 type="checkbox"
-                value={o.pk}
-                id={`check-${props.pk}-${o.student}`}
+                value={o.id}
+                id={`check-${props.id}-${o.student}`}
                 defaultChecked={o.attended}
               />
 
               <label
                 className="form-check-label"
-                htmlFor={`check-${props.pk}-${o.student}`}
+                htmlFor={`check-${props.id}-${o.student}`}
               >
                 {o.studentName}
               </label>

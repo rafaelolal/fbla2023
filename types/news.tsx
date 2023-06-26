@@ -1,5 +1,5 @@
 export type NewsType = {
-  pk: number;
+  id: number;
   title: string;
   createdOn: string;
   content: string;

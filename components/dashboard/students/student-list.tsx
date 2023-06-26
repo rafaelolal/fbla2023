@@ -44,28 +44,24 @@ export default function DashboardStudentList() {
               </div>
 
               <div className="col d-flex">
-                
                 <button
-          className="btn eventBtn m-3 me-5 my-auto"
-          onClick={() => setShowCreateModal(true)}
-        >
-          Create Student
-        </button>
-                 </div>
+                  className="btn eventBtn m-3 me-5 my-auto"
+                  onClick={() => setShowCreateModal(true)}
+                >
+                  Create Student
+                </button>
+              </div>
             </div>
-           
           </div>
-          
-           <div className="container-fluid neoBorder my-5 bg-light">
-            
+
+          <div className="container-fluid neoBorder my-5 bg-light">
             <div className="row justify-content-around py-3 px-3 border-bottom border-top bg-primary">
-              
               <div className="col-3 d-flex border-end">
                 <h5 className="m-auto">Student Name</h5>
               </div>
 
               <div className="col-3 d-flex border-end">
-                <h5 className="m-auto">PK</h5>
+                <h5 className="m-auto">id</h5>
               </div>
 
               <div className="col-3 d-flex border-end">
@@ -81,7 +77,7 @@ export default function DashboardStudentList() {
               data.map((student: DashboardStudentType, i: number) => (
                 <DashboardStudent
                   key={i}
-                  pk={student.pk}
+                  id={student.id}
                   firstName={student.firstName}
                   middleName={student.middleName}
                   lastName={student.lastName}
@@ -93,8 +89,6 @@ export default function DashboardStudentList() {
           </div>
         </div>
       </div>
-
-      
     </>
   );
 }

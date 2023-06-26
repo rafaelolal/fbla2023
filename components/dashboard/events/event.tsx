@@ -21,15 +21,15 @@ export default function DashboardEvent(
     setShow(!show);
   }
 
-  function handleDelete(pk: number) {
+  function handleDelete(id: number) {
     axios
-      .delete(`http://127.0.0.1:8000/api/event/${pk}/destroy/`)
+      .delete(`http://127.0.0.1:8000/api/event/${id}/destroy/`)
       .then(() => {
         props.mutate();
         toast.success("Event deleted successfully");
       })
       .catch((error) => {
-        toast.error(`/event/${pk}/destroy/ (${error.code}): ${error.message}`);
+        toast.error(`/event/${id}/destroy/ (${error.code}): ${error.message}`);
         throw error;
       });
   }
@@ -37,7 +37,7 @@ export default function DashboardEvent(
   return (
     <>
       <AttendanceModal
-        pk={props.pk}
+        id={props.id}
         toggleModal={toggleModal}
         show={show}
         participants={props.participants}
@@ -76,7 +76,7 @@ export default function DashboardEvent(
                 new Date(props.startsOn) < now ? "disabledBtn" : ""
               }`}
               style={{ height: "fit-content" }}
-              onClick={() => handleDelete(props.pk)}
+              onClick={() => handleDelete(props.id)}
             >
               Delete
             </button>
@@ -89,7 +89,7 @@ export default function DashboardEvent(
               }`}
               style={{ height: "fit-content" }}
               onClick={() => {
-                props.setCanceling(props.pk);
+                props.setCanceling(props.id);
                 props.setShowCancelingModal(true);
               }}
             >

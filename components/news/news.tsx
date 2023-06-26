@@ -7,14 +7,10 @@ export default function News(props: NewsType) {
     <div className=" my-2">
       <div className="card">
         <div className="card-header d-flex">
-          <span className="fw-semibold " style={{flex: "1"}}>
-           {toFormattedDate(props.createdOn)}
+          <span className="fw-semibold " style={{ flex: "1" }}>
+            {toFormattedDate(props.createdOn)}
           </span>
-          <Link
-            className="text-quaternary"
-            href={`/news/${props.pk}`}
-            
-          >
+          <Link className="text-quaternary" href={`/news/${props.id}`}>
             <small className="ms-2 ">read more...</small>
           </Link>
         </div>

@@ -11,7 +11,7 @@ export default function NewsList(props: { news: NewsType[]; orange: boolean }) {
       {props.news.map((newsItem, i) => (
         <News
           key={i}
-          pk={newsItem.pk}
+          id={newsItem.id}
           title={newsItem.title}
           content={newsItem.content}
           createdOn={newsItem.createdOn}

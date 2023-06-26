@@ -1,7 +1,7 @@
 import { KeyedMutator } from "swr";
 
 export type ParticipantType = {
-  pk: number;
+  id: number;
   attended: boolean;
   final: boolean;
   event: number;
@@ -10,7 +10,7 @@ export type ParticipantType = {
 };
 
 type CommonEventType = {
-  pk: number;
+  id: number;
   title: string;
   startsOn: string;
   finishesOn: string;
@@ -40,7 +40,11 @@ export type HomeEventType = CommonEventType & {
 export type ProfileEventType = CommonEventType;
 
 export type QueryType = {
+  search: string;
   type: string;
-  startsOn: string;
   location: string;
+  points: string;
+  startDate: string;
+  startTime: string;
+  duration: string;
 };

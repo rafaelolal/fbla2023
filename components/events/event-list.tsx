@@ -4,7 +4,7 @@ import { KeyedMutator } from "swr";
 
 export default function EventList(props: {
   events: EventType[];
-  attendancesData: { pk: number; event: number }[];
+  attendancesData: { id: number; event: number }[];
   attendancesMutate: KeyedMutator<any>;
 }) {
   let attendedEvents: number[] = [];
@@ -12,21 +12,21 @@ export default function EventList(props: {
     attendedEvents = props.attendancesData.map((o) => o.event);
   }
 
-  function getAttendancePk(eventPk: number) {
-    if (attendedEvents.includes(eventPk)) {
+  function getAttendanceId(eventId: number) {
+    if (attendedEvents.includes(eventId)) {
       return props.attendancesData.find((o) => {
-        return o.event == eventPk;
-      })?.pk;
+        return o.event == eventId;
+      })?.id;
     }
     return undefined;
   }
 
   return (
-    <div className="col-10 mx-auto" style={{ maxWidth: "900px" }}>
+    <div>
       {props.events.map((event, i) => (
         <Event
           key={i}
-          pk={event.pk}
+          id={event.id}
           image={event.image}
           title={event.title}
           type={event.type}
@@ -36,8 +36,8 @@ export default function EventList(props: {
           startsOn={event.startsOn}
           finishesOn={event.finishesOn}
           cancelationReason={event.cancelationReason}
-          joined={attendedEvents.includes(event.pk)}
-          attendancePk={getAttendancePk(event.pk)}
+          joined={attendedEvents.includes(event.id)}
+          attendanceId={getAttendanceId(event.id)}
           attendancesMutate={props.attendancesMutate}
         />
       ))}

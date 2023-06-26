@@ -10,7 +10,7 @@ type CommonStudentType = {
 };
 
 export type DashboardStudentType = {
-  pk: string;
+  id: string;
   email: string;
   firstName: string;
   middleName: string;
@@ -19,7 +19,7 @@ export type DashboardStudentType = {
 };
 
 export type ProfileStudentType = {
-  pk: string;
+  id: string;
   firstName: string;
   middleName: string;
   lastName: string;
@@ -34,7 +34,7 @@ export type ProfileStudentType = {
 };
 
 export type ProfileModalStudentType = {
-  pk: string;
+  id: string;
   firstName: string;
   middleName: string;
   lastName: string;

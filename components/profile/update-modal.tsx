@@ -28,7 +28,7 @@ export default function UpdateModal(props: {
     event.preventDefault();
 
     await axios
-      .patch(`http://127.0.0.1:8000/api/student/${props.data.pk}/update/`, {
+      .patch(`http://127.0.0.1:8000/api/student/${props.data.id}/update/`, {
         firstName: firstNameRef.current.value,
         middleName: middleNameRef.current.value,
         lastName: lastNameRef.current.value,
@@ -47,7 +47,7 @@ export default function UpdateModal(props: {
       })
       .catch((error) => {
         toast.error(
-          `/student/${props.data.pk}/update/ (${error.code}): ${error.message}`
+          `/student/${props.data.id}/update/ (${error.code}): ${error.message}`
         );
         throw error;
       });
