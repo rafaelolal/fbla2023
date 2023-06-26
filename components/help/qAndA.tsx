@@ -59,26 +59,26 @@ export default function QNA() {
 
   return (
     <>
-      <div
-        className="bg-white p-5 h-100"
-      >
-        <div className="col-11 mx-auto">
+      <div className="bg-white p-5 h-100">
+        <div className="col-lg-6 col-11 mx-auto">
           <h2>Questions and Answers</h2>
           <div className="mt-4 w-100 mx-auto">
-             <div className="mt-3 mb-4"> {currentQuestion ? (
-              <div>
-                <div className="bg-quaternary text-light b-radius-normal p-3">
-                <ReactMarkdown className="markdown">
-                  {currentQuestion.question}
-                </ReactMarkdown>
-                <ReactMarkdown className="markdown">
-                  {currentQuestion.answer}
-                </ReactMarkdown>
+            <div className="mt-3 mb-4">
+              {currentQuestion ? (
+                <div>
+                  <div className="bg-quaternary text-light b-radius-normal p-3">
+                    <ReactMarkdown className="markdown">
+                      {currentQuestion.question}
+                    </ReactMarkdown>
+                    <ReactMarkdown className="markdown">
+                      {currentQuestion.answer}
+                    </ReactMarkdown>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              "No search item yet"
-            )}</div>
+              ) : (
+                "No search item yet"
+              )}
+            </div>
             <div
               className="form-floating mb-4 border-thin "
               style={{ borderRadius: "30px" }}
@@ -92,10 +92,10 @@ export default function QNA() {
                 ref={searchRef}
                 onChange={getTopAnswer}
               />
-              <label className="ps-4"htmlFor="search" >Search</label>
+              <label className="ps-4" htmlFor="search">
+                Search
+              </label>
             </div>
-
-          
 
             <div
               className="accordion"
@@ -119,7 +119,7 @@ export default function QNA() {
                       {question.question}
                     </button>
                   </h2>
-                  
+
                   <div
                     id={`collapse${i}`}
                     className="accordion-collapse collapse border-0"
