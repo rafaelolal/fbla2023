@@ -6,15 +6,21 @@ import UpdateModal from "../../components/profile/update-modal";
 import { ProfileStudentType } from "../../types/students";
 import PasswordModal from "../../components/profile/password-modal";
 import axios from "axios";
+import HomeEvent from "../../components/events/home-event";
+import client from "../../api/apollo-client";
+import { gql } from "@apollo/client";
+import { HomeEventType } from "../../types/events";
 
-export default function ProfilePage(props: ProfileStudentType) {
+export default function ProfilePage(
+  props: ProfileStudentType & { eventData: HomeEventType[] }
+) {
   const firstTime = props.grade === null;
   const [showUpdate, setShowUpdate] = useState(firstTime);
   const [showPassword, setShowPassword] = useState(false);
 
   const mLocalizer = momentLocalizer(moment);
   const formattedEvents = props.events.map((e) => ({
-    pk: e.event.pk,
+    id: e.event.id,
     title: e.event.title,
     start: new Date(e.event.startsOn),
     end: new Date(e.event.finishesOn),
@@ -43,7 +49,7 @@ export default function ProfilePage(props: ProfileStudentType) {
     <>
       <UpdateModal
         data={{
-          pk: props.pk,
+          id: props.id,
           firstName: props.firstName,
           middleName: props.middleName,
           lastName: props.lastName,
@@ -62,7 +68,7 @@ export default function ProfilePage(props: ProfileStudentType) {
         toggleModal={togglePasswordModal}
       />
 
-      <div className="row justify-content-center my-5 py-3 mx-3">
+      <div className="row justify-content-center py-3 mx-3">
         <div className="col-12 col-md-3 mb-4 mt-md-0">
           <div
             className="bg-primary p-4 neoBorder"
@@ -203,7 +209,7 @@ export default function ProfilePage(props: ProfileStudentType) {
             defaultDate={new Date()}
             localizer={mLocalizer}
             eventPropGetter={(event: {
-              pk: number;
+              id: number;
               title: string;
               start: Date;
               end: Date;
@@ -213,7 +219,7 @@ export default function ProfilePage(props: ProfileStudentType) {
               if (new Date(event.start) > new Date()) {
                 backgroundColor = "#56becd";
               } else if (
-                props.events.find((e) => e.event.pk == event.pk)?.attended
+                props.events.find((e) => e.event.id == event.id)?.attended
               ) {
                 backgroundColor = "gray";
               }
@@ -221,6 +227,31 @@ export default function ProfilePage(props: ProfileStudentType) {
               return { style: { backgroundColor } };
             }}
           />
+        </div>
+      </div>
+
+      <div className="row py-3 mx-3" style={{ overflowY: "scroll" }}>
+        <h2 style={{ display: "inline" }}>EVENTS SIMILAR TO</h2>
+        <h4 className="fw-bold" style={{ display: "inline" }}>
+          {props.events[0].event.title}
+        </h4>
+
+        <div className="row flex-nowrap">
+          {props.eventData.map((event: HomeEventType, i: number) => (
+            <HomeEvent
+              key={i}
+              id={event.id}
+              image={event.image}
+              title={event.title}
+              type={event.type}
+              points={event.points}
+              description={event.description}
+              location={event.location}
+              startsOn={event.startsOn}
+              finishesOn={event.finishesOn}
+              cancelationReason={event.cancelationReason}
+            />
+          ))}
         </div>
       </div>
     </>
@@ -238,9 +269,33 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       throw error;
     });
 
+  const { data: eventData } = await client.query({
+    query: gql`
+      query ($type: String!, $count: Int!) {
+        listEventsByType(type: $type, count: $count) {
+          id
+          image
+          title
+          type
+          points
+          description
+          location
+          startsOn
+          finishesOn
+          cancelationReason
+        }
+      }
+    `,
+    variables: {
+      type: response.data.events[0].event.type,
+      count: 5,
+    },
+  });
+
   return {
     props: {
       ...response.data,
+      eventData: eventData.listEventsByType,
       bodyStyle: { backgroundColor: "white" },
     },
   };
