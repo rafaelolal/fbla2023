@@ -1,19 +1,19 @@
-import axios from "axios";
+import client from "./api/apollo-client";
+import { gql } from "@apollo/client";
 
 export async function isAdmin(id: string) {
-  const result = axios
-    .get(`http://127.0.0.1:8000/api/admin/${id}/`)
-    .then((response) => {
-      return Boolean(response.data.pk);
-    })
-    .catch((error) => {
-      if (error.request.status == 404) {
-        return false;
+  const { data } = await client.query({
+    query: gql`
+      query ($id: String!) {
+        retrieveAdmin(id: $id) {
+          id
+        }
       }
-      throw error;
-    });
+    `,
+    variables: { id },
+  });
 
-  return result;
+  return data;
 }
 
 export function toFormattedDate(date: string) {
