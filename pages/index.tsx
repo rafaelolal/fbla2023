@@ -6,10 +6,15 @@ import { EventType } from "../types/events";
 import { NewsType } from "../types/news";
 import axios from "axios";
 import Footer from "../components/layout/footer";
+import client from "../api/apollo-client";
+import { gql } from "@apollo/client";
+import AdminAnnouncementModal from "../components/adminAnnouncementModal";
+import { AdminAnnouncementType } from "../types/adminAnnouncements";
 
 export default function IndexPage(props: {
   events: EventType[];
   news: NewsType[];
+  adminAnnouncements: AdminAnnouncementType[];
   rally: { startsOn: string };
 }) {
   const [isRallyTime, setIsRallyTime] = useState(false);
@@ -19,6 +24,8 @@ export default function IndexPage(props: {
     minutes: 0,
     seconds: 0,
   });
+  const [announcementsDismissed, setAnnouncementsDismissed] = useState(false);
+  const [announcementsShow, setAnnouncementsShow] = useState(false);
 
   useEffect(() => {
     const target = new Date(props.rally.startsOn);
@@ -51,6 +58,46 @@ export default function IndexPage(props: {
 
   return (
     <>
+      {!announcementsDismissed && (
+        <>
+          <AdminAnnouncementModal
+            show={announcementsShow}
+            setShow={setAnnouncementsShow}
+            setDismissed={setAnnouncementsDismissed}
+            announcements={props.adminAnnouncements}
+          />
+
+          <button
+            type="button"
+            className="btn btn-danger"
+            style={{
+              position: "fixed",
+              bottom: "30px",
+              right: "30px",
+              zIndex: "100",
+            }}
+            onClick={() => setAnnouncementsShow(true)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-exclamation-diamond-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098L9.05.435zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </svg>
+
+            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+              {props.adminAnnouncements.length}
+            </span>
+          </button>
+        </>
+      )}
+
+      {/* //////////////////////////////////////// */}
+
       <div className="bubble-container" style={{ marginTop: `${-8 * 3}px` }}>
         <span className="seal"></span>
         <span className="bubble a"></span>
@@ -65,7 +112,6 @@ export default function IndexPage(props: {
         <span className="bubble j"></span>
         <span className="bubble k"></span>
       </div>
-
       <div className="randContainer">
         <div
           className="position-absolute d-none d-md-block"
@@ -116,7 +162,6 @@ export default function IndexPage(props: {
           )}
         </div>
       </div>
-
       <div className="container my-5 pt-5">
         <div className="d-flex justify-content-between">
           <h1 className="pb-2 ms-3 ">Top Events of the Week</h1>
@@ -143,7 +188,7 @@ export default function IndexPage(props: {
           {props.events.map((event: EventType, i: number) => (
             <HomeEvent
               key={i}
-              pk={event.pk}
+              id={event.id}
               image={event.image}
               title={event.title}
               type={event.type}
@@ -218,11 +263,25 @@ export async function getServerSideProps() {
       throw error;
     });
 
+  const adminAnnouncements = await client.query({
+    query: gql`
+      query {
+        listAdminAnnouncement {
+          title
+          content
+          createdOn
+          expiresOn
+        }
+      }
+    `,
+  });
+
   return {
     props: {
       events: eventsResponse.data.slice(0, 3),
       news: newsResponse.data.slice(0, 3),
       rally: rallyResponse.data,
+      adminAnnouncements: adminAnnouncements.data.listAdminAnnouncement,
       bodyStyle: { backgroundColor: "white" },
     },
   };
