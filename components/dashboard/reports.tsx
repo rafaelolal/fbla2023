@@ -88,7 +88,7 @@ export default function DashboardReports() {
                   className="form-select d-inline-block m-3 my-auto"
                   style={{ flex: "1" }}
                   aria-label="Select Report"
-                  defaultValue="report Date"
+                  defaultValue="Report Date"
                   ref={reportRef}
                   onChange={retrieveHandler}
                 >

@@ -77,105 +77,106 @@ export default function CreateModal(props: {
       <form onSubmit={handleSubmit}>
         <Modal.Body>
           <div className="container-fluid p-3">
-          <div className="row">
-            <div className="mb-1 fs-6 fw-semibold p-0">Title</div>
-            <input
-              type="text"
-              className="form-control"
-              required
-              ref={titleRef}
-            />
-          </div>
-
-          <div className="row">
-            <div className="col-6 p-0 pe-2">
-              <div className="mt-3 mb-1 fs-6 fw-semibold">Start Time</div>
+            <div className="row">
+              <div className="mb-1 fs-6 fw-semibold p-0">Title</div>
               <input
-                type="datetime-local"
-                className="form-control mb-1"
+                type="text"
+                className="form-control"
                 required
-                ref={startsOnRef}
+                ref={titleRef}
               />
             </div>
 
-            <div className="col-6 p-0 ps-2">
-              <div className="mt-3 mb-1 fs-6 fw-semibold">End Time</div>
-              <input
-                type="datetime-local"
-                className="form-control mb-1"
+            <div className="row">
+              <div className="col-6 p-0 pe-2">
+                <div className="mt-3 mb-1 fs-6 fw-semibold">Start Time</div>
+                <input
+                  type="datetime-local"
+                  className="form-control mb-1"
+                  required
+                  ref={startsOnRef}
+                />
+              </div>
+
+              <div className="col-6 p-0 ps-2">
+                <div className="mt-3 mb-1 fs-6 fw-semibold">End Time</div>
+                <input
+                  type="datetime-local"
+                  className="form-control mb-1"
+                  required
+                  ref={endsOnRef}
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="p-0 mt-3 mb-1 fs-6 fw-semibold">Description</div>
+              <textarea
+                className="form-control my-2"
+                placeholder="This event is about..."
                 required
-                ref={endsOnRef}
+                ref={descriptionRef}
               />
             </div>
+
+            <div className="row justify-content-between">
+              <div className="p-0 mt-3 mb-1 fs-6 fw-semibold">Attributes</div>
+              <input
+                type="text"
+                className="form-control d-inline-block"
+                style={{ width: "32%" }}
+                placeholder="Location"
+                required
+                ref={locationRef}
+              />
+
+              <input
+                type="number"
+                className="form-control d-inline-block"
+                style={{ width: "32%" }}
+                placeholder="Points"
+                required
+                ref={pointsRef}
+              />
+
+              <select
+                className="form-select d-inline-block"
+                style={{ width: "32%" }}
+                ref={typeRef}
+                required
+              >
+                <option value="Type">Type</option>
+                <option value="Competition">Competition</option>
+                <option value="Show">Show</option>
+                <option value="Fundraiser">Fundraiser</option>
+                <option value="Trip">Trip</option>
+                <option value="Fair">Fair</option>
+              </select>
+            </div>
           </div>
-
-          <div className="row">
-            <div className="p-0 mt-3 mb-1 fs-6 fw-semibold">Description</div>
-            <textarea
-              className="form-control my-2"
-              placeholder="This event is about..."
-              required
-              ref={descriptionRef}
-            />
-          </div>
-
-          <div className="row justify-content-between">
-            <div className="p-0 mt-3 mb-1 fs-6 fw-semibold">Attributes</div>
-            <input
-              type="text"
-              className="form-control d-inline-block"
-              style={{ width: "32%" }}
-              placeholder="Location"
-              required
-              ref={locationRef}
-            />
-
-            <input
-              type="number"
-              className="form-control d-inline-block"
-              style={{ width: "32%" }}
-              placeholder="Points"
-              required
-              ref={pointsRef}
-            />
-
-            <select
-              className="form-select d-inline-block"
-              style={{ width: "32%" }}
-              ref={typeRef}
-              required
-            >
-              <option value="Type">Type</option>
-              <option value="Competition">Competition</option>
-              <option value="Show">Show</option>
-              <option value="Fundraiser">Fundraiser</option>
-              <option value="Trip">Trip</option>
-              <option value="Fair">Fair</option>
-            </select>
-          </div>
-          </div>
-
 
           <div className="row">
             <label>
-            <div className="mt-3 mb-1 fs-6 fw-semibold p-0">Profile Image</div>
-            <input
-              required
-              type="file"
-              onChange={({ target }) => {
-                if (target.files) {
-                  const file = target.files[0];
-                  setSelectedImage(URL.createObjectURL(file));
-                  setSelectedFile(file);
-                  handleImageUpload();
-                }
-              }}
-            />
+              <div className="mt-3 mb-1 fs-6 fw-semibold p-0">
+                Profile Image
+              </div>
+              <input
+                required
+                type="file"
+                onChange={({ target }) => {
+                  if (target.files) {
+                    const file = target.files[0];
+                    setSelectedImage(URL.createObjectURL(file));
+                    setSelectedFile(file);
+                    handleImageUpload();
+                  }
+                }}
+              />
 
-            {selectedImage && (
-              <img width="200px" height="auto" src={selectedImage} alt="" />
-            )}
-          </label>
+              {selectedImage && (
+                <img width="200px" height="auto" src={selectedImage} alt="" />
+              )}
+            </label>
           </div>
         </Modal.Body>
 

@@ -159,6 +159,25 @@ export default function RallyPage(props: {
       ></div> */}
 
         <div className="dashboard row">
+          <select
+            className="form-select d-inline-block border-normal me-5 b-radius-normal my-auto fs-1"
+            style={{ width: "15%", height: "100px" }}
+            required
+            defaultValue="Grade"
+          >
+            <option className="fs-1" value="5">
+              5
+            </option>
+            <option className="fs-1" value="6">
+              6
+            </option>
+            <option className="fs-1" value="7">
+              7
+            </option>
+            <option className="fs-1" value="8">
+              8
+            </option>
+          </select>
           <div className="rallySpinBtn d-inline-block" id="spinner"></div>
           <div className="rallyResetBtn d-inline-block" id="reseter"></div>
           <div
