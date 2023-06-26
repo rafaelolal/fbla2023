@@ -17,9 +17,13 @@ export default function EventsPage(props: { events: EventType[] }) {
     initialEvents.current
   );
   const [query, setQuery] = useState<QueryType>({
+    search: "",
     type: "",
-    startsOn: "",
     location: "",
+    points: "",
+    startDate: "",
+    startTime: "",
+    duration: "",
   });
   const [filterOptions, setFilterOptions] = useState({
     types: new Set<string>(),
@@ -48,19 +52,54 @@ export default function EventsPage(props: { events: EventType[] }) {
 
   useEffect(() => {
     let newEvents = initialEvents.current;
-    if (query.type) {
-      newEvents = initialEvents.current.filter((e) => e.type == query.type);
+    if (query.search) {
+      newEvents = initialEvents.current.filter(
+        (e) =>
+          e.title.toLowerCase().includes(query.search.toLowerCase()) ||
+          e.description.toLowerCase().includes(query.search.toLowerCase())
+      );
     }
 
-    if (query.startsOn) {
-      newEvents = initialEvents.current.filter(
-        (e) => new Date(e.startsOn) >= new Date(query.startsOn)
-      );
+    if (query.type) {
+      newEvents = initialEvents.current.filter((e) => e.type == query.type);
     }
 
     if (query.location) {
       newEvents = initialEvents.current.filter(
         (e) => e.location == query.location
+      );
+    }
+
+    if (query.points) {
+      newEvents = initialEvents.current.filter(
+        (e) => e.points >= parseInt(query.points)
+      );
+    }
+
+    if (query.startDate) {
+      newEvents = initialEvents.current.filter(
+        (e) => new Date(e.startsOn) >= new Date(query.startDate)
+      );
+    }
+
+    // TODO: new Date() converts the UTC event information to current time zone
+    // meaning that the hours are perceived to be 3 less.
+    if (query.startTime) {
+      newEvents = initialEvents.current.filter((e) => {
+        const eventDate = new Date(e.startsOn);
+        const eventTime = eventDate.getHours() + eventDate.getMinutes() / 60;
+        const queryTime = query.startTime.split(":");
+        const queryTimeInHours =
+          parseInt(queryTime[0]) + parseInt(queryTime[1]) / 60;
+        return eventTime >= queryTimeInHours;
+      });
+    }
+
+    if (query.duration) {
+      newEvents = initialEvents.current.filter(
+        (e) =>
+          new Date(e.finishesOn).getTime() - new Date(e.startsOn).getTime() >=
+          parseInt(query.duration) * 3600000 // getTime returns milliseconds
       );
     }
 
@@ -97,18 +136,16 @@ export default function EventsPage(props: { events: EventType[] }) {
 
   return (
     <>
-    
       <a className="visually-hidden" id="anchorButton" href={"#" + anchorId} />
 
       <div
         className="fish-container d-flex"
         style={{ marginTop: `${-17 * 3}px` }}
       >
-        <h5
-          className="title m-auto fw-bold text-primary eventsPageStyle"
-        >
+        <h5 className="title m-auto fw-bold text-primary eventsPageStyle">
           Join Events
         </h5>
+
         <span className="fish a"></span>
         <span className="fish b"></span>
         <span className="fish c"></span>
@@ -124,24 +161,31 @@ export default function EventsPage(props: { events: EventType[] }) {
         <span className="fish m"></span>
         <span className="fish n"></span>
       </div>
-<div className="container-fluid">
-      <Search filterOptions={filterOptions} setQuery={setQuery} />
-      <div className="row d-none d-md-block my-5">
-        
-        
-      <EventList
-        events={currentEvents}
-        attendancesData={attendances}
-        attendancesMutate={attendancesMutate}
-      />
-      
-      </div>
 
-       <div className="row row-cols-1 justify-content-center d-block d-md-none  my-5">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-3">
+            <Search filterOptions={filterOptions} setQuery={setQuery} />
+          </div>
+
+          <div className="col-9">
+            {/* Computer Screen Events */}
+            <div className="row d-none d-md-block my-5">
+              <EventList
+                events={currentEvents}
+                attendancesData={attendances}
+                attendancesMutate={attendancesMutate}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Phone Screen Events */}
+        <div className="row row-cols-1 justify-content-center d-block d-md-none  my-5">
           {props.events.map((event: EventType, i: number) => (
             <HomeEvent
               key={i}
-              pk={event.pk}
+              id={event.id}
               image={event.image}
               title={event.title}
               type={event.type}
@@ -154,8 +198,8 @@ export default function EventsPage(props: { events: EventType[] }) {
             />
           ))}
         </div>
-        
-        </div>
+      </div>
+
       <Footer />
     </>
   );
