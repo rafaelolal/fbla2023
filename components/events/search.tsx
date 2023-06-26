@@ -1,5 +1,5 @@
 import { Dispatch, MutableRefObject, SetStateAction, useRef } from "react";
-import { QueryType } from "../../types/events";
+import { QueryType } from "../../types/event";
 
 export default function Search(props: {
   filterOptions: { types: Set<string>; locations: Set<string> };

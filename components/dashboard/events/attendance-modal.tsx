@@ -1,7 +1,7 @@
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
-import { ParticipantType } from "../../../types/events";
+import { ParticipantType } from "../../../types/event";
 
 export default function AttendanceModal(props: {
   id: number;

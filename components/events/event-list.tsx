@@ -1,5 +1,5 @@
 import Event from "./event";
-import { EventType } from "../../types/events";
+import { EventType } from "../../types/event";
 import { KeyedMutator } from "swr";
 
 export default function EventList(props: {

@@ -1,6 +1,6 @@
 import { KeyedMutator } from "swr";
 import DashboardEvent from "./event";
-import { DashboardEventType } from "../../../types/events";
+import { DashboardEventType } from "../../../types/event";
 import { useState } from "react";
 import CancelingModal from "./canceling-modal";
 

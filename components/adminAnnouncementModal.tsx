@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { Modal } from "react-bootstrap";
-import { AdminAnnouncementType } from "../types/adminAnnouncements";
+import { AdminAnnouncementType } from "../types/adminAnnouncement";
 
 export default function AdminAnnouncementModal(props: {
   show: boolean;

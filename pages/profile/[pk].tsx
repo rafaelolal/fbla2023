@@ -9,11 +9,13 @@ import axios from "axios";
 import HomeEvent from "../../components/events/home-event";
 import client from "../../api/apollo-client";
 import { gql } from "@apollo/client";
-import { HomeEventType } from "../../types/events";
+import { HomeEventType } from "../../types/event";
 
 export default function ProfilePage(
   props: ProfileStudentType & { eventData: HomeEventType[] }
 ) {
+  console.log({ pp: props });
+
   const firstTime = props.grade === null;
   const [showUpdate, setShowUpdate] = useState(firstTime);
   const [showPassword, setShowPassword] = useState(false);
@@ -37,8 +39,8 @@ export default function ProfilePage(
   function countPrizes(i: number) {
     const order = ["Food", "Spirit", "School"];
     let c = 0;
-    for (const award of props.prizes) {
-      if (award == order[i]) {
+    for (const redemption of props.redemptions) {
+      if (redemption.prize.type == order[i]) {
         c += 1;
       }
     }
@@ -93,7 +95,7 @@ export default function ProfilePage(
             <h6 className="text-center pt-1">Grade: {props.grade}</h6>
 
             <hr />
-            <h6 className="text-center fw-bold">Awards</h6>
+            <h6 className="text-center fw-bold">Prizes Redeemed</h6>
             <div className="text-center mt-3">
               {[
                 <img
@@ -153,6 +155,10 @@ export default function ProfilePage(
 
             <h5 className="d-inline mx-2 align-middle">
               Balance: {props.balance}
+            </h5>
+
+            <h5 className="d-inline mx-2 align-middle">
+              Current Points: {props.currentPoints}
             </h5>
 
             <h5 className="d-inline mx-2 align-middle">Rank: {props.rank}</h5>
@@ -227,6 +233,15 @@ export default function ProfilePage(
               return { style: { backgroundColor } };
             }}
           />
+        </div>
+      </div>
+
+      <div className="row py-3 mx-3">
+        <div className="col-6">
+          <h2>Groups</h2>
+        </div>
+        <div className="col-6">
+          <h2>Prize Redemptions</h2>
         </div>
       </div>
 

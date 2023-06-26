@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import EventList from "../components/events/event-list";
 import Search from "../components/events/search";
-import { EventType, QueryType } from "../types/events";
+import { EventType, QueryType } from "../types/event";
 import Footer from "../components/layout/footer";
 import { useRouter } from "next/router";
 import useSWR from "swr";

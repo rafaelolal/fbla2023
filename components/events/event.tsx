@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { KeyedMutator } from "swr";
 import { useAppContext } from "../../context/state";
 import { formatStartAndFinish } from "../../helpers";
-import { EventType } from "../../types/events";
+import { EventType } from "../../types/event";
 
 export default function Event(
   props: EventType & {

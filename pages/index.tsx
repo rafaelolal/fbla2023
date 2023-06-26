@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import HomeEvent from "../components/events/home-event";
 import NewsList from "../components/news/news-list";
-import { EventType } from "../types/events";
+import { EventType } from "../types/event";
 import { NewsType } from "../types/news";
 import axios from "axios";
 import Footer from "../components/layout/footer";
 import client from "../api/apollo-client";
 import { gql } from "@apollo/client";
 import AdminAnnouncementModal from "../components/adminAnnouncementModal";
-import { AdminAnnouncementType } from "../types/adminAnnouncements";
+import { AdminAnnouncementType } from "../types/adminAnnouncement";
 
 export default function IndexPage(props: {
   events: EventType[];

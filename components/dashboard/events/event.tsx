@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import AttendanceModal from "./attendance-modal";
-import { DashboardEventType } from "../../../types/events";
+import { DashboardEventType } from "../../../types/event";
 import { toFormattedDatetime } from "../../../helpers";
 import { KeyedMutator } from "swr";
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { formatStartAndFinish } from "../../helpers";
-import { HomeEventType } from "../../types/events";
+import { HomeEventType } from "../../types/event";
 
 export default function HomeEvent(props: HomeEventType) {
   return (
