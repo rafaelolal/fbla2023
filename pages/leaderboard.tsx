@@ -102,8 +102,6 @@ export async function getServerSideProps() {
       throw error;
     });
 
-  console.log({ data: studentsResponse.data });
-
   return {
     props: {
       students: studentsResponse.data,

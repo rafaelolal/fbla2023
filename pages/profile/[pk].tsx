@@ -11,19 +11,58 @@ import client from "../../api/apollo-client";
 import { gql } from "@apollo/client";
 import { HomeEventType } from "../../types/event";
 import FeedbackModal from "../../components/profile/feedback-modal";
+import { toast } from "react-toastify";
 
 export default function ProfilePage(
   props: ProfileStudentType & { eventData: HomeEventType[] }
 ) {
-  console.log({ pp: props });
-
   const firstTime = props.grade === null;
   const [showUpdate, setShowUpdate] = useState(firstTime);
   const [showPassword, setShowPassword] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackEventId, setFeedbackEventId] = useState(0);
+  const [prizeCount, setPrizeCount] = useState([
+    countPrizes(0),
+    countPrizes(1),
+    countPrizes(2),
+  ]);
+  const [studentBalance, setStudentBalance] = useState(props.balance);
 
   const mLocalizer = momentLocalizer(moment);
+
+  const redeemPrize = (i: number) => {
+    const prizeCost = (i + 1) * 25;
+    if (studentBalance < prizeCost) {
+      toast.warning("You do not have sufficient points");
+      return;
+    }
+
+    const newPrizeCount = prizeCount.slice();
+    newPrizeCount[i] += 1;
+    setPrizeCount(newPrizeCount);
+    setStudentBalance(studentBalance - (i + 1) * 25);
+    toast.success("Prize redeemed successfully");
+  };
+
+  function countPrizes(i: number) {
+    const order = ["Food", "Spirit", "School"];
+    let c = 0;
+    for (const redemption of props.redemptions) {
+      if (redemption.prize.type == order[i]) {
+        c += 1;
+      }
+    }
+    return c;
+  }
+
+  function toggleUpdateModal() {
+    setShowUpdate(!showUpdate);
+  }
+
+  function togglePasswordModal() {
+    setShowPassword(!showPassword);
+  }
+
   const formattedEvents = props.events.map((e) => ({
     id: e.event.id,
     title: (() => {
@@ -50,25 +89,6 @@ export default function ProfilePage(
     start: new Date(e.event.startsOn),
     end: new Date(e.event.finishesOn),
   }));
-
-  function toggleUpdateModal() {
-    setShowUpdate(!showUpdate);
-  }
-
-  function togglePasswordModal() {
-    setShowPassword(!showPassword);
-  }
-
-  function countPrizes(i: number) {
-    const order = ["Food", "Spirit", "School"];
-    let c = 0;
-    for (const redemption of props.redemptions) {
-      if (redemption.prize.type == order[i]) {
-        c += 1;
-      }
-    }
-    return c;
-  }
 
   return (
     <>
@@ -146,7 +166,7 @@ export default function ProfilePage(
                 <div className="d-inline-block mx-2" key={i}>
                   {type}
                   <br />
-                  <div className="text-center">{countPrizes(i)}</div>
+                  <div className="text-center">{prizeCount[i]}</div>
                 </div>
               ))}
             </div>
@@ -184,7 +204,7 @@ export default function ProfilePage(
             />
 
             <h5 className="d-inline mx-2 align-middle">
-              Balance: {props.balance}
+              Balance: {studentBalance}
             </h5>
 
             <h5 className="d-inline mx-2 align-middle">
@@ -270,8 +290,36 @@ export default function ProfilePage(
         <div className="col-6">
           <h2>Groups</h2>
         </div>
+
         <div className="col-6">
           <h2>Prize Redemptions</h2>
+          {[
+            <img
+              src="/images/icons/snacks.png"
+              style={{ width: "45px", height: "45px" }}
+            />,
+
+            <img
+              src="/images/icons/seal.png"
+              style={{ width: "45px", height: "45px" }}
+            />,
+
+            <img
+              src="/images/icons/books.png"
+              style={{ width: "45px", height: "45px" }}
+            />,
+          ].map((type, i) => (
+            <div className="row">
+              {type}
+              <p>Cost: {(i + 1) * 25}</p>
+              <button
+                className="btn btn-primary"
+                onClick={() => redeemPrize(i)}
+              >
+                Redeem
+              </button>
+            </div>
+          ))}
         </div>
       </div>
 

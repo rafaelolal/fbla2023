@@ -10,8 +10,6 @@ export default function RallyPage(props: {
     lastName: string;
   }[];
 }) {
-  console.log({ names: props.names });
-
   useEffect(() => {
     const items = props.names
       .filter((name) => name.firstName !== null)

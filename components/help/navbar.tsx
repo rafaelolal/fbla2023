@@ -3,9 +3,8 @@ import Link from "next/link";
 export default function HelpNavbar() {
   return (
     <>
-    <div className="container-fluid ">
-      <div className="row justify-content-center my-4">
-        
+      <div className="container-fluid ">
+        <div className="row justify-content-center my-4">
           <Link
             href="help?page=howToGuide"
             className="btn eventBtn text-center fs-5 mx-3"
@@ -18,8 +17,7 @@ export default function HelpNavbar() {
           >
             How was it Made
           </Link>
-        
-      </div>
+        </div>
       </div>
     </>
   );
