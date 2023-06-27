@@ -33,10 +33,11 @@ export default function DashboardReports() {
     axios
       .post("http://127.0.0.1:8000/api/report/create/")
       .then((response) => {
-        mutate();
         reportRef.current.value = response.data.createdOn;
-        retrieveHandler();
         toast.success("Report created successfully");
+        mutate();
+        // retrieveHandler(); cannot run this because
+        // TODO somehow reportRef.current.value = ""
       })
       .catch((error) => {
         toast.error(`/report/create/ (${error}): ${error.message}`);
