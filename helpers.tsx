@@ -1,17 +1,22 @@
 import client from "./api/apollo-client";
 import { gql } from "@apollo/client";
 
-export async function isAdmin(id: string) {
-  const { data } = await client.query({
-    query: gql`
-      query ($id: String!) {
-        retrieveAdmin(id: $id) {
-          id
+export function isAdmin(id: string) {
+  const data = client
+    .query({
+      query: gql`
+        query ($id: String!) {
+          retrieveAdmin(id: $id) {
+            id
+          }
         }
-      }
-    `,
-    variables: { id },
-  });
+      `,
+      variables: { id },
+    })
+    .then((data) => data)
+    .catch((error) => {
+      console.log(error);
+    });
 
   return data;
 }
