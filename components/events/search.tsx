@@ -51,7 +51,7 @@ export default function Search(props: {
       <input
         type="number"
         className="form-control mt-3"
-        placeholder="POINTS"
+        placeholder="MINIMUM POINTS"
         ref={pointsRef}
       />
 
@@ -64,7 +64,7 @@ export default function Search(props: {
       <input
         type="number"
         className="form-control mt-3"
-        placeholder="DURATION IN HOURS"
+        placeholder="MINIMUM DURATION IN HOURS"
         ref={durationRef}
       />
 
