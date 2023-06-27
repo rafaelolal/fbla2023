@@ -25,7 +25,7 @@ export default function EventList(props: {
     <div>
       <div className="d-flex" style={{ height: "73px" }}>
         <h5 className="ms-4 mt-auto text-quaternary">
-          Number of Available Events: 9999
+          Displaying {props.events.length} Events
         </h5>
       </div>
       {props.events.map((event, i) => (
