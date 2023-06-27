@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, Fragment, SetStateAction } from "react";
 import { Modal } from "react-bootstrap";
 import { AdminAnnouncementType } from "../types/adminAnnouncement";
 
@@ -25,8 +25,8 @@ export default function AdminAnnouncementModal(props: {
       </Modal.Header>
 
       <Modal.Body>
-        {props.announcements.map((a) => (
-          <>
+        {props.announcements.map((a, i) => (
+          <Fragment key={i}>
             <p className="mt-1 text-center fw-bold">{a.title}</p>
             <p className="text-center">{a.content}</p>
             <div className="row text-center">
@@ -42,9 +42,10 @@ export default function AdminAnnouncementModal(props: {
             <hr
               className="my-4 bg-tertiary"
               style={{ border: "none", height: "2px" }}
-            ></hr>
-          </>
+            />
+          </Fragment>
         ))}
+
         <h6
           className="w-100 text-center text-tertiary"
           style={{ fontSize: "0.8rem" }}
