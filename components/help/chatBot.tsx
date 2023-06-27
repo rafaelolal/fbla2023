@@ -1,6 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
-import { MutableRefObject, useRef, useState } from "react";
-import { flushSync } from "react-dom";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import {
   MDBCard,
   MDBCardHeader,
@@ -32,14 +31,15 @@ export default function ChatBot() {
     { role: "assistant", content: "How can I assist you today?" },
   ]);
 
+  useEffect(() => {
+    const chatBox = document.getElementById("chatBox");
+    chatBox.scrollTop = chatBox?.scrollHeight;
+  }, [lastMessage]);
+
   const sendPrompt = () => {
     messages.current.push({ role: "user", content: promptRef.current.value });
-    flushSync(() => {
-      setLastMessage(promptRef.current.value);
-    });
+    setLastMessage(promptRef.current.value);
 
-    const chatBox = document.getElementById("chatBox");
-    chatBox.scroll({ top: chatBox?.scrollHeight });
     promptRef.current.value = "";
 
     openai
@@ -51,11 +51,7 @@ export default function ChatBot() {
         messages.current.push(response.data.choices[0].message)
       )
       .finally(() => {
-        flushSync(() => {
-          setLastMessage("");
-        });
-        const chatBox = document.getElementById("chatBox");
-        chatBox.scroll({ top: chatBox?.scrollHeight });
+        setLastMessage("");
       });
   };
 
@@ -78,7 +74,7 @@ export default function ChatBot() {
             width="16"
             height="16"
             fill="currentColor"
-            class="bi bi-chat-dots-fill"
+            className="bi bi-chat-dots-fill"
             viewBox="0 0 16 16"
           >
             <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
@@ -109,7 +105,6 @@ export default function ChatBot() {
             id="chatBox"
             style={{ height: "300px", overflowY: "auto" }}
           >
-            <div style={{ height: 1000 }}></div>
             {messages.current.slice(2).map((m) => {
               if (m.role == "assistant") {
                 return (
