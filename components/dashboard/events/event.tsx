@@ -43,59 +43,61 @@ export default function DashboardEvent(
         participants={props.participants}
       />
 
-      <div className="row justify-content-around py-3  px-3 border-bottom">
-        <div className="col-3 d-flex">
-          <h6 className="my-auto">{props.title}</h6>
+      <div className="row justify-content-around py-3  px-0 px-md-3 border-bottom">
+        <div className="col-2 col-md-3 d-flex">
+          <h6 className="my-auto fs-7">{props.title}</h6>
         </div>
 
         <div className="col-3 d-flex">
-          <h6 className="my-auto">{toFormattedDatetime(props.startsOn)}</h6>
+          <h6 className="my-auto fs-7">
+            {toFormattedDatetime(props.startsOn)}
+          </h6>
         </div>
 
         <div className="col-3 d-flex">
-          <h6 className="my-auto">{toFormattedDatetime(props.finishesOn)}</h6>
+          <h6 className="my-auto fs-7">
+            {toFormattedDatetime(props.finishesOn)}
+          </h6>
         </div>
 
-        <div className="col-3 d-flex">
-          <div className="m-auto">
-            <button
-              className={`btn eventBtn mx-1 ${
-                props.participants.some((o) => o.final) ||
-                new Date(props.startsOn) > now
-                  ? "disabledBtn"
-                  : ""
-              }`}
-              style={{ height: "fit-content" }}
-              onClick={toggleModal}
-            >
-              Attendance
-            </button>
+        <div className="col-4 col-md-3 d-flex flex-column flex-lg-row p-0">
+          <button
+            className={`btn eventBtn mx-auto my-2 fs-7${
+              props.participants.some((o) => o.final) ||
+              new Date(props.startsOn) > now
+                ? "disabledBtn"
+                : ""
+            }`}
+            style={{ height: "fit-content" }}
+            onClick={toggleModal}
+          >
+            Attendance
+          </button>
 
-            <button
-              className={`btn eventBtn mx-1 ${
-                new Date(props.startsOn) < now ? "disabledBtn" : ""
-              }`}
-              style={{ height: "fit-content" }}
-              onClick={() => handleDelete(props.id)}
-            >
-              Delete
-            </button>
+          <button
+            className={`btn eventBtn mx-auto my-2 fs-7 ${
+              new Date(props.startsOn) < now ? "disabledBtn" : ""
+            }`}
+            style={{ height: "fit-content" }}
+            onClick={() => handleDelete(props.id)}
+          >
+            Delete
+          </button>
 
-            <button
-              className={`btn eventBtn mx-1 ${
-                props.cancelationReason || new Date(props.startsOn) < now
-                  ? "disabledBtn"
-                  : ""
-              }`}
-              style={{ height: "fit-content" }}
-              onClick={() => {
-                props.setCanceling(props.id);
-                props.setShowCancelingModal(true);
-              }}
-            >
-              Cancel
-            </button>
-          </div>
+          <button
+            className={`btn eventBtn mx-auto my-2 fs-7 ${
+              props.cancelationReason || new Date(props.startsOn) < now
+                ? "disabledBtn"
+                : ""
+            }`}
+            style={{ height: "fit-content" }}
+            onClick={() => {
+              props.setCanceling(props.id);
+              props.setShowCancelingModal(true);
+            }}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </>

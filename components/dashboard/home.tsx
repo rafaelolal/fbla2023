@@ -41,8 +41,8 @@ export default function DashboardHome() {
   return (
     <>
       <div className="row justify-content-center">
-        <div className="col-8 mt-4 p-0"></div>
-        <div className="col-8 mt-4 mb-2">
+        <div className=" mt-4 p-0"></div>
+        <div className="col-10 col-lg-8 mt-4 mb-2">
           <div className="row">
             <div className="col-12 col-md-auto me-0 me-md-4 p-4 mb-4 mb-md-0 neoBorder bg-light">
               <h3>Actions</h3>
