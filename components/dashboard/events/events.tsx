@@ -43,26 +43,21 @@ export default function DashboardEvents() {
               </div>
 
               <div className="col d-flex">
-                
-                
-                  <button
-          className="btn btn eventBtn m-3 me-5 my-auto"
-          onClick={() => setShowCreateModal(true)}
-        >
-          Create Event
-        </button>
-                
-             
+                <button
+                  className="btn btn eventBtn m-3 me-5 my-auto"
+                  onClick={() => setShowCreateModal(true)}
+                >
+                  Create Event
+                </button>
               </div>
             </div>
           </div>
-          
+
           <div className="container-fluid  my-5 neoBorder  bg-light">
             <DashboardEventList mutate={mutate} events={data} />
           </div>
         </div>
       </div>
-      
     </>
   );
 }

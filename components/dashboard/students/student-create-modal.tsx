@@ -64,43 +64,43 @@ export default function StudentCreateModal(props: {
       <form onSubmit={handleSubmit}>
         <Modal.Body>
           <div className="container-fluid p-3">
-          <div className="row mb-1">
-            <label htmlFor="emailInput" className="form-label">
-              Student email
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="emailInput"
-              required
-              ref={emailRef}
-              onChange={() => {
-                const eI = document.getElementById(
-                  "emailInput"
-                ) as HTMLInputElement;
-                (
-                  document.getElementById("passwordInput") as HTMLInputElement
-                ).value =
-                  eI.value.split("@")[0] +
-                  "0".repeat(Math.max(0, 6 - eI.value.split("@")[0].length));
-              }}
-            />
+            <div className="row mb-1">
+              <label htmlFor="emailInput" className="form-label">
+                Student email
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="emailInput"
+                required
+                ref={emailRef}
+                onChange={() => {
+                  const eI = document.getElementById(
+                    "emailInput"
+                  ) as HTMLInputElement;
+                  (
+                    document.getElementById("passwordInput") as HTMLInputElement
+                  ).value =
+                    eI.value.split("@")[0] +
+                    "0".repeat(Math.max(0, 6 - eI.value.split("@")[0].length));
+                }}
+              />
+            </div>
+
+            <div className="row mt-3 mb-1">
+              <label htmlFor="passwordInput" className="form-label">
+                Default password
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="passwordInput"
+                ref={passwordRef}
+                disabled
+                readOnly
+              />
+            </div>
           </div>
-         
-          <div className="row mt-3 mb-1">
-            <label htmlFor="passwordInput" className="form-label">
-              Default password
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="passwordInput"
-              ref={passwordRef}
-              disabled
-              readOnly
-            />
-          </div>
-           </div>
         </Modal.Body>
 
         <Modal.Footer>

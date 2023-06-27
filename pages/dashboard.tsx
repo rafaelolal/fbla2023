@@ -23,15 +23,14 @@ export default function DashboardPage() {
 
   return (
     <>
-    <div className="container-fluid">
-      <DashboardNavbar />
-      {(page == "home" || page === undefined) && <DashboardHome />}
-      {page == "reports" && <DashboardReports />}
-      {page == "events" && <DashboardEvents />}
-      {page == "students" && <DashboardStudentList />}
-    </div>
+      <div className="container-fluid">
+        <DashboardNavbar />
+        {(page == "home" || page === undefined) && <DashboardHome />}
+        {page == "reports" && <DashboardReports />}
+        {page == "events" && <DashboardEvents />}
+        {page == "students" && <DashboardStudentList />}
+      </div>
     </>
-    
   );
 }
 
