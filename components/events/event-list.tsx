@@ -24,8 +24,13 @@ export default function EventList(props: {
   return (
     <div>
       <div className="d-flex" style={{ height: "73px" }}>
-        <h5 className="ms-4 mt-auto text-quaternary">
-          Displaying {props.events.length} Events
+        <h5 className="ms-4 mt-auto mb-0 text-quaternary">
+          Displaying{" "}
+          <span className="text-tertiary">{props.events.length}</span> Events
+          <hr
+            className="mt-1 mb-0 bg-tertiary"
+            style={{ border: "none", height: "3px", width: "30%" }}
+          ></hr>
         </h5>
       </div>
       {props.events.map((event, i) => (
