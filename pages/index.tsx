@@ -73,8 +73,8 @@ export default function IndexPage(props: {
             style={{
               position: "fixed",
               backgroundColor: "#fd5901",
-              bottom: "20px",
-              right: "20px",
+              bottom: "30px",
+              right: "30px",
               zIndex: "100",
               padding: "0.3rem 0.7rem 0.6rem",
             }}

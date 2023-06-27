@@ -98,7 +98,7 @@ export default function Navbar() {
 
           {!user && (
             <Link
-              className="nav-link signBtn fs-6 mx-3 neoBorder "
+              className="nav-link signBtn fs-6 me-3 neoBorder "
               href="/signIn"
             >
               Sign In
@@ -107,7 +107,7 @@ export default function Navbar() {
 
           {user && (
             <a
-              className="nav-link signBtn fs-6 neoBorder "
+              className="nav-link signBtn fs-6 me-3 neoBorder "
               onClick={() => {
                 auth.signOut();
               }}

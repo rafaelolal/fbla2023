@@ -6,7 +6,7 @@ export default function HomeEvent(props: HomeEventType) {
   return (
     <>
       <div
-        className="py-3"
+        className="py-3 mx-auto"
         style={{
           height: "auto",
           maxWidth: "390px",

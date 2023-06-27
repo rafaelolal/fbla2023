@@ -56,20 +56,22 @@ export default function Event(
     <div
       className="row eventEffect m-4 b-radius-normal"
       style={{
-        height: "220px",
+        minHeight: "220px",
       }}
       id={props.id.toString()}
     >
       <div
-        className="col-4 p-0 h-100"
+        className="col-4 p-0"
         style={{
           borderRight: "solid 3px #000",
+          minHeight: "100%",
           backgroundImage: `url(${
             props.image.includes("http")
               ? props.image
               : `/images/events/${props.image}`
           })`,
           backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       />
 
