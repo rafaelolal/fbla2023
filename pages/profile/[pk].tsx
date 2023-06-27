@@ -10,6 +10,7 @@ import HomeEvent from "../../components/events/home-event";
 import client from "../../api/apollo-client";
 import { gql } from "@apollo/client";
 import { HomeEventType } from "../../types/event";
+import FeedbackModal from "../../components/profile/feedback-modal";
 
 export default function ProfilePage(
   props: ProfileStudentType & { eventData: HomeEventType[] }
@@ -19,11 +20,33 @@ export default function ProfilePage(
   const firstTime = props.grade === null;
   const [showUpdate, setShowUpdate] = useState(firstTime);
   const [showPassword, setShowPassword] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackEventId, setFeedbackEventId] = useState(0);
 
   const mLocalizer = momentLocalizer(moment);
   const formattedEvents = props.events.map((e) => ({
     id: e.event.id,
-    title: e.event.title,
+    title: (() => {
+      if (e.attended) {
+        return (
+          <>
+            <td className="rbc-agenda-event-cell d-flex">
+              {e.event.title}
+              <button
+                className="btn btn-sm btn-primary ms-auto"
+                onClick={() => {
+                  setFeedbackEventId(e.event.id);
+                  setShowFeedback(true);
+                }}
+              >
+                Rate
+              </button>
+            </td>
+          </>
+        );
+      }
+      return e.event.title;
+    })(),
     start: new Date(e.event.startsOn),
     end: new Date(e.event.finishesOn),
   }));
@@ -49,6 +72,13 @@ export default function ProfilePage(
 
   return (
     <>
+      <FeedbackModal
+        show={showFeedback}
+        setShow={setShowFeedback}
+        feedbackEventId={feedbackEventId}
+        studentId={props.id}
+      />
+
       <UpdateModal
         data={{
           id: props.id,
@@ -227,7 +257,7 @@ export default function ProfilePage(
               } else if (
                 props.events.find((e) => e.event.id == event.id)?.attended
               ) {
-                backgroundColor = "gray";
+                backgroundColor = "#bbbbbb";
               }
 
               return { style: { backgroundColor } };
@@ -246,7 +276,7 @@ export default function ProfilePage(
       </div>
 
       <div className="row py-3 mx-3" style={{ overflowY: "scroll" }}>
-        <h2 style={{ display: "inline" }}>EVENTS SIMILAR TO</h2>
+        <h2 style={{ display: "inline" }}>Events Like</h2>
         <h4 className="fw-bold" style={{ display: "inline" }}>
           {props.events[0].event.title}
         </h4>
