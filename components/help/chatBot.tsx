@@ -33,7 +33,9 @@ export default function ChatBot() {
 
   useEffect(() => {
     const chatBox = document.getElementById("chatBox");
-    chatBox.scrollTop = chatBox?.scrollHeight;
+    if (chatBox) {
+      chatBox.scrollTop = chatBox?.scrollHeight;
+    }
   }, [lastMessage]);
 
   const sendPrompt = () => {
