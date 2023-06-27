@@ -1,3 +1,5 @@
+import Footer from "../components/layout/footer";
+
 export default function HelpHowItsMade() {
   return (
     <>
@@ -81,6 +83,8 @@ export default function HelpHowItsMade() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }
