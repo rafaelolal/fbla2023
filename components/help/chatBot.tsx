@@ -1,6 +1,6 @@
 import { Configuration, OpenAIApi } from "openai";
 import { MutableRefObject, useRef, useState } from "react";
-
+import { flushSync } from "react-dom";
 import {
   MDBCard,
   MDBCardHeader,
@@ -14,11 +14,10 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export default function HelpHowToGuide() {
-  const promptRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
-
+export default function ChatBot() {
+  const [showChat, setShowChat] = useState(false);
   const [lastMessage, setLastMessage] = useState("");
-
+  const promptRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const messages = useRef([
     {
       role: "system",
@@ -30,87 +29,133 @@ export default function HelpHowToGuide() {
       content:
         "I am a new student to this website. Please answer my questions in the most concise way possible.",
     },
-    { role: "assistant", content: "How can I assist yoou today?" },
+    { role: "assistant", content: "How can I assist you today?" },
   ]);
 
   const sendPrompt = () => {
     messages.current.push({ role: "user", content: promptRef.current.value });
-    setLastMessage(promptRef.current.value);
+    flushSync(() => {
+      setLastMessage(promptRef.current.value);
+    });
+
+    const chatBox = document.getElementById("chatBox");
+    chatBox.scroll({ top: chatBox?.scrollHeight });
+    promptRef.current.value = "";
 
     openai
       .createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: messages.current,
       })
-      .then((response) => {
-        messages.current.push(response.data.choices[0].message);
-        setLastMessage("");
+      .then((response) =>
+        messages.current.push(response.data.choices[0].message)
+      )
+      .finally(() => {
+        flushSync(() => {
+          setLastMessage("");
+        });
+        const chatBox = document.getElementById("chatBox");
+        chatBox.scroll({ top: chatBox?.scrollHeight });
       });
   };
 
-  console.log({ messages });
-
   return (
     <>
-      <MDBCard
-        id="chat2"
-        style={{
-          position: "fixed",
-          right: "30px",
-          bottom: "30px",
-          width: "350px",
-        }}
-      >
-        <MDBCardHeader className="d-flex justify-content-between align-items-center p-3">
-          <h5 className="mb-0">AI Helper</h5>
-        </MDBCardHeader>
+      {!showChat && (
+        <button
+          type="button"
+          className="btn btn-tertiary"
+          style={{
+            position: "fixed",
+            bottom: "30px",
+            right: "30px",
+            zIndex: "100",
+          }}
+          onClick={() => setShowChat(true)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-chat-dots-fill"
+            viewBox="0 0 16 16"
+          >
+            <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+          </svg>
+        </button>
+      )}
 
-        <MDBCardBody style={{ height: "300px", overflowY: "scroll" }}>
-          {messages.current.slice(2).map((m) => {
-            if (m.role == "assistant") {
+      {showChat && (
+        <MDBCard
+          style={{
+            position: "fixed",
+            right: "30px",
+            bottom: "30px",
+            width: "350px",
+          }}
+        >
+          <MDBCardHeader className="d-flex justify-content-between align-items-center p-3">
+            <h5 className="mb-0">AI Helper</h5>
+            <button
+              className="btn btn-sm btn-tertiary"
+              onClick={() => setShowChat(false)}
+            >
+              Close
+            </button>
+          </MDBCardHeader>
+
+          <MDBCardBody
+            id="chatBox"
+            style={{ height: "300px", overflowY: "auto" }}
+          >
+            <div style={{ height: 1000 }}></div>
+            {messages.current.slice(2).map((m) => {
+              if (m.role == "assistant") {
+                return (
+                  <div className="d-flex flex-row justify-content-start">
+                    <div>
+                      <p
+                        className="small p-2 ms-3 mb-1 rounded-3"
+                        style={{ backgroundColor: "#f5f6f7" }}
+                      >
+                        {m.content}
+                      </p>
+                    </div>
+                  </div>
+                );
+              }
+
               return (
-                <div className="d-flex flex-row justify-content-start">
+                <div className="d-flex flex-row justify-content-end mb-4 pt-1">
                   <div>
-                    <p
-                      className="small p-2 ms-3 mb-1 rounded-3"
-                      style={{ backgroundColor: "#f5f6f7" }}
-                    >
+                    <p className="small p-2 me-3 mb-1 rounded-3 bg-primary">
                       {m.content}
                     </p>
                   </div>
                 </div>
               );
-            }
+            })}
+          </MDBCardBody>
 
-            return (
-              <div className="d-flex flex-row justify-content-end mb-4 pt-1">
-                <div>
-                  <p className="small p-2 me-3 mb-1 rounded-3 bg-primary">
-                    {m.content}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </MDBCardBody>
-
-        <MDBCardFooter className="text-muted d-flex justify-content-start align-items-center p-3">
-          <input
-            type="text"
-            className="form-control form-control-lg"
-            id="exampleFormControlInput1"
-            placeholder="Ask a question..."
-            ref={promptRef}
-          />
-          <button
-            type="button"
-            className="ms-3 btn btn-primary"
-            onClick={sendPrompt}
-          >
-            Send
-          </button>
-        </MDBCardFooter>
-      </MDBCard>
+          <MDBCardFooter className="text-muted d-flex justify-content-start align-items-center p-3">
+            <input
+              type="text"
+              className="form-control form-control-lg"
+              id="exampleFormControlInput1"
+              placeholder="Ask a question..."
+              ref={promptRef}
+            />
+            <button
+              type="button"
+              className="ms-3 btn btn-primary"
+              onClick={sendPrompt}
+            >
+              Send
+            </button>
+          </MDBCardFooter>
+        </MDBCard>
+      )}
 
       {/* <button onClick={myFun}>API TEST</button>
       <div className="container-fluid">

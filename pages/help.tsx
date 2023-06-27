@@ -1,4 +1,4 @@
-import HelpHowToGuide from "../components/help/guide";
+import ChatBot from "../components/help/chatBot";
 import Footer from "../components/layout/footer";
 import QNA from "../components/help/qAndA";
 
@@ -6,7 +6,7 @@ export default function HelpPage() {
   return (
     <>
       <QNA />
-      <HelpHowToGuide />
+      <ChatBot />
       <Footer />
     </>
   );
