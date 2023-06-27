@@ -196,29 +196,33 @@ export default function ProfilePage(
 
         <div className="col-12 col-md mt-4 mt-md-0">
           <div className="bg-primary neoBorder p-1">
-            <h3 className="d-inline mx-2 fw-semibold align-middle">Stats</h3>
+            <h3 className="d-block d-md-inline text-center mx-2 fw-semibold align-middle">
+              Stats
+            </h3>
             <img
-              className="d-inline mx-3"
+              className="d-none d-md-inline mx-3"
               style={{ height: "2rem", width: "auto" }}
               src="/images/yellow fish.svg"
             />
 
-            <h5 className="d-inline mx-2 align-middle">
+            <h5 className="d-inline px-2 align-middle border-end border-2">
               Balance: {studentBalance}
             </h5>
 
-            <h5 className="d-inline mx-2 align-middle">
+            <h5 className="d-inline px-2 align-middle border-end border-2">
               Current Points: {props.currentPoints}
             </h5>
 
-            <h5 className="d-inline mx-2 align-middle">Rank: {props.rank}</h5>
+            <h5 className="d-inline px-2 align-middle text-nowrap border-end border-2">
+              Rank: {props.rank}
+            </h5>
 
-            <h5 className="d-inline mx-2 align-middle">
+            <h5 className="d-inline px-2 align-middle border-end border-2">
               Attended:{" "}
               {props.events.filter((event) => event.attended == true).length}
             </h5>
 
-            <h5 className="d-inline mx-2 align-middle">
+            <h5 className="d-inline px-2 align-middle">
               Joined: {props.events.length}
             </h5>
           </div>

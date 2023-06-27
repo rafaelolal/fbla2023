@@ -14,7 +14,7 @@ export default function Search(props: {
   const durationRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   return (
-    <div className="row sticky-top ms-4" style={{ paddingTop: "96px" }}>
+    <div className="row sticky-top mx-4" style={{ paddingTop: "96px" }}>
       <input
         className="form-control"
         id="searchInput"

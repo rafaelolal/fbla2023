@@ -21,7 +21,7 @@ export default function DashboardEventList(props: {
       />
 
       <div className="row justify-content-around py-3 px-3 border-bottom border-top bg-primary">
-        <div className="col-3 d-flex border-end">
+        <div className="col-2 col-md-3 d-flex border-end">
           <h5 className="m-auto">Event Name</h5>
         </div>
 
@@ -33,7 +33,7 @@ export default function DashboardEventList(props: {
           <h5 className="m-auto">Finishes On</h5>
         </div>
 
-        <div className="col-3 d-flex">
+        <div className="col-4 col-md-3 d-flex">
           <h5 className="m-auto">Actions</h5>
         </div>
       </div>

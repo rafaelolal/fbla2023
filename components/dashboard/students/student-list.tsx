@@ -33,7 +33,7 @@ export default function DashboardStudentList() {
       />
 
       <div className="row justify-content-center">
-        <div className="col-8 my-4 p-0">
+        <div className="col-10 col-lg-8 my-4 p-0">
           <div className="container neoBorder  bg-light">
             <div className="row ">
               <div

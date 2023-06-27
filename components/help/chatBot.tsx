@@ -62,11 +62,12 @@ export default function ChatBot() {
       {!showChat && (
         <button
           type="button"
-          className="btn btn-tertiary"
+          className="btn eventBtnO"
           style={{
             position: "fixed",
             bottom: "30px",
             right: "30px",
+            padding: "0.3rem 0.7rem 0.6rem",
             zIndex: "100",
           }}
           onClick={() => setShowChat(true)}
@@ -86,15 +87,24 @@ export default function ChatBot() {
 
       {showChat && (
         <MDBCard
+          className="bg-primary"
           style={{
             position: "fixed",
-            right: "30px",
-            bottom: "30px",
+            right: "10px",
+            bottom: "10px",
             width: "350px",
           }}
         >
           <MDBCardHeader className="d-flex justify-content-between align-items-center p-3">
-            <h5 className="mb-0">AI Helper</h5>
+            <h5 className="mb-0">
+              AI Helper{" "}
+              <img
+                className="mx-2"
+                style={{ height: "2rem", width: "auto" }}
+                src="/images/yellow fish.svg"
+              />
+            </h5>
+
             <button
               className="btn btn-sm btn-tertiary"
               onClick={() => setShowChat(false)}

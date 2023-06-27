@@ -39,7 +39,10 @@ export default function AdminAnnouncementModal(props: {
                 <small>{a.expiresOn}</small>
               </div>
             </div>
-            <hr className="my-4"></hr>
+            <hr
+              className="my-4 bg-tertiary"
+              style={{ border: "none", height: "2px" }}
+            ></hr>
           </>
         ))}
         <h6
