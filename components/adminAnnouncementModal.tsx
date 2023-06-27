@@ -9,12 +9,7 @@ export default function AdminAnnouncementModal(props: {
   announcements: AdminAnnouncementType[];
 }) {
   return (
-    <Modal
-      style={{ padding: "0px 0px 0px -17px" }}
-      centered
-      show={props.show}
-      onHide={() => props.setShow(false)}
-    >
+    <Modal centered show={props.show} onHide={() => props.setShow(false)}>
       <Modal.Header closeButton>
         <svg
           xmlns="http://www.w3.org/2000/svg"
