@@ -163,7 +163,7 @@ export default function EventsPage(props: { events: EventType[] }) {
       </div>
 
       <div className="container-fluid">
-        <div className="row justify-content-evenly">
+        <div className="row mt-2 justify-content-evenly">
           <div className="col-10 col-md-3 pb-4">
             <Search filterOptions={filterOptions} setQuery={setQuery} />
           </div>
