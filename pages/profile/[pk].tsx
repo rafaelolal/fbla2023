@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from "next";
-import { useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import UpdateModal from "../../components/profile/update-modal";
@@ -12,11 +12,14 @@ import { gql } from "@apollo/client";
 import { HomeEventType } from "../../types/event";
 import FeedbackModal from "../../components/profile/feedback-modal";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export default function ProfilePage(
   props: ProfileStudentType & { eventData: HomeEventType[] }
 ) {
+  console.log({ props });
   const firstTime = props.grade === null;
+  const privateKeyRef = useRef() as MutableRefObject<HTMLInputElement>;
   const [showUpdate, setShowUpdate] = useState(firstTime);
   const [showPassword, setShowPassword] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -29,6 +32,10 @@ export default function ProfilePage(
   const [studentBalance, setStudentBalance] = useState(props.balance);
 
   const mLocalizer = momentLocalizer(moment);
+
+  const joinByKey = () => {
+    return privateKeyRef.current.value;
+  };
 
   const redeemPrize = (i: number) => {
     const prizeCost = (i + 1) * 25;
@@ -293,6 +300,27 @@ export default function ProfilePage(
       <div className="row py-3 mx-3">
         <div className="col-6">
           <h2>Groups</h2>
+          <Link className="btn btn-primary" href="/groups">
+            Public Groups
+          </Link>
+
+          <h6 className="fw-semibold">Private Key</h6>
+          <input type="password" className="form-control" ref={privateKeyRef} />
+          <button className="btn btn-primary" onClick={joinByKey}>
+            Join
+          </button>
+
+          {props.groups.map((group) => (
+            <>
+              <p>{group.group.name}</p>
+              <Link
+                className="btn btn-primary"
+                href={`/groups/${group.group.id}/`}
+              >
+                Visit
+              </Link>
+            </>
+          ))}
         </div>
 
         <div className="col-6">
