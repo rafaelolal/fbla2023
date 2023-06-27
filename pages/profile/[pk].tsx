@@ -128,7 +128,7 @@ export default function ProfilePage(
       />
 
       <div className="row justify-content-center py-3 mx-3">
-        <div className="col-12 col-md-3 mb-4 mt-md-0">
+        <div className="col-12 col-lg-3 mb-4 mt-lg-0">
           <div
             className="bg-primary p-4 neoBorder"
             style={{ minWidth: "fit-content" }}
@@ -145,9 +145,9 @@ export default function ProfilePage(
             />
             <hr></hr>
 
-            <h5 className="fw-bold text-center pt-1">
+            <h6 className="fw-bold text-center pt-1">
               {props.firstName} {props.middleName} {props.lastName}
-            </h5>
+            </h6>
 
             <h6 className="text-center pt-1">Grade: {props.grade}</h6>
 
@@ -201,37 +201,41 @@ export default function ProfilePage(
           </div>
         </div>
 
-        <div className="col-12 col-md mt-4 mt-md-0">
+        <div className="col-12 col-lg mt-4 mt-lg-0">
           <div className="bg-primary neoBorder p-1">
-            <h3 className="d-block d-md-inline text-center mx-2 fw-semibold align-middle">
+            <h4 className="d-block d-md-inline text-center mx-2 fw-semibold align-middle">
               Stats
-            </h3>
+            </h4>
             <img
-              className="d-none d-md-inline mx-3"
+              className="d-none d-md-inline mx-1"
               style={{ height: "2rem", width: "auto" }}
               src="/images/yellow fish.svg"
             />
 
-            <h5 className="d-inline px-2 align-middle border-end border-2">
-              Balance: {studentBalance}
-            </h5>
+            <h6 className="d-inline px-3 align-middle border-end border-2">
+              Balance: <span className="text-tertiary">{studentBalance}</span>
+            </h6>
 
-            <h5 className="d-inline px-2 align-middle border-end border-2">
-              Current Points: {props.currentPoints}
-            </h5>
+            <h6 className="d-inline px-3 align-middle border-end border-2">
+              Quarterly Points:{" "}
+              <span className="text-tertiary">{props.currentPoints}</span>
+            </h6>
 
-            <h5 className="d-inline px-2 align-middle text-nowrap border-end border-2">
-              Rank: {props.rank}
-            </h5>
+            <h6 className="d-inline px-3 align-middle text-nowrap border-end border-2">
+              Rank: <span className="text-tertiary">{props.rank}</span>
+            </h6>
 
-            <h5 className="d-inline px-2 align-middle border-end border-2">
+            <h6 className="d-inline px-3 align-middle border-end border-2">
               Attended:{" "}
-              {props.events.filter((event) => event.attended == true).length}
-            </h5>
+              <span className="text-tertiary">
+                {props.events.filter((event) => event.attended == true).length}
+              </span>
+            </h6>
 
-            <h5 className="d-inline px-2 align-middle">
-              Joined: {props.events.length}
-            </h5>
+            <h6 className="d-inline px-3 align-middle">
+              Joined:{" "}
+              <span className="text-tertiary">{props.events.length}</span>
+            </h6>
           </div>
 
           <div className="mt-3 mb-2">
@@ -271,7 +275,7 @@ export default function ProfilePage(
           </div>
 
           <Calendar
-            style={{ height: "calc(100% - 130px)" }}
+            style={{ height: "calc(100% - 130px)", minHeight: "350px" }}
             events={formattedEvents}
             defaultDate={new Date()}
             localizer={mLocalizer}
@@ -297,16 +301,16 @@ export default function ProfilePage(
         </div>
       </div>
 
-      <div className="row py-3 mx-3">
-        <div className="col-6">
-          <h2>Groups</h2>
-          <Link className="btn btn-primary" href="/groups">
+      <div className="row justify-content-center m-4 neoBorder">
+        <div className="col-12 col-md-6 py-3 border-end border-3">
+          <h3 className="mb-4 text-center">Groups</h3>
+          <Link className="btn eventBtn" href="/groups">
             Public Groups
           </Link>
 
           <h6 className="fw-semibold">Private Key</h6>
           <input type="password" className="form-control" ref={privateKeyRef} />
-          <button className="btn btn-primary" onClick={joinByKey}>
+          <button className="btn eventBtn" onClick={joinByKey}>
             Join
           </button>
 
@@ -323,39 +327,38 @@ export default function ProfilePage(
           ))}
         </div>
 
-        <div className="col-6">
-          <h2>Prize Redemptions</h2>
-          {[
-            <img
-              src="/images/icons/snacks.png"
-              style={{ width: "45px", height: "45px" }}
-            />,
+        <div className="col-12 col-md-6 py-3">
+          <div className="row">
+            <h3 className="mb-4 text-center">Prize Redemptions</h3>
+            {[
+              <img
+                src="/images/icons/snacks.png"
+                style={{ width: "45px", height: "auto" }}
+              />,
 
-            <img
-              src="/images/icons/seal.png"
-              style={{ width: "45px", height: "45px" }}
-            />,
+              <img
+                src="/images/icons/seal.png"
+                style={{ width: "45px", height: "45px" }}
+              />,
 
-            <img
-              src="/images/icons/books.png"
-              style={{ width: "45px", height: "45px" }}
-            />,
-          ].map((type, i) => (
-            <div className="row">
-              {type}
-              <p>Cost: {(i + 1) * 25}</p>
-              <button
-                className="btn btn-primary"
-                onClick={() => redeemPrize(i)}
-              >
-                Redeem
-              </button>
-            </div>
-          ))}
+              <img
+                src="/images/icons/books.png"
+                style={{ width: "45px", height: "45px" }}
+              />,
+            ].map((type, i) => (
+              <div className="col text-center">
+                {type}
+                <p>Cost: {(i + 1) * 25}</p>
+                <button className="btn eventBtn" onClick={() => redeemPrize(i)}>
+                  Redeem
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="row py-3 mx-3" style={{ overflowY: "scroll" }}>
+      <div className="row py-3 mx-3 mt-5" style={{ overflowY: "scroll" }}>
         <h2 style={{ display: "inline" }}>Events Like</h2>
         <h4 className="fw-bold" style={{ display: "inline" }}>
           {props.events[0].event.title}

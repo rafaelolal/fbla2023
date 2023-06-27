@@ -87,7 +87,6 @@ export default function ChatBot() {
 
       {showChat && (
         <MDBCard
-          className="bg-primary"
           style={{
             position: "fixed",
             right: "10px",
@@ -95,7 +94,7 @@ export default function ChatBot() {
             width: "350px",
           }}
         >
-          <MDBCardHeader className="d-flex justify-content-between align-items-center p-3">
+          <MDBCardHeader className="bg-primary d-flex justify-content-between align-items-center p-3">
             <h5 className="mb-0">
               AI Helper{" "}
               <img
@@ -145,7 +144,7 @@ export default function ChatBot() {
             })}
           </MDBCardBody>
 
-          <MDBCardFooter className="text-muted d-flex justify-content-start align-items-center p-3">
+          <MDBCardFooter className="bg-primary text-muted d-flex justify-content-start align-items-center p-3">
             <input
               type="text"
               className="form-control form-control-lg"
@@ -155,7 +154,7 @@ export default function ChatBot() {
             />
             <button
               type="button"
-              className="ms-3 btn btn-primary"
+              className="ms-3 btn eventBtn"
               onClick={sendPrompt}
             >
               Send
