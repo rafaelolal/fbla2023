@@ -12,7 +12,7 @@ export default function HomeEvent(props: HomeEventType) {
           maxWidth: "390px",
         }}
       >
-        <div className="card bg-primary mx-auto mx-lg-0 eventEffect b-radius-normal">
+        <div className="card h-100 bg-primary mx-auto mx-lg-0 eventEffect b-radius-normal">
           <img
             src={
               props.image.includes("http")
