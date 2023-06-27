@@ -40,12 +40,6 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="mainNavbar">
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
               <li className="nav-item mx-1">
-                <Link className="nav-link fw-bolder fs-5 fc-2" href="/">
-                  Home
-                </Link>
-              </li>
-
-              <li className="nav-item mx-1">
                 <Link className="nav-link fw-bolder fs-5 fc-2" href="/events">
                   Events
                 </Link>
@@ -89,8 +83,8 @@ export default function Navbar() {
               </li>
 
               <li className="nav-item mx-1">
-                <Link className="nav-link fw-bolder fs-5 fc-2" href="/help/">
-                  Help
+                <Link className="nav-link fw-bolder fs-5 fc-2" href="/groups/">
+                  Groups
                 </Link>
               </li>
             </ul>

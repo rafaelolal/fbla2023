@@ -53,7 +53,7 @@ export default function EventsPage(props: { events: EventType[] }) {
   useEffect(() => {
     let newEvents = initialEvents.current;
     if (query.search) {
-      newEvents = initialEvents.current.filter(
+      newEvents = newEvents.filter(
         (e) =>
           e.title.toLowerCase().includes(query.search.toLowerCase()) ||
           e.description.toLowerCase().includes(query.search.toLowerCase())
@@ -61,23 +61,19 @@ export default function EventsPage(props: { events: EventType[] }) {
     }
 
     if (query.type) {
-      newEvents = initialEvents.current.filter((e) => e.type == query.type);
+      newEvents = newEvents.filter((e) => e.type == query.type);
     }
 
     if (query.location) {
-      newEvents = initialEvents.current.filter(
-        (e) => e.location == query.location
-      );
+      newEvents = newEvents.filter((e) => e.location == query.location);
     }
 
     if (query.points) {
-      newEvents = initialEvents.current.filter(
-        (e) => e.points >= parseInt(query.points)
-      );
+      newEvents = newEvents.filter((e) => e.points >= parseInt(query.points));
     }
 
     if (query.startDate) {
-      newEvents = initialEvents.current.filter(
+      newEvents = newEvents.filter(
         (e) => new Date(e.startsOn) >= new Date(query.startDate)
       );
     }
@@ -85,7 +81,7 @@ export default function EventsPage(props: { events: EventType[] }) {
     // TODO: new Date() converts the UTC event information to current time zone
     // meaning that the hours are perceived to be 3 less.
     if (query.startTime) {
-      newEvents = initialEvents.current.filter((e) => {
+      newEvents = newEvents.filter((e) => {
         const eventDate = new Date(e.startsOn);
         const eventTime = eventDate.getHours() + eventDate.getMinutes() / 60;
         const queryTime = query.startTime.split(":");
@@ -96,7 +92,7 @@ export default function EventsPage(props: { events: EventType[] }) {
     }
 
     if (query.duration) {
-      newEvents = initialEvents.current.filter(
+      newEvents = newEvents.filter(
         (e) =>
           new Date(e.finishesOn).getTime() - new Date(e.startsOn).getTime() >=
           parseInt(query.duration) * 3600000 // getTime returns milliseconds

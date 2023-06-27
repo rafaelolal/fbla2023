@@ -47,7 +47,6 @@ export default function FeedbackModal(props: {
         toast.success("Feedback sent successfully");
       })
       .catch((e) => {
-        console.log({ e });
         throw e;
       });
   }

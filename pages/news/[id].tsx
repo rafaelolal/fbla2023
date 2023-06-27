@@ -37,9 +37,9 @@ export default function NewsPage(props: { news: NewsType }) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { pk } = context.query;
+  const { id } = context.query;
   const response = await axios
-    .get(`http://127.0.0.1:8000/api/news/${pk}/`)
+    .get(`http://127.0.0.1:8000/api/news/${id}/`)
     .then((response) => {
       return response;
     })

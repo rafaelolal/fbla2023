@@ -54,15 +54,13 @@ export default function UpdateModal(props: {
   }
 
   async function handleUpload() {
-    setUploading(true);
+    // if (!selectedFile) return;
 
-    if (!selectedFile) return;
+    setUploading(true);
 
     setSelectedImage(
       "https://static.generated.photos/vue-static/face-generator/landing/wall/20.jpg"
     ); // use this default until actually using files
-
-    console.log("Profile image uploaded");
 
     setUploading(false);
   }
@@ -161,9 +159,9 @@ export default function UpdateModal(props: {
                 type="file"
                 onChange={({ target }) => {
                   if (target.files) {
-                    const file = target.files[0];
-                    setSelectedImage(URL.createObjectURL(file));
-                    setSelectedFile(file);
+                    // const file = target.files[0];
+                    // setSelectedImage(URL.createObjectURL(file));
+                    // setSelectedFile(file);
                     handleUpload();
                   }
                 }}

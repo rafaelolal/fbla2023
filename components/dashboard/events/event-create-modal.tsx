@@ -58,7 +58,6 @@ export default function CreateModal(props: {
     if (!selectedFile) return;
 
     setSelectedImage("https://picsum.photos/seed/00000/300");
-    console.log("Event image uploaded");
 
     setUploading(false);
   }

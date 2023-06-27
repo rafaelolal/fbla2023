@@ -47,7 +47,7 @@ export default function HomeEvent(props: HomeEventType) {
               {props.location}
             </h6>
 
-            <Link className="mt-auto btn eventBtn" href={`/events#${props.pk}`}>
+            <Link className="mt-auto btn eventBtn" href={`/events#${props.id}`}>
               Visit
             </Link>
           </div>

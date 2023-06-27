@@ -17,7 +17,6 @@ import Link from "next/link";
 export default function ProfilePage(
   props: ProfileStudentType & { eventData: HomeEventType[] }
 ) {
-  console.log({ props });
   const firstTime = props.grade === null;
   const privateKeyRef = useRef() as MutableRefObject<HTMLInputElement>;
   const [showUpdate, setShowUpdate] = useState(firstTime);

@@ -45,11 +45,10 @@ export default function Footer(props: any) {
 
                 <div className="mx-auto" style={{ width: "fit-content" }}>
                   <h6 className="text-center fw-normal">
-                    <span className="fw-semibold">134 West Minister st,</span>{" "}
-                    Scotch Plains, NJ
+                    134 West Minister St, Scotch Plains, NJ
                   </h6>
 
-                  <h6 className="text-center fw-normal">1 (199) 838-2727</h6>
+                  <h6 className="text-center fw-normal">+1 (199) 838-2727</h6>
 
                   <h6 className="text-center fw-normal">office@scc.edu</h6>
                 </div>
@@ -68,16 +67,16 @@ export default function Footer(props: any) {
                 <h5 className="fw-bolder text-center">QuickLinks</h5>
                 <Link
                   className="text-center nav-link d-block fw-normal"
-                  href="/help?page=howToGuide"
+                  href="/help"
                 >
-                  How do you use this Site
+                  Help
                 </Link>
 
                 <Link
                   className="text-center nav-link d-block fw-normal"
-                  href="/help?page=howWasItMade"
+                  href="/howWasItMade"
                 >
-                  How the website was made
+                  How Was It Made
                 </Link>
 
                 <Link
