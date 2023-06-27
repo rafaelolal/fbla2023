@@ -69,12 +69,14 @@ export default function IndexPage(props: {
 
           <button
             type="button"
-            className="btn btn-danger"
+            className="btn eventBtnO "
             style={{
               position: "fixed",
-              bottom: "30px",
-              right: "30px",
+              backgroundColor: "#fd5901",
+              bottom: "20px",
+              right: "20px",
               zIndex: "100",
+              padding: "0.3rem 0.7rem 0.6rem",
             }}
             onClick={() => setAnnouncementsShow(true)}
           >
@@ -82,7 +84,7 @@ export default function IndexPage(props: {
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
-              fill="currentColor"
+              fill="white"
               className="bi bi-exclamation-diamond-fill"
               viewBox="0 0 16 16"
             >

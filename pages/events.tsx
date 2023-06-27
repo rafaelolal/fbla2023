@@ -163,14 +163,14 @@ export default function EventsPage(props: { events: EventType[] }) {
       </div>
 
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-3">
+        <div className="row justify-content-evenly">
+          <div className="col-3 pb-4">
             <Search filterOptions={filterOptions} setQuery={setQuery} />
           </div>
 
-          <div className="col-9">
+          <div className="col-8">
             {/* Computer Screen Events */}
-            <div className="row d-none d-md-block my-5">
+            <div className="row d-none d-md-block">
               <EventList
                 events={currentEvents}
                 attendancesData={attendances}
