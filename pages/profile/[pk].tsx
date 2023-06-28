@@ -200,7 +200,7 @@ export default function ProfilePage(
           </div>
         </div>
 
-        <div className="col-12 col-lg mt-4 mt-lg-0">
+        <div className="col-12 col-lg-9 mt-4 mt-lg-0">
           <div className="bg-primary neoBorder p-1">
             <h4 className="d-block d-md-inline text-center mx-2 fw-semibold align-middle">
               Stats
@@ -303,27 +303,46 @@ export default function ProfilePage(
       <div className="row justify-content-center m-4 neoBorder">
         <div className="col-12 col-md-6 py-3 border-end border-3">
           <h3 className="mb-4 text-center">Groups</h3>
-          <Link className="btn eventBtn" href="/groups">
-            Public Groups
-          </Link>
+          <div className="d-flex">
+            <Link className="btn eventBtn ms-auto" href="/groups">
+              View Public Groups
+            </Link>
+          </div>
+          <h5 className="fw-bold">Private Key</h5>
+          <div className="d-flex">
+            <input
+              type="password"
+              className="form-control me-2"
+              ref={privateKeyRef}
+            />
+            <button className="btn eventBtn mx-2" onClick={joinByKey}>
+              Join
+            </button>
+            <button className="btn eventBtn mx-2" onClick={joinByKey}>
+              Join
+            </button>
+          </div>
 
-          <h6 className="fw-semibold">Private Key</h6>
-          <input type="password" className="form-control" ref={privateKeyRef} />
-          <button className="btn eventBtn" onClick={joinByKey}>
-            Join
-          </button>
-
-          {props.groups.map((group) => (
-            <>
-              <p>{group.group.name}</p>
-              <Link
-                className="btn btn-primary"
-                href={`/groups/${group.group.id}/`}
-              >
-                Visit
-              </Link>
-            </>
-          ))}
+          <h5 className="mt-3 fw-bold">Groups Joined</h5>
+          <div className="row justify-content-start">
+            {props.groups.map((group) => (
+              <>
+                <div className="col m-3 p-0 d-flex flex-column border border-3 b-radius-normal">
+                  <p className="p-2">
+                    <span className="fw-bold">Group:</span> {group.group.name}
+                  </p>
+                  <div className="mt-auto border-top p-2">
+                    <Link
+                      className="btn eventBtn"
+                      href={`/groups/${group.group.id}/`}
+                    >
+                      Visit
+                    </Link>
+                  </div>
+                </div>
+              </>
+            ))}
+          </div>
         </div>
 
         <div className="col-12 col-md-6 py-3">

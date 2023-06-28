@@ -15,7 +15,7 @@ export default function AdminAnnouncementModal(props: {
           xmlns="http://www.w3.org/2000/svg"
           width="28"
           height="28"
-          fill="#fd5901"
+          fill="#FF3131"
           className="bi bi-exclamation-diamond-fill"
           viewBox="0 0 16 16"
         >
