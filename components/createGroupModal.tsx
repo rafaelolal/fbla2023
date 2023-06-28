@@ -2,8 +2,7 @@ import { Dispatch, MutableRefObject, SetStateAction, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 
-export default function GroupUpdateModal(props: {
-  data: { id: number; name: string; description: string; isPrivate: boolean };
+export default function GroupCreateModal(props: {
   show: boolean;
   setShow: Dispatch<SetStateAction<boolean>>;
 }) {
@@ -37,8 +36,7 @@ export default function GroupUpdateModal(props: {
     //       );
     //       throw error;
     //     });
-
-    toast.success("Event updated successfully");
+    toast.success("Group created successfully");
     props.setShow(false);
   }
 
@@ -67,7 +65,6 @@ export default function GroupUpdateModal(props: {
               className="form-control"
               id="nameInput"
               placeholder="Group Name"
-              defaultValue={props.data.name}
               required
               ref={nameRef}
             />
@@ -82,7 +79,6 @@ export default function GroupUpdateModal(props: {
               className="form-control"
               id="groupDescription"
               placeholder="Group Description"
-              defaultValue={props.data.description}
               required
               ref={descriptionRef}
             />
@@ -95,7 +91,6 @@ export default function GroupUpdateModal(props: {
                 type="checkbox"
                 id="privateCheckbox"
                 value=""
-                defaultChecked={props.data.isPrivate}
                 ref={isPrivateRef}
               />
 
@@ -116,7 +111,7 @@ export default function GroupUpdateModal(props: {
           </button>
 
           <button className="btn eventBtn me-2" type="submit">
-            Save Changes
+            Create
           </button>
         </Modal.Footer>
       </form>

@@ -6,12 +6,15 @@ import { gql } from "@apollo/client";
 import GroupUpdateModal from "../../components/groups/groupUpdateModal";
 import { useAppContext } from "../../context/state";
 import client from "../../api/apollo-client";
+import { toast } from "react-toastify";
+import { toFormattedDatetime } from "../../helpers";
 
 export default function GroupPage(props: any) {
   const { user } = useAppContext();
   const announcementRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const [showUpdate, setShowUpdate] = useState(false);
   const [isAdmin, setIsAdmin] = useState(undefined);
+  const [announcements, setAnnouncements] = useState(props.announcements);
   const mLocalizer = momentLocalizer(moment);
   const formattedEvents = props.events.map((e) => ({
     id: e.event.id,
@@ -29,7 +32,23 @@ export default function GroupPage(props: any) {
     setIsAdmin(found && found.isAdmin);
   }, [user]);
 
+  useEffect(() => {
+    const announcementBox = document.getElementById("announcementBox");
+    if (announcementBox) {
+      announcementBox.scrollTop = announcementBox?.scrollHeight;
+    }
+  }, [announcements]);
+
   const createAnnouncement = () => {
+    toast.success("Announcement created successfully");
+    setAnnouncements([
+      ...announcements,
+      {
+        createdBy: { firstName: user.email },
+        createdOn: new Date().toISOString(),
+        content: announcementRef.current.value,
+      },
+    ]);
     return announcementRef.current.value;
   };
 
@@ -66,11 +85,14 @@ export default function GroupPage(props: any) {
         <div className="col-6">
           <h2>Announcements</h2>
 
-          <div style={{ maxHeight: "300px", overflowY: "auto" }}>
-            {props.announcements.map((a) => (
+          <div
+            id="announcementBox"
+            style={{ maxHeight: "300px", overflowY: "auto" }}
+          >
+            {announcements.map((a) => (
               <>
                 <p>created by: {a.createdBy.firstName}</p>
-                <p>created on: {a.createdOn}</p>
+                <p>created on: {toFormattedDatetime(a.createdOn)}</p>
                 <p>content: {a.content}</p>
               </>
             ))}
