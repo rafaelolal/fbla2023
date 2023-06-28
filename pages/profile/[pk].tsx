@@ -13,6 +13,7 @@ import { HomeEventType } from "../../types/event";
 import FeedbackModal from "../../components/profile/feedback-modal";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import Footer from "../../components/layout/footer";
 
 export default function ProfilePage(
   props: ProfileStudentType & { eventData: HomeEventType[] }
@@ -400,6 +401,8 @@ export default function ProfilePage(
           ))}
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

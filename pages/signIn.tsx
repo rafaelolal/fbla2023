@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { toast } from "react-toastify";
+import Footer from "../components/layout/footer";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -85,8 +86,9 @@ export default function SignInPage() {
             Login
           </button>
         </form>
-        y
       </div>
+
+      <Footer />
     </>
   );
 }

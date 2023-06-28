@@ -23,6 +23,7 @@ export default function NewsListPage(props: { news: NewsType[] }) {
           <NewsList news={initialNews.current} orange={false} />
         </div>
       </div>
+
       <Footer />
     </>
   );

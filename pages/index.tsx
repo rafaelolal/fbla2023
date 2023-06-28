@@ -233,6 +233,7 @@ export default function IndexPage(props: {
 
         <NewsList news={props.news} orange={true} />
       </div>
+
       <Footer />
     </>
   );

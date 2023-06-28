@@ -8,6 +8,7 @@ import { useAppContext } from "../../context/state";
 import client from "../../api/apollo-client";
 import { toast } from "react-toastify";
 import { toFormattedDatetime } from "../../helpers";
+import Footer from "../../components/layout/footer";
 
 export default function GroupPage(props: any) {
   const { user } = useAppContext();
@@ -66,7 +67,7 @@ export default function GroupPage(props: any) {
       />
 
       <div className="row py-3 mx-3">
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-4">
           <div className="col-12">
             <div className="card neoBorder p-3 mb-4">
               <p
@@ -144,7 +145,7 @@ export default function GroupPage(props: any) {
           </div>
         </div>
 
-        <div className="col-12 col-md-6 mt-4 mt-md-0">
+        <div className="col-12 col-md-8 mt-4 mt-md-0">
           <h3 className="py-2">
             Calendar
             <img
@@ -154,7 +155,7 @@ export default function GroupPage(props: any) {
             />
           </h3>
           <Calendar
-            style={{ height: "calc(100vh - 200px)" }}
+            style={{ height: "calc(100% - 61px)" }}
             events={formattedEvents}
             defaultDate={new Date()}
             localizer={mLocalizer}
@@ -179,6 +180,8 @@ export default function GroupPage(props: any) {
           />
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

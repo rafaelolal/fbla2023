@@ -1,6 +1,8 @@
 import { gql } from "@apollo/client";
 import client from "../../api/apollo-client";
 import { MutableRefObject, useRef } from "react";
+import { toast } from "react-toastify";
+import Footer from "../../components/layout/footer";
 
 export default function GroupsPage(props: any) {
   const privateKeyRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -8,11 +10,15 @@ export default function GroupsPage(props: any) {
   console.log(props.groups);
 
   const joinByKey = () => {
-    return privateKeyRef.current.value;
+    if (!privateKeyRef.current.value) {
+      toast.warning("Enter a key first");
+      return;
+    }
+    toast.success("Group joined successfully");
   };
 
   const joinGroup = (id) => {
-    return id;
+    toast.success("Group joined successfully");
   };
 
   return (
@@ -82,6 +88,8 @@ export default function GroupsPage(props: any) {
           </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }
