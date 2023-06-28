@@ -6,6 +6,7 @@ import DashboardStudentList from "../components/dashboard/students/student-list"
 import DashboardEvents from "../components/dashboard/events/events";
 import DashboardReports from "../components/dashboard/reports";
 import { useRouter } from "next/router";
+import DashboardRedemptionList from "../components/dashboard/redemptions/redemption-list";
 
 export default function DashboardPage() {
   const { user, isA } = useAppContext();
@@ -29,6 +30,7 @@ export default function DashboardPage() {
         {page == "reports" && <DashboardReports />}
         {page == "events" && <DashboardEvents />}
         {page == "students" && <DashboardStudentList />}
+        {page == "redemptions" && <DashboardRedemptionList />}
       </div>
     </>
   );

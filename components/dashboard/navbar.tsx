@@ -21,6 +21,10 @@ export default function DashboardNavbar() {
             <Link className="nav-link" href="/dashboard?page=students">
               Students
             </Link>
+
+            <Link className="nav-link" href="/dashboard?page=redemptions">
+              Redemptions
+            </Link>
           </div>
         </div>
       </nav>
