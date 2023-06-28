@@ -66,78 +66,118 @@ export default function GroupPage(props: any) {
       />
 
       <div className="row py-3 mx-3">
-        <div className="col-6">
-          <h2 className="text-center pt-1">{props.name}</h2>
+        <div className="col-12 col-md-6">
+          <div className="col-12">
+            <div className="card neoBorder p-3 mb-4">
+              <p
+                className="b-radius-normal bg-lightTertiary my-0 px-2 py-1 fw-semibold fs-7"
+                style={{ width: "fit-content", display: "inline" }}
+              >
+                Members: {props.members.length}
+              </p>
+              <h3 className="text-center pt-1 fw-semibold">
+                Group Name: <span className="fw-normal">{props.name}</span>
+              </h3>
+              <h6 className="py-1 text-center">{props.description}</h6>
 
-          <h6 className="py-1 text-center">{props.description}</h6>
-          <h6 className="py-1 text-center">Members: {props.members.length}</h6>
-
-          {isAdmin && (
-            <button
-              className="btn btn-primary"
-              onClick={() => setShowUpdate(true)}
-            >
-              Update Information
-            </button>
-          )}
-        </div>
-
-        <div className="col-6">
-          <h2>Announcements</h2>
-
-          <div
-            id="announcementBox"
-            style={{ maxHeight: "300px", overflowY: "auto" }}
-          >
-            {announcements.map((a) => (
-              <>
-                <p>created by: {a.createdBy.firstName}</p>
-                <p>created on: {toFormattedDatetime(a.createdOn)}</p>
-                <p>content: {a.content}</p>
-              </>
-            ))}
+              {isAdmin && (
+                <button
+                  className="btn eventBtn ms-auto"
+                  onClick={() => setShowUpdate(true)}
+                >
+                  Update Information
+                </button>
+              )}
+            </div>
           </div>
 
-          {isAdmin && (
-            <>
-              <textarea
-                className="form-control"
-                placeholder="Create Announcement"
-                ref={announcementRef}
-              />
-              <button className="btn btn-primary" onClick={createAnnouncement}>
-                Create
-              </button>
-            </>
-          )}
+          <div className="col-12">
+            <div className="neoBorder p-0">
+              <h3
+                className="bg-primary border-bottom border-3 px-3 py-2 m-0"
+                style={{
+                  borderTopLeftRadius: "7px",
+                  borderTopRightRadius: "7px",
+                }}
+              >
+                Announcements
+              </h3>
+
+              <div
+                className="px-3"
+                id="announcementBox"
+                style={{ maxHeight: "300px", overflowY: "auto" }}
+              >
+                {announcements.map((a) => (
+                  <>
+                    <div className="bg-primary border border-3 m-3 p-3 b-radius-normal">
+                      <h6 className="fw-bold d-inline">
+                        {a.createdBy.firstName}
+                      </h6>
+                      <h6 className="d-inline ms-3 fs-7">
+                        {toFormattedDatetime(a.createdOn)}
+                      </h6>
+                      <h6> {a.content}</h6>
+                    </div>
+                  </>
+                ))}
+              </div>
+
+              {isAdmin && (
+                <>
+                  <div className="bg-primary px-3 py-1 border-top border-3 d-flex">
+                    <textarea
+                      className="form-control me-3 my-1"
+                      placeholder="Create Announcement"
+                      ref={announcementRef}
+                    />
+                    <button
+                      className="btn eventBtn ms-auto my-auto"
+                      onClick={createAnnouncement}
+                    >
+                      Create
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="col-12 col-md mt-4 mt-md-0">
-        <Calendar
-          style={{ height: "calc(100vh - 200px)" }}
-          events={formattedEvents}
-          defaultDate={new Date()}
-          localizer={mLocalizer}
-          eventPropGetter={(event: {
-            id: number;
-            title: string;
-            start: Date;
-            end: Date;
-          }) => {
-            let backgroundColor = "#ffb158";
+        <div className="col-12 col-md-6 mt-4 mt-md-0">
+          <h3 className="py-2">
+            Calendar
+            <img
+              className="mx-2"
+              style={{ height: "2rem", width: "auto" }}
+              src="/images/yellow fish.svg"
+            />
+          </h3>
+          <Calendar
+            style={{ height: "calc(100vh - 200px)" }}
+            events={formattedEvents}
+            defaultDate={new Date()}
+            localizer={mLocalizer}
+            eventPropGetter={(event: {
+              id: number;
+              title: string;
+              start: Date;
+              end: Date;
+            }) => {
+              let backgroundColor = "#ffb158";
 
-            if (new Date(event.start) > new Date()) {
-              backgroundColor = "#56becd";
-            } else if (
-              props.events.find((e) => e.event.id == event.id)?.attended
-            ) {
-              backgroundColor = "#bbbbbb";
-            }
+              if (new Date(event.start) > new Date()) {
+                backgroundColor = "#56becd";
+              } else if (
+                props.events.find((e) => e.event.id == event.id)?.attended
+              ) {
+                backgroundColor = "#bbbbbb";
+              }
 
-            return { style: { backgroundColor } };
-          }}
-        />
+              return { style: { backgroundColor } };
+            }}
+          />
+        </div>
       </div>
     </>
   );

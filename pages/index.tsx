@@ -69,10 +69,11 @@ export default function IndexPage(props: {
 
           <button
             type="button"
-            className="btn eventBtnO "
+            className="btn eventBtnO"
             style={{
               position: "fixed",
-              backgroundColor: "#fd5901",
+              backgroundColor: "#FF3131",
+              border: "2px solid #000",
               bottom: "30px",
               right: "30px",
               zIndex: "100",
